@@ -1,0 +1,54 @@
+// RESEAU
+---------------------------------------------------------------------------------------
+/ PATH FINDING
+- ressoit uniquement le path restant lors de l'apparition (calculé et transmit par le client)
+- si obstacle découvert, recalcule path finding et notifi les autres
+- si units sur la route, attend /!\ peut crée des bouchons
+- si batiment posé sur path finding, recalcule se dernier
+
+/ PROTOCOLE COM
+- sncro avec tout les clients au début du programe
+- chaque commande est timé et verifier par le serv
+
+/ COMBAT
+- lors d'un afrontement les unités s'inflige les dégats sur le serv et se dernier envoie les dégats au clients
+- le server comunique aussi le ciblage des units
+- si une unité décede le serveur prévient les clients
+- les clients précalcule les dégats pour la fluidité
+
+/ UNITS
+- si une unité enemi rentre dans la vision d'un joueur le serv lui envoie les donnés de l'unit
+
+/ PRE GAME
+- waiting for player ready and finish download map asset or choose map
+---------------------------------------------------------------------------------------
+// GAMEPLAY
+---------------------------------------------------------------------------------------
+/ UNITS
+- attaque multiple (cac, distance, indirect) intance de degats avec "nbr att * att dmg"
+- defence reduit les dégats de manière linéaire
+- 3 mode de movement static, marche (auto attaque), sprint (pas d'attaque)
+- flying unit with a boolean (some unit dont hit air or ground)
+
+/ BATIMENTS
+- des mines sur la map a capturé pour les resources
+- des objectifs a caputé pour des buffs
+- les batiments joueur peuvent produir, tech, buff, defendre
+- un batiment principal pour la construction
+---------------------------------------------------------------------------------------
+// LIST OF COMMAND
+---------------------------------------------------------------------------------------
+/ EVOYER
+- is ready
+- move unit
+- stop unit
+- attac unit / capture
+- build / produce / tech
+- place building
+/ RECU
+- sync + get map
+- update unit
+- update building
+- kill unit
+- destroy building
+---------------------------------------------------------------------------------------
