@@ -10,22 +10,30 @@
 #include <sys/socket.h>
 #include <poll.h>
 #include <vector>
+#include <netinet/in.h>
+#include <cstring>
+#include <unistd.h>
+
+#include <stdio.h>
 
 namespace ef
 {
     class TcpConnect
     {
     public:
-        TcpConnect();
-        void loop();
+        TcpConnect(int port);
+        bool loop();
         bool sendData(char *data, int len, int ip, int port);
         int getData(char *data, int len, int ip, int port);
-        bool connect(int ip, int port);
+        bool connectClient(int ip, int port);
+        struct sockaddr_in getLastConnected();
+        std::vector<struct sockaddr_in> getAllConnected();
+        ~TcpConnect();
 
     protected:
         size_t s;
-        vector<struct sockaddr_in> otherSock;
-        vector<struct pollfd> fds;
+        std::vector<struct sockaddr_in> otherSock;
+        std::vector<struct pollfd> fds;
         struct sockaddr_in mySock;
     };
 }; // !ef

@@ -22,3 +22,8 @@ ef::UdpConnect::UdpConnect(int port)
     sockGet = mySock;
 }
 
+ef::UdpConnect::~UdpConnect()
+{
+    close(fd[0].fd);
+}
+

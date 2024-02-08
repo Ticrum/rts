@@ -13,12 +13,14 @@ bool ef::TcpConnect::sendData(char *data,
 {
     in_port_t tempPort = (in_port_t)htons(port);
     struct in_addr tempIp = (struct in_addr)ip;
-    for (int i = 0; i < otherSock.size(); i += 1)
-        if (tempPort == otherSock[i].sin_port && tempIp == otherSock[i].sin_addr && fds[i + 1].revents & POLLOUT)
+    for (int i = 0; i < (int)otherSock.size(); i += 1)
+    {
+        if (tempPort == otherSock[i].sin_port && memcmp((char *)&tempIp, (char *)&otherSock[i].sin_addr, 4) == 0 && fds[i + 1].revents & POLLOUT)
         {
             send(fds[i + 1].fd, data, len, 0);
             return true;
         }
+    }
     return false;
 }
 

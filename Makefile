@@ -16,8 +16,6 @@ GTEST_LIBS= -lgtest_main -lgtest -lpthread
 LAPINLINKS=-L./ -llapin -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lstdc++ -lm -ldl -lpthread -lopencv_imgproc -lopencv_objdetect -lopencv_highgui -lopencv_video -lopencv_core -lavcall -lusb -lopencv_videoio
 
 #options
-DEBUG=1
-LIBLAPIN=1
 ifeq ($(DEBUG), 1)
 	OPTFLAGS = $(DFLAGS)
 endif
@@ -52,7 +50,7 @@ $(OUT): $(OBJ)
 ifeq ($(LIBLAPIN), 1)
 	$(CC) $(OBJ) $(INCLUDE) $(FLAGS) $(LAPINLINKS) -o $(OUT)
 else
-	$(CC) $(OBJ) $(INCLUDE) $(FLAGS) -o $(OUT)
+	$(CC) $(OBJ) $(INCLUDE) $(FLAGS) -o $(OUT) efzfezfzfe
 endif
 
 lib: $(LIBSTAOUT) $(LIBDYOUT) test

@@ -11,6 +11,7 @@
 #include <poll.h>
 //#include <sys/types.h>
 #include <netinet/in.h>
+#include <unistd.h>
 
 namespace ef
 {
@@ -22,6 +23,7 @@ namespace ef
         bool sendData(char *data, int len, int ip, int port);
         int getData(char *data, int len);
         struct sockaddr_in getSender();
+        ~UdpConnect();
 
     protected:
         size_t s;

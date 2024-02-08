@@ -6,11 +6,12 @@
 
 #include "tcpConnect.hh"
 
-bool ef::TcpConnect::connect(int ip, int port)
+bool ef::TcpConnect::connectClient(int ip, int port)
 {
     struct pollfd fd;
     struct sockaddr_in tempSock;
 
+    fd.fd = socket(AF_INET, SOCK_STREAM, 0);
     fd.events = POLLOUT | POLLIN;
     tempSock.sin_family = AF_INET;
     tempSock.sin_port = (in_port_t)htons(port);
@@ -21,6 +22,7 @@ bool ef::TcpConnect::connect(int ip, int port)
         otherSock.push_back(tempSock);
         return true;
     }
+    close(fd.fd);
     return false;
 }
 
