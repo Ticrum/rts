@@ -4,7 +4,7 @@
 #include "unit.hh"
 #include "building.hh"
 #include "map.hh"
-#include "udpServer.hh"
+#include "udpConnect.hh"
 
 namespace ef
 {
