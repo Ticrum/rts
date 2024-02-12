@@ -35,13 +35,13 @@ namespace ef
         int moneyGain;
         int totalEnergy;
         int actualEnergy;
+        Map map;
+        Map visionMap;
+        std::shared_ptr<Building> rallyPoint;
         std::vector<std::shared_ptr<Building>> buildings;
         std::vector<std::shared_ptr<Unit>> units;
         std::vector<std::shared_ptr<Unit>> otherUnits;
-        std::vector<std::shared_ptr<Buildings>> otherBuildings;
-        std::shared_ptr<Building> rallyPoint;
-        Map map;
-        Map visionMap;
+        std::vector<std::shared_ptr<Building>> otherBuildings;
     };
 
     class ServerPlayersInfo
@@ -62,7 +62,7 @@ namespace ef
         std::vector<PlayerInfo> playersInfo;
         Map trueMap;
         std::vector<std::shared_ptr<Building>> neutralBuildings;
-        std::shared_ptr<UdpServer> serverUdp;
+        std::shared_ptr<UdpConnect> serverUdp;
     };
 
     class ClientPlayerInfo
@@ -87,7 +87,7 @@ namespace ef
         std::vector<std::shared_ptr<Unit>> selectedUnit;
         std::vector<std::shared_ptr<Building>> selectedBuilding;
         std::shared_ptr<UdpConnect> connectUdp;
-    }
+    };
 }; // !ef
 
 #endif // __PLAYERINFO_HH__

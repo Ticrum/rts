@@ -8,12 +8,12 @@ namespace ef
     class Map
     {
     public:
-        Map();
+        Map(int sizex, int sizey);
         Pos getMapSize();
-        & char operator[]();
+        char & operator[](int index);
 
     private:
-        vector<char> map;
+        std::vector<char> map;
         Pos mapSize;
     };
 }; // !ef
