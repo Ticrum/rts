@@ -27,11 +27,12 @@ namespace ef
         BuildingType type;
         bool canBeTarget;
         int energyCost;
+        int energyProduction;
         int moneyProduction;
         std::vector<std::string> weaponConf;
     };
 
-    class Building : Object
+    class Building : public Object
     {
     public:
         Building(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
@@ -41,37 +42,30 @@ namespace ef
         int getEnergyCost();
         bool getIsActive();
         void setIsActive(bool newState);
+        int getEnergyProduction();
 
     protected:
         BuildingType type;
         bool canBeTarget;
         int energyCost;
+        int energyProduction;
         int moneyProduction;
         bool isActive;
         std::vector<Weapon> weapons;
     };
 
-    class EnergyBuilding : Building
-    {
-    public:
-        EnergyBuilding();
-        int getEnergyProduction();
-
-    private:
-        int energyProduction;
-    };
-
     class ProdBuilding : Building
     {
     public:
-        ProdBuilding();
-        std::shared_ptr<Unit> produceUnit(double timePassed);
-        void addUnitToProd(std::string newUnit);
+        ProdBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+        std::shared_ptr<Unit> produceUnit(double timePassed,
+                                          std::vector<ConfWeapon> & weaponsConf);
+        void addUnitToProd(ConfUnit newUnit);
         bool getOnHold();
-        void setOnHold();
+        void setOnHold(bool newState);
 
     private:
-        std::vector<std::string> unitProd;
+        std::vector<ConfUnit> unitProd;
         double timeLeft;
         bool onHold;
     };
@@ -85,14 +79,14 @@ namespace ef
     class TechBuilding : Building
     {
     public:
-        TechBuilding();
+        TechBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
         std::shared_ptr<Tech> searchTech(double timePassed);
-        void addSearchToList(std::string newSearch);
+        void addSearchToList(Tech newSearch);
         bool getOnHold();
-        void setOnHold();
+        void setOnHold(bool newState);
 
     private:
-        std::vector<std::string> techResearch;
+        std::vector<Tech> techResearch;
         double timeLeft;
         bool onHold;
     };

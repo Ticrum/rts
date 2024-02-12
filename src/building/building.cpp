@@ -16,6 +16,7 @@ ef::Building::Building(ConfBuilding conf,
     type(conf.type),
     canBeTarget(conf.canBeTarget),
     energyCost(conf.energyCost),
+    energyProduction(conf.energyProduction),
     moneyProduction(conf.moneyProduction),
     isActive(true)
 {

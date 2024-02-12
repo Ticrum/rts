@@ -6,7 +6,7 @@
 
 #include "building.hh"
 
-bool ef::Unit::fireAllWeapon(double timePassed)
+bool ef::Building::fireAllWeapon(double timePassed)
 {
     bool hasFire = false;
 

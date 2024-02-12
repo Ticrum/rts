@@ -15,7 +15,7 @@ void ef::Unit::moveUnit(double timePassed,
         progress += runningSpeed * timePassed;
     else
         progress += speed * timePassed;
-    if (progress > 1)
+    if (progress >= 1)
     {
         actualIndex += 1;
         progress = 0;
