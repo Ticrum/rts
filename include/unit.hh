@@ -42,6 +42,9 @@ namespace ef
         bool getIsFlying();
         int getActualIndex();
         void changePath(std::vector<Pos> newPath);
+        void UnitDisplay(Bpixelarray &px,
+                         std::vector<Bpixelarray> &rsrc,
+                         Pos caseSiz);
 
     private:
         std::vector<Pos> path;
