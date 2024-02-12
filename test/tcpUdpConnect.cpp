@@ -41,6 +41,11 @@ int main(int    nbr,
                     write(1,data,lu);
                     udp.sendData("bien recu\n", 10, *(int *)&temp.sin_addr, ntohs(temp.sin_port));
                 }
+            std::vector<struct sockaddr_in> list = udp.getAllConnected();
+            for (int j = 0; j < (int)list.size(); j += 1)
+                {
+                    udp.sendData("ping\n", 5, *(int *)&list[j].sin_addr, ntohs(list[j].sin_port));
+                }
             /*
               // udp
             udp.loop();

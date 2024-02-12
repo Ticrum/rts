@@ -1,38 +1,57 @@
+// EFRITS
+// project:     rts
+// created on:  2024-02-12 - 10:39 +0100
+// 1st author:  thomas.barbe - thomas.barbe
+// description: unit header
+
 #ifndef __UNIT_HH__
 #define __UNIT_HH__
 
-#include "object.hh"
+#include "weapon.hh"
 
 namespace ef
 {
+    enum MoveType
+    {
+        Run,
+        Walk,
+        Static
+    };
+
+    struct ConfUnit : ConfObj
+    {
+        ConfUnit(std::string file);
+
+        std::string conf;
+        double speed;
+        double runningSpeed;
+        MoveType moveType;
+        bool isFlying;
+        std::vector<std::string> weaponConf;
+    };
+
     class Unit : Object
     {
     public:
-        enum MoveType
-        {
-            Run,
-            Walk,
-            Static
-        };
 
-        Unit();
-        int getSpeed();
-        int getRunningSpeed();
+        Unit(ConfUnit conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+        double getSpeed();
+        double getRunningSpeed();
         void moveUnit(double timePassed, MoveType movementType);
         bool fireAllWeapon(double timePassed);
         bool getIsFlying();
         int getActualIndex();
-        void changePath(vector<Pos> newPath);
+        void changePath(std::vector<Pos> newPath);
 
     private:
-        vector<Pos> path;
+        std::vector<Pos> path;
         int actualIndex;
-        int speed;
-        int runningSpeed;
-        MoveType moveType;
         double progress;
+        double speed;
+        double runningSpeed;
+        MoveType moveType;
         bool isFlying;
-        vector<Weapon> weapons;
+        std::vector<Weapon> weapons;
     };
 }; // !ef
 

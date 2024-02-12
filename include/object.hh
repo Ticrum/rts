@@ -1,8 +1,15 @@
+// EFRITS
+// project:     rts
+// created on:  2024-02-09 - 11:21 +0100
+// 1st author:  thomas.barbe - thomas.barbe
+// description: object header
+
 #ifndef __OBJECT_HH__
 #define __OBJECT_HH__
 
-#include <memory>
 #include <vector>
+#include <cstdint>
+#include <string>
 
 namespace ef
 {
@@ -20,10 +27,22 @@ namespace ef
         int y;
     };
 
+    struct ConfObj
+    {
+        ConfObj(std::string file);
+
+        std::string conf;
+        int imgId;
+        Pos objSize;
+        int maxhp;
+        int armor;
+        int rangeOfVision;
+    };
+
     class Object
     {
     public:
-        Object();
+        Object(ConfObj conf, Pos _pos, int _objId, int _alegence);
         void takeDmg(int nbrDmg, int dmg);
         Pos getPos();
         void setPos(int x, int y);
@@ -44,28 +63,6 @@ namespace ef
         int armor;
         int rangeOfVision;
         int alegence;
-    };
-
-    class Weapon
-    {
-    public:
-        Weapon();
-        bool FireAction(double timePassed);
-        void setNewTarget(shared_ptr<Object> newTarget);
-        int getDmg();
-        int getNbrAtt();
-        int getRange();
-
-    private:
-
-        int computeDmg();
-
-        int dmg;
-        int nbrAtt;
-        double cdrMax;
-        double cdr;
-        int range;
-        shared_ptr<Object> target;
     };
 }; // !ef
 
