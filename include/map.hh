@@ -11,6 +11,7 @@ namespace ef
         Map(int sizex, int sizey);
         Pos getMapSize();
         char & operator[](int index);
+        void clear(char data);
 
     private:
         std::vector<char> map;

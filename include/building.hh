@@ -24,6 +24,7 @@ namespace ef
         ConfBuilding(std::string file);
 
         std::string conf;
+        int cost;
         BuildingType type;
         bool canBeTarget;
         int energyCost;
@@ -43,6 +44,9 @@ namespace ef
         bool getIsActive();
         void setIsActive(bool newState);
         int getEnergyProduction();
+        int getMoneyProduction();
+        void makeTargeting(std::vector<std::shared_ptr<Object>> others);
+        void manualTargeting(std::shared_ptr<Object> target);
 
     protected:
         BuildingType type;
@@ -74,6 +78,7 @@ namespace ef
     {
         std::string techName;
         bool isSearched;
+        double timeToSearch;
     };
 
     class TechBuilding : Building

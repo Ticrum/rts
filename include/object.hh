@@ -22,6 +22,7 @@ namespace ef
     struct Pos
     {
         ConformPos get();
+        int isInRange(Pos other, int _x, int _y);
 
         int x;
         int y;
@@ -46,6 +47,7 @@ namespace ef
         void takeDmg(int nbrDmg, int dmg);
         Pos getPos();
         void setPos(int x, int y);
+        int getId();
         int getImgId();
         Pos getObjSize();
         int getHp();

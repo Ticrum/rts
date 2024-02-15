@@ -6,8 +6,10 @@
 
 #include "unit.hh"
 
-void ef::Unit::changePath(std::vector<Pos> newPath)
+void ef::Unit::changePath(std::vector<Pos> newPath,
+                          MoveType type)
 {
     path = newPath;
+    moveType = type;
 }
 

@@ -22,6 +22,7 @@ namespace ef
         int nbrAtt;
         double cdrMax;
         int range;
+        bool manualTarget;
     };
 
     class Weapon
@@ -33,6 +34,7 @@ namespace ef
         int getDmg();
         int getNbrAtt();
         int getRange();
+        bool isManual();
 
     private:
         int dmg;
@@ -40,6 +42,7 @@ namespace ef
         double cdrMax;
         double cdr;
         int range;
+        bool manualTarget;
         std::shared_ptr<Object> target;
     };
 }
