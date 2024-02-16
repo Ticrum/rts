@@ -22,13 +22,14 @@ namespace ef
         void makePath(std::shared_ptr<Unit> unit, Pos dest, MoveType moveType);
         void stopUnit(std::shared_ptr<Unit> unit);
         void setTarget(std::shared_ptr<Unit> unit, std::shared_ptr<Object> other);
-        void computeActions(double timePassed);
+        void computeActions(double timePassed, std::vector<ConfWeapon> & weaponsConf);
         void finishAction(double timePassed);
-        void placeBuilding(std::shared_ptr<Building> building,
-                           bool other);
+        void placeBuilding(std::shared_ptr<Building> building);
+        bool placeBuilding(Pos pos);
         bool canPlaceBuilding(Pos pos);
         void produce(std::shared_ptr<ProdBuilding> producer, ConfUnit newUnit);
         void produce(std::shared_ptr<TechBuilding> producer, Tech newSearch);
+        void produce(std::shared_ptr<ConstructBuilding> producer, ConfBuilding newBuilding);
         bool destroyUnit(std::shared_ptr<Unit> unit, bool isOther);
         bool destroyBuilding(std::shared_ptr<Building> building, bool isOther);
         void addOther(std::shared_ptr<Unit> unit);
@@ -37,6 +38,7 @@ namespace ef
         std::vector<std::shared_ptr<Unit>> selectUnit(Pos start, Pos end);
         std::vector<std::shared_ptr<Building>> selectBuilding(Pos start, Pos end);
         void modifyMoneyGain(int money);
+        std::vector<std::shared_ptr<ef::Object>> & getKillList();
 
     private:
         int money;
@@ -54,6 +56,8 @@ namespace ef
         std::vector<std::shared_ptr<Unit>> otherUnits;
         std::vector<std::shared_ptr<Building>> otherBuildings;
         std::vector<std::shared_ptr<ef::Object>> killList;
+        std::vector<std::shared_ptr<Building>> producedBuilding;
+        std::vector<std::shared_ptr<Tech>> searchedTech;
     };
 
     class ServerPlayersInfo

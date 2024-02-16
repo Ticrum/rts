@@ -9,6 +9,9 @@
 void ef::PlayerInfo::produce(std::shared_ptr<TechBuilding> producer,
                              Tech newSearch)
 {
+    if (money < newSearch.cost)
+        return;
+    money -= newSearch.cost;
     producer->addSearchToList(newSearch);
 }
 

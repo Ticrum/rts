@@ -19,10 +19,10 @@ static void printMap(ef::Map map)
 int main(void)
 {
     srand(time(NULL));
-    ef::Map map(128, 128);
+    ef::Map map(20, 20);
     map.clear(0);
 
-    for (int i = 0; i < 1400; i += 1)
+    for (int i = 0; i < 30; i += 1)
         map[rand() % (map.getMapSize().x * map.getMapSize().y)] = 1;
     map[4 + 10 * 5] = 1;
     map[5 + 10 * 5] = 1;

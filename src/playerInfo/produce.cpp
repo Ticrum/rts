@@ -9,6 +9,9 @@
 void ef::PlayerInfo::produce(std::shared_ptr<ProdBuilding> producer,
                              ConfUnit newUnit)
 {
+    if (money < newUnit.cost)
+        return;
+    money -= newUnit.cost;
     producer->addUnitToProd(newUnit);
 }
 
