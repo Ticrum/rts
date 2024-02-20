@@ -45,6 +45,9 @@ namespace ef
         void changePath(std::vector<Pos> newPath, MoveType type);
         void makeTargeting(std::vector<std::shared_ptr<Object>> others);
         void manualTargeting(std::shared_ptr<Object> target);
+        void UnitDisplay(Bpixelarray &px,
+                         std::vector<Bpixelarray> &rsrc,
+                         Pos caseSize);
 
     private:
         std::vector<Pos> path;

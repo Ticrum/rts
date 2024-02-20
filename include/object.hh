@@ -13,6 +13,7 @@
 
 namespace ef
 {
+    class Bpixelarray;
     struct ConformPos
     {
         uint16_t x;
@@ -26,6 +27,12 @@ namespace ef
 
         int x;
         int y;
+    };
+
+    struct AcuPos
+    {
+        double x;
+        double y;
     };
 
     struct ConfObj
@@ -55,7 +62,9 @@ namespace ef
         int getArmor();
         int getRangeOfVision();
         int getAlegence();
-
+        void Display(Bpixelarray &px,
+                     std::vector<Bpixelarray> &rsrc,
+                     Pos caseSize);
     protected:
         int objId;
         Pos pos;

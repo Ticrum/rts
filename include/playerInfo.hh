@@ -11,6 +11,7 @@
 #include "map.hh"
 #include "pathfinder.hh"
 #include "udpConnect.hh"
+#include "camera.hh"
 
 namespace ef
 {
@@ -37,11 +38,14 @@ namespace ef
         std::vector<std::shared_ptr<Unit>> selectUnit(Pos start, Pos end);
         std::vector<std::shared_ptr<Building>> selectBuilding(Pos start, Pos end);
         void modifyMoneyGain(int money);
+        void Display(Bpixelarray &px,
+                     std::vector<Bpixelarray> &rsrc,
+                     ef::Camera &cam,
+                     bool fog);
         std::vector<std::shared_ptr<ef::Object>> & getKillList();
         std::shared_ptr<Unit> getUnit(int unitId);
         std::shared_ptr<Building> getBuild(int buildId);
         std::shared_ptr<Object> getOtherObject(int otherId, bool isBuilding);
-
 
     private:
         int money;
@@ -51,7 +55,7 @@ namespace ef
         int actualEnergy;
         Map map;
         Map buildingMap;
-        Map visionMap;
+        Map visionMap; //0: quepouik | 1: gnn? | 2 : i see
         Pathfinder path;
         std::shared_ptr<Building> rallyPoint;
         ResourceManager & res;
