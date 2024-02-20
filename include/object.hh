@@ -32,12 +32,13 @@ namespace ef
     {
         ConfObj(std::string file);
 
-        std::string conf;
+        char conformConf[128];
         int imgId;
         Pos objSize;
         int maxhp;
         int armor;
         int rangeOfVision;
+        std::string conf;
     };
 
     class Object

@@ -7,18 +7,17 @@
 #ifndef __PLAYERINFO_HH__
 #define __PLAYERINFO_HH__
 
-#include "unit.hh"
-#include "building.hh"
+#include "resourceManager.hh"
 #include "map.hh"
-#include "udpConnect.hh"
 #include "pathfinder.hh"
+#include "udpConnect.hh"
 
 namespace ef
 {
     class PlayerInfo
     {
     public:
-        PlayerInfo();
+        PlayerInfo(ResourceManager & res);
         void makePath(std::shared_ptr<Unit> unit, Pos dest, MoveType moveType);
         void stopUnit(std::shared_ptr<Unit> unit);
         void setTarget(std::shared_ptr<Unit> unit, std::shared_ptr<Object> other);
@@ -51,6 +50,7 @@ namespace ef
         Map visionMap;
         Pathfinder path;
         std::shared_ptr<Building> rallyPoint;
+        ResourceManager & res;
         std::vector<std::shared_ptr<Building>> buildings;
         std::vector<std::shared_ptr<Unit>> units;
         std::vector<std::shared_ptr<Unit>> otherUnits;
@@ -58,27 +58,6 @@ namespace ef
         std::vector<std::shared_ptr<ef::Object>> killList;
         std::vector<std::shared_ptr<Building>> producedBuilding;
         std::vector<std::shared_ptr<Tech>> searchedTech;
-    };
-
-    class ServerPlayersInfo
-    {
-    public:
-        ServerPlayersInfo();
-        void makePath(int unitId, Pos dest, MoveType moveType, int PlayerId);
-        void stopUnit(int unitId, int PlayerId);
-        void setTarget(int unitId, std::shared_ptr<Unit> other, int PlayerId);
-        void setTarget(int unitId, std::shared_ptr<Building> other, int PlayerId);
-        void computeActions(double timePassed);
-        void placeBuilding(std::string building, int PlayerId);
-        void produce(int producerId, std::string unitToProd, int PlayerId, bool isTech);
-        bool destroyUnit(int unitId, bool isOther, int PlayerId);
-        bool destroyBuilding(int buildingId, bool isOther, int PlayerId);
-
-    private:
-        std::vector<PlayerInfo> playersInfo;
-        Map trueMap;
-        std::vector<std::shared_ptr<Building>> neutralBuildings;
-        std::shared_ptr<UdpConnect> serverUdp;
     };
 
     class ClientPlayerInfo

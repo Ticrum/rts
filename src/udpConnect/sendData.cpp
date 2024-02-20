@@ -8,14 +8,11 @@
 
 bool ef::UdpConnect::sendData(char *data,
                               int len,
-                              int ip,
-                              int port)
+                              struct sockaddr_in addr)
 {
-    sockGet.sin_port = (in_port_t)htons(port);
-    sockGet.sin_addr = (struct in_addr)ip;
     if (fd[0].revents & POLLOUT)
     {
-        sendto(fd[0].fd, data, len, 0, (struct sockaddr *)&sockGet, (socklen_t)s);
+        sendto(fd[0].fd, data, len, 0, (struct sockaddr *)&addr, (socklen_t)s);
         return true;
     }
     return false;

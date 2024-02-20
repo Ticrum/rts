@@ -35,7 +35,6 @@ namespace ef
     class Unit : public Object
     {
     public:
-
         Unit(ConfUnit conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
         double getSpeed();
         double getRunningSpeed();

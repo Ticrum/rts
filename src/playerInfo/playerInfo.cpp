@@ -6,7 +6,7 @@
 
 #include "playerInfo.hh"
 
-ef::PlayerInfo::PlayerInfo()
+ef::PlayerInfo::PlayerInfo(ResourceManager & res)
     :
     money(0),
     moneyGain(0),
@@ -17,7 +17,8 @@ ef::PlayerInfo::PlayerInfo()
     buildingMap(64, 64),
     visionMap(64, 64),
     path(buildingMap),
-    rallyPoint(nullptr)
+    rallyPoint(nullptr),
+    res(res)
 {
     map.clear(0);
     buildingMap.clear(0);

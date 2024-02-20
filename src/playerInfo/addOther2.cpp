@@ -8,6 +8,7 @@
 
 void ef::PlayerInfo::addOther(std::shared_ptr<Building> building)
 {
-    buildings.push_back(building);
+    otherBuildings.push_back(building);
+    buildingMap[building->getPos().x + building->getPos().y * buildingMap.getMapSize().x] = 1;
 }
 

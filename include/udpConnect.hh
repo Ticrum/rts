@@ -20,7 +20,7 @@ namespace ef
     public:
         UdpConnect(int port);
         void loop();
-        bool sendData(char *data, int len, int ip, int port);
+        bool sendData(char *data, int len, struct sockaddr_in addr);
         int getData(char *data, int len);
         struct sockaddr_in getSender();
         ~UdpConnect();

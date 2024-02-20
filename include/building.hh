@@ -24,7 +24,6 @@ namespace ef
     {
         ConfBuilding(std::string file);
 
-        std::string conf;
         int cost;
         double timeToProduce;
         BuildingType type;
