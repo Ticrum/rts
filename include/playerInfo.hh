@@ -1,10 +1,11 @@
-#ifndef __PLAYERINFO_HH__
+ #ifndef __PLAYERINFO_HH__
 #define __PLAYERINFO_HH__
 
 #include "unit.hh"
 #include "building.hh"
 #include "map.hh"
 #include "udpConnect.hh"
+#include "camera.hh"
 
 namespace ef
 {
@@ -29,14 +30,17 @@ namespace ef
         std::vector<std::shared_ptr<Building>> selectBuilding(Pos start, Pos end);
         void addMoneyGain(int money);
         void loseMoneyGain(int money);
-
+        void Display(Bpixelarray &px,
+                     std::vector<Bpixelarray> &rsrc,
+                     ef::Camera &cam,
+                     bool fog);
     private:
         int money;
         int moneyGain;
         int totalEnergy;
         int actualEnergy;
         Map map;
-        Map visionMap;
+        Map visionMap; //0: quepouik | 1: gnn? | 2 : i see
         std::shared_ptr<Building> rallyPoint;
         std::vector<std::shared_ptr<Building>> buildings;
         std::vector<std::shared_ptr<Unit>> units;
@@ -57,7 +61,9 @@ namespace ef
         void produce(int producerId, std::string unitToProd, int PlayerId, bool isTech);
         bool destroyUnit(int unitId, bool isOther, int PlayerId);
         bool destroyBuilding(int buildingId, bool isOther, int PlayerId);
-
+        void Display(Bpixelarray &px,
+                     std::vector<Bpixelarray> &rsrc,
+                     ef::Camera &cam);
     private:
         std::vector<PlayerInfo> playersInfo;
         Map trueMap;

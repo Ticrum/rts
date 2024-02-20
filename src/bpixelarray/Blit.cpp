@@ -1,5 +1,4 @@
 #include "Bpixelarray.hh"
-#include <cmath>
 
 void ef::Bpixelarray::Blit(ef::Bpixelarray &other,
                            Pos const &start,

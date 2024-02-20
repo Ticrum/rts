@@ -30,7 +30,7 @@ namespace ef
         std::vector<std::string> weaponConf;
     };
 
-    class Unit : Object
+    class Unit : public Object
     {
     public:
 
@@ -44,7 +44,7 @@ namespace ef
         void changePath(std::vector<Pos> newPath);
         void UnitDisplay(Bpixelarray &px,
                          std::vector<Bpixelarray> &rsrc,
-                         Pos caseSiz);
+                         Pos caseSize);
 
     private:
         std::vector<Pos> path;
