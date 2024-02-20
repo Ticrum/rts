@@ -29,10 +29,6 @@ namespace ef
         void addOther(int unitId, std::string unit, Pos pos, int playerId);
 
     private:
-        std::shared_ptr<Unit> getUnit(int unitId, int playerId);
-        std::shared_ptr<Building> getBuild(int buildId, int playerId);
-        std::shared_ptr<Object> getOtherObject(int otherId, int playerId, bool isBuilding);
-
         Map trueMap;
         std::shared_ptr<UdpConnect> serverUdp;
         std::shared_ptr<TcpConnect> serverTcp;
