@@ -11,7 +11,7 @@ void ef::ServerPlayersInfo::produce(int producerId,
                                     int playerId,
                                     BuildingType type)
 {
-    std::shared_ptr<Building> build = getBuild(producerId, playerId);
+    std::shared_ptr<Building> build = playersInfo[playerId].getBuild(producerId);
     if (type == PRODUCTION)
     {
         std::shared_ptr<ProdBuilding> pBuild = std::static_pointer_cast<ProdBuilding>(build);

@@ -14,8 +14,8 @@ void ef::ServerPlayersInfo::setTarget(int unitId,
     std::shared_ptr<Unit> unit;
     std::shared_ptr<Object> other;
 
-    unit = getUnit(unitId, playerId);
-    other = getOtherObject(otherId, playerId, isBuilding);
+    unit = playersInfo[playerId].getUnit(unitId);
+    other = playersInfo[playerId].getOtherObject(otherId, isBuilding);
     if (unit.get() == nullptr)
         return;
     if (other.get() == nullptr)

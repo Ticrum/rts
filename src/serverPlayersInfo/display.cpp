@@ -1,5 +1,4 @@
-#include "playerInfo.hh"
-
+#include "serverPlayersInfo.hh"
 
 void ef::ServerPlayersInfo::Display(Bpixelarray &px,
                                     std::vector<Bpixelarray> &rsrc,

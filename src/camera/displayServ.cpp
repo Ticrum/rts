@@ -1,5 +1,5 @@
 #include "camera.hh"
-#include "playerInfo.hh"
+#include "serverPlayersInfo.hh"
 
 void ef::Camera::display(ServerPlayersInfo &srv,
                          std::vector<Bpixelarray> &rsrc)

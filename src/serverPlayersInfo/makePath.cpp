@@ -13,7 +13,7 @@ void ef::ServerPlayersInfo::makePath(int unitId,
 {
     std::shared_ptr<Unit> unit;
 
-    unit = getUnit(unitId, playerId);
+    unit = playersInfo[playerId].getUnit(unitId);
     if (unit.get() == nullptr)
         return;
     playersInfo[playerId].makePath(unit, dest, moveType);
