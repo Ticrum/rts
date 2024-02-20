@@ -27,7 +27,6 @@ void ef::Object::Display(ef::Bpixelarray &px,
     square.y = 0;
 
     int tempon = (hp * size.x) / maxhp;
-
     while(square.x <= size.x && square.y < size.y)
         {
             px.GetSetPixel(square.x + tmp.x, tmp.y - square.y - 2) = (square.x < tempon)? GREEN: RED;
