@@ -13,9 +13,9 @@ namespace ef
 {
     enum MoveType
     {
-        Run,
-        Walk,
-        Static
+        RUN,
+        WALK,
+        STATIC
     };
 
     struct ConfUnit : ConfObj
@@ -23,25 +23,28 @@ namespace ef
         ConfUnit(std::string file);
 
         std::string conf;
+        int cost;
         double speed;
         double runningSpeed;
         MoveType moveType;
         bool isFlying;
+        double timeToProduce;
         std::vector<std::string> weaponConf;
     };
 
     class Unit : public Object
     {
     public:
-
         Unit(ConfUnit conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
         double getSpeed();
         double getRunningSpeed();
-        void moveUnit(double timePassed, MoveType movementType);
+        void moveUnit(double timePassed);
         bool fireAllWeapon(double timePassed);
         bool getIsFlying();
         int getActualIndex();
-        void changePath(std::vector<Pos> newPath);
+        void changePath(std::vector<Pos> newPath, MoveType type);
+        void makeTargeting(std::vector<std::shared_ptr<Object>> others);
+        void manualTargeting(std::shared_ptr<Object> target);
         void UnitDisplay(Bpixelarray &px,
                          std::vector<Bpixelarray> &rsrc,
                          Pos caseSize);

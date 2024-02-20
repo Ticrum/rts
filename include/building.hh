@@ -14,6 +14,7 @@ namespace ef
     enum BuildingType
     {
         PRODUCTION,
+        CONSTRUCT,
         TECH,
         ENERGY,
         MONEY
@@ -23,7 +24,8 @@ namespace ef
     {
         ConfBuilding(std::string file);
 
-        std::string conf;
+        int cost;
+        double timeToProduce;
         BuildingType type;
         bool canBeTarget;
         int energyCost;
@@ -43,6 +45,9 @@ namespace ef
         bool getIsActive();
         void setIsActive(bool newState);
         int getEnergyProduction();
+        int getMoneyProduction();
+        void makeTargeting(std::vector<std::shared_ptr<Object>> others);
+        void manualTargeting(std::shared_ptr<Object> target);
 
     protected:
         BuildingType type;
@@ -54,7 +59,7 @@ namespace ef
         std::vector<Weapon> weapons;
     };
 
-    class ProdBuilding : Building
+    class ProdBuilding : public Building
     {
     public:
         ProdBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
@@ -70,13 +75,31 @@ namespace ef
         bool onHold;
     };
 
+    class ConstructBuilding : public Building
+    {
+    public:
+        ConstructBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+        std::shared_ptr<Building> produceBuilding(double timePassed,
+                                                  std::vector<ConfWeapon> & weaponsConf);
+        void addBuildingToProd(ConfBuilding newBuilding);
+        bool getOnHold();
+        void setOnHold(bool newState);
+
+    private:
+        std::vector<ConfBuilding> buildingProd;
+        double timeLeft;
+        bool onHold;
+    };
+
     struct Tech
     {
         std::string techName;
         bool isSearched;
+        double timeToSearch;
+        int cost;
     };
 
-    class TechBuilding : Building
+    class TechBuilding : public Building
     {
     public:
         TechBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);

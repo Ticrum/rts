@@ -3,6 +3,7 @@
 
 int main(void)
 {
+    /*
     ef::TcpConnect tcp(54321);
     char data[128];
     char i[4];
@@ -27,12 +28,13 @@ int main(void)
                 write(1,"Message lu :\n", 13);
                 write(1,data,lu);
             }
-            /*
+            
               // udp
             tcp.loop();
             tcp.sendData("test\n", 5, *(int *)i, 12345);
             //printf("clientLoop\n");
-            */
+            
             sleep(1);
         }
+*/
 }

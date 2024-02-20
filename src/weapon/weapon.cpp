@@ -13,6 +13,7 @@ ef::Weapon::Weapon(ConfWeapon conf)
     cdrMax(conf.cdrMax),
     cdr(cdrMax),
     range(conf.range),
+    manualTarget(conf.manualTarget),
     target(nullptr)
 {
 }

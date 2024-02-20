@@ -15,13 +15,18 @@ std::shared_ptr<ef::Unit> ef::ProdBuilding::produceUnit(double timePassed,
         timeLeft -= timePassed;
     if (timeLeft <= 0)
     {
-        Pos tempPos = getPos();
-        tempPos.x += 1;
-        newUnit.reset(new Unit(unitProd[0], tempPos, rand(), alegence, weaponsConf));
-        std::vector<ConfUnit> tempVect = unitProd;
-        unitProd.clear();
-        for (int i = 0; i < (int)tempVect.size() - 1; i += 1)
-            unitProd.push_back(tempVect[i + 1]);
+        if (unitProd.size() > 0)
+        {
+            Pos tempPos = getPos();
+            tempPos.x += 1;
+            newUnit.reset(new Unit(unitProd[0], tempPos, rand(), alegence, weaponsConf));
+            std::vector<ConfUnit> tempVect = unitProd;
+            unitProd.clear();
+            for (int i = 0; i < (int)tempVect.size() - 1; i += 1)
+                unitProd.push_back(tempVect[i + 1]);
+            if (unitProd.size() > 0)
+                timeLeft = unitProd[0].timeToProduce;
+        }
     }
     else
         newUnit = nullptr;
