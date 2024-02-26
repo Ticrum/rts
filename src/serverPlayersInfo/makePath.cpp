@@ -13,9 +13,21 @@ void ef::ServerPlayersInfo::makePath(int unitId,
 {
     std::shared_ptr<Unit> unit;
 
-    unit = playersInfo[playerId].getUnit(unitId);
+    unit = playersInfo[playerId]->getUnit(unitId);
     if (unit.get() == nullptr)
         return;
-    playersInfo[playerId].makePath(unit, dest, moveType);
+    playersInfo[playerId]->makePath(unit, dest, moveType);
+    Packet pack;
+    pack.type = PATHUNIT;
+    pack.pathUnit.unitId = unit->getId();
+    pack.pathUnit.moveType = unit->getMoveType();
+    std::vector<ConformPos> newPos = unit->getPathLeft();
+    for (int i = 0; i < (int)newPos.size(); i += 1)
+        pack.pathUnit.pos[i] = newPos[i];
+    pack.pathUnit.nbrPos = newPos.size();
+    for (int i = playerId + 1; i < playerId + (int)clientConnected.size(); i += 1)
+        if (playersInfo[i % playersInfo.size()]->isInVision(unit))
+            serverUdp->sendData((char *)&pack, sizeof(Packet), clientConnected[i % clientConnected.size()]);
+
 }
 

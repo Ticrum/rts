@@ -8,6 +8,7 @@
 #define __UNIT_HH__
 
 #include "weapon.hh"
+#include "tcpConnect.hh"
 
 namespace ef
 {
@@ -43,11 +44,15 @@ namespace ef
         bool getIsFlying();
         int getActualIndex();
         void changePath(std::vector<Pos> newPath, MoveType type);
-        void makeTargeting(std::vector<std::shared_ptr<Object>> others);
+        TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others);
         void manualTargeting(std::shared_ptr<Object> target);
         void UnitDisplay(Bpixelarray &px,
                          std::vector<Bpixelarray> &rsrc,
                          Pos caseSize);
+        double getProgress();
+        MoveType getMoveType();
+        std::vector<ConformPos> getPathLeft();
+        std::vector<double> getWeaponsCd();
 
     private:
         std::vector<Pos> path;

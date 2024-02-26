@@ -14,8 +14,11 @@
 namespace ef
 {
     class Bpixelarray;
+    struct Pos;
     struct ConformPos
     {
+        Pos get();
+
         uint16_t x;
         uint16_t y;
     };
@@ -51,7 +54,7 @@ namespace ef
     class Object
     {
     public:
-        Object(ConfObj conf, Pos _pos, int _objId, int _alegence);
+        Object(ConfObj _conf, Pos _pos, int _objId, int _alegence);
         void takeDmg(int nbrDmg, int dmg);
         Pos getPos();
         void setPos(int x, int y);
@@ -62,10 +65,12 @@ namespace ef
         int getArmor();
         int getRangeOfVision();
         int getAlegence();
+        std::string getConf();
         void Display(Bpixelarray &px,
                      std::vector<Bpixelarray> &rsrc,
                      Pos caseSize);
     protected:
+        std::string conf;
         int objId;
         Pos pos;
         int imgId;

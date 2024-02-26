@@ -23,6 +23,6 @@ void ef::ServerPlayersInfo::addOther(int buildId,
         tempBuild.reset(new TechBuilding(conf, pos, buildId, playerId, res.getWeaponConf())); //get weapon conf
     else
         tempBuild.reset(new Building(conf, pos, buildId, playerId, res.getWeaponConf()));
-    playersInfo[playerId].addOther(tempBuild);
+    playersInfo[playerId]->addOther(tempBuild);
 }
 

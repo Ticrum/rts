@@ -46,8 +46,9 @@ namespace ef
         void setIsActive(bool newState);
         int getEnergyProduction();
         int getMoneyProduction();
-        void makeTargeting(std::vector<std::shared_ptr<Object>> others);
+        TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others);
         void manualTargeting(std::shared_ptr<Object> target);
+        std::vector<double> getWeaponsCd();
 
     protected:
         BuildingType type;

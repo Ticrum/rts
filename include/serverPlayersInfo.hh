@@ -8,9 +8,7 @@
 #define __SERVERPLAYERINFO_HH__
 
 #include "playerInfo.hh"
-#include "com.hh"
-#include "udpConnect.hh"
-#include "tcpConnect.hh"
+#include "time.h"
 
 namespace ef
 {
@@ -30,14 +28,20 @@ namespace ef
         void Display(Bpixelarray &px,
                      std::vector<Bpixelarray> &rsrc,
                      ef::Camera &cam);
+        void broadcastTarget(std::vector<TargetReturn> target);
 
     private:
+        void updateOther();
+
         Map trueMap;
+        double lastTime;
         std::shared_ptr<UdpConnect> serverUdp;
         std::shared_ptr<TcpConnect> serverTcp;
+        bool gameStarted;
         ResourceManager res;
         std::vector<struct sockaddr_in> clientConnected;
-        std::vector<PlayerInfo> playersInfo;
+        std::vector<bool> clientReady;
+        std::vector<std::shared_ptr<PlayerInfo>> playersInfo;
         std::vector<std::shared_ptr<Building>> neutralBuildings;
     };
 }; // !ef

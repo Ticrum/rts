@@ -12,6 +12,8 @@
 #include "pathfinder.hh"
 #include "udpConnect.hh"
 #include "camera.hh"
+#include "udpConnect.hh"
+#include "com.hh"
 
 namespace ef
 {
@@ -22,8 +24,8 @@ namespace ef
         void makePath(std::shared_ptr<Unit> unit, Pos dest, MoveType moveType);
         void stopUnit(std::shared_ptr<Unit> unit);
         void setTarget(std::shared_ptr<Unit> unit, std::shared_ptr<Object> other);
-        void computeActions(double timePassed, std::vector<ConfWeapon> & weaponsConf);
-        void finishAction(double timePassed);
+        std::vector<TargetReturn> computeActions(double timePassed, std::vector<ConfWeapon> & weaponsConf, bool moveOther, std::shared_ptr<UdpConnect> & serverUdp, struct sockaddr_in & clients);
+        void finishAction(double timePassed, bool finishOther);
         void placeBuilding(std::shared_ptr<Building> building);
         bool placeBuilding(Pos pos);
         bool canPlaceBuilding(Pos pos);
@@ -46,6 +48,12 @@ namespace ef
         std::shared_ptr<Unit> getUnit(int unitId);
         std::shared_ptr<Building> getBuild(int buildId);
         std::shared_ptr<Object> getOtherObject(int otherId, bool isBuilding);
+        void updateOther();
+        void updateOther(std::vector<std::shared_ptr<Unit>> newUnit, std::shared_ptr<UdpConnect> udp, struct sockaddr_in client);
+        void updateOther(std::vector<std::shared_ptr<Building>> newBuilding, std::shared_ptr<UdpConnect> udp, struct sockaddr_in client);
+        Map & getVisionMap();
+        std::vector<std::shared_ptr<Building>> getBuildingInVision(Map vision);
+        std::vector<std::shared_ptr<Unit>> getUnitInVision(Map vision);
 
     private:
         int money;

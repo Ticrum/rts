@@ -13,6 +13,14 @@
 namespace ef
 {
 
+    struct TargetReturn
+    {
+        std::shared_ptr<Object> unit;
+        bool isBuilding;
+        std::vector<std::shared_ptr<Object>> target;
+        std::vector<bool> isTargetBuilding;
+    };
+
     struct ConfWeapon
     {
         ConfWeapon(std::string file);
@@ -34,7 +42,9 @@ namespace ef
         int getDmg();
         int getNbrAtt();
         int getRange();
+        double getCdr();
         bool isManual();
+        bool hasTarget();
 
     private:
         int dmg;

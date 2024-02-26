@@ -15,10 +15,10 @@ bool ef::ServerPlayersInfo::destroy(int unitId,
     std::shared_ptr<Building> build;
     if (isBuilding)
     {
-        build = playersInfo[playerId].getBuild(unitId);
-        return playersInfo[playerId].destroyBuilding(build, isOther);
+        build = playersInfo[playerId]->getBuild(unitId);
+        return playersInfo[playerId]->destroyBuilding(build, isOther);
     }
-    unit = playersInfo[playerId].getUnit(unitId);
-    return playersInfo[playerId].destroyUnit(unit, isOther);
+    unit = playersInfo[playerId]->getUnit(unitId);
+    return playersInfo[playerId]->destroyUnit(unit, isOther);
 }
 

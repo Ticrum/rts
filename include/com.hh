@@ -18,9 +18,11 @@ namespace ef
         PATHUNIT,
         SETTARGET,
         PLACEBUILD,
-        ADDOTHER,
+        ADDOTHERUNIT,
+        ADDOTHERBUILDING,
         PRODUCE,
-        DESTROY
+        DESTROY,
+        UPDATETARGET
     };
 
     struct PacketReady
@@ -41,8 +43,9 @@ namespace ef
     {
         PackType type;
         int unitId;
+        MoveType moveType;
         int nbrPos;
-        ConformPos pos;
+        ConformPos pos[128];
     };
 
     struct PacketSetTarget
@@ -53,19 +56,51 @@ namespace ef
         bool isBuilding;
     };
 
-    struct PacketPlaceBuilding
-    {
-        PackType type;
-        Pos pos;
-    };
-
-    struct PacketAddOther
+    struct PacketUpdateTarget
     {
         PackType type;
         int unitId;
+        int otherId[20];
+        bool isEnemyBuilding[20];
+        bool isBuilding;
+        bool isEnemy;
+    };
+
+    struct PacketPlaceBuilding
+    {
+        PackType type;
+        ConformPos pos;
+    };
+
+    struct PacketAddOtherUnit
+    {
+        PackType type;
+        int unitId;
+        int alegence;
         int len;
         char conf[128];
-        bool isBuilding;
+        int actualHp;
+        double progress;
+        MoveType moveType;
+        int nbrPos;
+        ConformPos pos[64];
+        int nbrCdr;
+        double cdr[10];
+        bool isOther;
+    };
+
+    struct PacketAddOtherBuilding
+    {
+        PackType type;
+        int buildId;
+        int alegence;
+        int len;
+        char conf[128];
+        int actualHp;
+        bool isActive;
+        int nbrCdr;
+        double cdr[10];
+        bool isOther;
     };
 
     struct PacketProduce
@@ -74,7 +109,7 @@ namespace ef
         int producerId;
         int len;
         char conf[128];
-        bool isTech;
+        BuildingType buildType;
     };
 
     struct PacketDestroy
@@ -93,9 +128,11 @@ namespace ef
         PacketPathUnit pathUnit;
         PacketSetTarget setTarget;
         PacketPlaceBuilding placeBuild;
-        PacketAddOther addOther;
+        PacketAddOtherUnit addOtherUnit;
+        PacketAddOtherBuilding addOtherBuilding;
         PacketProduce produce;
         PacketDestroy destroy;
+        PacketUpdateTarget updateTarget;
     };
 }; // !ef
 
