@@ -55,6 +55,7 @@ namespace ef
     {
     public:
         Object(ConfObj _conf, Pos _pos, int _objId, int _alegence);
+        Object(ConfObj _conf, Pos _pos, int _objId, int _alegence, int actualHp);
         void takeDmg(int nbrDmg, int dmg);
         Pos getPos();
         void setPos(int x, int y);

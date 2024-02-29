@@ -22,7 +22,8 @@ namespace ef
         ADDOTHERBUILDING,
         PRODUCE,
         DESTROY,
-        UPDATETARGET
+        UPDATETARGET,
+        GAMESTART
     };
 
     struct PacketReady
@@ -60,6 +61,7 @@ namespace ef
     {
         PackType type;
         int unitId;
+        int otherLen;
         int otherId[20];
         bool isEnemyBuilding[20];
         bool isBuilding;
@@ -77,6 +79,7 @@ namespace ef
         PackType type;
         int unitId;
         int alegence;
+        ConformPos posi;
         int len;
         char conf[128];
         int actualHp;
@@ -94,6 +97,7 @@ namespace ef
         PackType type;
         int buildId;
         int alegence;
+        ConformPos posi;
         int len;
         char conf[128];
         int actualHp;
@@ -120,9 +124,16 @@ namespace ef
         bool isBuilding;
     };
 
+    struct PacketGameStart
+    {
+        PackType type;
+        bool isStart;
+    };
+
     union Packet
     {
         PackType type;
+        PacketGameStart gameStart;
         PacketReady ready;
         PacketMoveUnit moveUnit;
         PacketPathUnit pathUnit;

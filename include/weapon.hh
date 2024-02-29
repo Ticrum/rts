@@ -37,6 +37,7 @@ namespace ef
     {
     public:
         Weapon(ConfWeapon conf);
+        Weapon(ConfWeapon conf, double _cdr);
         bool fireAction(double timePassed);
         void setNewTarget(std::shared_ptr<Object> newTarget);
         int getDmg();

@@ -9,7 +9,6 @@
 ef::ServerPlayersInfo::ServerPlayersInfo(int port)
     :
     trueMap(64, 64),
-    lastTime(time(NULL)),
     serverUdp(new UdpConnect(port)),
     serverTcp(new TcpConnect(port)),
     gameStarted(false)

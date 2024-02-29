@@ -7,7 +7,7 @@
 #include "playerInfo.hh"
 
 std::vector<std::shared_ptr<ef::Unit>> ef::PlayerInfo::selectUnit(Pos start,
-                                                              Pos end)
+                                                                  Pos end)
 {
     Pos center;
     std::vector<std::shared_ptr<Unit>> selected;

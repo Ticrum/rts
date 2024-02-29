@@ -24,6 +24,9 @@ namespace ef
         void makePath(std::shared_ptr<Unit> unit, Pos dest, MoveType moveType);
         void stopUnit(std::shared_ptr<Unit> unit);
         void setTarget(std::shared_ptr<Unit> unit, std::shared_ptr<Object> other);
+        void setTarget(std::shared_ptr<Building> build, std::shared_ptr<Object> other);
+        void refreshTarget(std::shared_ptr<Unit> unit, std::vector<std::shared_ptr<Object>> targets);
+        void refreshTarget(std::shared_ptr<Building> build, std::vector<std::shared_ptr<Object>> targets);
         std::vector<TargetReturn> computeActions(double timePassed, std::vector<ConfWeapon> & weaponsConf, bool moveOther, std::shared_ptr<UdpConnect> & serverUdp, struct sockaddr_in & clients);
         void finishAction(double timePassed, bool finishOther);
         void placeBuilding(std::shared_ptr<Building> building);
@@ -34,8 +37,8 @@ namespace ef
         void produce(std::shared_ptr<ConstructBuilding> producer, ConfBuilding newBuilding);
         bool destroyUnit(std::shared_ptr<Unit> unit, bool isOther);
         bool destroyBuilding(std::shared_ptr<Building> building, bool isOther);
-        void addOther(std::shared_ptr<Unit> unit);
-        void addOther(std::shared_ptr<Building> building);
+        void addOther(std::shared_ptr<Unit> unit, bool isOther);
+        void addOther(std::shared_ptr<Building> building, bool isOther);
         bool isInVision(std::shared_ptr<Object> obj);
         std::vector<std::shared_ptr<Unit>> selectUnit(Pos start, Pos end);
         std::vector<std::shared_ptr<Building>> selectBuilding(Pos start, Pos end);
@@ -54,6 +57,8 @@ namespace ef
         Map & getVisionMap();
         std::vector<std::shared_ptr<Building>> getBuildingInVision(Map vision);
         std::vector<std::shared_ptr<Unit>> getUnitInVision(Map vision);
+        std::shared_ptr<Unit> getUnitAtPos(Pos pos);
+        std::shared_ptr<Building> getBuildingAtPos(Pos pos);
 
     private:
         int money;
@@ -74,30 +79,6 @@ namespace ef
         std::vector<std::shared_ptr<ef::Object>> killList;
         std::vector<std::shared_ptr<Building>> producedBuilding;
         std::vector<std::shared_ptr<Tech>> searchedTech;
-    };
-
-    class ClientPlayerInfo
-    {
-    public:
-        ClientPlayerInfo();
-        void makePath(Pos dest, MoveType moveType);
-        void selectUnit(Pos start, Pos end);
-        void selectBuilding(Pos start, Pos end);
-        void stopUnit();
-        void setTarget();
-        void placeBuilding(std::string building);
-        void produce(int producerId, std::string unitToProd, bool isTech);
-        bool DestroyUnit();
-        bool DestroyBuilding();
-        bool destroyUnit(int unitId, bool isOther);
-        bool destroyBuilding(int buildingId, bool isOther);
-
-        PlayerInfo playerInfo;
-
-    private:
-        std::vector<std::shared_ptr<Unit>> selectedUnit;
-        std::vector<std::shared_ptr<Building>> selectedBuilding;
-        std::shared_ptr<UdpConnect> connectUdp;
     };
 }; // !ef
 

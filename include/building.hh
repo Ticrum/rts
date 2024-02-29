@@ -38,7 +38,9 @@ namespace ef
     {
     public:
         Building(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+        Building(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
         bool fireAllWeapon(double timePassed);
+        void changeTarget(std::vector<std::shared_ptr<Object>> targets);
         BuildingType getType();
         bool getCanBeTarget();
         int getEnergyCost();
@@ -64,6 +66,7 @@ namespace ef
     {
     public:
         ProdBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+        ProdBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
         std::shared_ptr<Unit> produceUnit(double timePassed,
                                           std::vector<ConfWeapon> & weaponsConf);
         void addUnitToProd(ConfUnit newUnit);
@@ -80,6 +83,7 @@ namespace ef
     {
     public:
         ConstructBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+        ConstructBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
         std::shared_ptr<Building> produceBuilding(double timePassed,
                                                   std::vector<ConfWeapon> & weaponsConf);
         void addBuildingToProd(ConfBuilding newBuilding);
@@ -104,6 +108,7 @@ namespace ef
     {
     public:
         TechBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+        TechBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
         std::shared_ptr<Tech> searchTech(double timePassed);
         void addSearchToList(Tech newSearch);
         bool getOnHold();

@@ -43,7 +43,14 @@ void ef::ServerPlayersInfo::computeActions(double timePassed)
                     if (clientReady[i])
                         compt += 1;
                 if (compt == (int)clientReady.size())
+                {
                     gameStarted = true;
+                    Packet pack;
+                    pack.type = GAMESTART;
+                    pack.gameStart.isStart = true;
+                    for (int i = 0; i < (int)clientConnected.size(); i += 1)
+                        serverUdp->sendData((char *)&pack, sizeof(Packet), clientConnected[i]);
+                }
             }
             else
             {

@@ -37,6 +37,7 @@ namespace ef
     {
     public:
         Unit(ConfUnit conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+        Unit(ConfUnit conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, double _progress, MoveType type, std::vector<Pos> newPath, std::vector<double> cdr);
         double getSpeed();
         double getRunningSpeed();
         void moveUnit(double timePassed);
@@ -44,6 +45,7 @@ namespace ef
         bool getIsFlying();
         int getActualIndex();
         void changePath(std::vector<Pos> newPath, MoveType type);
+        void changeTarget(std::vector<std::shared_ptr<Object>> targets);
         TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others);
         void manualTargeting(std::shared_ptr<Object> target);
         void UnitDisplay(Bpixelarray &px,

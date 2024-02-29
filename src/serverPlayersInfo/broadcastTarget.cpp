@@ -15,6 +15,7 @@ void ef::ServerPlayersInfo::broadcastTarget(std::vector<TargetReturn> target)
         pack.updateTarget.unitId = target[i].unit->getId();
         pack.updateTarget.isBuilding = target[i].isBuilding;
         pack.updateTarget.isEnemy = true;
+        pack.updateTarget.otherLen = target.size();
         for (int j = 0; j < (int)target[i].target.size(); j += 1)
         {
             pack.updateTarget.otherId[j] = target[i].target[j]->getId();

@@ -34,7 +34,6 @@ namespace ef
         void updateOther();
 
         Map trueMap;
-        double lastTime;
         std::shared_ptr<UdpConnect> serverUdp;
         std::shared_ptr<TcpConnect> serverTcp;
         bool gameStarted;

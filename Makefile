@@ -50,7 +50,7 @@ $(OUT): $(OBJ)
 ifeq ($(LIBLAPIN), 1)
 	$(CC) $(OBJ) $(INCLUDE) $(FLAGS) $(LAPINLINKS) -o $(OUT)
 else
-	$(CC) $(OBJ) $(INCLUDE) $(FLAGS) -o $(OUT) efzfezfzfe
+	$(CC) $(OBJ) $(INCLUDE) $(FLAGS) -o $(OUT)
 endif
 
 lib: $(LIBSTAOUT) $(LIBDYOUT) test
