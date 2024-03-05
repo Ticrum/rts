@@ -13,16 +13,14 @@ int main()
     while(px.Init(500, 500));
     while(blu.Init(200, 100));
     while(whi.Init(300, 100));
-    while(red.Init(500, 100));
+    while(red.Init(1000, 100));
+    px.Clear(BLACK);
     ef::Pos size = px.GetSize();
     if(size.x != 500 || size.y != 500)
     {
         std::cout << "ERROR: FAULS SIZE ("<< size.x << ", "<<  size.y<< ")\n";
         return 1;
     }
-    int max = size.x * size.y;
-    for(int i = 0; i< max; i++)
-        px.GetSetPixel(i) = BLACK;
     size = blu.GetSize();
     for(int i = 0; i< size.x *size.y; i++)
         blu.GetSetPixel(i) = BLUE;
@@ -40,5 +38,8 @@ int main()
     px.Blit(red, size, siz);
     px.Blit(whi, size, siz);
     px.Blit(blu, size, siz);
+    bunny_blit(&win->buffer, px.GetClip(), NULL);
     bunny_display(win);
+    sleep(10);
 }
+

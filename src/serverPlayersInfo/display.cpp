@@ -1,7 +1,7 @@
 #include "serverPlayersInfo.hh"
 
 void ef::ServerPlayersInfo::Display(Bpixelarray &px,
-                                    std::vector<Bpixelarray> &rsrc,
+                                    std::vector<std::shared_ptr<Bpixelarray>> &rsrc,
                                     ef::Camera &cam)
 {
     for(int i=0; i < (int) playersInfo.size(); i++)

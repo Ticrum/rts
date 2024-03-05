@@ -2,7 +2,7 @@
 #include "playerInfo.hh"
 
 void ef::Camera::display(PlayerInfo &plr,
-                         std::vector<Bpixelarray> &rsrc)
+                         std::vector<std::shared_ptr<ef::Bpixelarray>> &rsrc)
 {
     if(win == NULL)
         return;

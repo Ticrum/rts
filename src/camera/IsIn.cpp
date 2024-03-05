@@ -2,10 +2,10 @@
 #include "camera.hh"
 
 bool ef::Camera::IsIn(ef::Pos &start,
-                      ef::Bpixelarray &pic)
+                      std::shared_ptr<ef::Bpixelarray> &pic)
 {
     AcuPos total;
-    Pos max = pic.GetSize();
+    Pos max = pic->GetSize();
     total.x = pos.x + size.x * zoom;
     total.y = pos.y + size.y * zoom;
 

@@ -28,7 +28,7 @@ namespace ef
         void addOther(int buildId, std::string build, Pos pos, int playerId, BuildingType type);
         void addOther(int unitId, std::string unit, Pos pos, int playerId);
         void Display(Bpixelarray &px,
-                     std::vector<Bpixelarray> &rsrc,
+                     std::vector<std::shared_ptr<Bpixelarray>> &rsrc,
                      ef::Camera &cam);
 
     private:

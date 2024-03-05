@@ -18,11 +18,15 @@ namespace ef
         STATIC
     };
 
-    struct ConfUnit : ConfObj
+    class ConfUnit : public ConfObj
     {
+    public:
+        ConfUnit();
         ConfUnit(std::string file);
+        ConfUnit(ConfUnit const &other);
+        ConfUnit &operator=(ConfUnit const&other);
+        int load(std::string &file);
 
-        std::string conf;
         int cost;
         double speed;
         double runningSpeed;
@@ -46,7 +50,7 @@ namespace ef
         void makeTargeting(std::vector<std::shared_ptr<Object>> others);
         void manualTargeting(std::shared_ptr<Object> target);
         void UnitDisplay(Bpixelarray &px,
-                         std::vector<Bpixelarray> &rsrc,
+                         std::vector<std::shared_ptr<Bpixelarray>> &rsrc,
                          Pos caseSize);
 
     private:

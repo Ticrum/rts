@@ -7,15 +7,19 @@
 #ifndef __WEAPON_HH__
 #define __WEAPON_HH__
 
-#include <memory>
 #include "object.hh"
 
 namespace ef
 {
 
-    struct ConfWeapon
+    class ConfWeapon
     {
+    public:
+        ConfWeapon();
         ConfWeapon(std::string file);
+        ConfWeapon(ConfWeapon const &other);
+        ConfWeapon &operator=(ConfWeapon const&other);
+        int load(std::string &file);
 
         std::string conf;
         int dmg;

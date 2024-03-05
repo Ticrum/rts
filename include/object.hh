@@ -10,9 +10,12 @@
 #include <vector>
 #include <cstdint>
 #include <string>
+#include <memory>
 
 namespace ef
 {
+    class ResourceManager;
+    class Bconf;
     class Bpixelarray;
     struct ConformPos
     {
@@ -22,6 +25,9 @@ namespace ef
 
     struct Pos
     {
+        Pos(){}
+        Pos(Pos const &other);
+        Pos &operator=(Pos const& other);
         ConformPos get();
         int isInRange(Pos other, int _x, int _y);
 
@@ -37,7 +43,12 @@ namespace ef
 
     struct ConfObj
     {
+        ConfObj();
+        ConfObj(ConfObj const &other);
         ConfObj(std::string file);
+        ConfObj &operator=(ConfObj const&other);
+        int LoadBasic(std::string &file);
+        int LoadBasic(Bconf &conff);
 
         char conformConf[128];
         int imgId;
@@ -63,7 +74,7 @@ namespace ef
         int getRangeOfVision();
         int getAlegence();
         void Display(Bpixelarray &px,
-                     std::vector<Bpixelarray> &rsrc,
+                     std::vector<std::shared_ptr<ef::Bpixelarray>> &rsrc,
                      Pos caseSize);
     protected:
         int objId;
