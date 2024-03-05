@@ -11,22 +11,23 @@
 
 namespace ef
 {
-    class ResourceManager
-    {
-    public:
-        ConfUnit getUnit(std::string name);
-        ConfBuilding getBuild(std::string name);
-        Tech getTech(std::string name);
-        std::vector<ConfWeapon> & getWeaponConf();
-        ConfObj getShot(std::string name);
-        std::vector<std::shared_ptr<Bpixelarray>> getSprit();
-    private:
-        std::vector<ConfUnit> unitConf;
-        std::vector<ConfWeapon> weaponConf;
-        std::vector<ConfBuilding> buildingConf;
-        std::vector<Tech> allTech;
-        std::vector<std::shared_ptr<Bpixelarray>> sprites;
-    }; 
+  class ResourceManager
+  {
+  public:
+    ConfUnit getUnit(std::string name);
+    ConfBuilding getBuild(std::string name);
+    Tech getTech(std::string name);
+    std::vector<ConfWeapon> & getWeaponConf();
+    ConfObj getShot(std::string name);
+    std::vector<std::shared_ptr<Bpixelarray>> getSprit();
+  private:
+    std::vector<ConfUnit> unitConf;
+    std::vector<ConfWeapon> weaponConf;
+    std::vector<ConfBuilding> buildingConf;
+    std::vector<Tech> allTech;
+    std::vector<ConfObj> shot;
+    std::vector<std::shared_ptr<Bpixelarray>> sprites;
+  };
 }; // !ef
 
 #endif // __RESOURCEMANAGER_HH__
