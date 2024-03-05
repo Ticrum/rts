@@ -136,7 +136,7 @@ namespace ef
     PackType type;
     int buildId;
     int alegence;
-    ConformPos poso;
+    ConformPos pos;
     int len;
     char conf[128];
   };
