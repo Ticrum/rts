@@ -6,14 +6,14 @@
 
 #include "object.hh"
 
-void ef::Object::takeDmg(int nbrDmg,
-                         int dmg)
+void ef::Object::takeDmg(int _nbrDmg,
+                         int _dmg)
 {
-    dmg -= armor;
-    if (dmg <= 0)
+    _dmg -= armor;
+    if (_dmg <= 0)
         return;
-    for (int i = 0; i < nbrDmg; i += 1)
-        hp -= dmg;
+    for (int i = 0; i < _nbrDmg; i += 1)
+        hp -= _dmg;
     if (hp < 0)
         hp = 0;
 }

@@ -18,6 +18,7 @@ namespace ef
         ConfBuilding getBuild(std::string name);
         Tech getTech(std::string name);
         std::vector<ConfWeapon> & getWeaponConf();
+        ConfObj getShot(std::string name);
         std::vector<std::shared_ptr<Bpixelarray>> getSprit();
     private:
         std::vector<ConfUnit> unitConf;
@@ -25,7 +26,7 @@ namespace ef
         std::vector<ConfBuilding> buildingConf;
         std::vector<Tech> allTech;
         std::vector<std::shared_ptr<Bpixelarray>> sprites;
-    };
+    }; 
 }; // !ef
 
 #endif // __RESOURCEMANAGER_HH__

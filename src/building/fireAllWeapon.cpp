@@ -6,13 +6,14 @@
 
 #include "building.hh"
 
-bool ef::Building::fireAllWeapon(double timePassed)
+std::vector<std::shared_ptr<ef::Object>> ef::Building::fireAllWeapon(double timePassed)
 {
-    bool hasFire = false;
+  std::vector<std::shared_ptr<Object>> shots;
+  std::shared_ptr<Object> tempObj = nullptr;
 
-    for (int i = 0; i < (int)weapons.size(); i += 1)
-        if (weapons[i].fireAction(timePassed))
-            hasFire = true;
-    return hasFire;
+  for (int i = 0; i < (int)weapons.size(); i += 1)
+    if ((tempObj = weapons[i].fireAction(timePassed)) != nullptr)
+      shots.push_back(tempObj);
+  return shots;
 }
 

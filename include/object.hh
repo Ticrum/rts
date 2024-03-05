@@ -16,31 +16,33 @@ namespace ef
 {
     class ResourceManager;
     class Bconf;
-    class Bpixelarray;
+    class Bpixelarray; 
+    struct Pos;
     struct ConformPos
     {
-        uint16_t x;
-        uint16_t y;
-    };
+    Pos get();
 
-    struct Pos
+    uint16_t x;
+    uint16_t y;
+  };
+
+ struct Pos
     {
         Pos(){}
         Pos(Pos const &other);
         Pos &operator=(Pos const& other);
         ConformPos get();
         int isInRange(Pos other, int _x, int _y);
-
-        int x;
-        int y;
-    };
-
-    struct AcuPos
-    {
-        double x;
-        double y;
-    };
-
+   
+    int x;
+    int y;
+  };
+  
+struct AcuPos
+  {
+    double x;
+    double y;
+  };
     struct ConfObj
     {
         ConfObj();
@@ -49,44 +51,52 @@ namespace ef
         ConfObj &operator=(ConfObj const&other);
         int LoadBasic(std::string &file);
         int LoadBasic(Bconf &conff);
-
+      
         char conformConf[128];
-        int imgId;
-        Pos objSize;
-        int maxhp;
-        int armor;
-        int rangeOfVision;
-        std::string conf;
-    };
+    int imgId;
+    Pos objSize;
+    int maxhp;
+    int armor;
+    int rangeOfVision;
+    int nbrDmg;
+    int dmg;
+    std::string conf;
+  };
+  class Object
+  {
+  public:
+    Object(ConfObj _conf, Pos _pos, int _objId, int _alegence);
+    Object(ConfObj _conf, Pos _pos, int _objId, int _alegence, int actualHp);
+    void takeDmg(int _nbrDmg, int _dmg);
+    Pos getPos();
+    void setPos(int x, int y);
+    int getId();
+    int getImgId();
+    Pos getObjSize();
+    int getHp();
+    int getArmor();
+    int getRangeOfVision();
+    int getAlegence();
+    std::string getConf();
+    void kaboom(std::vector<std::shared_ptr<Object>> objects);
+    void Display(Bpixelarray &px,
+                 std::vector<std::shared_ptr<ef::Bpixelarray>> &rsrc,
+                 Pos caseSize);
 
-    class Object
-    {
-    public:
-        Object(ConfObj conf, Pos _pos, int _objId, int _alegence);
-        void takeDmg(int nbrDmg, int dmg);
-        Pos getPos();
-        void setPos(int x, int y);
-        int getId();
-        int getImgId();
-        Pos getObjSize();
-        int getHp();
-        int getArmor();
-        int getRangeOfVision();
-        int getAlegence();
-        void Display(Bpixelarray &px,
-                     std::vector<std::shared_ptr<ef::Bpixelarray>> &rsrc,
-                     Pos caseSize);
-    protected:
-        int objId;
-        Pos pos;
-        int imgId;
-        Pos objSize;
-        int hp;
-        int maxhp;
-        int armor;
-        int rangeOfVision;
-        int alegence;
-    };
+  protected:
+    std::string conf;
+    int objId;
+    Pos pos;
+    int imgId;
+    Pos objSize;
+    int hp;
+    int maxhp;
+    int armor;
+    int rangeOfVision;
+    int alegence;
+    int nbrDmg;
+    int dmg;
+  };
 }; // !ef
 
 #endif // __OBJECT_HH__

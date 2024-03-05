@@ -15,6 +15,6 @@ void ef::ServerPlayersInfo::addOther(int unitId,
     ConfUnit conf = res.getUnit(unit);
 
     tempUnit.reset(new Unit(conf, pos, unitId, playerId, res.getWeaponConf()));
-    playersInfo[playerId].addOther(tempUnit);
+    playersInfo[playerId]->addOther(tempUnit, true);
 }
 

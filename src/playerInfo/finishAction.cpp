@@ -6,17 +6,22 @@
 
 #include "playerInfo.hh"
 
-void ef::PlayerInfo::finishAction(double timePassed)
+std::vector<std::shared_ptr<ef::Object>> ef::PlayerInfo::finishAction(double timePassed)
 {
-    for (int i = 0; i < (int)buildings.size(); i += 1)
-        buildings[i]->fireAllWeapon(timePassed);
-    for (int i = 0; i < (int)units.size(); i += 1)
-        units[i]->fireAllWeapon(timePassed);
-    for (int i = 0; i < (int)buildings.size(); i += 1)
-        if (buildings[i]->getHp() <= 0)
-            killList.push_back(buildings[i]);
-    for (int i = 0; i < (int)units.size(); i += 1)
-        if (units[i]->getHp() <= 0)
-            killList.push_back(units[i]);
+  std::vector<std::shared_ptr<Object>> tempShot;
+
+  for (int i = 0; i < (int)buildings.size(); i += 1)
+    {
+      tempShot = buildings[i]->fireAllWeapon(timePassed);
+      for (int j = 0; j < (int)tempShot.size(); j += 1)
+	shots.push_back(tempShot[j]);
+    }
+  for (int i = 0; i < (int)units.size(); i += 1)
+    {
+      tempShot = units[i]->fireAllWeapon(timePassed);
+      for (int j = 0; j < (int)tempShot.size(); j += 1)
+	shots.push_back(tempShot[j]);
+    }
+  return shots;
 }
 

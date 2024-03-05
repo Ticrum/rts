@@ -43,7 +43,9 @@ namespace ef
     {
     public:
         Building(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
-        bool fireAllWeapon(double timePassed);
+        Building(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
+        std::vector<std::shared_ptr<Object>> fireAllWeapon(double timePassed);
+        void changeTarget(std::vector<std::shared_ptr<Object>> targets);
         BuildingType getType();
         bool getCanBeTarget();
         int getEnergyCost();
@@ -51,8 +53,9 @@ namespace ef
         void setIsActive(bool newState);
         int getEnergyProduction();
         int getMoneyProduction();
-        void makeTargeting(std::vector<std::shared_ptr<Object>> others);
+        TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others);
         void manualTargeting(std::shared_ptr<Object> target);
+        std::vector<double> getWeaponsCd();
 
     protected:
         BuildingType type;
@@ -68,6 +71,7 @@ namespace ef
     {
     public:
         ProdBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+        ProdBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
         std::shared_ptr<Unit> produceUnit(double timePassed,
                                           std::vector<ConfWeapon> & weaponsConf);
         void addUnitToProd(ConfUnit newUnit);
@@ -84,6 +88,7 @@ namespace ef
     {
     public:
         ConstructBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+        ConstructBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
         std::shared_ptr<Building> produceBuilding(double timePassed,
                                                   std::vector<ConfWeapon> & weaponsConf);
         void addBuildingToProd(ConfBuilding newBuilding);
@@ -108,6 +113,7 @@ namespace ef
     {
     public:
         TechBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+        TechBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
         std::shared_ptr<Tech> searchTech(double timePassed);
         void addSearchToList(Tech newSearch);
         bool getOnHold();

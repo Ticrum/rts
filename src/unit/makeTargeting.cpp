@@ -6,23 +6,30 @@
 
 #include "unit.hh"
 
-void ef::Unit::makeTargeting(std::vector<std::shared_ptr<Object>> others)
+ef::TargetReturn ef::Unit::makeTargeting(std::vector<std::shared_ptr<Object>> others)
 {
     int minDist;
     int actualDist;
     std::shared_ptr<Object> bestTarget;
+    TargetReturn tar;
 
-    minDist = 999999;
+    tar.isBuilding = false;
     for (int i = 0; i < (int)weapons.size(); i += 1)
     {
-        for (int j = 0; j < (int)others.size(); j += 1)
-            if ((actualDist = getPos().isInRange(others[j]->getPos(), weapons[i].getRange(), weapons[i].getRange())) != -1)
-                if (actualDist < minDist)
-                {
-                    minDist = actualDist;
-                    bestTarget = others[j];
-                }
-        weapons[i].setNewTarget(bestTarget);
+        if (!weapons[i].hasTarget())
+        {
+            minDist = 999999;
+            for (int j = 0; j < (int)others.size(); j += 1)
+                if ((actualDist = getPos().isInRange(others[j]->getPos(), weapons[i].getRange(), weapons[i].getRange())) != -1 && getAlegence() != others[j]->getAlegence())
+                    if (actualDist < minDist)
+                    {
+                        minDist = actualDist;
+                        bestTarget = others[j];
+                    }
+            weapons[i].setNewTarget(bestTarget);
+            tar.target.push_back(bestTarget);
+        }
     }
+    return tar;
 }
 

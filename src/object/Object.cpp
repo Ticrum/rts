@@ -6,19 +6,20 @@
 
 #include "object.hh"
 
-ef::Object::Object(ConfObj conf,
+ef::Object::Object(ConfObj _conf,
                    Pos _pos,
                    int _objId,
                    int _alegence)
     :
+    conf(_conf.conf),
     objId(_objId),
     pos(_pos),
-    imgId(conf.imgId),
-    objSize(conf.objSize),
-    hp(conf.maxhp),
-    maxhp(conf.maxhp),
-    armor(conf.armor),
-    rangeOfVision(conf.rangeOfVision),
+    imgId(_conf.imgId),
+    objSize(_conf.objSize),
+    hp(_conf.maxhp),
+    maxhp(_conf.maxhp),
+    armor(_conf.armor),
+    rangeOfVision(_conf.rangeOfVision),
     alegence(_alegence)
 {
 }

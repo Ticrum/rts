@@ -6,8 +6,12 @@
 
 #include "playerInfo.hh"
 
-void ef::PlayerInfo::addOther(std::shared_ptr<Unit> unit)
+void ef::PlayerInfo::addOther(std::shared_ptr<Unit> unit,
+                              bool isOther)
 {
-    otherUnits.push_back(unit);
+    if (isOther)
+        otherUnits.push_back(unit);
+    else
+        units.push_back(unit);
 }
 

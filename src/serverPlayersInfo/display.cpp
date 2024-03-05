@@ -5,7 +5,7 @@ void ef::ServerPlayersInfo::Display(Bpixelarray &px,
                                     ef::Camera &cam)
 {
     for(int i=0; i < (int) playersInfo.size(); i++)
-        playersInfo[i].Display(px,rsrc,cam,false);
+        playersInfo[i]->Display(px,rsrc,cam,false);
     Pos casePos;
     Pos pixPos;
     Pos pxSize = px.GetSize();

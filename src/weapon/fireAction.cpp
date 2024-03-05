@@ -6,17 +6,18 @@
 
 #include "weapon.hh"
 
-bool ef::Weapon::fireAction(double timePassed)
+std::shared_ptr<ef::Object> ef::Weapon::fireAction(double timePassed)
 {
-    cdr -= timePassed;
-    if (cdr < 0)
-        cdr = 0;
-    if (target.get() != nullptr && cdr == 0)
+  std::shared_ptr<Object> shoot = nullptr;
+  cdr -= timePassed;
+  if (cdr < 0)
+    cdr = 0;
+  if (target.get() != nullptr && cdr == 0)
     {
-        target->takeDmg(nbrAtt, dmg);
-        cdr = cdrMax;
-        return true;
+      //target->takeDmg(nbrAtt, dmg);
+      cdr = cdrMax;
+      shoot.reset(new Object(shot, target->getPos(), rand(), alegence));
     }
-    return false;
+  return shoot;
 }
 
