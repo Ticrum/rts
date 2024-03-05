@@ -7,6 +7,7 @@
 #include "weapon.hh"
 
 ef::Weapon::Weapon(ConfWeapon conf,
+		   int _alegence,
                    double _cdr)
     :
     dmg(conf.dmg),
@@ -15,6 +16,8 @@ ef::Weapon::Weapon(ConfWeapon conf,
     cdr(_cdr),
     range(conf.range),
     manualTarget(conf.manualTarget),
+    alegence(_alegence),
+    shot("test"),
     target(nullptr)
 {
 }

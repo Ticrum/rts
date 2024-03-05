@@ -12,60 +12,60 @@
 
 namespace ef
 {
-    enum MoveType
+  enum MoveType
     {
-        RUN,
-        WALK,
-        STATIC
+      RUN,
+      WALK,
+      STATIC
     };
 
-    struct ConfUnit : ConfObj
-    {
-        ConfUnit(std::string file);
+  struct ConfUnit : ConfObj
+  {
+    ConfUnit(std::string file);
 
-        std::string conf;
-        int cost;
-        double speed;
-        double runningSpeed;
-        MoveType moveType;
-        bool isFlying;
-        double timeToProduce;
-        std::vector<std::string> weaponConf;
-    };
+    std::string conf;
+    int cost;
+    double speed;
+    double runningSpeed;
+    MoveType moveType;
+    bool isFlying;
+    double timeToProduce;
+    std::vector<std::string> weaponConf;
+  };
 
-    class Unit : public Object
-    {
-    public:
-        Unit(ConfUnit conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
-        Unit(ConfUnit conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, double _progress, MoveType type, std::vector<Pos> newPath, std::vector<double> cdr);
-        double getSpeed();
-        double getRunningSpeed();
-        void moveUnit(double timePassed);
-        bool fireAllWeapon(double timePassed);
-        bool getIsFlying();
-        int getActualIndex();
-        void changePath(std::vector<Pos> newPath, MoveType type);
-        void changeTarget(std::vector<std::shared_ptr<Object>> targets);
-        TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others);
-        void manualTargeting(std::shared_ptr<Object> target);
-        void UnitDisplay(Bpixelarray &px,
-                         std::vector<Bpixelarray> &rsrc,
-                         Pos caseSize);
-        double getProgress();
-        MoveType getMoveType();
-        std::vector<ConformPos> getPathLeft();
-        std::vector<double> getWeaponsCd();
+  class Unit : public Object
+  {
+  public:
+    Unit(ConfUnit conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+    Unit(ConfUnit conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, double _progress, MoveType type, std::vector<Pos> newPath, std::vector<double> cdr);
+    double getSpeed();
+    double getRunningSpeed();
+    void moveUnit(double timePassed);
+    std::vector<std::shared_ptr<Object>> fireAllWeapon(double timePassed);
+    bool getIsFlying();
+    int getActualIndex();
+    void changePath(std::vector<Pos> newPath, MoveType type);
+    void changeTarget(std::vector<std::shared_ptr<Object>> targets);
+    TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others);
+    void manualTargeting(std::shared_ptr<Object> target);
+    void UnitDisplay(Bpixelarray &px,
+		     std::vector<Bpixelarray> &rsrc,
+		     Pos caseSize);
+    double getProgress();
+    MoveType getMoveType();
+    std::vector<ConformPos> getPathLeft();
+    std::vector<double> getWeaponsCd();
 
-    private:
-        std::vector<Pos> path;
-        int actualIndex;
-        double progress;
-        double speed;
-        double runningSpeed;
-        MoveType moveType;
-        bool isFlying;
-        std::vector<Weapon> weapons;
-    };
+  private:
+    std::vector<Pos> path;
+    int actualIndex;
+    double progress;
+    double speed;
+    double runningSpeed;
+    MoveType moveType;
+    bool isFlying;
+    std::vector<Weapon> weapons;
+  };
 }; // !ef
 
 #endif // __UNIT_HH__

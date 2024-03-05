@@ -12,21 +12,22 @@
 
 namespace ef
 {
-    class ResourceManager
-    {
-    public:
-        ResourceManager();
-        ConfUnit getUnit(std::string name);
-        ConfBuilding getBuild(std::string name);
-        Tech getTech(std::string name);
-        std::vector<ConfWeapon> & getWeaponConf();
+  class ResourceManager
+  {
+  public:
+    ResourceManager();
+    ConfUnit getUnit(std::string name);
+    ConfBuilding getBuild(std::string name);
+    Tech getTech(std::string name);
+    ConfObj getShot(std::string name);
+    std::vector<ConfWeapon> & getWeaponConf();
 
-    private:
-        std::vector<ConfUnit> unitConf;
-        std::vector<ConfWeapon> weaponConf;
-        std::vector<ConfBuilding> buildingConf;
-        std::vector<Tech> allTech;
-    };
+  private:
+    std::vector<ConfUnit> unitConf;
+    std::vector<ConfWeapon> weaponConf;
+    std::vector<ConfBuilding> buildingConf;
+    std::vector<Tech> allTech;
+  };
 }; // !ef
 
 #endif // __RESOURCEMANAGER_HH__

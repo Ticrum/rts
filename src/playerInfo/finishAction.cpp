@@ -6,31 +6,22 @@
 
 #include "playerInfo.hh"
 
-void ef::PlayerInfo::finishAction(double timePassed,
-                                  bool finishOther)
+std::vector<std::shared_ptr<ef::Object>> ef::PlayerInfo::finishAction(double timePassed)
 {
-    for (int i = 0; i < (int)buildings.size(); i += 1)
-        buildings[i]->fireAllWeapon(timePassed);
-    for (int i = 0; i < (int)units.size(); i += 1)
-        units[i]->fireAllWeapon(timePassed);
-    if (finishOther)
+  std::vector<std::shared_ptr<Object>> tempShot;
+
+  for (int i = 0; i < (int)buildings.size(); i += 1)
     {
-        for (int i = 0; i < (int)otherBuildings.size(); i += 1)
-            buildings[i]->fireAllWeapon(timePassed);
-        for (int i = 0; i < (int)otherUnits.size(); i += 1)
-            units[i]->fireAllWeapon(timePassed);
+      tempShot = buildings[i]->fireAllWeapon(timePassed);
+      for (int j = 0; j < (int)tempShot.size(); j += 1)
+	shots.push_back(tempShot[j]);
     }
-    for (int i = 0; i < (int)buildings.size(); i += 1)
-        if (buildings[i]->getHp() <= 0)
-        {
-            killList.push_back(buildings[i]);
-            destroyBuilding(buildings[i], false);
-        }
-    for (int i = 0; i < (int)units.size(); i += 1)
-        if (units[i]->getHp() <= 0)
-        {
-            killList.push_back(units[i]);
-            destroyUnit(units[i], false);
-        }
+  for (int i = 0; i < (int)units.size(); i += 1)
+    {
+      tempShot = units[i]->fireAllWeapon(timePassed);
+      for (int j = 0; j < (int)tempShot.size(); j += 1)
+	shots.push_back(tempShot[j]);
+    }
+  return shots;
 }
 

@@ -13,49 +13,52 @@
 namespace ef
 {
 
-    struct TargetReturn
-    {
-        std::shared_ptr<Object> unit;
-        bool isBuilding;
-        std::vector<std::shared_ptr<Object>> target;
-        std::vector<bool> isTargetBuilding;
-    };
+  struct TargetReturn
+  {
+    std::shared_ptr<Object> unit;
+    bool isBuilding;
+    std::vector<std::shared_ptr<Object>> target;
+    std::vector<bool> isTargetBuilding;
+  };
 
-    struct ConfWeapon
-    {
-        ConfWeapon(std::string file);
+  struct ConfWeapon
+  {
+    ConfWeapon(std::string file);
 
-        std::string conf;
-        int dmg;
-        int nbrAtt;
-        double cdrMax;
-        int range;
-        bool manualTarget;
-    };
+    std::string conf;
+    std::string ShotConf;
+    int dmg;
+    int nbrAtt;
+    double cdrMax;
+    int range;
+    bool manualTarget;
+  };
 
-    class Weapon
-    {
-    public:
-        Weapon(ConfWeapon conf);
-        Weapon(ConfWeapon conf, double _cdr);
-        bool fireAction(double timePassed);
-        void setNewTarget(std::shared_ptr<Object> newTarget);
-        int getDmg();
-        int getNbrAtt();
-        int getRange();
-        double getCdr();
-        bool isManual();
-        bool hasTarget();
+  class Weapon
+  {
+  public:
+    Weapon(ConfWeapon conf, int _alegence);
+    Weapon(ConfWeapon conf, int _alegence, double _cdr);
+    std::shared_ptr<Object> fireAction(double timePassed);
+    void setNewTarget(std::shared_ptr<Object> newTarget);
+    int getDmg();
+    int getNbrAtt();
+    int getRange();
+    double getCdr();
+    bool isManual();
+    bool hasTarget();
 
-    private:
-        int dmg;
-        int nbrAtt;
-        double cdrMax;
-        double cdr;
-        int range;
-        bool manualTarget;
-        std::shared_ptr<Object> target;
-    };
+  private:
+    int dmg;
+    int nbrAtt;
+    double cdrMax;
+    double cdr;
+    int range;
+    bool manualTarget;
+    int alegence;
+    ConfObj shot;
+    std::shared_ptr<Object> target;
+  };
 }
 
 #endif // __WEAPON_HH__

@@ -39,7 +39,7 @@ namespace ef
     public:
         Building(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
         Building(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
-        bool fireAllWeapon(double timePassed);
+        std::vector<std::shared_ptr<Object>> fireAllWeapon(double timePassed);
         void changeTarget(std::vector<std::shared_ptr<Object>> targets);
         BuildingType getType();
         bool getCanBeTarget();

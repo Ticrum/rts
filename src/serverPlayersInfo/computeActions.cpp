@@ -73,7 +73,23 @@ void ef::ServerPlayersInfo::computeActions(double timePassed)
     {
         for (int i = 0; i < (int)playersInfo.size(); i += 1)
         {
-            playersInfo[i]->finishAction(timePassed, false);
+            std::vector<std::shared_ptr<ef::Object>> tempObj = playersInfo[i]->finishAction(timePassed);
+	    for (int j = 0; j < (int)tempObj.size(); j += 1)
+	      {
+		pack.type = ADDSHOT;
+		pack.addShot.buildId = tempObj[j]->getId();
+		pack.addShot.alegence = tempObj[j]->getAlegence();
+		pack.addShot.pos = tempObj[j]->getPos().get();
+		pack.addShot.len = tempObj[j]->getConf().size();
+		memcpy(pack.addShot.conf, &tempObj[j]->getConf()[0], pack.addShot.len);
+		for (int k = 0; k < (int)playersInfo.size(); k += 1)
+		  if (playersInfo[k]->isInVision(tempObj[j]))
+		    {
+		      playersInfo[k]->addOtherShot(tempObj[j]);
+		      serverUdp->sendData((char *)&pack, sizeof(Packet), clientConnected[k]);
+		    }
+	      }
+	    playersInfo[i]->computeShot(false);
             Packet tempPack;
             std::vector<std::shared_ptr<ef::Object>> & kill = playersInfo[i]->getKillList();
             for (int j = 0; j < (int)kill.size(); j += 1)

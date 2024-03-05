@@ -17,69 +17,73 @@
 
 namespace ef
 {
-    class PlayerInfo
-    {
-    public:
-        PlayerInfo(ResourceManager & res);
-        void makePath(std::shared_ptr<Unit> unit, Pos dest, MoveType moveType);
-        void stopUnit(std::shared_ptr<Unit> unit);
-        void setTarget(std::shared_ptr<Unit> unit, std::shared_ptr<Object> other);
-        void setTarget(std::shared_ptr<Building> build, std::shared_ptr<Object> other);
-        void refreshTarget(std::shared_ptr<Unit> unit, std::vector<std::shared_ptr<Object>> targets);
-        void refreshTarget(std::shared_ptr<Building> build, std::vector<std::shared_ptr<Object>> targets);
-        std::vector<TargetReturn> computeActions(double timePassed, std::vector<ConfWeapon> & weaponsConf, bool moveOther, std::shared_ptr<UdpConnect> & serverUdp, struct sockaddr_in & clients);
-        void finishAction(double timePassed, bool finishOther);
-        void placeBuilding(std::shared_ptr<Building> building);
-        bool placeBuilding(Pos pos);
-        bool canPlaceBuilding(Pos pos);
-        void produce(std::shared_ptr<ProdBuilding> producer, ConfUnit newUnit);
-        void produce(std::shared_ptr<TechBuilding> producer, Tech newSearch);
-        void produce(std::shared_ptr<ConstructBuilding> producer, ConfBuilding newBuilding);
-        bool destroyUnit(std::shared_ptr<Unit> unit, bool isOther);
-        bool destroyBuilding(std::shared_ptr<Building> building, bool isOther);
-        void addOther(std::shared_ptr<Unit> unit, bool isOther);
-        void addOther(std::shared_ptr<Building> building, bool isOther);
-        bool isInVision(std::shared_ptr<Object> obj);
-        std::vector<std::shared_ptr<Unit>> selectUnit(Pos start, Pos end);
-        std::vector<std::shared_ptr<Building>> selectBuilding(Pos start, Pos end);
-        void modifyMoneyGain(int money);
-        void Display(Bpixelarray &px,
-                     std::vector<Bpixelarray> &rsrc,
-                     ef::Camera &cam,
-                     bool fog);
-        std::vector<std::shared_ptr<ef::Object>> & getKillList();
-        std::shared_ptr<Unit> getUnit(int unitId);
-        std::shared_ptr<Building> getBuild(int buildId);
-        std::shared_ptr<Object> getOtherObject(int otherId, bool isBuilding);
-        void updateOther();
-        void updateOther(std::vector<std::shared_ptr<Unit>> newUnit, std::shared_ptr<UdpConnect> udp, struct sockaddr_in client);
-        void updateOther(std::vector<std::shared_ptr<Building>> newBuilding, std::shared_ptr<UdpConnect> udp, struct sockaddr_in client);
-        Map & getVisionMap();
-        std::vector<std::shared_ptr<Building>> getBuildingInVision(Map vision);
-        std::vector<std::shared_ptr<Unit>> getUnitInVision(Map vision);
-        std::shared_ptr<Unit> getUnitAtPos(Pos pos);
-        std::shared_ptr<Building> getBuildingAtPos(Pos pos);
+  class PlayerInfo
+  {
+  public:
+    PlayerInfo(ResourceManager & res);
+    void makePath(std::shared_ptr<Unit> unit, Pos dest, MoveType moveType);
+    void stopUnit(std::shared_ptr<Unit> unit);
+    void setTarget(std::shared_ptr<Unit> unit, std::shared_ptr<Object> other);
+    void setTarget(std::shared_ptr<Building> build, std::shared_ptr<Object> other);
+    void refreshTarget(std::shared_ptr<Unit> unit, std::vector<std::shared_ptr<Object>> targets);
+    void refreshTarget(std::shared_ptr<Building> build, std::vector<std::shared_ptr<Object>> targets);
+    std::vector<TargetReturn> computeActions(double timePassed, std::vector<ConfWeapon> & weaponsConf, bool moveOther, std::shared_ptr<UdpConnect> & serverUdp, struct sockaddr_in & clients);
+    std::vector<std::shared_ptr<Object>> finishAction(double timePassed);
+    void computeShot(bool isClient);
+    void placeBuilding(std::shared_ptr<Building> building);
+    bool placeBuilding(Pos pos);
+    bool canPlaceBuilding(Pos pos);
+    void produce(std::shared_ptr<ProdBuilding> producer, ConfUnit newUnit);
+    void produce(std::shared_ptr<TechBuilding> producer, Tech newSearch);
+    void produce(std::shared_ptr<ConstructBuilding> producer, ConfBuilding newBuilding);
+    bool destroyUnit(std::shared_ptr<Unit> unit, bool isOther);
+    bool destroyBuilding(std::shared_ptr<Building> building, bool isOther);
+    void addOther(std::shared_ptr<Unit> unit, bool isOther);
+    void addOther(std::shared_ptr<Building> building, bool isOther);
+    void addOtherShot(std::shared_ptr<Object> shot);
+    bool isInVision(std::shared_ptr<Object> obj);
+    std::vector<std::shared_ptr<Unit>> selectUnit(Pos start, Pos end);
+    std::vector<std::shared_ptr<Building>> selectBuilding(Pos start, Pos end);
+    void modifyMoneyGain(int money);
+    void Display(Bpixelarray &px,
+		 std::vector<Bpixelarray> &rsrc,
+		 ef::Camera &cam,
+		 bool fog);
+    std::vector<std::shared_ptr<ef::Object>> & getKillList();
+    std::shared_ptr<Unit> getUnit(int unitId);
+    std::shared_ptr<Building> getBuild(int buildId);
+    std::shared_ptr<Object> getOtherObject(int otherId, bool isBuilding);
+    void updateOther();
+    void updateOther(std::vector<std::shared_ptr<Unit>> newUnit, std::shared_ptr<UdpConnect> udp, struct sockaddr_in client);
+    void updateOther(std::vector<std::shared_ptr<Building>> newBuilding, std::shared_ptr<UdpConnect> udp, struct sockaddr_in client);
+    Map & getVisionMap();
+    std::vector<std::shared_ptr<Building>> getBuildingInVision(Map vision);
+    std::vector<std::shared_ptr<Unit>> getUnitInVision(Map vision);
+    std::shared_ptr<Unit> getUnitAtPos(Pos pos);
+    std::shared_ptr<Building> getBuildingAtPos(Pos pos);
 
-    private:
-        int money;
-        int moneyGain;
-        double moneyCooldown;
-        int totalEnergy;
-        int actualEnergy;
-        Map map;
-        Map buildingMap;
-        Map visionMap; //0: quepouik | 1: gnn? | 2 : i see
-        Pathfinder path;
-        std::shared_ptr<Building> rallyPoint;
-        ResourceManager & res;
-        std::vector<std::shared_ptr<Building>> buildings;
-        std::vector<std::shared_ptr<Unit>> units;
-        std::vector<std::shared_ptr<Unit>> otherUnits;
-        std::vector<std::shared_ptr<Building>> otherBuildings;
-        std::vector<std::shared_ptr<ef::Object>> killList;
-        std::vector<std::shared_ptr<Building>> producedBuilding;
-        std::vector<std::shared_ptr<Tech>> searchedTech;
-    };
+  private:
+    int money;
+    int moneyGain;
+    double moneyCooldown;
+    int totalEnergy;
+    int actualEnergy;
+    Map map;
+    Map buildingMap;
+    Map visionMap; //0: quepouik | 1: gnn? | 2 : i see
+    Pathfinder path;
+    std::shared_ptr<Building> rallyPoint;
+    ResourceManager & res;
+    std::vector<std::shared_ptr<Building>> buildings;
+    std::vector<std::shared_ptr<Unit>> units;
+    std::vector<std::shared_ptr<Unit>> otherUnits;
+    std::vector<std::shared_ptr<Building>> otherBuildings;
+    std::vector<std::shared_ptr<ef::Object>> killList;
+    std::vector<std::shared_ptr<Building>> producedBuilding;
+    std::vector<std::shared_ptr<Tech>> searchedTech;
+    std::vector<std::shared_ptr<Object>> shots;
+    std::vector<std::shared_ptr<Object>> otherShots;
+  };
 }; // !ef
 
 #endif // __PLAYERINFO_HH__

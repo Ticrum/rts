@@ -13,21 +13,21 @@ ef::Building::Building(ConfBuilding conf,
                        std::vector<ConfWeapon> & weaponsConf,
                        int actualHp,
                        std::vector<double> cdr)
-    :
-    Object(conf, _pos, _objId, _alegence, actualHp),
-    type(conf.type),
-    canBeTarget(conf.canBeTarget),
-    energyCost(conf.energyCost),
-    energyProduction(conf.energyProduction),
-    moneyProduction(conf.moneyProduction),
-    isActive(true)
+  :
+  Object(conf, _pos, _objId, _alegence, actualHp),
+  type(conf.type),
+  canBeTarget(conf.canBeTarget),
+  energyCost(conf.energyCost),
+  energyProduction(conf.energyProduction),
+  moneyProduction(conf.moneyProduction),
+  isActive(true)
 {
-    for (int i = 0; i < (int)conf.weaponConf.size(); i += 1)
-        for (int j = 0; j < (int)weaponsConf.size(); j += 1)
-            if (conf.weaponConf[i] == weaponsConf[j].conf)
-            {
-                weapons.emplace_back(weaponsConf[j], cdr[i]);
-                j = weaponsConf.size() + 1;
-            }
+  for (int i = 0; i < (int)conf.weaponConf.size(); i += 1)
+    for (int j = 0; j < (int)weaponsConf.size(); j += 1)
+      if (conf.weaponConf[i] == weaponsConf[j].conf)
+	{
+	  weapons.emplace_back(weaponsConf[j], alegence, cdr[i]);
+	  j = weaponsConf.size() + 1;
+	}
 }
 
