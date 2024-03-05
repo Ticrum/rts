@@ -18,20 +18,22 @@ namespace ef
       WALK,
       STATIC
     };
+    struct ConfUnit : public ConfObj
+    {
+        ConfUnit();
+        ConfUnit(std::string file);
+        ConfUnit(ConfUnit const &other);
+        ConfUnit &operator=(ConfUnit const&other);
+        int load(std::string &file);
 
-  struct ConfUnit : ConfObj
-  {
-    ConfUnit(std::string file);
-
-    std::string conf;
-    int cost;
-    double speed;
-    double runningSpeed;
-    MoveType moveType;
-    bool isFlying;
-    double timeToProduce;
-    std::vector<std::string> weaponConf;
-  };
+        int cost;
+        double speed;
+        double runningSpeed;
+        MoveType moveType;
+        bool isFlying;
+        double timeToProduce;
+        std::vector<std::string> weaponConf;
+    };
 
   class Unit : public Object
   {
@@ -49,9 +51,8 @@ namespace ef
     TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others);
     void manualTargeting(std::shared_ptr<Object> target);
     void UnitDisplay(Bpixelarray &px,
-		     std::vector<Bpixelarray> &rsrc,
-		     Pos caseSize);
-    double getProgress();
+                     std::vector<std::shared_ptr<Bpixelarray>> &rsrc,
+                     Pos caseSize);double getProgress();
     MoveType getMoveType();
     std::vector<ConformPos> getPathLeft();
     std::vector<double> getWeaponsCd();

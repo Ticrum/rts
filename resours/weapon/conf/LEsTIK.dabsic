@@ -1,0 +1,8 @@
+[Weapon
+    name = "LeStik"
+    dmg = 1
+    nbrAtt = 2
+    cdrMax = 2
+    range = 1
+    manualTarget = "T"
+]

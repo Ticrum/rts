@@ -16,13 +16,18 @@ namespace ef
         PRODUCTION,
         CONSTRUCT,
         TECH,
+        DEFENCE,
         ENERGY,
         MONEY
     };
 
-    struct ConfBuilding : ConfObj
+    struct ConfBuilding : public ConfObj
     {
+        ConfBuilding();
         ConfBuilding(std::string file);
+        ConfBuilding(ConfBuilding const &other);
+        ConfBuilding &operator=(ConfBuilding const&other);
+        int load(std::string &file);
 
         int cost;
         double timeToProduce;

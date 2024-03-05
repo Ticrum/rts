@@ -7,27 +7,26 @@
 #ifndef __RESOURCEMANAGER_HH__
 #define __RESOURCEMANAGER_HH__
 
-#include "unit.hh"
 #include "building.hh"
 
 namespace ef
 {
-  class ResourceManager
-  {
-  public:
-    ResourceManager();
-    ConfUnit getUnit(std::string name);
-    ConfBuilding getBuild(std::string name);
-    Tech getTech(std::string name);
-    ConfObj getShot(std::string name);
-    std::vector<ConfWeapon> & getWeaponConf();
-
-  private:
-    std::vector<ConfUnit> unitConf;
-    std::vector<ConfWeapon> weaponConf;
-    std::vector<ConfBuilding> buildingConf;
-    std::vector<Tech> allTech;
-  };
+    class ResourceManager
+    {
+    public:
+        ConfUnit getUnit(std::string name);
+        ConfBuilding getBuild(std::string name);
+        Tech getTech(std::string name);
+        std::vector<ConfWeapon> & getWeaponConf();
+        ConfObj getShot(std::string name);
+        std::vector<std::shared_ptr<Bpixelarray>> getSprit();
+    private:
+        std::vector<ConfUnit> unitConf;
+        std::vector<ConfWeapon> weaponConf;
+        std::vector<ConfBuilding> buildingConf;
+        std::vector<Tech> allTech;
+        std::vector<std::shared_ptr<Bpixelarray>> sprites;
+    }; 
 }; // !ef
 
 #endif // __RESOURCEMANAGER_HH__

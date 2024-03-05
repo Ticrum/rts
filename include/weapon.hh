@@ -7,12 +7,28 @@
 #ifndef __WEAPON_HH__
 #define __WEAPON_HH__
 
-#include <memory>
 #include "object.hh"
 
 namespace ef
 {
 
+    class ConfWeapon
+    {
+    public:
+        ConfWeapon();
+        ConfWeapon(std::string file);
+        ConfWeapon(ConfWeapon const &other);
+        ConfWeapon &operator=(ConfWeapon const&other);
+        int load(std::string &file);
+
+        std::string conf;
+        std::string ShotConf;
+        int dmg;
+        int nbrAtt;
+        double cdrMax;
+        int range;
+        bool manualTarget;
+    };
   struct TargetReturn
   {
     std::shared_ptr<Object> unit;
@@ -21,18 +37,6 @@ namespace ef
     std::vector<bool> isTargetBuilding;
   };
 
-  struct ConfWeapon
-  {
-    ConfWeapon(std::string file);
-
-    std::string conf;
-    std::string ShotConf;
-    int dmg;
-    int nbrAtt;
-    double cdrMax;
-    int range;
-    bool manualTarget;
-  };
 
   class Weapon
   {

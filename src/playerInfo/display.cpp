@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 void ef::PlayerInfo::Display(ef::Bpixelarray &px,
-                             std::vector<ef::Bpixelarray> &rsrc,
+                             std::vector<std::shared_ptr<Bpixelarray>> &rsrc,
                              ef::Camera &cam,
                              bool fog)
 {

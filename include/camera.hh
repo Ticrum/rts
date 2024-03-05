@@ -18,14 +18,14 @@ namespace ef
                int height);
         bool Init(std::string screen);
         bool IsIn(Pos &start,
-                  Bpixelarray &pic);
+                  std::shared_ptr<ef::Bpixelarray> &pic);
         void ZoomIn(double add);
         void ZoomOut(double sub);
         void Move(AcuPos move);
         void display(PlayerInfo &plr,
-                     std::vector<Bpixelarray> &rsrc);
+                     std::vector<std::shared_ptr<ef::Bpixelarray>> &rsrc);
         void display(ServerPlayersInfo &srv,
-                     std::vector<Bpixelarray> &rsrc);
+                     std::vector<std::shared_ptr<ef::Bpixelarray>> &rsrc);
     private:
         t_bunny_window *win;
         Bpixelarray game;

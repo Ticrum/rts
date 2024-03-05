@@ -73,7 +73,7 @@ report:
 	genhtml coverage.info --output-directory report
 
 .cpp.o:
-	$(CC) -c $< $(INCLUDE) -o $@ $(FLAGS)
+	$(CC) -c $< $(INCLUDE) -o $@ $(FLAGS) -fPIC
 
 %.test: %.o
 ifeq ($(GTEST), 1)

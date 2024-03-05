@@ -1,0 +1,23 @@
+[Object
+    name = "missingno"
+    imgId = 1
+    [objSize
+        x = 1
+        y = 1
+    ]
+    maxHp = 3
+    armor = 1000
+    rangeOfVision = 2
+]
+[Unit
+    cost = 100
+    speed = 0.5
+    runningSpeed = 0.25
+    moveType = "R"
+    isFlying = "F"
+    timeToProduce = 100
+    [weaponConf
+        size = 1
+        data = "LeStik"
+    ]
+]

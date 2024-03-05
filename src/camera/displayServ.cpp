@@ -2,7 +2,7 @@
 #include "serverPlayersInfo.hh"
 
 void ef::Camera::display(ServerPlayersInfo &srv,
-                         std::vector<Bpixelarray> &rsrc)
+                         std::vector<std::shared_ptr<ef::Bpixelarray>> &rsrc)
 {
     if(!god ||win == NULL)
         return;
