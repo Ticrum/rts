@@ -1,0 +1,30 @@
+[Object
+    name = (string)
+    imgId = (int)
+    [objSize
+        x = (int)
+        y = (int)
+    ]
+    maxHp = (int)
+    armor = (int)
+    rangeOfVision = (int)
+]
+[Building
+    cost = (int)
+    timeToProduce = 0.2
+    type = (int) 0 = PRODUCTION
+    	   	 1 = CONSTRUCT
+		 2 = TECH
+		 3 = DEFENCE
+		 4 = ENERGY
+		 5 = MONEY
+    canBeTarget = true / false
+    energyCost = (int)
+    energyProduction = (int)
+    moneyProduction = (int)
+    [weaponConf
+        size = (int) nbr of data ellement
+        data = (chain of string) "weapon1", "weapon 2", ...
+
+    ]
+]

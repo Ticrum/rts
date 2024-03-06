@@ -11,119 +11,122 @@
 
 namespace ef
 {
-    enum BuildingType
+  enum BuildingType
     {
-        PRODUCTION,
-        CONSTRUCT,
-        TECH,
-        DEFENCE,
-        ENERGY,
-        MONEY
-    };
+      PRODUCTION,
+      CONSTRUCT,
+      TECH,
+      DEFENCE,
+      ENERGY,
+      MONEY
+    };/*if you add a BuildingType don't forget to update;
+	the if line 26 in "src/config/buildingLoad.cpp",
+	Building.type in "resours/building/conf/tamplate"
+      */
 
-    struct ConfBuilding : public ConfObj
-    {
-        ConfBuilding();
-        ConfBuilding(std::string file);
-        ConfBuilding(ConfBuilding const &other);
-        ConfBuilding &operator=(ConfBuilding const&other);
-        int load(std::string &file);
+  struct ConfBuilding : public ConfObj
+  {
+    ConfBuilding();
+    ConfBuilding(std::string file);
+    ConfBuilding(ConfBuilding const &other);
+    ConfBuilding &operator=(ConfBuilding const&other);
+    int load(std::string &file);
 
-        int cost;
-        double timeToProduce;
-        BuildingType type;
-        bool canBeTarget;
-        int energyCost;
-        int energyProduction;
-        int moneyProduction;
-        std::vector<std::string> weaponConf;
-    };
+    int cost;
+    double timeToProduce;
+    BuildingType type;
+    bool canBeTarget;
+    int energyCost;
+    int energyProduction;
+    int moneyProduction;
+    std::vector<std::string> weaponConf;
+  };
 
-    class Building : public Object
-    {
-    public:
-        Building(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
-        Building(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
-        std::vector<std::shared_ptr<Object>> fireAllWeapon(double timePassed);
-        void changeTarget(std::vector<std::shared_ptr<Object>> targets);
-        BuildingType getType();
-        bool getCanBeTarget();
-        int getEnergyCost();
-        bool getIsActive();
-        void setIsActive(bool newState);
-        int getEnergyProduction();
-        int getMoneyProduction();
-        TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others);
-        void manualTargeting(std::shared_ptr<Object> target);
-        std::vector<double> getWeaponsCd();
+  class Building : public Object
+  {
+  public:
+    Building(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+    Building(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
+    std::vector<std::shared_ptr<Object>> fireAllWeapon(double timePassed);
+    void changeTarget(std::vector<std::shared_ptr<Object>> targets);
+    BuildingType getType();
+    bool getCanBeTarget();
+    int getEnergyCost();
+    bool getIsActive();
+    void setIsActive(bool newState);
+    int getEnergyProduction();
+    int getMoneyProduction();
+    TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others);
+    void manualTargeting(std::shared_ptr<Object> target);
+    std::vector<double> getWeaponsCd();
 
-    protected:
-        BuildingType type;
-        bool canBeTarget;
-        int energyCost;
-        int energyProduction;
-        int moneyProduction;
-        bool isActive;
-        std::vector<Weapon> weapons;
-    };
+  protected:
+    BuildingType type;
+    bool canBeTarget;
+    int energyCost;
+    int energyProduction;
+    int moneyProduction;
+    bool isActive;
+    std::vector<Weapon> weapons;
+  };
 
-    class ProdBuilding : public Building
-    {
-    public:
-        ProdBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
-        ProdBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
-        std::shared_ptr<Unit> produceUnit(double timePassed,
-                                          std::vector<ConfWeapon> & weaponsConf);
-        void addUnitToProd(ConfUnit newUnit);
-        bool getOnHold();
-        void setOnHold(bool newState);
+  class ProdBuilding : public Building
+  {
+  public:
+    ProdBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+    ProdBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
+    std::shared_ptr<Unit> produceUnit(double timePassed,
+				      std::vector<ConfWeapon> & weaponsConf);
+    void addUnitToProd(ConfUnit newUnit);
+    bool getOnHold();
+    void setOnHold(bool newState);
 
-    private:
-        std::vector<ConfUnit> unitProd;
-        double timeLeft;
-        bool onHold;
-    };
+  private:
+    std::vector<ConfUnit> unitProd;
+    double timeLeft;
+    bool onHold;
+  };
 
-    class ConstructBuilding : public Building
-    {
-    public:
-        ConstructBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
-        ConstructBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
-        std::shared_ptr<Building> produceBuilding(double timePassed,
-                                                  std::vector<ConfWeapon> & weaponsConf);
-        void addBuildingToProd(ConfBuilding newBuilding);
-        bool getOnHold();
-        void setOnHold(bool newState);
+  class ConstructBuilding : public Building
+  {
+  public:
+    ConstructBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+    ConstructBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
+    std::shared_ptr<Building> produceBuilding(double timePassed,
+					      std::vector<ConfWeapon> & weaponsConf);
+    void addBuildingToProd(ConfBuilding newBuilding);
+    bool getOnHold();
+    void setOnHold(bool newState);
 
-    private:
-        std::vector<ConfBuilding> buildingProd;
-        double timeLeft;
-        bool onHold;
-    };
+  private:
+    std::vector<ConfBuilding> buildingProd;
+    double timeLeft;
+    bool onHold;
+  };
 
-    struct Tech
-    {
-        std::string techName;
-        bool isSearched;
-        double timeToSearch;
-        int cost;
-    };
+  struct Tech
+  {
+    std::string techName;
+    bool isSearched;
+    double timeToSearch;
+    int cost;
+  };
 
-    class TechBuilding : public Building
-    {
-    public:
-        TechBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
-        TechBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
-        std::shared_ptr<Tech> searchTech(double timePassed);
-        void addSearchToList(Tech newSearch);
-        bool getOnHold();
-        void setOnHold(bool newState);
+  class TechBuilding : public Building
+  {
+  public:
+    TechBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+    TechBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
+    std::shared_ptr<Tech> searchTech(double timePassed);
+    void addSearchToList(Tech newSearch);
+    bool getOnHold();
+    void setOnHold(bool newState);
 
-    private:
-        std::vector<Tech> techResearch;
-        double timeLeft;
-        bool onHold;
-    };
+  private:
+    std::vector<Tech> techResearch;
+    double timeLeft;
+    bool onHold;
+  };
 }; // !ef
 
 #endif // __BUILDING_HH__

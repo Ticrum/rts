@@ -12,8 +12,8 @@
 [Building
     cost = 350
     timeToProduce = 0.2
-    type = "D"
-    canBeTarget = "T"
+    type = 3
+    canBeTarget = true
     energyCost = 10
     energyProduction = 0
     moneyProduction = 0

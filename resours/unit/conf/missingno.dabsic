@@ -13,8 +13,8 @@
     cost = 100
     speed = 0.5
     runningSpeed = 0.25
-    moveType = "R"
-    isFlying = "F"
+    moveType = 0
+    isFlying = false
     timeToProduce = 100
     [weaponConf
         size = 1

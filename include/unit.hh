@@ -17,23 +17,26 @@ namespace ef
       RUN,
       WALK,
       STATIC
-    };
-    struct ConfUnit : public ConfObj
-    {
-        ConfUnit();
-        ConfUnit(std::string file);
-        ConfUnit(ConfUnit const &other);
-        ConfUnit &operator=(ConfUnit const&other);
-        int load(std::string &file);
+    };/*if you add a MoveType don't forget to update;
+	the if line 22 in "src/config/unitLoad.cpp",
+	Unit.moveType in "resours/unit/conf/tamplate"
+      */
+  struct ConfUnit : public ConfObj
+  {
+    ConfUnit();
+    ConfUnit(std::string file);
+    ConfUnit(ConfUnit const &other);
+    ConfUnit &operator=(ConfUnit const&other);
+    int load(std::string &file);
 
-        int cost;
-        double speed;
-        double runningSpeed;
-        MoveType moveType;
-        bool isFlying;
-        double timeToProduce;
-        std::vector<std::string> weaponConf;
-    };
+    int cost;
+    double speed;
+    double runningSpeed;
+    MoveType moveType;
+    bool isFlying;
+    double timeToProduce;
+    std::vector<std::string> weaponConf;
+  };
 
   class Unit : public Object
   {
