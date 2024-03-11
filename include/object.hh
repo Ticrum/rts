@@ -14,45 +14,47 @@
 
 namespace ef
 {
-    class ResourceManager;
-    class Bconf;
-    class Bpixelarray; 
-    struct Pos;
-    struct ConformPos
-    {
+  class ResourceManager;
+  class Bconf;
+  class Bpixelarray;
+  struct Pos;
+
+  struct ConformPos
+  {
     Pos get();
 
     uint16_t x;
     uint16_t y;
   };
 
- struct Pos
-    {
-        Pos(){}
-        Pos(Pos const &other);
-        Pos &operator=(Pos const& other);
-        ConformPos get();
-        int isInRange(Pos other, int _x, int _y);
-   
+  struct Pos
+  {
+    Pos(){}
+    Pos(Pos const &other);
+    Pos &operator=(Pos const& other);
+    ConformPos get();
+    int isInRange(Pos other, int _x, int _y);
+
     int x;
     int y;
   };
-  
-struct AcuPos
+
+  struct AcuPos
   {
     double x;
     double y;
   };
-    struct ConfObj
-    {
-        ConfObj();
-        ConfObj(ConfObj const &other);
-        ConfObj(std::string file);
-        ConfObj &operator=(ConfObj const&other);
-        int LoadBasic(std::string &file);
-        int LoadBasic(Bconf &conff);
-      
-        char conformConf[128];
+
+  struct ConfObj
+  {
+    ConfObj();
+    ConfObj(ConfObj const &other);
+    ConfObj(std::string file);
+    ConfObj &operator=(ConfObj const&other);
+    int LoadBasic(std::string &file);
+    int LoadBasic(Bconf &conff);
+
+    char conformConf[128];
     int imgId;
     Pos objSize;
     int maxhp;
@@ -62,6 +64,7 @@ struct AcuPos
     int dmg;
     std::string conf;
   };
+
   class Object
   {
   public:

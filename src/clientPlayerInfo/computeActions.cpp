@@ -6,6 +6,8 @@
 
 #include "clientPlayerInfo.hh"
 
+#include <iostream>
+
 void ef::ClientPlayerInfo::computeActions(double timePassed)
 {
   Packet pack;
@@ -13,17 +15,21 @@ void ef::ClientPlayerInfo::computeActions(double timePassed)
   if (isConnected)
     {
       if (gameStarted)
-	playerInfo.updateOther();
-      playerInfo.computeActions(timePassed, res.getWeaponConf(), true, clientUdp, serverConnected);
+	{
+	  playerInfo.updateOther();
+	  playerInfo.computeActions(timePassed, res.getWeaponConf(), true, clientUdp, serverConnected);
+	}
       clientUdp->loop();
       while (clientUdp->getData((char *)&pack, sizeof(pack)) != -1)
         {
+	  std::cout << "receve PACKET cli : " << pack.type << std::endl;
 	  if (pack.type == GAMESTART && pack.gameStart.isStart)
 	    gameStarted = true;
 	  if (gameStarted)
             {
 	      if (pack.type == DESTROY)
                 {
+		  std::cout << "receve destroy" << std::endl;
 		  if (pack.destroy.isBuilding)
                     {
 		      std::shared_ptr<Building> tempBuild = playerInfo.getBuild(pack.destroy.unitId);
@@ -45,6 +51,7 @@ void ef::ClientPlayerInfo::computeActions(double timePassed)
                 }
 	      else if (pack.type == ADDOTHERUNIT)
                 {
+		  std::cout << "receve addUnit" << std::endl;
 		  std::shared_ptr<Unit> tempUnit;
 		  std::string confName(pack.addOtherUnit.conf, pack.addOtherUnit.len);
 		  ConfUnit conf = res.getUnit(confName);
@@ -59,6 +66,7 @@ void ef::ClientPlayerInfo::computeActions(double timePassed)
                 }
 	      else if (pack.type == ADDOTHERBUILDING)
                 {
+		  std::cout << "receve addBuilding" << std::endl;
 		  std::shared_ptr<Building> tempBuilding;
 		  std::string confName(pack.addOtherBuilding.conf, pack.addOtherBuilding.len);
 		  ConfBuilding conf = res.getBuild(confName);
@@ -78,6 +86,7 @@ void ef::ClientPlayerInfo::computeActions(double timePassed)
                 }
 	      else if (pack.type == UPDATETARGET)
                 {
+		  std::cout << "receve updateTarget" << std::endl;
 		  std::shared_ptr<Unit> tempUnit = nullptr;
 		  std::shared_ptr<Building> tempBuild = nullptr;
 		  std::vector<std::shared_ptr<Object>> targets;
@@ -106,6 +115,7 @@ void ef::ClientPlayerInfo::computeActions(double timePassed)
 		}
 	      else if (pack.type == ADDSHOT)
 		{
+		  std::cout << "receve addShot" << std::endl;
 		  std::shared_ptr<Object> tempObj;
 		  std::string str(pack.addShot.conf, pack.addShot.len);
 		  ConfObj tempConf = res.getShot(str);
@@ -113,9 +123,13 @@ void ef::ClientPlayerInfo::computeActions(double timePassed)
 		  playerInfo.addOtherShot(tempObj);
 		}
 	    }
+	  clientUdp->loop();
+	  std::cout << "PACKET cli FIN" << std::endl;
 	}
-      playerInfo.computeShot(true);
+      if (gameStarted)
+	playerInfo.computeShot(true);
     }
+  std::cout << "end of FUNC client" << std::endl;
 }
 
 

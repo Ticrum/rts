@@ -14,6 +14,7 @@ namespace ef
   class ResourceManager
   {
   public:
+    ResourceManager();
     ConfUnit getUnit(std::string name);
     ConfBuilding getBuild(std::string name);
     Tech getTech(std::string name);

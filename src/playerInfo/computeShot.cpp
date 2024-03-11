@@ -6,10 +6,13 @@
 
 #include "playerInfo.hh"
 
+#include <iostream>
+
 void ef::PlayerInfo::computeShot(bool isClient)
 {
   std::vector<std::shared_ptr<Object>> tempObj;
 
+  std::cout << "COUCOU in computeShot" << std::endl;
   for (int i = 0; i < (int)units.size(); i += 1)
     tempObj.push_back(units[i]);
   for (int i = 0; i < (int)buildings.size(); i += 1)
@@ -31,12 +34,14 @@ void ef::PlayerInfo::computeShot(bool isClient)
   for (int i = 0; i < (int)buildings.size(); i += 1)
     if (buildings[i]->getHp() <= 0)
       {
+	std::cout << "build is dead" << std::endl;
 	killList.push_back(buildings[i]);
 	destroyBuilding(buildings[i], false);
       }
   for (int i = 0; i < (int)units.size(); i += 1)
     if (units[i]->getHp() <= 0)
       {
+	std::cout << "unit is dead" << std::endl;
 	killList.push_back(units[i]);
 	destroyUnit(units[i], false);
       }

@@ -17,11 +17,10 @@
 
 namespace ef
 {
-
   class PlayerInfo
   {
   public:
-    PlayerInfo(ResourceManager & res);
+    PlayerInfo(ResourceManager & res, int _alegence, bool isClient);
     void makePath(std::shared_ptr<Unit> unit, Pos dest, MoveType moveType);
     void stopUnit(std::shared_ptr<Unit> unit);
     void setTarget(std::shared_ptr<Unit> unit, std::shared_ptr<Object> other);
@@ -34,9 +33,9 @@ namespace ef
     void placeBuilding(std::shared_ptr<Building> building);
     bool placeBuilding(Pos pos);
     bool canPlaceBuilding(Pos pos);
-    void produce(std::shared_ptr<ProdBuilding> producer, ConfUnit newUnit);
-    void produce(std::shared_ptr<TechBuilding> producer, Tech newSearch);
-    void produce(std::shared_ptr<ConstructBuilding> producer, ConfBuilding newBuilding);
+    bool produce(std::shared_ptr<ProdBuilding> producer, ConfUnit newUnit);
+    bool produce(std::shared_ptr<TechBuilding> producer, Tech newSearch);
+    bool produce(std::shared_ptr<ConstructBuilding> producer, ConfBuilding newBuilding);
     bool destroyUnit(std::shared_ptr<Unit> unit, bool isOther);
     bool destroyBuilding(std::shared_ptr<Building> building, bool isOther);
     void addOther(std::shared_ptr<Unit> unit, bool isOther);
@@ -62,9 +61,10 @@ namespace ef
     std::vector<std::shared_ptr<Unit>> getUnitInVision(Map vision);
     std::shared_ptr<Unit> getUnitAtPos(Pos pos);
     std::shared_ptr<Building> getBuildingAtPos(Pos pos);
-
+    std::shared_ptr<Building> getFirstBuild();
 
   private:
+    int alegence;
     int money;
     int moneyGain;
     double moneyCooldown;
