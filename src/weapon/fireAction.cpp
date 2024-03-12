@@ -16,7 +16,7 @@ std::shared_ptr<ef::Object> ef::Weapon::fireAction(double timePassed)
     {
       //target->takeDmg(nbrAtt, dmg);
       cdr = cdrMax;
-      shoot.reset(new Object(shot, target->getPos(), rand(), alegence));
+      shoot.reset(new Object(shot, std::shared_ptr<Bpixelarray>(), target->getPos(), rand(), alegence));
     }
   return shoot;
 }

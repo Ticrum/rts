@@ -51,11 +51,12 @@ namespace ef
     ConfObj(ConfObj const &other);
     ConfObj(std::string file);
     ConfObj &operator=(ConfObj const&other);
+    std::string operator << (std::string text);
     int LoadBasic(std::string &file);
     int LoadBasic(Bconf &conff);
 
     char conformConf[128];
-    int imgId;
+    std::string img;
     Pos objSize;
     int maxhp;
     int armor;
@@ -68,13 +69,13 @@ namespace ef
   class Object
   {
   public:
-    Object(ConfObj _conf, Pos _pos, int _objId, int _alegence);
-    Object(ConfObj _conf, Pos _pos, int _objId, int _alegence, int actualHp);
+    Object(ConfObj _conf, std::shared_ptr<ef::Bpixelarray>_img, Pos _pos, int _objId, int _alegence);
+    Object(ConfObj _conf, std::shared_ptr<ef::Bpixelarray>_img, Pos _pos, int _objId, int _alegence, int actualHp);
     void takeDmg(int _nbrDmg, int _dmg);
     Pos getPos();
     void setPos(int x, int y);
     int getId();
-    int getImgId();
+    std::shared_ptr<Bpixelarray> &getImg();
     Pos getObjSize();
     int getHp();
     int getArmor();
@@ -83,14 +84,13 @@ namespace ef
     std::string getConf();
     void kaboom(std::vector<std::shared_ptr<Object>> objects);
     void Display(Bpixelarray &px,
-                 std::vector<std::shared_ptr<ef::Bpixelarray>> &rsrc,
                  Pos caseSize);
 
   protected:
     std::string conf;
     int objId;
     Pos pos;
-    int imgId;
+    std::shared_ptr<ef::Bpixelarray> img;
     Pos objSize;
     int hp;
     int maxhp;

@@ -24,8 +24,10 @@ int ef::ConfObj::LoadBasic(ef::Bconf &conff)
         i++;
     }
     conformConf[i] = '\0';
-    if(!bunny_configuration_getf_int(conff.Get(), &imgId, "Object.imgId"))
+    if(!bunny_configuration_getf_string(conff.Get(), (const char **)&buf, "Object.imgId"))
         return 4;
+    img.clear();
+    img.insert(0, buf);
     if(!bunny_configuration_getf_int(conff.Get(), &objSize.x, "Object.objSize.x"))
         return 5;
     if(!bunny_configuration_getf_int(conff.Get(), &objSize.y, "Object.objSize.y"))
@@ -36,5 +38,9 @@ int ef::ConfObj::LoadBasic(ef::Bconf &conff)
         return 8;
     if(!bunny_configuration_getf_int(conff.Get(), &rangeOfVision, "Object.rangeOfVision"))
         return 9;
+    if(!bunny_configuration_getf_int(conff.Get(), &nbrDmg, "Object.nbrDmg"))
+        return 10;
+    if(!bunny_configuration_getf_int(conff.Get(), &dmg, "Object.dmg"))
+        return 11;
     return 0;
 }

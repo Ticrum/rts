@@ -7,7 +7,7 @@
 #include "object.hh"
 
 ef::ConfObj::ConfObj(ConfObj const &other)
-    :imgId(other.imgId),
+    :img(other.img),
      objSize(other.objSize),
      maxhp(other.maxhp),
      armor(other.armor),

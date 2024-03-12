@@ -7,7 +7,8 @@
 #include "unit.hh"
 
 ef::Unit::Unit(ConfUnit conf,
-               Pos _pos,
+               std::shared_ptr<ef::Bpixelarray> _img,
+	       Pos _pos,
                int _objId,
                int _alegence,
                std::vector<ConfWeapon> & weaponsConf,
@@ -17,7 +18,7 @@ ef::Unit::Unit(ConfUnit conf,
                std::vector<Pos> newPath,
                std::vector<double> cdr)
   :
-  Object(conf, _pos, _objId, _alegence, actualHp),
+  Object(conf, _img, _pos, _objId, _alegence, actualHp),
   path(newPath),
   actualIndex(0),
   progress(_progress),

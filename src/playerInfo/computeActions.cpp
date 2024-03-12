@@ -38,7 +38,7 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
 	  if (buildings[i]->getType() == PRODUCTION)
             {
 	      std::shared_ptr<ProdBuilding> prod = std::static_pointer_cast<ProdBuilding>(buildings[i]);
-	      std::shared_ptr<Unit> newUnit = prod->produceUnit(timePassed, weaponsConf);
+	      std::shared_ptr<Unit> newUnit = prod->produceUnit(timePassed, weaponsConf, res.getSprit());
 	      if (newUnit.get() != nullptr)
 		units.push_back(newUnit);
 	      Packet pack;
@@ -57,7 +57,7 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
 	  else if (buildings[i]->getType() == CONSTRUCT)
             {
 	      std::shared_ptr<ConstructBuilding> construct = std::static_pointer_cast<ConstructBuilding>(buildings[i]);
-	      std::shared_ptr<Building> newBuilding = construct->produceBuilding(timePassed, weaponsConf);
+	      std::shared_ptr<Building> newBuilding = construct->produceBuilding(timePassed, weaponsConf,res.getSprit());
 	      if (newBuilding.get() != nullptr)
 		producedBuilding.push_back(newBuilding);
 	      Packet pack;

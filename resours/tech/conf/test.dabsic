@@ -1,0 +1,6 @@
+[Tech
+    name = "test"
+    isSearched = false
+    timeToSearch = 1000
+    cost = 2
+]
