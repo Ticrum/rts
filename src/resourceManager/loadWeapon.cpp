@@ -8,7 +8,7 @@ int ef::ResourceManager::LoadWeapon(bool reset)
   std::vector<std::string> conf = {"LEsTIK.dabsic", "miniGun.dabsic"};
   std::string stati = "resours/weapon/conf/";
   if(weaponConf.size() == conf.size())
-    return 0;
+    return -2;
   int error;
   ConfWeapon tmp;
   std::string temp;

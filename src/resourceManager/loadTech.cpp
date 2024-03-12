@@ -8,7 +8,7 @@ int ef::ResourceManager::LoadTech(bool reset)
   std::vector<std::string> conf = {"test.dabsic"};
   std::string stati = "resours/tech/conf/";
   if(allTech.size() == conf.size())
-    return 0;
+    return -2;
   int error;
   Tech tmp;
   std::string temp;

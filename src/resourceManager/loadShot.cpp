@@ -8,7 +8,7 @@ int ef::ResourceManager::LoadShot(bool reset)
   std::vector<std::string> conf = {"test.dabsic"};
   std::string stati = "resours/shot/conf/";
   if(shot.size() == conf.size())
-    return 0;
+    return -2;
   int error;
   ConfObj tmp;
   std::string temp;
