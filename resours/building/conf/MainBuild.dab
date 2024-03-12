@@ -1,6 +1,6 @@
 [Object
   name = "MainBuild"
-  imgId = 0
+  imgId = ""
   [objSize
     x = 1
     y = 1
@@ -8,12 +8,14 @@
   maxHp = 100
   armor = 2
   rangeOfVision = 5
+  nbrDmg = 0
+  dmg = 0
 ]
 [Building
   cost = 350
   timeToProduce = 0.2
-  type = "C"
-  canBeTarget = "T"
+  type = 3
+  canBeTarget = true
   energyCost = 10
   energyProduction = 0
   moneyProduction = 0
