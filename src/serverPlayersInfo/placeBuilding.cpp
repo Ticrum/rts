@@ -9,6 +9,6 @@
 void ef::ServerPlayersInfo::placeBuilding(Pos pos,
                                           int playerId)
 {
-    playersInfo[playerId]->placeBuilding(pos);
+  playersInfo[playerId]->placeBuilding(pos);
 }
 

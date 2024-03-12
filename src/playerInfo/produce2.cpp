@@ -6,12 +6,13 @@
 
 #include "playerInfo.hh"
 
-void ef::PlayerInfo::produce(std::shared_ptr<TechBuilding> producer,
+bool ef::PlayerInfo::produce(std::shared_ptr<TechBuilding> producer,
                              Tech newSearch)
 {
     if (money < newSearch.cost)
-        return;
+        return false;
     money -= newSearch.cost;
     producer->addSearchToList(newSearch);
+    return true;
 }
 

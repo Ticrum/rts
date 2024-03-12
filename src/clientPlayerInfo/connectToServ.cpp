@@ -6,6 +6,8 @@
 
 #include "clientPlayerInfo.hh"
 
+#include <iostream>
+
 void ef::ClientPlayerInfo::connectToServ(int ip,
                                          int port)
 {
@@ -14,6 +16,13 @@ void ef::ClientPlayerInfo::connectToServ(int ip,
     {
         isConnected = true;
         serverConnected = clientTcp->getLastConnected();
+	Packet pack;
+	pack.type = CLIENTINFO;
+	pack.clientInfo.port = clientPort;
+	clientTcp->loop();
+	clientTcp->sendData((char *)&pack, sizeof(Packet), serverConnected);
+	clientUdp->sendData("test", 4, serverConnected);
+	std::cout << "client" << (int)ntohs(serverConnected.sin_port) << std::endl;
     }
 }
 
