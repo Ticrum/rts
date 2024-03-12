@@ -9,7 +9,7 @@ int ef::ResourceManager::LoadSprit(bool reset)
   std::vector<std::string> allConf = {};
   std::string stati = "resours/sprit/";
   if(sprites.size() == allConf.size())
-    return 0;
+    return -2;
   std::string temp;
   bool exit;
   for(unsigned int i = sprites.size(); i < allConf.size(); i++)
