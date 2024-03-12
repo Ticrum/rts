@@ -1,0 +1,24 @@
+[Object
+  name = "MainBuild"
+  imgId = 0
+  [objSize
+    x = 1
+    y = 1
+  ]
+  maxHp = 100
+  armor = 2
+  rangeOfVision = 5
+]
+[Building
+  cost = 350
+  timeToProduce = 0.2
+  type = "C"
+  canBeTarget = "T"
+  energyCost = 10
+  energyProduction = 0
+  moneyProduction = 0
+  [weaponConf
+    size = 0
+    data = "miniGun"
+  ]
+]

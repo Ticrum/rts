@@ -18,6 +18,7 @@ namespace ef
   class Bconf;
   class Bpixelarray;
   struct Pos;
+
   struct ConformPos
   {
     Pos get();
@@ -43,15 +44,16 @@ namespace ef
     double x;
     double y;
   };
+
   struct ConfObj
   {
     ConfObj();
     ConfObj(ConfObj const &other);
     ConfObj(std::string file);
     ConfObj &operator=(ConfObj const&other);
+    std::string operator << (std::string text);
     int LoadBasic(std::string &file);
     int LoadBasic(Bconf &conff);
-    std::string operator << (std::string text);
 
     char conformConf[128];
     std::string img;
@@ -63,6 +65,7 @@ namespace ef
     int dmg;
     std::string conf;
   };
+
   class Object
   {
   public:

@@ -6,13 +6,15 @@
 
 #include "clientPlayerInfo.hh"
 
-ef::ClientPlayerInfo::ClientPlayerInfo(int port)
-    :
-    playerInfo(res),
-    clientUdp(new UdpConnect(port)),
-    clientTcp(new TcpConnect(port)),
-    gameStarted(false),
-    isConnected(false)
+ef::ClientPlayerInfo::ClientPlayerInfo(int port,
+				       int alegence)
+  :
+  playerInfo(res, alegence, true),
+  clientUdp(new UdpConnect(port)),
+  clientTcp(new TcpConnect(port)),
+  gameStarted(false),
+  isConnected(false),
+  clientPort(port)
 {
 }
 

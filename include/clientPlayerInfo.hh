@@ -15,7 +15,7 @@ namespace ef
   class ClientPlayerInfo
   {
   public:
-    ClientPlayerInfo(int port);
+    ClientPlayerInfo(int port, int alegence);
     void computeActions(double timePassed);
     void connectToServ(int ip, int port);
     void makePath(Pos dest, MoveType moveType);
@@ -29,6 +29,7 @@ namespace ef
     bool destroyUnit(int unitId, bool isOther);
     bool destroyBuilding(int buildingId, bool isOther);
     void deleteFromKillList(std::shared_ptr<Object> obj);
+    void sendIsReady();
 
     ResourceManager res;
     PlayerInfo playerInfo;
@@ -38,6 +39,7 @@ namespace ef
     std::shared_ptr<TcpConnect> clientTcp;
     bool gameStarted;
     bool isConnected;
+    int clientPort;
     std::shared_ptr<Unit> dummy;
     struct sockaddr_in serverConnected;
     std::vector<std::shared_ptr<Unit>> selectedUnit;
