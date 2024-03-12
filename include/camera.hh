@@ -22,10 +22,8 @@ namespace ef
         void ZoomIn(double add);
         void ZoomOut(double sub);
         void Move(AcuPos move);
-        void display(PlayerInfo &plr,
-                     std::vector<std::shared_ptr<ef::Bpixelarray>> &rsrc);
-        void display(ServerPlayersInfo &srv,
-                     std::vector<std::shared_ptr<ef::Bpixelarray>> &rsrc);
+        void display(PlayerInfo &plr);
+        void display(ServerPlayersInfo &srv);
     private:
         t_bunny_window *win;
         Bpixelarray game;

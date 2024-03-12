@@ -174,18 +174,52 @@ int main(void)
 
       }
   std::cout << "___--" << wep.conf << "--___\ndmg : "<< wep.dmg<< "\nnbrAtt : "<< wep.nbrAtt<< "\ncbrMax : "<< wep.cdrMax << "\nrange : " << wep.range << "\ntarget : " << wep.manualTarget<< "\n";
-  std::cout << "___--" << build.conf << "("<< build.conformConf<< ")--___\nimgId : "<< build.imgId << "\nobjSize : "<< build.objSize.x<< "; " << build.objSize.y<< "\nmaxhp : " << build.maxhp<< "\narmor : " << build.armor << "\nrangeOfVision : " << build.rangeOfVision << "\n------------\n"<<
+  std::cout << "___--" << build.conf << "("<< build.conformConf<< ")--___\nimg : "<< build.img << "\nobjSize : "<< build.objSize.x<< "; " << build.objSize.y<< "\nmaxhp : " << build.maxhp<< "\narmor : " << build.armor << "\nrangeOfVision : " << build.rangeOfVision << "\nnbrDMG : " << build.nbrDmg << "\ndmg : " << build.dmg << "\n------------\n"<<
     "cost : " << build.cost<< "\ntimeToProduce" << build.timeToProduce << "\ntype : " <<build.type << "\ncanBeTarget : " << build.canBeTarget << "\nenergyCost : " << build.energyCost << "\nenergyProduction : " << build.energyProduction << "\nmoneyProduction : " << build.moneyProduction << "\nweaponConf : (" << build.weaponConf.size() << ") | ";
   for(unsigned int i = 0; i < build.weaponConf.size(); i++)
     {
       std::cout << build.weaponConf[i]<< ",";
     }
   std::cout<< "\n";
-  std::cout << "___--" << unit.conf << "("<< unit.conformConf<< ")--___\nimgId : "<< unit.imgId << "\nobjSize : "<< unit.objSize.x<< "; " << unit.objSize.y<< "\nmaxhp : " << unit.maxhp<< "\narmor : " << unit.armor << "\nrangeOfVision : " << unit.rangeOfVision << "\n------------\n"<<
+  std::cout << "___--" << unit.conf << "("<< unit.conformConf<< ")--___\nimg : "<< unit.img << "\nobjSize : "<< unit.objSize.x<< "; " << unit.objSize.y<< "\nmaxhp : " << unit.maxhp<< "\narmor : " << unit.armor << "\nrangeOfVision : " << unit.rangeOfVision << "\nnbrDMG : " << unit.nbrDmg << "\ndmg : " << unit.dmg << "\n------------\n"<<
     "cost : " << unit.cost << "\nspeed : " << unit.speed << "\nrunningSpeed : " << unit.runningSpeed << "\nmoveType : " << unit.moveType << "\nIsFlying : " << unit.isFlying<< "\ntimeToProduce : " << unit.timeToProduce << "\nweaponConf : (" << unit.weaponConf.size() << ") | ";
   for(unsigned int i = 0; i < unit.weaponConf.size(); i++)
     {
       std::cout << unit.weaponConf[i]<< ",";
     }
-  std::cout<< "\n";
+  std::cout<< "\n __--RESOURCE MANAGER--__\n";
+
+  ef::ResourceManager rsa;
+
+  unit = rsa.getUnit("");
+  std::vector<ef::ConfWeapon> weaps = rsa.getWeaponConf();
+  build = rsa.getBuild("");
+  ef::Tech tech = rsa.getTech("");
+  ef::ConfObj shot = rsa.getShot("");
+
+  std::cout << "unit : " << unit.cost;
+  std::cout << "\nwep : " <<( weaps.empty()? "empty" : "smth");
+  std::cout << "\nbuild : " << build.cost;
+  std::cout << "\ntech : " << tech.cost;
+  std::cout << "\nshot : " << shot.img<< shot.maxhp<< shot.armor<< shot.rangeOfVision << "\n";
+
+  int error = rsa.LoadUnit();
+  std::cout<< "LoadUnit "<<error<<"\n";
+  error = rsa.LoadBuild();
+  std::cout<< "LoadBuild "<<error<<"\n";
+  error = rsa.LoadTech();
+  std::cout<< "LoadTech "<<error<<"\n";
+  error = rsa.LoadWeapon();
+  std::cout<< "LoadWeapon "<<error<<"\n";
+  error = rsa.LoadShot();
+  std::cout<< "LoadShot "<<error<<"\n";
+  error = rsa.LoadSprit();
+  std::cout<< "LoadSprit "<<error<<"\n";
+
+  unit = rsa.getUnit("missingno");
+  weaps = rsa.getWeaponConf();
+  build = rsa.getBuild("LATHOURES");
+  tech = rsa.getTech("test");
+  shot = rsa.getShot("test");
+  std::cout << (unit << (build << (tech << (shot << ""))));
 }

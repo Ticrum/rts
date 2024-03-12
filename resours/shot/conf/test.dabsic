@@ -1,0 +1,13 @@
+[Object
+    name = "test"
+    imgId = 2
+    [objSize
+        x = 1
+        y = 1
+    ]
+    maxHp = 50
+    armor = 0
+    rangeOfVision = 1
+    nbrDmg = 50
+    dmg = 1
+]

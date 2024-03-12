@@ -47,7 +47,6 @@ namespace ef
     std::vector<std::shared_ptr<Building>> selectBuilding(Pos start, Pos end);
     void modifyMoneyGain(int money);
     void Display(Bpixelarray &px,
-                 std::vector<std::shared_ptr<Bpixelarray>> &rsrc,
                  ef::Camera &cam,
                  bool fog);
     std::vector<std::shared_ptr<ef::Object>> & getKillList();

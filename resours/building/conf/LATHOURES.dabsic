@@ -8,6 +8,8 @@
     maxHp = 100
     armor = 2
     rangeOfVision = 5
+    nbrDmg = 0
+    dmg = 0
 ]
 [Building
     cost = 350

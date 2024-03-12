@@ -8,6 +8,7 @@
 #define __BUILDING_HH__
 
 #include "unit.hh"
+#include <map>
 
 namespace ef
 {
@@ -31,6 +32,7 @@ namespace ef
     ConfBuilding(ConfBuilding const &other);
     ConfBuilding &operator=(ConfBuilding const&other);
     int load(std::string &file);
+    std::string operator<<(std::string text);
 
     int cost;
     double timeToProduce;
@@ -45,8 +47,8 @@ namespace ef
   class Building : public Object
   {
   public:
-    Building(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
-    Building(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
+    Building(ConfBuilding conf, std::shared_ptr<ef::Bpixelarray>_img, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+    Building(ConfBuilding conf, std::shared_ptr<ef::Bpixelarray>_img, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
     std::vector<std::shared_ptr<Object>> fireAllWeapon(double timePassed);
     void changeTarget(std::vector<std::shared_ptr<Object>> targets);
     BuildingType getType();
@@ -73,10 +75,11 @@ namespace ef
   class ProdBuilding : public Building
   {
   public:
-    ProdBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
-    ProdBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
+    ProdBuilding(ConfBuilding conf, std::shared_ptr<ef::Bpixelarray>_img, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+    ProdBuilding(ConfBuilding conf, std::shared_ptr<ef::Bpixelarray>_img, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
     std::shared_ptr<Unit> produceUnit(double timePassed,
-				      std::vector<ConfWeapon> & weaponsConf);
+				      std::vector<ConfWeapon> & weaponsConf,
+				      std::map<std::string, std::shared_ptr<Bpixelarray>> & imgs);
     void addUnitToProd(ConfUnit newUnit);
     bool getOnHold();
     void setOnHold(bool newState);
@@ -90,10 +93,11 @@ namespace ef
   class ConstructBuilding : public Building
   {
   public:
-    ConstructBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
-    ConstructBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
+    ConstructBuilding(ConfBuilding conf, std::shared_ptr<ef::Bpixelarray>_img, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+    ConstructBuilding(ConfBuilding conf, std::shared_ptr<ef::Bpixelarray>_img, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
     std::shared_ptr<Building> produceBuilding(double timePassed,
-					      std::vector<ConfWeapon> & weaponsConf);
+					      std::vector<ConfWeapon> & weaponsConf,
+					      std::map<std::string, std::shared_ptr<Bpixelarray>> & imgs);
     void addBuildingToProd(ConfBuilding newBuilding);
     bool getOnHold();
     void setOnHold(bool newState);
@@ -106,6 +110,13 @@ namespace ef
 
   struct Tech
   {
+    Tech();
+    Tech(std:: string file);
+    Tech(Tech const &other);
+    Tech &operator=(Tech const &other);
+    int load(std::string &file);
+    std::string operator << (std::string text);
+
     std::string techName;
     bool isSearched;
     double timeToSearch;
@@ -115,8 +126,8 @@ namespace ef
   class TechBuilding : public Building
   {
   public:
-    TechBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
-    TechBuilding(ConfBuilding conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
+    TechBuilding(ConfBuilding conf, std::shared_ptr<ef::Bpixelarray>_img, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+    TechBuilding(ConfBuilding conf, std::shared_ptr<ef::Bpixelarray>_img, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, std::vector<double> cdr);
     std::shared_ptr<Tech> searchTech(double timePassed);
     void addSearchToList(Tech newSearch);
     bool getOnHold();

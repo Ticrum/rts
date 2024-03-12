@@ -8,6 +8,8 @@
     maxHp = 3
     armor = 1000
     rangeOfVision = 2
+    nbrDmg = 0
+    dmg = 0
 ]
 [Unit
     cost = 100

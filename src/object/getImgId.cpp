@@ -5,9 +5,10 @@
 // description: getImgId implementation
 
 #include "object.hh"
+#include "Bpixelarray.hh"
 
-int ef::Object::getImgId()
+std::shared_ptr<ef::Bpixelarray> &ef::Object::getImg()
 {
-    return imgId;
+    return img;
 }
 

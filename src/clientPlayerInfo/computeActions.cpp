@@ -54,7 +54,7 @@ void ef::ClientPlayerInfo::computeActions(double timePassed)
 		  std::vector<double> cdr;
 		  for (int i = 0; i < pack.addOtherUnit.nbrCdr; i += 1)
 		    cdr.push_back(pack.addOtherUnit.cdr[i]);
-		  tempUnit.reset(new Unit(conf, pack.addOtherUnit.posi.get(), pack.addOtherUnit.unitId, pack.addOtherUnit.alegence, res.getWeaponConf(), pack.addOtherUnit.actualHp, pack.addOtherUnit.progress, pack.addOtherUnit.moveType, path, cdr));
+		  tempUnit.reset(new Unit(conf, res.getSprit()[conf.img], pack.addOtherUnit.posi.get(), pack.addOtherUnit.unitId, pack.addOtherUnit.alegence, res.getWeaponConf(), pack.addOtherUnit.actualHp, pack.addOtherUnit.progress, pack.addOtherUnit.moveType, path, cdr));
 		  playerInfo.addOther(tempUnit, pack.addOtherUnit.isOther);
                 }
 	      else if (pack.type == ADDOTHERBUILDING)
@@ -66,13 +66,13 @@ void ef::ClientPlayerInfo::computeActions(double timePassed)
 		  for (int i = 0; i < pack.addOtherBuilding.nbrCdr; i += 1)
 		    cdr.push_back(pack.addOtherBuilding.cdr[i]);
 		  if (conf.type == PRODUCTION)
-		    tempBuilding.reset(new ProdBuilding(conf, pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), pack.addOtherBuilding.actualHp, cdr));
+		    tempBuilding.reset(new ProdBuilding(conf, res.getSprit()[conf.img], pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), pack.addOtherBuilding.actualHp, cdr));
 		  else if (conf.type == CONSTRUCT)
-		    tempBuilding.reset(new ConstructBuilding(conf, pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), pack.addOtherBuilding.actualHp, cdr));
+		    tempBuilding.reset(new ConstructBuilding(conf, res.getSprit()[conf.img], pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), pack.addOtherBuilding.actualHp, cdr));
 		  else if (conf.type == TECH)
-		    tempBuilding.reset(new TechBuilding(conf, pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), pack.addOtherBuilding.actualHp, cdr));
+		    tempBuilding.reset(new TechBuilding(conf, res.getSprit()[conf.img], pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), pack.addOtherBuilding.actualHp, cdr));
 		  else
-		    tempBuilding.reset(new Building(conf, pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), pack.addOtherBuilding.actualHp, cdr));
+		    tempBuilding.reset(new Building(conf, res.getSprit()[conf.img], pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), pack.addOtherBuilding.actualHp, cdr));
 
 		  playerInfo.addOther(tempBuilding, pack.addOtherBuilding.isOther);
                 }
@@ -109,7 +109,7 @@ void ef::ClientPlayerInfo::computeActions(double timePassed)
 		  std::shared_ptr<Object> tempObj;
 		  std::string str(pack.addShot.conf, pack.addShot.len);
 		  ConfObj tempConf = res.getShot(str);
-		  tempObj.reset(new Object(tempConf, pack.addShot.pos.get(), pack.addShot.buildId, pack.addShot.alegence));
+		  tempObj.reset(new Object(tempConf, res.getSprit()[tempConf.img], pack.addShot.pos.get(), pack.addShot.buildId, pack.addShot.alegence));
 		  playerInfo.addOtherShot(tempObj);
 		}
 	    }

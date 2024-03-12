@@ -18,25 +18,25 @@ int ef::ConfBuilding::load(std::string &file)
   if(buf > 0)
     return buf;
   if(!bunny_configuration_getf_int(conf.Get(), &cost, "Building.cost"))
-    return 10;
-  if(!bunny_configuration_getf_double(conf.Get(), &timeToProduce, "Building.timeToProduce"))
-    return 11;
-  if(!bunny_configuration_getf_int(conf.Get(),(int *) &type, "Building.type"))
     return 12;
-  if (type < 0 || type > 5)
-    return 18;
-  if(!bunny_configuration_getf_int(conf.Get(), (int *)&canBeTarget, "Building.canBeTarget"))
+  if(!bunny_configuration_getf_double(conf.Get(), &timeToProduce, "Building.timeToProduce"))
     return 13;
-  if(!bunny_configuration_getf_int(conf.Get(), &energyCost, "Building.energyCost"))
+  if(!bunny_configuration_getf_int(conf.Get(),(int *) &type, "Building.type"))
     return 14;
-  if(!bunny_configuration_getf_int(conf.Get(), &energyProduction, "Building.energyProduction"))
+  if (type < 0 || type > 5)
+    return 20;
+  if(!bunny_configuration_getf_int(conf.Get(), (int *)&canBeTarget, "Building.canBeTarget"))
     return 15;
-  if(!bunny_configuration_getf_int(conf.Get(), &moneyProduction, "Building.moneyProduction"))
+  if(!bunny_configuration_getf_int(conf.Get(), &energyCost, "Building.energyCost"))
     return 16;
+  if(!bunny_configuration_getf_int(conf.Get(), &energyProduction, "Building.energyProduction"))
+    return 17;
+  if(!bunny_configuration_getf_int(conf.Get(), &moneyProduction, "Building.moneyProduction"))
+    return 18;
   char *zut;
   int size;
   if(!bunny_configuration_getf_int(conf.Get(), &size, "Building.weaponConf.size"))
-    return 17;
+    return 19;
   if(!weaponConf.empty())
     weaponConf.clear();
   for(int i = 0; i < size; i++)

@@ -1,11 +1,10 @@
 #include "serverPlayersInfo.hh"
 
 void ef::ServerPlayersInfo::Display(Bpixelarray &px,
-                                    std::vector<std::shared_ptr<Bpixelarray>> &rsrc,
                                     ef::Camera &cam)
 {
     for(int i=0; i < (int) playersInfo.size(); i++)
-        playersInfo[i]->Display(px,rsrc,cam,false);
+        playersInfo[i]->Display(px,cam,false);
     Pos casePos;
     Pos pixPos;
     Pos pxSize = px.GetSize();
@@ -17,7 +16,7 @@ void ef::ServerPlayersInfo::Display(Bpixelarray &px,
         casePos = neutralBuildings[i]->getPos();
         pixPos.x = casePos.x * mapSize.x;
         pixPos.y = casePos.y * mapSize.y;
-        if(cam.IsIn(pixPos, rsrc[neutralBuildings[i]->getImgId()]))
-            neutralBuildings[i]->Display(px, rsrc, mapSize);
+        if(cam.IsIn(pixPos, neutralBuildings[i]->getImg()))
+            neutralBuildings[i]->Display(px, mapSize);
     }
 }

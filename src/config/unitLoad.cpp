@@ -12,23 +12,23 @@ int ef::ConfUnit::load(std::string &file)
   if(tmp > 0)
     return tmp;
   if(!bunny_configuration_getf_int(conf.Get(), &cost, "Unit.cost"))
-    return 10;
-  if(!bunny_configuration_getf_double(conf.Get(), &speed, "Unit.speed"))
-    return 11;
-  if(!bunny_configuration_getf_double(conf.Get(), &runningSpeed, "Unit.runningSpeed"))
     return 12;
-  if(!bunny_configuration_getf_int(conf.Get(), (int *)&moveType, "Unit.moveType"))
+  if(!bunny_configuration_getf_double(conf.Get(), &speed, "Unit.speed"))
     return 13;
-  if(moveType < 0 || moveType > 2)
-    return 17;
-  if(!bunny_configuration_getf_int(conf.Get(), (int *)&isFlying, "Unit.isFlying"))
+  if(!bunny_configuration_getf_double(conf.Get(), &runningSpeed, "Unit.runningSpeed"))
     return 14;
-  if(!bunny_configuration_getf_double(conf.Get(), &timeToProduce, "Unit.timeToProduce"))
+  if(!bunny_configuration_getf_int(conf.Get(), (int *)&moveType, "Unit.moveType"))
     return 15;
+  if(moveType < 0 || moveType > 2)
+    return 19;
+  if(!bunny_configuration_getf_int(conf.Get(), (int *)&isFlying, "Unit.isFlying"))
+    return 16;
+  if(!bunny_configuration_getf_double(conf.Get(), &timeToProduce, "Unit.timeToProduce"))
+    return 17;
   char *buf;
   int size;
   if(!bunny_configuration_getf_int(conf.Get(), &size, "Unit.weaponConf.size"))
-    return 16;
+    return 18;
   if(!weaponConf.empty())
     weaponConf.clear();
   for(int i = 0; i < size; i++)

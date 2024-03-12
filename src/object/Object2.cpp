@@ -7,7 +7,8 @@
 #include "object.hh"
 
 ef::Object::Object(ConfObj _conf,
-                   Pos _pos,
+		   std::shared_ptr<ef::Bpixelarray>_img,
+		   Pos _pos,
                    int _objId,
                    int _alegence,
                    int actualHp)
@@ -15,7 +16,7 @@ ef::Object::Object(ConfObj _conf,
     conf(_conf.conf),
     objId(_objId),
     pos(_pos),
-    imgId(_conf.imgId),
+    img(_img),
     objSize(_conf.objSize),
     hp(actualHp),
     maxhp(_conf.maxhp),

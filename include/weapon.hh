@@ -15,11 +15,12 @@ namespace ef
     class ConfWeapon
     {
     public:
-        ConfWeapon();
-        ConfWeapon(std::string file);
-        ConfWeapon(ConfWeapon const &other);
-        ConfWeapon &operator=(ConfWeapon const&other);
-        int load(std::string &file);
+      ConfWeapon();
+      ConfWeapon(std::string file);
+      ConfWeapon(ConfWeapon const &other);
+      ConfWeapon &operator=(ConfWeapon const&other);
+      std::string operator << (std::string text);
+      int load(std::string &file);
 
         std::string conf;
         std::string ShotConf;

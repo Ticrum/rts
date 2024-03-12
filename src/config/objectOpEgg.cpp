@@ -2,7 +2,7 @@
 
 ef::ConfObj &ef::ConfObj::operator=(ConfObj const&other)
 {
-    imgId = other.imgId;
+    img = other.img;
     objSize = other.objSize;
     maxhp = other.maxhp;
     armor = other.armor;
