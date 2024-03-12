@@ -17,6 +17,13 @@
 
 namespace ef
 {
+  struct Killed
+  {
+    std::shared_ptr<Object> obj;
+    double time;
+    bool isOther;
+  };
+
   class PlayerInfo
   {
   public:
@@ -49,7 +56,7 @@ namespace ef
                  std::vector<std::shared_ptr<Bpixelarray>> &rsrc,
                  ef::Camera &cam,
                  bool fog);
-    std::vector<std::shared_ptr<ef::Object>> & getKillList();
+    std::vector<ef::Killed> & getKillList();
     std::shared_ptr<Unit> getUnit(int unitId);
     std::shared_ptr<Building> getBuild(int buildId);
     std::shared_ptr<Object> getOtherObject(int otherId, bool isBuilding);
@@ -80,7 +87,7 @@ namespace ef
     std::vector<std::shared_ptr<Unit>> units;
     std::vector<std::shared_ptr<Unit>> otherUnits;
     std::vector<std::shared_ptr<Building>> otherBuildings;
-    std::vector<std::shared_ptr<ef::Object>> killList;
+    std::vector<Killed> killList;
     std::vector<std::shared_ptr<Building>> producedBuilding;
     std::vector<std::shared_ptr<Tech>> searchedTech;
     std::vector<std::shared_ptr<Object>> shots;

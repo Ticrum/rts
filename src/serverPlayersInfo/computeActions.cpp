@@ -136,13 +136,13 @@ void ef::ServerPlayersInfo::computeActions(double timePassed)
 	  std::cout << "compute shot called serv" << std::endl;
 	  playersInfo[i]->computeShot(false);
 	  Packet tempPack;
-	  std::vector<std::shared_ptr<ef::Object>> & kill = playersInfo[i]->getKillList();
+	  std::vector<ef::Killed> & kill = playersInfo[i]->getKillList();
 	  for (int j = 0; j < (int)kill.size(); j += 1)
             {
 	      tempPack.type = DESTROY;
-	      tempPack.destroy.unitId = kill[j]->getId();
+	      tempPack.destroy.unitId = kill[j].obj->getId();
 	      tempPack.destroy.isOther = false;
-	      std::shared_ptr<ef::Unit> tempUnit = static_pointer_cast<ef::Unit>(kill[j]);
+	      std::shared_ptr<ef::Unit> tempUnit = static_pointer_cast<ef::Unit>(kill[j].obj);
 	      if (tempUnit.get() == nullptr)
 		tempPack.destroy.isBuilding = true;
 	      else
@@ -152,13 +152,13 @@ void ef::ServerPlayersInfo::computeActions(double timePassed)
 		i -= 1;
 	      tempPack.destroy.isOther = true;
 	      for (int k = i + 1; k < i + (int)clientConnected.size(); k += 1)
-		if (playersInfo[k % playersInfo.size()]->isInVision(kill[j]))
+		if (playersInfo[k % playersInfo.size()]->isInVision(kill[j].obj))
 		  {
 		    serverUdp->sendData((char *)&tempPack, sizeof(Packet), clientConnected[k % clientConnected.size()]);
 		    if (tempPack.destroy.isBuilding)
-		      playersInfo[i]->destroyBuilding(static_pointer_cast<Building>(kill[j]), true);
+		      playersInfo[i]->destroyBuilding(static_pointer_cast<Building>(kill[j].obj), true);
 		    else
-		      playersInfo[i]->destroyUnit(static_pointer_cast<Unit>(kill[j]), true);
+		      playersInfo[i]->destroyUnit(static_pointer_cast<Unit>(kill[j].obj), true);
 		  }
             }
 	  kill.clear();

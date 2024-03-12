@@ -28,28 +28,28 @@ int main(void)
   cli.connectToServ(*(int *)&i, 50123);
   cli2.connectToServ(*(int *)&i, 50123);
   cli3.connectToServ(*(int *)&i, 50123);
-  srv.computeActions(0.5);
-  cli.computeActions(0.5);
-  cli2.computeActions(0.5);
-  cli3.computeActions(0.5);
+  srv.computeActions(0.016);
+  cli.computeActions(0.016);
+  cli2.computeActions(0.016);
+  cli3.computeActions(0.016);
   cli.sendIsReady();
   cli2.sendIsReady();
   cli3.sendIsReady();
-  srv.computeActions(0.5);
-  cli.computeActions(0.5);
-  cli2.computeActions(0.5);
-  cli3.computeActions(0.5);
-  srv.computeActions(0.5);
-  cli.computeActions(0.5);
-  cli2.computeActions(0.5);
-  cli3.computeActions(0.5);
+  srv.computeActions(0.016);
+  cli.computeActions(0.016);
+  cli2.computeActions(0.016);
+  cli3.computeActions(0.016);
+  srv.computeActions(0.016);
+  cli.computeActions(0.016);
+  cli2.computeActions(0.016);
+  cli3.computeActions(0.016);
   cli.produce(0, "LATHOURES.dabsic", ef::CONSTRUCT);
   for (int i = 0; i < 5; i += 1)
     {
-      srv.computeActions(0.5);
-      cli.computeActions(0.5);
-      cli2.computeActions(0.5);
-      cli3.computeActions(0.5);
+      srv.computeActions(0.016);
+      cli.computeActions(0.016);
+      cli2.computeActions(0.016);
+      cli3.computeActions(0.016);
     }
   std::cout << "/////////end/////////" << std::endl;
   return 0;

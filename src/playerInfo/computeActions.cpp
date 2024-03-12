@@ -15,6 +15,8 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
   std::vector<std::shared_ptr<Object>> temp;
   std::vector<TargetReturn> tar;
 
+  for (int i = 0; i < (int)killList.size(); i += 1)
+    killList[i].time += timePassed;
   for (int i = 0; i < (int)otherUnits.size(); i += 1)
     temp.push_back(otherUnits[i]);
   for (int i = 0; i < (int)otherBuildings.size(); i += 1)

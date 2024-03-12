@@ -16,6 +16,18 @@ void ef::ClientPlayerInfo::computeActions(double timePassed)
     {
       if (gameStarted)
 	{
+	  std::vector<Killed> & tempKill = playerInfo.getKillList();
+	  for (int i = 0; i < (int)tempKill.size(); i += 1)
+	    if (tempKill[i].time >= 0.2)
+	      {
+		std::shared_ptr<Unit> tempUnit;
+		std::shared_ptr<Building> tempBuilding;
+		if ((tempUnit = std::static_pointer_cast<Unit>(tempKill[i].obj)).get() != nullptr)
+		  playerInfo.addOther(tempUnit, tempKill[i].isOther);
+		else if ((tempBuilding = std::static_pointer_cast<Building>(tempKill[i].obj)).get() != nullptr)
+		  playerInfo.addOther(tempBuilding, tempKill[i].isOther);
+		deleteFromKillList(tempKill[i].obj);
+	      }
 	  playerInfo.updateOther();
 	  playerInfo.computeActions(timePassed, res.getWeaponConf(), true, clientUdp, serverConnected);
 	}
