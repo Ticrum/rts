@@ -8,11 +8,11 @@
 
 void ef::ClientPlayerInfo::deleteFromKillList(std::shared_ptr<Object> obj)
 {
-    std::vector<std::shared_ptr<ef::Object>> tempKill = playerInfo.getKillList();
+    std::vector<Killed> tempKill = playerInfo.getKillList();
     for (int i = 0; i < (int)tempKill.size(); i += 1)
-        if (tempKill[i]->getId() == obj->getId())
+        if (tempKill[i].obj->getId() == obj->getId())
         {
-            std::shared_ptr<Object> tempObj = tempKill[i];
+            Killed tempObj = tempKill[i];
             tempKill[i] = tempKill[tempKill.size() - 1];
             tempKill[tempKill.size() - 1] = tempObj;
             tempKill.pop_back();

@@ -24,7 +24,8 @@ namespace ef
       DESTROY,
       UPDATETARGET,
       GAMESTART,
-      ADDSHOT
+      ADDSHOT,
+      CLIENTINFO
     };
 
   struct PacketReady
@@ -141,6 +142,12 @@ namespace ef
     char conf[128];
   };
 
+  struct PacketClientInfo
+  {
+    PackType type;
+    int port;
+  };
+
   union Packet
   {
     PackType type;
@@ -156,6 +163,7 @@ namespace ef
     PacketDestroy destroy;
     PacketUpdateTarget updateTarget;
     PacketAddShot addShot;
+    PacketClientInfo clientInfo;
   };
 }; // !ef
 

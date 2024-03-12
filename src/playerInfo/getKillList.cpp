@@ -6,7 +6,7 @@
 
 #include "playerInfo.hh"
 
-std::vector<std::shared_ptr<ef::Object>> & ef::PlayerInfo::getKillList()
+std::vector<ef::Killed> & ef::PlayerInfo::getKillList()
 {
     return killList;
 }

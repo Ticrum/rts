@@ -1,13 +1,12 @@
 #include "camera.hh"
 #include "playerInfo.hh"
 
-void ef::Camera::display(PlayerInfo &plr,
-                         std::vector<std::shared_ptr<ef::Bpixelarray>> &rsrc)
+void ef::Camera::display(PlayerInfo &plr)
 {
     if(win == NULL)
         return;
     game.Clear(0);
-    plr.Display(game, rsrc, *this, true);
+    plr.Display(game, *this, true);
     bunny_blit(&win->buffer, game.GetClip(),NULL);
     bunny_blit(&win->buffer, Hud.GetClip(),NULL);
     bunny_display(win);

@@ -8,25 +8,34 @@
 #define __RESOURCEMANAGER_HH__
 
 #include "building.hh"
+#include <map>
 
 namespace ef
 {
   class ResourceManager
   {
   public:
+    ResourceManager();
+    int LoadUnit(bool reset = false);
     ConfUnit getUnit(std::string name);
+    int LoadBuild(bool reset = false);
     ConfBuilding getBuild(std::string name);
+    int LoadTech(bool reset = false);
     Tech getTech(std::string name);
+    int LoadWeapon(bool reset = false);
     std::vector<ConfWeapon> & getWeaponConf();
+    int LoadShot(bool reset = false);
     ConfObj getShot(std::string name);
-    std::vector<std::shared_ptr<Bpixelarray>> getSprit();
+    int LoadSprit(bool reset = false);
+    std::map<std::string, std::shared_ptr<Bpixelarray>> &getSprit();
+
   private:
     std::vector<ConfUnit> unitConf;
     std::vector<ConfWeapon> weaponConf;
     std::vector<ConfBuilding> buildingConf;
     std::vector<Tech> allTech;
     std::vector<ConfObj> shot;
-    std::vector<std::shared_ptr<Bpixelarray>> sprites;
+    std::map<std::string, std::shared_ptr<Bpixelarray>> sprites;
   };
 }; // !ef
 

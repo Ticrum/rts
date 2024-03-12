@@ -9,8 +9,13 @@
 int ef::UdpConnect::getData(char *data,
                             int len)
 {
-    if (fd[0].revents & POLLIN)
-        return recvfrom(fd[0].fd, data, len, 0, (struct sockaddr *)&sockGet, (socklen_t *)&s);
-    return -1;
+  if (fd[0].revents & POLLIN)
+    {
+      int result = recvfrom(fd[0].fd, data, len, 0, (struct sockaddr *)&sockGet, (socklen_t *)&s);
+      if (result == 0)
+	return -1;
+      return result;
+    }
+  return -1;
 }
 

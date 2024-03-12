@@ -7,12 +7,13 @@
 #include "unit.hh"
 
 ef::Unit::Unit(ConfUnit conf,
-               Pos _pos,
+               std::shared_ptr<ef::Bpixelarray> _img,
+	       Pos _pos,
                int _objId,
                int _alegence,
                std::vector<ConfWeapon> & weaponsConf)
   :
-  Object(conf, _pos, _objId, _alegence),
+  Object(conf, _img, _pos, _objId, _alegence),
   actualIndex(0),
   progress(0),
   speed(conf.speed),

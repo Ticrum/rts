@@ -17,29 +17,33 @@ namespace ef
       RUN,
       WALK,
       STATIC
-    };
-    struct ConfUnit : public ConfObj
-    {
-        ConfUnit();
-        ConfUnit(std::string file);
-        ConfUnit(ConfUnit const &other);
-        ConfUnit &operator=(ConfUnit const&other);
-        int load(std::string &file);
+    };/*if you add a MoveType don't forget to update;
+	the if line 22 in "src/config/unitLoad.cpp",
+	Unit.moveType in "resours/unit/conf/tamplate"
+      */
+  struct ConfUnit : public ConfObj
+  {
+    ConfUnit();
+    ConfUnit(std::string file);
+    ConfUnit(ConfUnit const &other);
+    ConfUnit &operator=(ConfUnit const&other);
+    int load(std::string &file);
+    std::string operator<<(std::string text);
 
-        int cost;
-        double speed;
-        double runningSpeed;
-        MoveType moveType;
-        bool isFlying;
-        double timeToProduce;
-        std::vector<std::string> weaponConf;
-    };
+    int cost;
+    double speed;
+    double runningSpeed;
+    MoveType moveType;
+    bool isFlying;
+    double timeToProduce;
+    std::vector<std::string> weaponConf;
+  };
 
   class Unit : public Object
   {
   public:
-    Unit(ConfUnit conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
-    Unit(ConfUnit conf, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, double _progress, MoveType type, std::vector<Pos> newPath, std::vector<double> cdr);
+    Unit(ConfUnit conf, std::shared_ptr<ef::Bpixelarray> _img, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
+    Unit(ConfUnit conf, std::shared_ptr<ef::Bpixelarray> _img, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, double _progress, MoveType type, std::vector<Pos> newPath, std::vector<double> cdr);
     double getSpeed();
     double getRunningSpeed();
     void moveUnit(double timePassed);
@@ -51,8 +55,8 @@ namespace ef
     TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others);
     void manualTargeting(std::shared_ptr<Object> target);
     void UnitDisplay(Bpixelarray &px,
-                     std::vector<std::shared_ptr<Bpixelarray>> &rsrc,
-                     Pos caseSize);double getProgress();
+                     Pos caseSize);
+    double getProgress();
     MoveType getMoveType();
     std::vector<ConformPos> getPathLeft();
     std::vector<double> getWeaponsCd();

@@ -7,14 +7,15 @@
 #include "building.hh"
 
 ef::ConstructBuilding::ConstructBuilding(ConfBuilding conf,
+					 std::shared_ptr<ef::Bpixelarray>_img,
                                          Pos _pos,
                                          int _objId,
                                          int _alegence,
                                          std::vector<ConfWeapon> & weaponsConf,
                                          int actualHp,
                                          std::vector<double> cdr)
-    :
-    Building(conf, _pos, _objId, _alegence, weaponsConf, actualHp, cdr)
+  :
+  Building(conf, _img, _pos, _objId, _alegence, weaponsConf, actualHp, cdr)
 {
 }
 

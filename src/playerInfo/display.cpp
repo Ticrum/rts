@@ -3,7 +3,6 @@
 #include <stdlib.h>
 
 void ef::PlayerInfo::Display(ef::Bpixelarray &px,
-                             std::vector<std::shared_ptr<Bpixelarray>> &rsrc,
                              ef::Camera &cam,
                              bool fog)
 {
@@ -18,8 +17,8 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
         casePos = units[i]->getPos();
         pixPos.x = casePos.x * mapSize.x;
         pixPos.y = casePos.y * mapSize.y;
-        if(cam.IsIn(pixPos, rsrc[units[i]->getImgId()]))
-            units[i]->UnitDisplay(px, rsrc, mapSize);
+        if(cam.IsIn(pixPos, units[i]->getImg()))
+            units[i]->UnitDisplay(px, mapSize);
     }
     if(fog)
         for(unsigned int i = 0; otherUnits.size(); i++)
@@ -27,16 +26,16 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
             casePos = otherUnits[i]->getPos();
             pixPos.x = casePos.x * mapSize.x;
             pixPos.y = casePos.y * mapSize.y;
-            if(cam.IsIn(pixPos, rsrc[otherUnits[i]->getImgId()]))
-                otherUnits[i]->UnitDisplay(px, rsrc, mapSize);
+            if(cam.IsIn(pixPos, otherUnits[i]->getImg()))
+                otherUnits[i]->UnitDisplay(px, mapSize);
         }
     for(unsigned int i = 0; buildings.size(); i++)
         {
             casePos = buildings[i]->getPos();
             pixPos.x = casePos.x * mapSize.x;
             pixPos.y = casePos.y * mapSize.y;
-            if(cam.IsIn(pixPos, rsrc[buildings[i]->getImgId()]))
-                buildings[i]->Display(px, rsrc, mapSize);
+            if(cam.IsIn(pixPos, buildings[i]->getImg()))
+                buildings[i]->Display(px, mapSize);
         }
     if(fog)
         for(unsigned int i = 0; otherBuildings.size(); i++)
@@ -44,8 +43,8 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
             casePos = otherBuildings[i]->getPos();
             pixPos.x = casePos.x * mapSize.x;
             pixPos.y = casePos.y * mapSize.y;
-            if(cam.IsIn(pixPos, rsrc[otherBuildings[i]->getImgId()]))
-                otherBuildings[i]->Display(px, rsrc, mapSize);
+            if(cam.IsIn(pixPos, otherBuildings[i]->getImg()))
+                otherBuildings[i]->Display(px, mapSize);
         }
 
     if(fog)

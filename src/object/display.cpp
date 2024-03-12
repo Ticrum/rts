@@ -2,7 +2,6 @@
 #include "Bpixelarray.hh"
 
 void ef::Object::Display(ef::Bpixelarray &px,
-                         std::vector<std::shared_ptr<ef::Bpixelarray>> &rsrc,
                          ef::Pos caseSize)
 {
     Pos tmp;
@@ -14,7 +13,7 @@ void ef::Object::Display(ef::Bpixelarray &px,
 
     tmpObjSize.x = objSize.x;
     tmpObjSize.y = objSize.y;
-    px.Blit(*(rsrc[imgId]), tmp, tmpObjSize);
+    px.Blit(*img, tmp, tmpObjSize);
 
     Pos size = px.GetSize();
 
