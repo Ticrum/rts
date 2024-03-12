@@ -24,7 +24,7 @@ int ef::ConfObj::LoadBasic(ef::Bconf &conff)
         i++;
     }
     conformConf[i] = '\0';
-    if(!bunny_configuration_getf_string(conff.Get(), (const char **)&buf, "Object.imgId"))
+    if(!bunny_configuration_getf_string(conff.Get(), (const char **)&buf, "Object.img"))
         return 4;
     img.clear();
     img.insert(0, buf);
