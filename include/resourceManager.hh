@@ -15,6 +15,7 @@ namespace ef
   class ResourceManager
   {
   public:
+    ResourceManager();
     int LoadUnit(bool reset = false);
     ConfUnit getUnit(std::string name);
     int LoadBuild(bool reset = false);
@@ -27,6 +28,7 @@ namespace ef
     ConfObj getShot(std::string name);
     int LoadSprit(bool reset = false);
     std::map<std::string, std::shared_ptr<Bpixelarray>> &getSprit();
+
   private:
     std::vector<ConfUnit> unitConf;
     std::vector<ConfWeapon> weaponConf;

@@ -12,10 +12,24 @@
 
 ef::ResourceManager::ResourceManager()
 {
-  buildingConf.emplace_back("resours/building/conf/LATHOURES.dabsic");
-  buildingConf.emplace_back("resours/building/conf/MainBuild.dab");
-  unitConf.emplace_back("resours/unit/conf/missingno.dabsic");
-  weaponConf.emplace_back("resours/weapon/conf/LEsTIK.dabsic");
-  weaponConf.emplace_back("resours/building/conf/miniGun.dabsic");
+  int compt = 0;
+
+  while (LoadUnit(false) >= 0 && compt < 5)
+    compt += 1;
+  compt = 0;
+  while (LoadBuild(false) >= 0 && compt < 5)
+    compt += 1;
+  compt = 0;
+  while (LoadTech(false) >= 0 && compt < 5)
+    compt += 1;
+  compt = 0;
+  while (LoadWeapon(false) >= 0 && compt < 5)
+    compt += 1;
+  compt = 0;
+  while (LoadShot(false) >= 0 && compt < 5)
+    compt += 1;
+  compt = 0;
+  while (LoadSprit(false) >= 0 && compt < 5)
+    compt += 1;
 }
 

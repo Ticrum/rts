@@ -33,7 +33,7 @@ ef::PlayerInfo::PlayerInfo(ResourceManager & res,
       Pos tempPos;
       tempPos.x = 0;
       tempPos.y = 0;
-      tempBuild.reset(new Building(confBuild, tempPos, 0, alegence, res.getWeaponConf()));
+      tempBuild.reset(new Building(confBuild, res.getSprit()[confBuild.img], tempPos, 0, alegence, res.getWeaponConf()));
       buildings.push_back(tempBuild);
     }
 }
