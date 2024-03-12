@@ -8,7 +8,7 @@ int ef::ResourceManager::LoadBuild(bool reset)
   std::vector<std::string> conf = {"LATHOURES.dabsic", "MainBuild.dab"};
   std::string stati = "resours/building/conf/";
   if(buildingConf.size() == conf.size())
-    return 0;
+    return -2;
   int error;
   ConfBuilding tmp;
   std::string temp;

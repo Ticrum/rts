@@ -8,7 +8,7 @@ int ef::ResourceManager::LoadUnit(bool reset)
   std::vector<std::string> conf = {"missingno.dabsic"};
   std::string stati = "resours/unit/conf/";
   if(unitConf.size() == conf.size())
-    return 0;
+    return -2;
   int error;
   ConfUnit tmp;
   std::string temp;
