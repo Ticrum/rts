@@ -9,6 +9,25 @@
 void ef::ServerPlayersInfo::placeBuilding(Pos pos,
                                           int playerId)
 {
-  playersInfo[playerId]->placeBuilding(pos);
+  std::shared_ptr<Building> newBuilding;
+  if ((newBuilding = playersInfo[playerId]->placeBuilding(pos)) != nullptr)
+    {
+      Packet pack;
+      pack.type = ADDOTHERBUILDING;
+      pack.addOtherBuilding.buildId = newBuilding->getId();
+      pack.addOtherBuilding.alegence = newBuilding->getAlegence();
+      pack.addOtherBuilding.posi = newBuilding->getPos().get();
+      pack.addOtherBuilding.actualHp = newBuilding->getHp();
+      pack.addOtherBuilding.isActive = true;
+      std::vector<double> tempCdr = newBuilding->getWeaponsCd();
+      pack.addOtherBuilding.nbrCdr = tempCdr.size();
+      for (int i = 0; i < (int)tempCdr.size(); i += 1)
+	pack.addOtherBuilding.cdr[i] = tempCdr[i];
+      pack.addOtherBuilding.isOther = false;
+      pack.addOtherBuilding.len = newBuilding->getConf().size();
+      memcpy(pack.addOtherBuilding.conf, &newBuilding->getConf()[0], newBuilding->getConf().size());
+      serverUdp->loop();
+      serverUdp->sendData((char *)&pack, sizeof(Packet), clientConnected[playerId]);
+    }
 }
 

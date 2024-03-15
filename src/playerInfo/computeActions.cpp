@@ -33,45 +33,37 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
 	  else
 	    tar.back().isTargetBuilding.push_back(true);
         }
-      if (!moveOther)
-        {
-	  if (buildings[i]->getType() == PRODUCTION)
-            {
-	      std::shared_ptr<ProdBuilding> prod = std::static_pointer_cast<ProdBuilding>(buildings[i]);
-	      std::shared_ptr<Unit> newUnit = prod->produceUnit(timePassed, weaponsConf, res.getSprit());
-	      if (newUnit.get() != nullptr)
-		units.push_back(newUnit);
+      if (buildings[i]->getType() == PRODUCTION)
+	{
+	  std::shared_ptr<ProdBuilding> prod = std::static_pointer_cast<ProdBuilding>(buildings[i]);
+	  std::shared_ptr<Unit> newUnit = prod->produceUnit(timePassed, weaponsConf, res.getSprit());
+	  if (newUnit.get() != nullptr && !moveOther)
+	    {
+	      units.push_back(newUnit);
 	      Packet pack;
 	      pack.type = ADDOTHERUNIT;
 	      pack.addOtherUnit.unitId = newUnit->getId();
 	      pack.addOtherUnit.alegence = newUnit->getAlegence();
+	      pack.addOtherUnit.posi = newUnit->getPos().get();
 	      pack.addOtherUnit.actualHp = newUnit->getHp();
 	      pack.addOtherUnit.progress = 0;
 	      pack.addOtherUnit.moveType = newUnit->getMoveType();
 	      pack.addOtherUnit.nbrPos = 0;
 	      pack.addOtherUnit.nbrCdr = 0;
 	      pack.addOtherUnit.isOther = false;
+	      pack.addOtherUnit.len = newUnit->getConf().size();
+	      memcpy(pack.addOtherUnit.conf, &newUnit->getConf()[0], newUnit->getConf().size());
 	      serverUdp->loop();
 	      serverUdp->sendData((char *)&pack, sizeof(Packet), client);
-            }
-	  else if (buildings[i]->getType() == CONSTRUCT)
-            {
-	      std::shared_ptr<ConstructBuilding> construct = std::static_pointer_cast<ConstructBuilding>(buildings[i]);
-	      std::shared_ptr<Building> newBuilding = construct->produceBuilding(timePassed, weaponsConf,res.getSprit());
-	      if (newBuilding.get() != nullptr)
-		producedBuilding.push_back(newBuilding);
-	      Packet pack;
-	      pack.type = ADDOTHERBUILDING;
-	      pack.addOtherBuilding.buildId = newBuilding->getId();
-	      pack.addOtherBuilding.alegence = newBuilding->getAlegence();
-	      pack.addOtherBuilding.actualHp = newBuilding->getHp();
-	      pack.addOtherBuilding.isActive = true;
-	      pack.addOtherBuilding.nbrCdr = 0;
-	      pack.addOtherBuilding.isOther = false;
-	      serverUdp->loop();
-	      serverUdp->sendData((char *)&pack, sizeof(Packet), client);
-            }
-        }
+	    }
+	}
+      else if (buildings[i]->getType() == CONSTRUCT)
+	{
+	  std::shared_ptr<ConstructBuilding> construct = std::static_pointer_cast<ConstructBuilding>(buildings[i]);
+	  std::shared_ptr<Building> newBuilding = construct->produceBuilding(timePassed, weaponsConf,res.getSprit());
+	  if (newBuilding.get() != nullptr && !moveOther)
+	    producedBuilding.push_back(newBuilding);
+	}
       else if (buildings[i]->getType() == TECH)
         {
 	  std::shared_ptr<TechBuilding> tech = std::static_pointer_cast<TechBuilding>(buildings[i]);

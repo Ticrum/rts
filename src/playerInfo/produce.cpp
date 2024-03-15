@@ -6,13 +6,19 @@
 
 #include "playerInfo.hh"
 
+#include <iostream>
+
 bool ef::PlayerInfo::produce(std::shared_ptr<ProdBuilding> producer,
                              ConfUnit newUnit)
 {
-    if (money < newUnit.cost)
-        return false;
-    money -= newUnit.cost;
-    producer->addUnitToProd(newUnit);
-    return true;
+  std::cout << "passed in produced unit" << std::endl;
+  if (money < newUnit.cost)
+    {
+      std::cout << "YOU HAVE NO MONEY" << std::endl;
+      return false;
+    }
+  money -= newUnit.cost;
+  producer->addUnitToProd(newUnit);
+  return true;
 }
 

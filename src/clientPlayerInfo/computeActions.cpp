@@ -136,12 +136,12 @@ void ef::ClientPlayerInfo::computeActions(double timePassed)
 		}
 	    }
 	  clientUdp->loop();
-	  std::cout << "PACKET cli FIN" << std::endl;
+	  //std::cout << "PACKET cli FIN" << std::endl;
 	}
       if (gameStarted)
 	playerInfo.computeShot(true);
     }
-  std::cout << "end of FUNC client" << std::endl;
+  //std::cout << "end of FUNC client" << std::endl;
 }
 
 
