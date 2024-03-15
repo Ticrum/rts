@@ -6,7 +6,7 @@ int ef::ResourceManager::LoadSprit(bool reset)
 {
   if(reset)
     sprites.clear();
-  std::vector<std::string> allConf = {};
+  std::vector<std::string> allConf = {"error.png", "errorunit.png"};
   std::string stati = "resours/sprit/";
   if(sprites.size() == allConf.size())
     return -2;

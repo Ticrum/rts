@@ -2,10 +2,11 @@
 
 ef::ConfWeapon &ef::ConfWeapon::operator=(ConfWeapon const&other)
 {
-    conf= other.conf;
-    dmg= other.dmg;
-    nbrAtt= other.nbrAtt;
-    cdrMax= other.cdrMax;
+    conf = other.conf;
+    ShotConf = other.ShotConf;
+    dmg = other.dmg;
+    nbrAtt = other.nbrAtt;
+    cdrMax = other.cdrMax;
     range = other.range;
     manualTarget = other.manualTarget;
     return *this;

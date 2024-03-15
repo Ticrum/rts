@@ -17,7 +17,7 @@ int ef::ResourceManager::LoadWeapon(bool reset)
       temp = stati + conf[i];
       for(int tri = 0;tri < 10 && (error = tmp.load(temp)) != 0; tri ++)
 	{
-	  std::cout<<"try n°"<< i<<" : " << " file ("<< stati<< conf[i]<<") ";
+	  std::cout<<"try n°"<< i * 10 + tri<<" : " << " file ("<< stati<< conf[i]<<") ";
 	  switch(error)
 	    {
 	    case 1:
@@ -40,6 +40,9 @@ int ef::ResourceManager::LoadWeapon(bool reset)
 	      break;
 	    case 7:
 	      std::cout<<"target\n";
+	      break;
+	    case 8:
+	      std::cout<<"ShotConf\n";
 	      break;
 	    default :
 	      break;

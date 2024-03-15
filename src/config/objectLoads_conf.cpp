@@ -6,7 +6,6 @@
 
 #include "object.hh"
 #include "Bconf.hh"
-
 int ef::ConfObj::LoadBasic(ef::Bconf &conff)
 {
     char *buf;
@@ -15,15 +14,15 @@ int ef::ConfObj::LoadBasic(ef::Bconf &conff)
         return 2;
     conf.clear();
     conf.insert(0, buf);
-    if(conf.size() >= 128)
+    if(conf.size()+1 >= 128)
         return 3;
     unsigned int i = 0;
     while(i< conf.size())
     {
-        conformConf[i] = conf[i];
-        i++;
+      conformConf[i] = conf[i];
+      i++;
     }
-    conformConf[i] = '\0';
+    conformConf[conf.size()] = '\0';
     if(!bunny_configuration_getf_string(conff.Get(), (const char **)&buf, "Object.img"))
         return 4;
     img.clear();

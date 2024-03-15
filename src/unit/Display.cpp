@@ -16,31 +16,29 @@ void ef::Unit::UnitDisplay(ef::Bpixelarray &px,
 
     AcuPos tmpObjSize;
 
-    tmpObjSize.x = objSize.x;
-    tmpObjSize.y = objSize.y;
-    px.Blit(*img, tmp, tmpObjSize);
+    tmpObjSize.x = objSize.x * caseSize.x;
+    tmpObjSize.y = objSize.y * caseSize.y;
+    px.Blit(*img, tmp, tmpObjSize, alegence);
 
-    Pos size = px.GetSize();
+    Pos size = img->GetSize();
 
-    size.x /= caseSize.x;
-    size.y = 10;
+    size.x *= tmpObjSize.x;
+    size.y = 4 * tmpObjSize.y;
 
     Pos square;
 
-    square.x = 0;
-    square.y = 0;
+    square.x = tmp.x;
+    square.y = tmp.y - 20;
 
     int tempon = (hp * size.x) / maxhp;
-
-    while(square.x <= size.x && square.y < size.y)
+    while(square.x-tmp.x < size.x && square.y-tmp.y +20 < size.y)
         {
-            px.GetSetPixel(square.x + tmp.x, tmp.y - square.y - 2) = (square.x < tempon)? GREEN: RED;
-            if(size.x == square.x)
-                {
-                    square.y ++;
-                    square.x = 0;
-                }
-            else
-                square.x++;
+	  px.placePixel(square, (square.x < tempon)? GREEN: RED);
+	  square.x++;
+	  if(size.x-1 == square.x - tmp.x)
+	    {
+	      square.y ++;
+	      square.x = tmp.x;
+	    }
         }
 }
