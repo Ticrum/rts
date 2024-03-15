@@ -85,9 +85,9 @@ namespace ef
     void setOnHold(bool newState);
 
   private:
-    std::vector<ConfUnit> unitProd;
     double timeLeft;
     bool onHold;
+    std::vector<ConfUnit> unitProd;
   };
 
   class ConstructBuilding : public Building
@@ -103,9 +103,9 @@ namespace ef
     void setOnHold(bool newState);
 
   private:
-    std::vector<ConfBuilding> buildingProd;
     double timeLeft;
     bool onHold;
+    std::vector<ConfBuilding> buildingProd;
   };
 
   struct Tech
@@ -134,9 +134,9 @@ namespace ef
     void setOnHold(bool newState);
 
   private:
-    std::vector<Tech> techResearch;
     double timeLeft;
     bool onHold;
+    std::vector<Tech> techResearch;
   };
 }; // !ef
 

@@ -40,26 +40,26 @@ int main()
     
     bunny_blit(&win->buffer, px.GetClip(), NULL);
     bunny_display(win);
-    sleep(4);
+    sleep(1);
     start.x = 250;
     px.Blit(unit, start, size);
     
     bunny_blit(&win->buffer, px.GetClip(), NULL);
     bunny_display(win);
-    sleep(4);
+    sleep(1);
     start.x = 0;
     size.y = 1;
     px.Blit(build, start, size);
     
     bunny_blit(&win->buffer, px.GetClip(), NULL);
     bunny_display(win);
-    sleep(4);
+    sleep(1);
     start.x = 250;
     px.Blit(unit, start, size);
     
     bunny_blit(&win->buffer, px.GetClip(), NULL);
     bunny_display(win);
-    sleep(4);
+    sleep(1);
     size.y = 0.5;
     size.x = 0.25;
     start.y = 250;
@@ -68,7 +68,7 @@ int main()
     px.Blit(build, start, size);
     bunny_blit(&win->buffer, px.GetClip(), NULL);
     bunny_display(win);
-    sleep(4);
+    sleep(1);
     srand(time(NULL));
     for(char i = 0; i<10; i++)
       {
@@ -79,7 +79,7 @@ int main()
 	px.Blit(i%2? unit: build, start, size);
 	bunny_blit(&win->buffer, px.GetClip(), NULL);
 	bunny_display(win);
-	sleep(2);
+	sleep(0.5);
       }
-    sleep(10);
+    sleep(1);
 }

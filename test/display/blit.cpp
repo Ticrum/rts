@@ -40,6 +40,6 @@ int main()
     px.Blit(blu, size, siz);
     bunny_blit(&win->buffer, px.GetClip(), NULL);
     bunny_display(win);
-    sleep(10);
+    sleep(1);
 }
 

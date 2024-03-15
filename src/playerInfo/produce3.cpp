@@ -6,13 +6,20 @@
 
 #include "playerInfo.hh"
 
+#include <iostream>
+
 bool ef::PlayerInfo::produce(std::shared_ptr<ConstructBuilding> producer,
                              ConfBuilding newBuilding)
 {
-    if (money < newBuilding.cost)
-        return false;
-    money -= newBuilding.cost;
-    producer->addBuildingToProd(newBuilding);
-    return true;
+  std::cout << "passed in produced build" << std::endl;
+  if (money < newBuilding.cost)
+    {
+      std::cout << "YOU HAVE NO MONEY" << std::endl;
+      return false;
+    }
+  money -= newBuilding.cost;
+  producer->addBuildingToProd(newBuilding);
+  std::cout << "still good from now" << std::endl;
+  return true;
 }
 

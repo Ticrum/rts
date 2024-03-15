@@ -6,8 +6,12 @@
 
 #include "building.hh"
 
+#include <iostream>
+
 void ef::ConstructBuilding::addBuildingToProd(ConfBuilding newBuilding)
 {
-    buildingProd.push_back(newBuilding);
+  std::cout << "before : " << newBuilding.conf << " size : " << this << std::endl;
+  buildingProd.push_back(newBuilding);
+  std::cout << "after" << std::endl;
 }
 
