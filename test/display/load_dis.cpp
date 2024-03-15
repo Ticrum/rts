@@ -8,7 +8,7 @@ int main()
     ef::Bpixelarray unit;
     ef::Bpixelarray build;
     bool gate = true;
-    for(char i = 0; i < 10 && (gate = unit.Init(std::string("resours/sprit/error.png"))); i++);
+    for(char i = 0; i < 10 && (gate = unit.Init(std::string("resours/sprit/errorunit.png"))); i++);
     if(gate)
     {
         std::cout << "LUL fail unit\n";

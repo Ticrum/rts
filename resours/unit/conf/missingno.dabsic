@@ -1,6 +1,6 @@
 [Object
     name = "missingno"
-    imgId = 1
+    img = "errorunit.png"
     [objSize
         x = 1
         y = 1

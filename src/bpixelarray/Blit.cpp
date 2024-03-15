@@ -9,17 +9,19 @@ void ef::Bpixelarray::Blit(ef::Bpixelarray &other,
     return;
   Pos end;
 
-  end.x = start.x + other.px->clipable.buffer.width * size.x;
-  end.y = start.y + other.px->clipable.buffer.height * size.y;
+  end.x = start.x + size.x;
+  end.y = start.y + size.y;
 
   Pos cursor;
 
   cursor.x = start.x;
   cursor.y = start.y;
+  double xcoef;
+  double ycoef;
   while(cursor.x < end.x && cursor.y < end.y)
     {
-      double xcoef = (double)(cursor.x - start.x)/(double)(end.x - start.x);
-      double ycoef = (double)(cursor.y - start.y)/(double)(end.y - start.y);
+      xcoef = (double)(cursor.x - start.x)/(double)(end.x - start.x);
+      ycoef = (double)(cursor.y - start.y)/(double)(end.y - start.y);
 
       placePixel(cursor, other.pixels
 		 [(int)(xcoef * other.px->clipable.buffer.width) +

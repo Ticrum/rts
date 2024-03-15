@@ -1,6 +1,6 @@
 [Object
     name = "test"
-    imgId = 2
+    img = "error.png"
     [objSize
         x = 1
         y = 1

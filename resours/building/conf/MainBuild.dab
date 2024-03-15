@@ -1,6 +1,6 @@
 [Object
   name = "MainBuild"
-  imgId = ""
+  img = "error.png"
   [objSize
     x = 1
     y = 1
