@@ -50,6 +50,7 @@ namespace ef
     std::vector<std::shared_ptr<Object>> fireAllWeapon(double timePassed);
     bool getIsFlying();
     int getActualIndex();
+    Pos getActualPos();
     void changePath(std::vector<Pos> newPath, MoveType type);
     void changeTarget(std::vector<std::shared_ptr<Object>> targets);
     TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others);

@@ -16,9 +16,9 @@ ef::PlayerInfo::PlayerInfo(ResourceManager & res,
   moneyCooldown(0.25),
   totalEnergy(0),
   actualEnergy(0),
-  map(64, 64),
-  buildingMap(64, 64),
-  visionMap(64, 64),
+  map(32, 32),
+  buildingMap(32, 32),
+  visionMap(32, 32),
   path(buildingMap),
   rallyPoint(nullptr),
   res(res)
@@ -31,10 +31,19 @@ ef::PlayerInfo::PlayerInfo(ResourceManager & res,
       std::shared_ptr<Building> tempBuild;
       ConfBuilding confBuild = res.getBuild("MainBuild");
       Pos tempPos;
-      tempPos.x = 0;
-      tempPos.y = 0;
+      tempPos.x = 5;
+      tempPos.y = 5;
+      if (alegence == 1)
+	tempPos.x = map.getMapSize().x - 6;
+      else if (alegence == 2)
+	tempPos.y = map.getMapSize().y - 6;
+      else if (alegence > 2)
+	{
+	  tempPos.x = map.getMapSize().x - 6;
+	  tempPos.y = map.getMapSize().y - 6;
+	}
       tempBuild.reset(new ConstructBuilding(confBuild, res.getSprit()[confBuild.img], tempPos, rand(), alegence, res.getWeaponConf()));
-      buildings.push_back(tempBuild);
+      addOther(tempBuild, false);
     }
 }
 

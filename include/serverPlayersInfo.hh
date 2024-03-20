@@ -19,7 +19,7 @@ namespace ef
     void makePath(int unitId, Pos dest, MoveType moveType, int playerId);
     void stopUnit(int unitId, int playerId);
     void setTarget(int unitId, int otherId, int playerId, bool isBuilding);
-    void computeActions(double timePassed);
+    void computeActions(double realTimePassed);
     void placeBuilding(Pos pos, int playerId);
     void produce(int producerId, std::string unitToProd, int playerId, BuildingType type);
     bool destroy(int unitId, bool isOther, int playerId, bool isBuilding);

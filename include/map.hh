@@ -5,18 +5,19 @@
 
 namespace ef
 {
-    class Map
-    {
-    public:
-        Map(int sizex, int sizey);
-        Pos getMapSize();
-        char & operator[](int index);
-        void clear(char data);
+  class Map
+  {
+  public:
+    Map(int sizex, int sizey);
+    Pos getMapSize();
+    char & operator[](int index);
+    void clear(char data);
+    void print();
 
-    private:
-        std::vector<char> map;
-        Pos mapSize;
-    };
+  private:
+    std::vector<char> map;
+    Pos mapSize;
+  };
 }; // !ef
 
 #endif // __MAP_HH__

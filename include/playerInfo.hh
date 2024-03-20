@@ -49,6 +49,7 @@ namespace ef
     void addOther(std::shared_ptr<Building> building, bool isOther);
     void addOtherShot(std::shared_ptr<Object> shot);
     bool isInVision(std::shared_ptr<Object> obj);
+    bool isInVisionUnit(std::shared_ptr<Unit> unit);
     std::vector<std::shared_ptr<Unit>> selectUnit(Pos start, Pos end);
     std::vector<std::shared_ptr<Building>> selectBuilding(Pos start, Pos end);
     void modifyMoneyGain(int money);
@@ -68,6 +69,7 @@ namespace ef
     std::shared_ptr<Unit> getUnitAtPos(Pos pos);
     std::shared_ptr<Building> getBuildingAtPos(Pos pos);
     std::shared_ptr<Building> getFirstBuild();
+    void updateVisionMap();
 
   private:
     int alegence;

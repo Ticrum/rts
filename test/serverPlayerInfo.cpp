@@ -32,42 +32,71 @@ int main(void)
   cli.computeActions(0.016);
   cli2.computeActions(0.016);
   //cli3.computeActions(0.016);
+  
   cli.sendIsReady();
   cli2.sendIsReady();
   //cli3.sendIsReady();
   srv.computeActions(0.016);
   cli.computeActions(0.016);
   cli2.computeActions(0.016);
+  
   //cli3.computeActions(0.016);
   srv.computeActions(0.016);
   cli.computeActions(0.016);
   cli2.computeActions(0.016);
   //cli3.computeActions(0.016);
+  
   ef::Pos pos;
-  pos.x = 0;
-  pos.y = 0;
+  pos.x = 5;
+  pos.y = 5;
   std::shared_ptr<ef::Building> tempBuild = cli.playerInfo.getBuildingAtPos(pos);
   if (tempBuild.get() != nullptr)
     cli.produce(tempBuild->getId(), "UnitProductor", tempBuild->getType());
-  pos.x = 5;
-  pos.y = 4;
+  pos.x = 7;
+  pos.y = 8;
   cli.placeBuilding(pos);
-  srv.computeActions(0.032);
-  cli.computeActions(0.032);
-  cli2.computeActions(0.032);
+  srv.computeActions(0.016);
+  cli.computeActions(0.016);
+  cli2.computeActions(0.016);
+  srv.computeActions(0.064);
+  cli.computeActions(0.064);
+  cli2.computeActions(0.064);
   //cli3.computeActions(0.032);
   cli.placeBuilding(pos);
   srv.computeActions(0.032);
   cli.computeActions(0.032);
   cli2.computeActions(0.032);
   //cli3.computeActions(0.032);
+  
   tempBuild = cli.playerInfo.getBuildingAtPos(pos);
   if (tempBuild.get() != nullptr)
     {
       std::cout << "test pB type : " << tempBuild->getType() << std::endl;
-      cli.produce(tempBuild->getId(), "misingno", tempBuild->getType());
+      cli.produce(tempBuild->getId(), "missingno", tempBuild->getType());
     }
-  for (int i = 0; i < 5; i += 1)
+  srv.computeActions(0.048);
+  cli.computeActions(0.048);
+  cli2.computeActions(0.048);
+  
+  srv.computeActions(0.048);
+  cli.computeActions(0.048);
+  cli2.computeActions(0.048);
+  pos.x += 1;
+  std::shared_ptr<ef::Unit> tempUnit = cli.playerInfo.getUnitAtPos(pos);
+  if (tempUnit.get() != nullptr)
+    {
+      std::cout << "yes get unit in test" << std::endl;
+      ef::Pos posi[2];
+      posi[0].x = 0;
+      posi[0].y = 0;
+      posi[1].x = 30;
+      posi[1].y = 30;
+      cli.select(posi[0], posi[1]);
+      posi[1].x = 25;
+      posi[1].y = 5;
+      cli.makePath(posi[1], ef::WALK);
+    }
+  for (int i = 0; i < 100; i += 1)
     {
       srv.computeActions(0.016);
       cli.computeActions(0.016);

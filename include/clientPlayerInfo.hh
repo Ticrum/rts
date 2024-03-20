@@ -16,7 +16,7 @@ namespace ef
   {
   public:
     ClientPlayerInfo(int port, int alegence);
-    void computeActions(double timePassed);
+    void computeActions(double realTimePassed);
     void connectToServ(int ip, int port);
     void makePath(Pos dest, MoveType moveType);
     void select(Pos start, Pos end);

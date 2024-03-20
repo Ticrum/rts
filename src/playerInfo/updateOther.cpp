@@ -10,7 +10,7 @@ void ef::PlayerInfo::updateOther()
 {
     std::vector<std::shared_ptr<Unit>> tempOtherUnit;
     for (int i = 0; i < (int)otherUnits.size(); i += 1)
-        if (isInVision(otherUnits[i]))
+        if (isInVisionUnit(otherUnits[i]))
             tempOtherUnit.push_back(otherUnits[i]);
     otherUnits = tempOtherUnit;
     std::vector<std::shared_ptr<Building>> tempOtherBuilding;

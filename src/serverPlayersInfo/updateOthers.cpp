@@ -8,13 +8,13 @@
 
 void ef::ServerPlayersInfo::updateOther()
 {
-    for (int i = 0; i < (int)playersInfo.size(); i += 1)
+  for (int i = 0; i < (int)playersInfo.size(); i += 1)
     {
-        playersInfo[i]->updateOther();
-        for (int j = i; j < (int)playersInfo.size() + i - 1; j += 1)
+      playersInfo[i]->updateOther();
+      for (int j = i + 1; j < (int)playersInfo.size() + i; j += 1)
         {
-            playersInfo[i]->updateOther(playersInfo[j % (int)playersInfo.size()]->getUnitInVision(playersInfo[i]->getVisionMap()), serverUdp, clientConnected[i]);
-            playersInfo[i]->updateOther(playersInfo[j % (int)playersInfo.size()]->getBuildingInVision(playersInfo[i]->getVisionMap()), serverUdp, clientConnected[i]);
+	  playersInfo[i]->updateOther(playersInfo[j % (int)playersInfo.size()]->getUnitInVision(playersInfo[i]->getVisionMap()), serverUdp, clientConnected[i]);
+	  playersInfo[i]->updateOther(playersInfo[j % (int)playersInfo.size()]->getBuildingInVision(playersInfo[i]->getVisionMap()), serverUdp, clientConnected[i]);
         }
     }
 }

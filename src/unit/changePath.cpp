@@ -6,10 +6,15 @@
 
 #include "unit.hh"
 
+#include <iostream>
+
 void ef::Unit::changePath(std::vector<Pos> newPath,
                           MoveType type)
 {
-    path = newPath;
-    moveType = type;
+  std::cout << "change path size : " << newPath.size() << std::endl;
+  for (int i = newPath.size() - 1; i > 0; i -= 1)
+    path.push_back(newPath[i]);
+  //path = newPath;
+  moveType = type;
 }
 

@@ -1,13 +1,13 @@
 [Object
   name = "UnitProductor"
-  imgId = ""
+  img = ""
   [objSize
     x = 1
     y = 1
   ]
   maxHp = 100
   armor = 2
-  rangeOfVision = 5
+  rangeOfVision = 2
   nbrDmg = 0
   dmg = 0
 ]

@@ -6,6 +6,8 @@
 
 #include "playerInfo.hh"
 
+#include <iostream>
+
 std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
                                                              std::vector<ConfWeapon> & weaponsConf,
                                                              bool moveOther,
@@ -49,7 +51,10 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
 	      pack.addOtherUnit.progress = 0;
 	      pack.addOtherUnit.moveType = newUnit->getMoveType();
 	      pack.addOtherUnit.nbrPos = 0;
-	      pack.addOtherUnit.nbrCdr = 0;
+	      std::vector<double> tempCdr = newUnit->getWeaponsCd();
+	      pack.addOtherUnit.nbrCdr = tempCdr.size();
+	      for (int i = 0; i < (int)tempCdr.size(); i += 1)
+		pack.addOtherUnit.cdr[i] = tempCdr[i];
 	      pack.addOtherUnit.isOther = false;
 	      pack.addOtherUnit.len = newUnit->getConf().size();
 	      memcpy(pack.addOtherUnit.conf, &newUnit->getConf()[0], newUnit->getConf().size());
@@ -108,6 +113,12 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
       money += moneyGain;
       moneyCooldown = 0.25;
     }
+  //std::cout << "[[[ MAP ]]]" << std::endl;
+  //map.print();
+  std::cout << "[[[ BUILDING MAP ]]]" << std::endl;
+  buildingMap.print();
+  std::cout << "[[[ VISION MAP ]]]" << std::endl;
+  visionMap.print();
   return tar;
 }
 

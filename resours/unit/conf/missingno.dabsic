@@ -7,13 +7,13 @@
     ]
     maxHp = 3
     armor = 1000
-    rangeOfVision = 2
+    rangeOfVision = 4
     nbrDmg = 0
     dmg = 0
 ]
 [Unit
     cost = 100
-    speed = 0.5
+    speed = 100
     runningSpeed = 0.25
     moveType = 0
     isFlying = false
