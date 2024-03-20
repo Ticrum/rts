@@ -22,16 +22,15 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       if(cam.IsIn(pixPos, buildings[i]->getImg()))
 	buildings[i]->Display(px, mapSize);
     }
-  if(fog)
-    for(unsigned int i = 0; i < otherBuildings.size(); i++)
-      {
-	std::cout<<"otherBUILD (" << otherBuildings.size()<< ")\n";
-	casePos = otherBuildings[i]->getPos();
-	pixPos.x = casePos.x * mapSize.x;
-	pixPos.y = casePos.y * mapSize.y;
-	if(cam.IsIn(pixPos, otherBuildings[i]->getImg()))
-	  otherBuildings[i]->Display(px, mapSize);
-      }
+  for(unsigned int i = 0; i < otherBuildings.size(); i++)
+    {
+      std::cout<<"otherBUILD (" << otherBuildings.size()<< ")\n";
+      casePos = otherBuildings[i]->getPos();
+      pixPos.x = casePos.x * mapSize.x;
+      pixPos.y = casePos.y * mapSize.y;
+      if(cam.IsIn(pixPos, otherBuildings[i]->getImg()))
+	otherBuildings[i]->Display(px, mapSize);
+    }
   for(unsigned int i = 0; i < units.size(); i++)
     {
       std::cout<<"UNIT (" << units.size()<< ")\n";
@@ -41,17 +40,16 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       if(cam.IsIn(pixPos, units[i]->getImg()))
 	units[i]->UnitDisplay(px, mapSize);
     }
-  if(fog)
-    for(unsigned int i = 0; i < otherUnits.size(); i++)
-      {
-	std::cout<<"otherUNIT (" << otherUnits.size()<< ")\n";
-	casePos = otherUnits[i]->getPos();
-	pixPos.x = casePos.x * mapSize.x;
-	pixPos.y = casePos.y * mapSize.y;
-	if(cam.IsIn(pixPos, otherUnits[i]->getImg()))
-	  otherUnits[i]->UnitDisplay(px, mapSize);
-      }
-                                                                    
+  for(unsigned int i = 0; i < otherUnits.size(); i++)
+    {
+      std::cout<<"otherUNIT (" << otherUnits.size()<< ")\n";
+      casePos = otherUnits[i]->getPos();
+      pixPos.x = casePos.x * mapSize.x;
+      pixPos.y = casePos.y * mapSize.y;
+      if(cam.IsIn(pixPos, otherUnits[i]->getImg()))
+	otherUnits[i]->UnitDisplay(px, mapSize);
+    }
+                                                           
   for(unsigned int i = 0; i < buildings.size(); i++)
     {
       std::cout<<"BUILD health(" << buildings.size()<< ")\n";
@@ -61,16 +59,15 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       if(cam.IsIn(pixPos, buildings[i]->getImg()))
 	buildings[i]->DisplayHealth(px, mapSize);
     }
-  if(fog)
-    for(unsigned int i = 0; i < otherBuildings.size(); i++)
-      {
-	std::cout<<"otherBUILD health(" << otherBuildings.size()<< ")\n";
-	casePos = otherBuildings[i]->getPos();
-	pixPos.x = casePos.x * mapSize.x;
-	pixPos.y = casePos.y * mapSize.y;
-	if(cam.IsIn(pixPos, otherBuildings[i]->getImg()))
-	  otherBuildings[i]->DisplayHealth(px, mapSize);
-      }
+  for(unsigned int i = 0; i < otherBuildings.size(); i++)
+    {
+      std::cout<<"otherBUILD health(" << otherBuildings.size()<< ")\n";
+      casePos = otherBuildings[i]->getPos();
+      pixPos.x = casePos.x * mapSize.x;
+      pixPos.y = casePos.y * mapSize.y;
+      if(cam.IsIn(pixPos, otherBuildings[i]->getImg()))
+	otherBuildings[i]->DisplayHealth(px, mapSize);
+    }
   for(unsigned int i = 0; i < units.size(); i++)
     {
       std::cout<<"UNIT health(" << units.size()<< ")\n";
@@ -80,19 +77,18 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       if(cam.IsIn(pixPos, units[i]->getImg()))
 	units[i]->DisplayHealth(px, mapSize, units[i]->getPathLeft(), units[i]->getProgress());
     }
-  if(fog)
-    for(unsigned int i = 0; i < otherUnits.size(); i++)
-      {
-	std::cout<<"otherUNIT health(" << otherUnits.size()<< ")\n";
-	casePos = otherUnits[i]->getPos();
-	pixPos.x = casePos.x * mapSize.x;
-	pixPos.y = casePos.y * mapSize.y;
-	if(cam.IsIn(pixPos, otherUnits[i]->getImg()))
-	  otherUnits[i]->DisplayHealth(px, mapSize, otherUnits[i]->getPathLeft(), otherUnits[i]->getProgress());
-      }
+  for(unsigned int i = 0; i < otherUnits.size(); i++)
+    {
+      std::cout<<"otherUNIT health(" << otherUnits.size()<< ")\n";
+      casePos = otherUnits[i]->getPos();
+      pixPos.x = casePos.x * mapSize.x;
+      pixPos.y = casePos.y * mapSize.y;
+      if(cam.IsIn(pixPos, otherUnits[i]->getImg()))
+	otherUnits[i]->DisplayHealth(px, mapSize, otherUnits[i]->getPathLeft(), otherUnits[i]->getProgress());
+    }
   
   
-  if(fog)
+  if(!fog)
     return;
   mapSize = visionMap.getMapSize();
   mapSize.x = mapSize.x * mapSize.y;
@@ -118,7 +114,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 	  color.argb[RED_CMP] = 0;
 	  color.argb[GREEN_CMP] = 0;
 	  color.argb[BLUE_CMP] = 0;
-	  color.argb[ALPHA_CMP] = 100 - (rand()%41);
+	  color.argb[ALPHA_CMP] = 50 - (rand()%32);
 	  tmp.x = i % pxSize.x;
 	  tmp.y = i / pxSize.x;
 	  px.placePixel(tmp, color.full);

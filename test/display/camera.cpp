@@ -28,14 +28,14 @@ int main()
   plt.placeBuilding(make_shared<ef::Building>(buil, sprits[buil.img], place, 1, 0, rsa.getWeaponConf()));
   place.x = 3;
   place.y = 1;
-  plt.placeBuilding(make_shared<ef::Building>(buil, sprits[buil.img], place, 1, 1, rsa.getWeaponConf(), 50,  std::vector<double>()));
+  plt.placeBuilding(make_shared<ef::Building>(buil, sprits[buil.img], place, 1, 1, rsa.getWeaponConf()));
   place.x = 3;
   place.y = 0;
   plt.placeBuilding(make_shared<ef::Building>(buil, sprits[buil.img], place, 1, 0, rsa.getWeaponConf()));
   place.x = 1;
   place.y = 0;
   plt.placeBuilding(make_shared<ef::Building>(buil, sprits[buil.img], place, 1, 1, rsa.getWeaponConf()));
-                          
+
   t_bunny_window *win;
   win = bunny_start(500,500, false, "BUNNY player");
   ef::Camera cam(500,500);
