@@ -30,6 +30,7 @@ namespace ef
   struct Pos
   {
     Pos(){}
+    Pos(int both);
     Pos(Pos const &other);
     Pos &operator=(Pos const& other);
     ConformPos get();
@@ -85,6 +86,10 @@ namespace ef
     void kaboom(std::vector<std::shared_ptr<Object>> objects);
     void Display(Bpixelarray &px,
                  Pos caseSize);
+    void DisplayHealth(Bpixelarray &px,
+		       Pos caseSize,
+		       std::vector<ef::ConformPos> path = std::vector<ef::ConformPos>(),
+		       double progress = -1);
 
   protected:
     std::string conf;

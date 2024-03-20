@@ -11,7 +11,7 @@ void ef::Bpixelarray::Blit(ef::Bpixelarray &other,
     return;
   std::map<int, bool> gate;
   t_bunny_color colo;
-  colo.full = alegence;
+  colo.full = (alegence + 24) * (alegence + 42) * 10000 + (alegence + 69) * (alegence + 34);
   colo.argb[RED_CMP] += colo.argb[ALPHA_CMP] * 1.0/3.0;
   colo.argb[GREEN_CMP] += colo.argb[ALPHA_CMP] * 1.0/3.0;
   colo.argb[BLUE_CMP] += colo.argb[ALPHA_CMP] * 1.0/3.0;
