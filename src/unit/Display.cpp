@@ -20,10 +20,10 @@ void ef::Unit::UnitDisplay(ef::Bpixelarray &px,
     tmpObjSize.y = objSize.y * caseSize.y;
     px.Blit(*img, tmp, tmpObjSize, alegence);
 
-    Pos size = img->GetSize();
+    Pos size = caseSize;
 
-    size.x *= tmpObjSize.x;
-    size.y = 4 * tmpObjSize.y;
+    size.x *= objSize.x;
+    size.y = 4 * objSize.y;
 
     Pos square;
 
@@ -33,7 +33,7 @@ void ef::Unit::UnitDisplay(ef::Bpixelarray &px,
     int tempon = (hp * size.x) / maxhp;
     while(square.x-tmp.x < size.x && square.y-tmp.y +20 < size.y)
         {
-	  px.placePixel(square, (square.x < tempon)? GREEN: RED);
+	  px.placePixel(square, (square.x - tmp.x < tempon)? GREEN: RED);
 	  square.x++;
 	  if(size.x-1 == square.x - tmp.x)
 	    {

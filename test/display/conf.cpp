@@ -31,7 +31,7 @@ int main()
   ef::ConfUnit confuni = rsa.getUnit("missingno");
   pos.x = 0;
   pos.y = 1;
-  confuni.objSize.x = 2;
+  confuni.objSize.y = 2;
   ef::Unit uni(confuni, rsa.getSprit()[confuni.img], pos, 0, 1140811007, rsa.getWeaponConf());
   std::cout <<"x "<< uni.getPos().x<< " y " << uni.getPos().y << "\n";
   t_bunny_window *win;
@@ -40,10 +40,10 @@ int main()
   pos.x = 100;
   pos.y = 100;
   while(px.Init(500, 500));
-  //uni.UnitDisplay(px, pos);
+  uni.UnitDisplay(px, pos);
   pos.x = 1;
-  pos.y = 2;
-  confuni.objSize.x = 1;
+  pos.y = 1;
+  confuni.objSize.y = 1;
   ef::Unit nit(confuni, rsa.getSprit()[confuni.img], pos, 0, 1140811007, rsa.getWeaponConf());
   std::cout <<"x "<< nit.getPos().x<< " y " << nit.getPos().y << "\n";
   pos.x = 100;
