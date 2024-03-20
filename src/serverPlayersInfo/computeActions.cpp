@@ -26,7 +26,7 @@ void ef::ServerPlayersInfo::computeActions(double timePassed)
     for (int i = 0; i < (int)playersInfo.size(); i += 1)
       {
 	updateOther();
-	broadcastTarget(playersInfo[i]->computeActions(timePassed, res.getWeaponConf(), false, serverUdp, clientConnected[i]));
+	playersInfo[i]->computeActions(timePassed, res.getWeaponConf(), false, serverUdp, clientConnected[i]);
       }
   // tcp read
   serverTcp->loop();
@@ -106,12 +106,13 @@ void ef::ServerPlayersInfo::computeActions(double timePassed)
 	      else if (pack.type == PRODUCE)
                 {
 		  std::string str(pack.produce.conf, pack.produce.len);
+		  std::cout << "server producing : " << str << std::endl;
 		  produce(pack.produce.producerId, str, playerId, pack.produce.buildType);
                 }
             }
         }
       serverUdp->loop();
-      std::cout << "end of loop" << std::endl;
+      //std::cout << "end of loop" << std::endl;
     }
   if (gameStarted)
     {
@@ -133,7 +134,7 @@ void ef::ServerPlayersInfo::computeActions(double timePassed)
 		    serverUdp->sendData((char *)&pack, sizeof(Packet), clientConnected[k]);
 		  }
 	    }
-	  std::cout << "compute shot called serv" << std::endl;
+	  //std::cout << "compute shot called serv" << std::endl;
 	  playersInfo[i]->computeShot(false);
 	  Packet tempPack;
 	  std::vector<ef::Killed> & kill = playersInfo[i]->getKillList();
@@ -164,6 +165,6 @@ void ef::ServerPlayersInfo::computeActions(double timePassed)
 	  kill.clear();
         }
     }
-  std::cout << "end of FUNC serv" << std::endl;
+  //std::cout << "end of FUNC serv" << std::endl;
 }
 

@@ -13,7 +13,9 @@ ef::ProdBuilding::ProdBuilding(ConfBuilding conf,
                                int _alegence,
                                std::vector<ConfWeapon> & weaponsConf)
   :
-  Building(conf, _img, _pos, _objId, _alegence, weaponsConf)
+  Building(conf, _img, _pos, _objId, _alegence, weaponsConf),
+  timeLeft(0),
+  onHold(false)
 {
 }
 

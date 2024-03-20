@@ -12,7 +12,7 @@ void ef::PlayerInfo::computeShot(bool isClient)
 {
   std::vector<std::shared_ptr<Object>> tempObj;
 
-  std::cout << "COUCOU in computeShot" << std::endl;
+  //std::cout << "COUCOU in computeShot" << std::endl;
   for (int i = 0; i < (int)units.size(); i += 1)
     tempObj.push_back(units[i]);
   for (int i = 0; i < (int)buildings.size(); i += 1)

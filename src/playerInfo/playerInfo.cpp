@@ -11,7 +11,7 @@ ef::PlayerInfo::PlayerInfo(ResourceManager & res,
 			   bool isClient)
   :
   alegence(_alegence),
-  money(0),
+  money(1000),
   moneyGain(0),
   moneyCooldown(0.25),
   totalEnergy(0),
@@ -29,11 +29,11 @@ ef::PlayerInfo::PlayerInfo(ResourceManager & res,
   if (!isClient)
     {
       std::shared_ptr<Building> tempBuild;
-      ConfBuilding confBuild = res.getBuild("LATHOURES.dabsic");
+      ConfBuilding confBuild = res.getBuild("MainBuild");
       Pos tempPos;
       tempPos.x = 0;
       tempPos.y = 0;
-      tempBuild.reset(new Building(confBuild, res.getSprit()[confBuild.img], tempPos, 0, alegence, res.getWeaponConf()));
+      tempBuild.reset(new ConstructBuilding(confBuild, res.getSprit()[confBuild.img], tempPos, rand(), alegence, res.getWeaponConf()));
       buildings.push_back(tempBuild);
     }
 }

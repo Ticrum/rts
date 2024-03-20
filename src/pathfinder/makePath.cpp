@@ -76,5 +76,6 @@ std::vector<ef::Pos> ef::Pathfinder::makePath(Pos start,
     }
     checking.clear();
     checkIndex = 0;
+    return out;
 }
 

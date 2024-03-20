@@ -38,7 +38,7 @@ namespace ef
     std::vector<std::shared_ptr<Object>> finishAction(double timePassed);
     void computeShot(bool isClient);
     void placeBuilding(std::shared_ptr<Building> building);
-    bool placeBuilding(Pos pos);
+    std::shared_ptr<ef::Building> placeBuilding(Pos pos);
     bool canPlaceBuilding(Pos pos);
     bool produce(std::shared_ptr<ProdBuilding> producer, ConfUnit newUnit);
     bool produce(std::shared_ptr<TechBuilding> producer, Tech newSearch);
