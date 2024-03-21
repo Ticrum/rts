@@ -22,7 +22,7 @@ int main(void)
   //t_bunny_window *win = bunny_start(1000, 1000, false, "test");
   ef::Camera cam(1000, 1000);
   cam.Init("test");
-  cam.ZoomIn(4);
+  cam.ZoomIn(1);
   char i[4];
   i[0] = 127;
   i[1] = 0;
@@ -104,7 +104,7 @@ int main(void)
       posi[1].x = 30;
       posi[1].y = 30;
       cli.select(posi[0], posi[1]);
-      posi[1].x = 25;
+      posi[1].x = 24;
       posi[1].y = 5;
       cli.makePath(posi[1], ef::WALK);
     }
@@ -112,9 +112,15 @@ int main(void)
     {
       srv.computeActions(0.016);
       cli.computeActions(0.016);
+      cam.ZoomIn(0.05);
+      ef::AcuPos posi;
+      posi.x = 10;
+      posi.y = 0;
+      cam.Move(posi);
       cam.display(cli.playerInfo);
       cli2.computeActions(0.016);
       //cli3.computeActions(0.016);
+      sleep(1);
     }
   std::cout << "/////////end/////////" << std::endl;
   return 0;

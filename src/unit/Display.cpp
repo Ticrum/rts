@@ -1,17 +1,28 @@
 #include "unit.hh"
 #include "Bpixelarray.hh"
 
+#include <iostream>
+
 void ef::Unit::UnitDisplay(ef::Bpixelarray &px,
                            ef::Pos caseSize)
 {
     Pos tmp;
 
-    tmp.x = pos.x * caseSize.x;
-    tmp.y = pos.y * caseSize.y;
+    if (actualIndex == 0)
+      {
+	tmp.x = pos.x * caseSize.x;
+	tmp.y = pos.y * caseSize.y;
+      }
+    else
+      {
+	tmp.x = path[actualIndex - 1].x * caseSize.x;
+	tmp.y = path[actualIndex - 1].y * caseSize.y;
+      }
     if(actualIndex + 1 < (int) path.size())
         {
-            tmp.x += (pos.x + progress * (path[actualIndex + 1].x - pos.x)) * caseSize.x;
-            tmp.y += (pos.y + progress * (path[actualIndex + 1].y - pos.y)) * caseSize.y;
+	  std::cout << "JE PASSE DANS UNITDISPLAY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+            tmp.x += (progress * (path[actualIndex].x - pos.x)) * caseSize.x;
+            tmp.y += (progress * (path[actualIndex].y - pos.y)) * caseSize.y;
         }
 
     AcuPos tmpObjSize;

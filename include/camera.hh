@@ -21,6 +21,7 @@ namespace ef
 	      std::shared_ptr<ef::Bpixelarray> &pic);
     void ZoomIn(double add);
     double getZoom();
+    AcuPos getPos();
     void ZoomOut(double sub);
     void Move(AcuPos move);
     void display(PlayerInfo &plr);

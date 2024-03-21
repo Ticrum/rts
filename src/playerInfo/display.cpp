@@ -91,16 +91,32 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
   if(!fog)
     return;
   mapSize = visionMap.getMapSize();
-  mapSize.x = mapSize.x * mapSize.y;
-  pxSize.y = pxSize.x * pxSize.y;
+  int totalpx = pxSize.x * pxSize.y;
   int rdm;
   t_bunny_color color;
   Pos tmp;
-  for(int i = 0; i < pxSize.y; i++)
+  std::cout << "////DisplayFog////" << std::endl;
+  std::cout << "pxSizex : " << pxSize.x << std::endl;
+  std::cout << "pxSizey : " << pxSize.y << std::endl;
+  std::cout << "mapSizex : " << mapSize.x << std::endl;
+  std::cout << "mapSizey : " << mapSize.y << std::endl;
+  /*  Pos compt(0);
+      while (compt.x < pxSize.x && compt.y)*/
+
+
+
+  
+  for(int i = 0; i < totalpx; i++)
     {
-      switch(visionMap[(i/pxSize.y) * mapSize.x])
+      //switch(visionMap[(i % pxSize.x + cam.getPos().x) * ((double)mapSize.x / ((double)pxSize.x / cam.getZoom())) + ((i / pxSize.x + cam.getPos().y) * ((double)mapSize.x / ((double)pxSize.x / cam.getZoom()))) * mapSize.x])
+      //visionMap[(int)((i % pxSize.x) * ((double)mapSize.x / ((double)pxSize.x))) + (int)((i / pxSize.x) * ((double)mapSize.y / ((double)pxSize.y))) * mapSize.x] = 9;
+      //std::cout<< "\n\n___--- PUTE ---___\n";
+      //visionMap.print();
+      //std::cout << "POS x : " << i % pxSize.x << " y : " << i / pxSize.x << std::endl;
+      //usleep(0.05e6);
+      switch(visionMap[(int)((i % pxSize.x + cam.getPos().x) * ((double)mapSize.x / ((double)pxSize.x * cam.getZoom()))) + (int)((i / pxSize.x + cam.getPos().y) * ((double)mapSize.y / ((double)pxSize.y * cam.getZoom()))) * mapSize.x])
         {
-        case 0:
+	case 0:
 	  rdm = rand() % 31;
 	  color.argb[RED_CMP] = rdm;
 	  color.argb[GREEN_CMP] = rdm;

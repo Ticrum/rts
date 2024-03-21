@@ -32,7 +32,8 @@ void ef::PlayerInfo::updateOther(std::vector<std::shared_ptr<Building>> newBuild
 	  pack.addOtherBuilding.alegence = newBuilding[i]->getAlegence();
 	  pack.addOtherBuilding.posi = newBuilding[i]->getPos().get();
 	  memcpy(pack.addOtherBuilding.conf, &newBuilding[i]->getConf()[0], newBuilding[i]->getConf().size());
-	  pack.addOtherBuilding.len = newBuilding[i]->getHp();
+	  pack.addOtherBuilding.len = newBuilding[i]->getConf().size();
+	  pack.addOtherBuilding.actualHp = newBuilding[i]->getHp();
 	  pack.addOtherBuilding.isActive = newBuilding[i]->getIsActive();
 	  std::vector<double> weaponCd = newBuilding[i]->getWeaponsCd();
 	  for (int j = 0; j < (int)weaponCd.size(); j += 1)
