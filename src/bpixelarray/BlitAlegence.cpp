@@ -1,5 +1,4 @@
 #include "Bpixelarray.hh"
-#include <iostream>
 #include <map>
 void ef::Bpixelarray::Blit(ef::Bpixelarray &other,
                            Pos const &start,
@@ -35,7 +34,6 @@ void ef::Bpixelarray::Blit(ef::Bpixelarray &other,
 	 (int)(ycoef * other.px->clipable.buffer.height) * other.px->clipable.buffer.width];
       if(gate.count(color) == 0)
 	{
-	  std::cout<< "color " << color << "\n" << cursor.x << "| "<< cursor.y << "\n";
 	  gate[color] = true;
 	}
       if(color == 4289069221)
