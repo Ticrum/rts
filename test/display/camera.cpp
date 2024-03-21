@@ -52,7 +52,7 @@ int main()
   while(px.Init(500, 500));
   px.Clear(BLACK);
   cam.ZoomIn(10);
-  plt.Display(px, cam, true);
+  plt.Display(px, cam, false);
   bunny_blit(&win->buffer, px.GetClip(), NULL);
   bunny_display(win);
   std::cout<< "\ndid u\n";
