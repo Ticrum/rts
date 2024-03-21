@@ -1,13 +1,11 @@
 #include "object.hh"
 #include "Bpixelarray.hh"
-#include <iostream>
 
 void ef::Object::DisplayHealth(ef::Bpixelarray &px,
 			       ef::Pos caseSize,
 			       std::vector<ef::ConformPos> path,
 			       double progress)
 {
-  std::cout<< "in\n";
   Pos tmp;
 
   tmp.x = pos.x * caseSize.x;
@@ -31,13 +29,9 @@ void ef::Object::DisplayHealth(ef::Bpixelarray &px,
   square.x = tmp.x;
   square.y = tmp.y - 10;
 
-  std::cout << "start  " << tmp.x << " | " <<tmp.y<<
-    "\nsize   " << size.x << " | " << size.y<<
-    "\nsquare " << square.x << " | "<< square.y<< "\n";
   Pos max = px.GetSize();
   while(square.x-tmp.x < size.x && square.y-tmp.y +10 < size.y)
     {
-      std::cout << square.x-tmp.x<< " / "<< size.x << "|" << square.y-tmp.y +20 << " / " << size.y <<"\n";
       if(square.x >= 0 && square.x < max.x && square.y >= 0 && square.y < max.y)
 	px.GetSetPixel(square.x, square.y) = (square.x - tmp.x < tempon)? GREEN: RED;
       square.x++;
