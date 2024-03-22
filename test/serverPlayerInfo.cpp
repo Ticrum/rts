@@ -112,11 +112,11 @@ int main(void)
     {
       srv.computeActions(0.016);
       cli.computeActions(0.016);
-      cam.ZoomIn(0.05);
+      //cam.ZoomIn(0.05);
       ef::AcuPos posi;
       posi.x = 10;
       posi.y = 0;
-      cam.Move(posi);
+      //cam.Move(posi);
       cam.display(cli.playerInfo);
       cli2.computeActions(0.016);
       //cli3.computeActions(0.016);

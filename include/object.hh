@@ -85,9 +85,11 @@ namespace ef
     std::string getConf();
     void kaboom(std::vector<std::shared_ptr<Object>> objects);
     void Display(Bpixelarray &px,
-                 Pos caseSize);
+                 Pos caseSize,
+		 AcuPos camStart);
     void DisplayHealth(Bpixelarray &px,
 		       Pos caseSize,
+		       AcuPos camStart,
 		       std::vector<ef::ConformPos> path = std::vector<ef::ConformPos>(),
 		       double progress = -1);
 

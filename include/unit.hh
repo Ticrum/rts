@@ -56,7 +56,8 @@ namespace ef
     TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others);
     void manualTargeting(std::shared_ptr<Object> target);
     void UnitDisplay(Bpixelarray &px,
-                     Pos caseSize);
+                     Pos caseSize,
+		     AcuPos camStart);
     double getProgress();
     MoveType getMoveType();
     std::vector<ConformPos> getPathLeft();
