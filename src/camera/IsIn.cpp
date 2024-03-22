@@ -12,8 +12,8 @@ bool ef::Camera::IsIn(ef::Pos start,
     Pos tmp;
     tmp.x = pos.x *zoom;
     tmp.y = pos.y *zoom;
-    start.x = start.x + size.x * zoom;
-    start.y = start.y + size.y * zoom;
+    start.x = (start.x + size.x) * zoom;
+    start.y = (start.y + size.y) * zoom;
     if(((tmp.x <= start.x || tmp.x <= max.x) &&
         (tmp.y <= start.y || tmp.y <= max.y))
        &&
