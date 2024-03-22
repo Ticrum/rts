@@ -57,7 +57,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       casePos = buildings[i]->getPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
-      if(cam.IsIn(pixPos, buildings[i]->getImg()))
+      //if(cam.IsIn(pixPos, buildings[i]->getImg()))
 	buildings[i]->DisplayHealth(px, rationMapPix, camPos);
     }
   for(unsigned int i = 0; i < otherBuildings.size(); i++)
@@ -66,7 +66,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       casePos = otherBuildings[i]->getPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
-      if(cam.IsIn(pixPos, otherBuildings[i]->getImg()))
+      //if(cam.IsIn(pixPos, otherBuildings[i]->getImg()))
 	otherBuildings[i]->DisplayHealth(px, rationMapPix, camPos);
     }
   for(unsigned int i = 0; i < units.size(); i++)
@@ -75,7 +75,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       casePos = units[i]->getPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
-      if(cam.IsIn(pixPos, units[i]->getImg()))
+      //if(cam.IsIn(pixPos, units[i]->getImg()))
 	units[i]->DisplayHealth(px, rationMapPix, camPos, units[i]->getPathLeft(), units[i]->getProgress());
     }
   for(unsigned int i = 0; i < otherUnits.size(); i++)
@@ -84,7 +84,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       casePos = otherUnits[i]->getPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
-      if(cam.IsIn(pixPos, otherUnits[i]->getImg()))
+      //if(cam.IsIn(pixPos, otherUnits[i]->getImg()))
 	otherUnits[i]->DisplayHealth(px, rationMapPix, camPos, otherUnits[i]->getPathLeft(), otherUnits[i]->getProgress());
     }
   
@@ -99,8 +99,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 
   for(int i = 0; i < totalpx; i++)
     {
-      
-      switch(visionMap[(int)((i % pxSize.x + cam.getPos().x) * ((double)map.getMapSize().x / ((double)pxSize.x * cam.getZoom()))) + (int)((i / pxSize.x + cam.getPos().y) * ((double)map.getMapSize().y / ((double)pxSize.y * cam.getZoom()))) * rationMapPix.x])
+      switch(visionMap[(int)((i % pxSize.x + cam.getPos().x) * ((double)rationMapPix.x / ((double)pxSize.x * cam.getZoom()))) + (int)((i / pxSize.x + cam.getPos().y) * ((double)rationMapPix.y / ((double)pxSize.y * cam.getZoom()))) * rationMapPix.x])
         {
 	case 0:
 	  rdm = rand() % 31;

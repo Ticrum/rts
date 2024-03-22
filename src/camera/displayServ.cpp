@@ -7,8 +7,11 @@ void ef::Camera::display(ServerPlayersInfo &srv)
 {
     if(!god ||win == NULL)
         return;
-    game.Clear(0);
-    srv.Display(game, *this);
+    t_bunny_color col;
+    col.full = BLUE;
+    col.argb[GREEN_CMP] = 0;
+    game.Clear(col.full);
+srv.Display(game, *this);
     bunny_blit(&win->buffer, game.GetClip(),NULL);
     //bunny_blit(&win->buffer, Hud.GetClip(),NULL);
     bunny_display(win);
