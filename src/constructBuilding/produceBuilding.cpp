@@ -18,7 +18,7 @@ std::shared_ptr<ef::Building> ef::ConstructBuilding::produceBuilding(double time
     timeLeft -= timePassed;
   if (timeLeft <= 0)
     {
-      std::cout << "buildProdSize : " << buildingProd.size() << std::endl;
+      //std::cout << "buildProdSize : " << buildingProd.size() << std::endl;
       if (buildingProd.size() > 0)
         {
 	  Pos tempPos = getPos();

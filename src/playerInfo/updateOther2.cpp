@@ -31,11 +31,12 @@ void ef::PlayerInfo::updateOther(std::vector<std::shared_ptr<Unit>> newUnit,
 	  pack.addOtherUnit.unitId = newUnit[i]->getId();
 	  pack.addOtherUnit.isOther = true;
 	  pack.addOtherUnit.alegence = newUnit[i]->getAlegence();
-	  pack.addOtherUnit.posi = newUnit[i]->getPos().get();
+	  pack.addOtherUnit.posi = newUnit[i]->getActualPos().get();
 	  memcpy(pack.addOtherUnit.conf, &newUnit[i]->getConf()[0], newUnit[i]->getConf().size());
 	  pack.addOtherUnit.len = newUnit[i]->getConf().size();
 	  pack.addOtherUnit.actualHp = newUnit[i]->getHp();
 	  pack.addOtherUnit.progress = newUnit[i]->getProgress();
+	  pack.addOtherUnit.actualIndex = 0;//newUnit[i]->getActualIndex();
 	  pack.addOtherUnit.moveType = newUnit[i]->getMoveType();
 	  std::vector<ConformPos> newPos = newUnit[i]->getPathLeft();
 	  for (int j = 0; j < (int)newPos.size(); j += 1)

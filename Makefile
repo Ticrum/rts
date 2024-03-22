@@ -53,7 +53,7 @@ else
 	$(CC) $(OBJ) $(INCLUDE) $(FLAGS) -o $(OUT)
 endif
 
-lib: $(LIBSTAOUT) $(LIBDYOUT) test
+lib: $(LIBSTAOUT) $(LIBDYOUT)
 
 $(LIBSTAOUT): $(OBJ)
 	ar cr $(LIBSTAOUT) $(OBJ)

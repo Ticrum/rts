@@ -26,6 +26,8 @@ namespace ef
     AcuPos getPos();
     void display(PlayerInfo &plr);
     void display(ServerPlayersInfo &srv);
+    t_bunny_window *getWin();
+    t_bunny_position getMousePos();
   private:
     t_bunny_window *win;
     Bpixelarray game;

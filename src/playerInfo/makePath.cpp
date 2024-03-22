@@ -11,6 +11,6 @@ void ef::PlayerInfo::makePath(std::shared_ptr<Unit> unit,
                               MoveType moveType)
 {
     path.resetMap(buildingMap);
-    unit->changePath(path.makePath(unit->getPos(), dest), moveType);
+    unit->changePath(path.makePath(unit->getActualPos(), dest), moveType);
 }
 

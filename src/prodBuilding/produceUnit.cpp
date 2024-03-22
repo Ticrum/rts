@@ -18,7 +18,7 @@ std::shared_ptr<ef::Unit> ef::ProdBuilding::produceUnit(double timePassed,
     timeLeft -= timePassed;
   if (timeLeft <= 0)
     {
-      std::cout << "unitProdSize : " << unitProd.size() << std::endl;
+      //std::cout << "unitProdSize : " << unitProd.size() << std::endl;
       if (unitProd.size() > 0)
         {
 	  Pos tempPos = getPos();

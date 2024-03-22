@@ -1,6 +1,8 @@
 #include "camera.hh"
 #include "serverPlayersInfo.hh"
 
+#include <iostream>
+
 void ef::Camera::display(ServerPlayersInfo &srv)
 {
     if(!god ||win == NULL)

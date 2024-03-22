@@ -49,6 +49,7 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
 	      pack.addOtherUnit.posi = newUnit->getPos().get();
 	      pack.addOtherUnit.actualHp = newUnit->getHp();
 	      pack.addOtherUnit.progress = 0;
+	      pack.addOtherUnit.actualIndex = 0;
 	      pack.addOtherUnit.moveType = newUnit->getMoveType();
 	      pack.addOtherUnit.nbrPos = 0;
 	      std::vector<double> tempCdr = newUnit->getWeaponsCd();
@@ -115,10 +116,10 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
     }
   //std::cout << "[[[ MAP ]]]" << std::endl;
   //map.print();
-  std::cout << "[[[ BUILDING MAP ]]]" << std::endl;
-  buildingMap.print();
-  std::cout << "[[[ VISION MAP ]]]" << std::endl;
-  visionMap.print();
+  //std::cout << "[[[ BUILDING MAP ]]]" << std::endl;
+  //buildingMap.print();
+  //std::cout << "[[[ VISION MAP ]]]" << std::endl;
+  //visionMap.print();
   return tar;
 }
 

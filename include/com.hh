@@ -86,6 +86,7 @@ namespace ef
     char conf[128];
     int actualHp;
     double progress;
+    int actualIndex;
     MoveType moveType;
     int nbrPos;
     ConformPos pos[64];

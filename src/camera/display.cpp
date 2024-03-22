@@ -5,7 +5,10 @@ void ef::Camera::display(PlayerInfo &plr)
 {
     if(win == NULL)
         return;
-    game.Clear(BLACK);
+    t_bunny_color col;
+    col.full = GREEN;
+    col.argb[GREEN_CMP] -= 50;
+    game.Clear(col.full);
     plr.Display(game, *this, true);
     bunny_blit(&win->buffer, game.GetClip(),NULL);
     //    bunny_blit(&win->buffer, Hud.GetClip(),NULL);
