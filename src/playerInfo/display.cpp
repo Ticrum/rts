@@ -1,7 +1,7 @@
 #include "playerInfo.hh"
 #include "Bpixelarray.hh"
 #include <stdlib.h>
-#include <iostream>
+
 void ef::PlayerInfo::Display(ef::Bpixelarray &px,
                              ef::Camera &cam,
                              bool fog)
@@ -9,107 +9,98 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
   Pos casePos;
   Pos pixPos;
   Pos pxSize = px.GetSize();
-  Pos mapSize = map.getMapSize();
-  mapSize.x = (pxSize.x / mapSize.x) * cam.getZoom();
-  mapSize.y = (pxSize.y / mapSize.y) * cam.getZoom();
-
-  for(unsigned int i = 0; i < buildings.size(); i++)
+  Pos rationMapPix = map.getMapSize();
+  rationMapPix.x = (pxSize.x * cam.getZoom()) / rationMapPix.x;
+  rationMapPix.y = (pxSize.y * cam.getZoom()) / rationMapPix.y;
+  AcuPos camPos = cam.getPos();
+  
+   for(unsigned int i = 0; i < buildings.size(); i++)
     {
       //std::cout<<"BUILD (" << buildings.size()<< ")\n";
       casePos = buildings[i]->getPos();
-      pixPos.x = casePos.x * mapSize.x;
-      pixPos.y = casePos.y * mapSize.y;
-      if(cam.IsIn(pixPos, buildings[i]->getImg()))
-	buildings[i]->Display(px, mapSize);
+      pixPos.x = casePos.x * rationMapPix.x;
+      pixPos.y = casePos.y * rationMapPix.y;
+      //if(cam.IsIn(pixPos, buildings[i]->getImg()))
+	buildings[i]->Display(px, rationMapPix, camPos);
     }
   for(unsigned int i = 0; i < otherBuildings.size(); i++)
     {
       //std::cout<<"otherBUILD (" << otherBuildings.size()<< ")\n";
       casePos = otherBuildings[i]->getPos();
-      pixPos.x = casePos.x * mapSize.x;
-      pixPos.y = casePos.y * mapSize.y;
-      if(cam.IsIn(pixPos, otherBuildings[i]->getImg()))
-	otherBuildings[i]->Display(px, mapSize);
+      pixPos.x = casePos.x * rationMapPix.x;
+      pixPos.y = casePos.y * rationMapPix.y;
+      //if(cam.IsIn(pixPos, otherBuildings[i]->getImg()))
+	otherBuildings[i]->Display(px, rationMapPix, camPos);
     }
   for(unsigned int i = 0; i < units.size(); i++)
     {
       //std::cout<<"UNIT (" << units.size()<< ")\n";
       casePos = units[i]->getPos();
-      pixPos.x = casePos.x * mapSize.x;
-      pixPos.y = casePos.y * mapSize.y;
-      if(cam.IsIn(pixPos, units[i]->getImg()))
-	units[i]->UnitDisplay(px, mapSize);
+      pixPos.x = casePos.x * rationMapPix.x;
+      pixPos.y = casePos.y * rationMapPix.y;
+      //if(cam.IsIn(pixPos, units[i]->getImg()))
+	units[i]->UnitDisplay(px, rationMapPix, camPos);
     }
   for(unsigned int i = 0; i < otherUnits.size(); i++)
     {
       //std::cout<<"otherUNIT (" << otherUnits.size()<< ")\n";
       casePos = otherUnits[i]->getPos();
-      pixPos.x = casePos.x * mapSize.x;
-      pixPos.y = casePos.y * mapSize.y;
-      if(cam.IsIn(pixPos, otherUnits[i]->getImg()))
-	otherUnits[i]->UnitDisplay(px, mapSize);
+      pixPos.x = casePos.x * rationMapPix.x;
+      pixPos.y = casePos.y * rationMapPix.y;
+      //if(cam.IsIn(pixPos, otherUnits[i]->getImg()))
+	otherUnits[i]->UnitDisplay(px, rationMapPix, camPos);
     }
                                                            
   for(unsigned int i = 0; i < buildings.size(); i++)
     {
       //std::cout<<"BUILD health(" << buildings.size()<< ")\n";
       casePos = buildings[i]->getPos();
-      pixPos.x = casePos.x * mapSize.x;
-      pixPos.y = casePos.y * mapSize.y;
+      pixPos.x = casePos.x * rationMapPix.x;
+      pixPos.y = casePos.y * rationMapPix.y;
       if(cam.IsIn(pixPos, buildings[i]->getImg()))
-	buildings[i]->DisplayHealth(px, mapSize);
+	buildings[i]->DisplayHealth(px, rationMapPix, camPos);
     }
   for(unsigned int i = 0; i < otherBuildings.size(); i++)
     {
       //std::cout<<"otherBUILD health(" << otherBuildings.size()<< ")\n";
       casePos = otherBuildings[i]->getPos();
-      pixPos.x = casePos.x * mapSize.x;
-      pixPos.y = casePos.y * mapSize.y;
+      pixPos.x = casePos.x * rationMapPix.x;
+      pixPos.y = casePos.y * rationMapPix.y;
       if(cam.IsIn(pixPos, otherBuildings[i]->getImg()))
-	otherBuildings[i]->DisplayHealth(px, mapSize);
+	otherBuildings[i]->DisplayHealth(px, rationMapPix, camPos);
     }
   for(unsigned int i = 0; i < units.size(); i++)
     {
       //std::cout<<"UNIT health(" << units.size()<< ")\n";
       casePos = units[i]->getPos();
-      pixPos.x = casePos.x * mapSize.x;
-      pixPos.y = casePos.y * mapSize.y;
+      pixPos.x = casePos.x * rationMapPix.x;
+      pixPos.y = casePos.y * rationMapPix.y;
       if(cam.IsIn(pixPos, units[i]->getImg()))
-	units[i]->DisplayHealth(px, mapSize, units[i]->getPathLeft(), units[i]->getProgress());
+	units[i]->DisplayHealth(px, rationMapPix, camPos, units[i]->getPathLeft(), units[i]->getProgress());
     }
   for(unsigned int i = 0; i < otherUnits.size(); i++)
     {
       //std::cout<<"otherUNIT health(" << otherUnits.size()<< ")\n";
       casePos = otherUnits[i]->getPos();
-      pixPos.x = casePos.x * mapSize.x;
-      pixPos.y = casePos.y * mapSize.y;
+      pixPos.x = casePos.x * rationMapPix.x;
+      pixPos.y = casePos.y * rationMapPix.y;
       if(cam.IsIn(pixPos, otherUnits[i]->getImg()))
-	otherUnits[i]->DisplayHealth(px, mapSize, otherUnits[i]->getPathLeft(), otherUnits[i]->getProgress());
+	otherUnits[i]->DisplayHealth(px, rationMapPix, camPos, otherUnits[i]->getPathLeft(), otherUnits[i]->getProgress());
     }
   
   
   if(!fog)
     return;
-  mapSize = visionMap.getMapSize();
+  rationMapPix = visionMap.getMapSize();
   int totalpx = pxSize.x * pxSize.y;
   int rdm;
   t_bunny_color color;
   Pos tmp;
-  /*  Pos compt(0);
-      while (compt.x < pxSize.x && compt.y)*/
 
-
-
-  
   for(int i = 0; i < totalpx; i++)
     {
-      //switch(visionMap[(i % pxSize.x + cam.getPos().x) * ((double)mapSize.x / ((double)pxSize.x / cam.getZoom())) + ((i / pxSize.x + cam.getPos().y) * ((double)mapSize.x / ((double)pxSize.x / cam.getZoom()))) * mapSize.x])
-      //visionMap[(int)((i % pxSize.x) * ((double)mapSize.x / ((double)pxSize.x))) + (int)((i / pxSize.x) * ((double)mapSize.y / ((double)pxSize.y))) * mapSize.x] = 9;
-      //std::cout<< "\n\n___--- PUTE ---___\n";
-      //visionMap.print();
-      //std::cout << "POS x : " << i % pxSize.x << " y : " << i / pxSize.x << std::endl;
-      //usleep(0.05e6);
-      switch(visionMap[(int)((i % pxSize.x + cam.getPos().x) * ((double)mapSize.x / ((double)pxSize.x * cam.getZoom()))) + (int)((i / pxSize.x + cam.getPos().y) * ((double)mapSize.y / ((double)pxSize.y * cam.getZoom()))) * mapSize.x])
+      
+      switch(visionMap[(int)((i % pxSize.x + cam.getPos().x) * ((double)map.getMapSize().x / ((double)pxSize.x * cam.getZoom()))) + (int)((i / pxSize.x + cam.getPos().y) * ((double)map.getMapSize().y / ((double)pxSize.y * cam.getZoom()))) * rationMapPix.x])
         {
 	case 0:
 	  rdm = rand() % 31;

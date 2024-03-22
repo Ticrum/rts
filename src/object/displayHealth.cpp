@@ -3,18 +3,21 @@
 
 void ef::Object::DisplayHealth(ef::Bpixelarray &px,
 			       ef::Pos caseSize,
+			       ef::AcuPos camStart,
 			       std::vector<ef::ConformPos> path,
 			       double progress)
 {
   Pos tmp;
 
-  tmp.x = pos.x * caseSize.x;
-  tmp.y = pos.y * caseSize.y;
+  tmp.x = ((double)pos.x) * caseSize.x;
+  tmp.y = ((double)pos.y) * caseSize.y;
   if(progress != -1 && (int) path.size() > 1)
     {
-      tmp.x += (pos.x + progress * (path[1].x - pos.x)) * caseSize.x;
-      tmp.y += (pos.y + progress * (path[1].y - pos.y)) * caseSize.y;
+      tmp.x += (progress * (path[1].x - pos.x)) * caseSize.x;
+      tmp.y += (progress * (path[1].y - pos.y)) * caseSize.y;
     }
+  tmp.y -= camStart.y;
+  tmp.x -= camStart.x;
 
   Pos size = caseSize;
 

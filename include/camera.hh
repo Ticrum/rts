@@ -17,13 +17,13 @@ namespace ef
     Camera(int width,
 	   int height);
     int Init(std::string screen);
-    bool IsIn(Pos &start,
+    bool IsIn(Pos start,
 	      std::shared_ptr<ef::Bpixelarray> &pic);
     void ZoomIn(double add);
     double getZoom();
-    AcuPos getPos();
     void ZoomOut(double sub);
     void Move(AcuPos move);
+    AcuPos getPos();
     void display(PlayerInfo &plr);
     void display(ServerPlayersInfo &srv);
     t_bunny_window *getWin();
