@@ -18,8 +18,8 @@ void ef::Unit::moveUnit(double timePassed)
     progress += speed * timePassed;
   if (progress >= 1)
     {
-      std::cout << "||||||||HAS MOVED FOWARD|||||||| " << actualIndex << " : " << path.size() << std::endl;
-      std::cout << "NOW AT pos x : " << path[actualIndex - 1].x << " y : " << path[actualIndex - 1].y << std::endl;
+      //std::cout << "||||||||HAS MOVED FOWARD|||||||| " << actualIndex << " : " << path.size() << std::endl;
+      //std::cout << "NOW AT pos x : " << path[actualIndex - 1].x << " y : " << path[actualIndex - 1].y << std::endl;
       actualIndex += 1;
       progress = 0;
     }
