@@ -9,8 +9,11 @@
 std::vector<ef::ConformPos> ef::Unit::getPathLeft()
 {
     std::vector<ConformPos> tempPath;
+    int start = actualIndex;
 
-    for(int i = actualIndex; i < (int)tempPath.size(); i += 1)
+    if (start > 0)
+      start -= 1;
+    for(int i = start; i < (int)path.size(); i += 1)
         tempPath.push_back(path[i].get());
     return tempPath;
 }

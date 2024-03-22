@@ -1,0 +1,25 @@
+[Object
+    name = (string)
+    imgId = (int)
+    [objSize
+        x = (int)
+        y = (int)
+    ]
+    maxHp = (int)
+    armor = (int)
+    rangeOfVision = (int)
+]
+[Unit
+    cost = (int)
+    speed = (double)
+    runningSpeed = (double)
+    moveType = (int) 0 = RUN
+    	       	     1 = WALK
+		     2 = STATIC
+    isFlying = true / false
+    timeToProduce = (double)
+    [weaponConf
+        size = (int) nbr of data ellement
+        data = (chain of string) "weapon1", "weapon 2", ...
+    ]
+]

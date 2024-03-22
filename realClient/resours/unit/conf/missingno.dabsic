@@ -1,0 +1,25 @@
+[Object
+    name = "missingno"
+    img = "errorunit.png"
+    [objSize
+        x = 1
+        y = 1
+    ]
+    maxHp = 3
+    armor = 1000
+    rangeOfVision = 4
+    nbrDmg = 0
+    dmg = 0
+]
+[Unit
+    cost = 100
+    speed = 100
+    runningSpeed = 0.25
+    moveType = 0
+    isFlying = false
+    timeToProduce = 100
+    [weaponConf
+        size = 1
+        data = "LeStik"
+    ]
+]

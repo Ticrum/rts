@@ -32,7 +32,6 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 		    deleteFromKillList(tempKill[i].obj);
 		  }
 	      playerInfo.updateOther();
-	      playerInfo.computeActions(timePassed, res.getWeaponConf(), true, clientUdp, serverConnected);
 	    }
 	  clientUdp->loop();
 	  while (clientUdp->getData((char *)&pack, sizeof(pack)) != -1)
@@ -76,7 +75,7 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 		      std::vector<double> cdr;
 		      for (int i = 0; i < pack.addOtherUnit.nbrCdr; i += 1)
 			cdr.push_back(pack.addOtherUnit.cdr[i]);
-		      tempUnit.reset(new Unit(conf, res.getSprit()[conf.img], pack.addOtherUnit.posi.get(), pack.addOtherUnit.unitId, pack.addOtherUnit.alegence, res.getWeaponConf(), pack.addOtherUnit.actualHp, pack.addOtherUnit.progress, pack.addOtherUnit.moveType, path, cdr));
+		      tempUnit.reset(new Unit(conf, res.getSprit()[conf.img], pack.addOtherUnit.posi.get(), pack.addOtherUnit.unitId, pack.addOtherUnit.alegence, res.getWeaponConf(), pack.addOtherUnit.actualHp, pack.addOtherUnit.progress, pack.addOtherUnit.actualIndex, pack.addOtherUnit.moveType, path, cdr));
 		      playerInfo.addOther(tempUnit, pack.addOtherUnit.isOther);
 		    }
 		  else if (pack.type == ADDOTHERBUILDING)
@@ -138,19 +137,32 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 		      tempObj.reset(new Object(tempConf, res.getSprit()[tempConf.img], pack.addShot.pos.get(), pack.addShot.buildId, pack.addShot.alegence));
 		      playerInfo.addOtherShot(tempObj);
 		    }
+		  else if (pack.type == PATHUNIT)
+		    {
+		      std::cout << "receve pathUnit" << std::endl;
+		      std::shared_ptr<Unit> tempOUnit = std::static_pointer_cast<Unit>(playerInfo.getOtherObject(pack.pathUnit.unitId, false));
+		      if (tempOUnit.get() != nullptr)
+			{
+			  std::vector<Pos> tempPath;
+			  for (int i = 0; i < pack.pathUnit.nbrPos; i += 1)
+			    tempPath.push_back(pack.pathUnit.pos[i].get());
+			  tempOUnit->changePath(tempPath, pack.pathUnit.moveType);
+			}
+		    }
 		}
 	      clientUdp->loop();
 	      //std::cout << "PACKET cli FIN" << std::endl;
 	    }
 	  if (gameStarted)
 	    {
+	      playerInfo.computeActions(timePassed, res.getWeaponConf(), true, clientUdp, serverConnected);
 	      playerInfo.updateVisionMap();
 	      playerInfo.computeShot(true);
 	    }
 	}
       realTimePassed -= timePassed;
     }
-  std::cout << "end of FUNC client" << std::endl;
+  //std::cout << "end of FUNC client" << std::endl;
 }
 
 

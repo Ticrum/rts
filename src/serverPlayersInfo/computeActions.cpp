@@ -171,6 +171,6 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 	}
       realTimePassed -= timePassed;
     }
-  std::cout << "end of FUNC serv" << std::endl;
+  //std::cout << "end of FUNC serv" << std::endl;
 }
 

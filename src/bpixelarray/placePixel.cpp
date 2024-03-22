@@ -11,7 +11,7 @@ void ef::Bpixelarray::placePixel(Pos &pos,
 	{
 	  t_bunny_color color;
 	  color.full = colo;
-	  double ratio= last.argb[ALPHA_CMP]/255;
+	  double ratio= last.argb[ALPHA_CMP] / 255.0;
 	  color.argb[RED_CMP] = last.argb[RED_CMP] +ratio * (color.argb[RED_CMP]- last.argb[RED_CMP]);
 	  color.argb[GREEN_CMP] = last.argb[GREEN_CMP] +ratio * (color.argb[GREEN_CMP]- last.argb[GREEN_CMP]);
 	  color.argb[BLUE_CMP] = last.argb[BLUE_CMP] +ratio * (color.argb[BLUE_CMP]- last.argb[BLUE_CMP]);

@@ -1,0 +1,9 @@
+[Weapon
+    name = "miniGun"
+    shot = "test"
+    dmg = 3
+    nbrAtt = 500
+    cdrMax = 100
+    range = 5
+    manualTarget = false
+]

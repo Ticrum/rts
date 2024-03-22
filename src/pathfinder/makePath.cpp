@@ -26,6 +26,8 @@ std::vector<ef::Pos> ef::Pathfinder::makePath(Pos start,
     tempCell->lastCell = nullptr;
     tempCell->pos = start;
     tempCell->dist = 0;
+    checkIndex = 0;
+    checking.clear();
     checking.push_back(tempCell);
     while (1)
     {

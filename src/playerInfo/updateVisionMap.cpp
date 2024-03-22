@@ -13,13 +13,13 @@
 void ef::PlayerInfo::updateVisionMap()
 {
   for (int i = 0; i < (int)units.size(); i += 1)
-    for (int x = units[i]->getActualPos().x - units[i]->getRangeOfVision(); x < units[i]->getActualPos().x + units[i]->getRangeOfVision(); x += 1)
-      for (int y = units[i]->getActualPos().y - units[i]->getRangeOfVision(); y < units[i]->getActualPos().y + units[i]->getRangeOfVision(); y += 1)
+    for (int x = units[i]->getActualPos().x - units[i]->getRangeOfVision(); x <= units[i]->getActualPos().x + units[i]->getRangeOfVision(); x += 1)
+      for (int y = units[i]->getActualPos().y - units[i]->getRangeOfVision(); y <= units[i]->getActualPos().y + units[i]->getRangeOfVision(); y += 1)
 	if (x >= 0 && x < visionMap.getMapSize().x && y >= 0 && y < visionMap.getMapSize().y)
 	  visionMap[x + y * visionMap.getMapSize().x] = 3;
   for (int i = 0; i < (int)buildings.size(); i += 1)
-    for (int x = buildings[i]->getPos().x - buildings[i]->getRangeOfVision(); x < buildings[i]->getPos().x + buildings[i]->getRangeOfVision(); x += 1)
-      for (int y = buildings[i]->getPos().y - buildings[i]->getRangeOfVision(); y < buildings[i]->getPos().y + buildings[i]->getRangeOfVision(); y += 1)
+    for (int x = buildings[i]->getPos().x - buildings[i]->getRangeOfVision(); x <= buildings[i]->getPos().x + buildings[i]->getRangeOfVision(); x += 1)
+      for (int y = buildings[i]->getPos().y - buildings[i]->getRangeOfVision(); y <= buildings[i]->getPos().y + buildings[i]->getRangeOfVision(); y += 1)
 	if (x >= 0 && x < visionMap.getMapSize().x && y >= 0 && y < visionMap.getMapSize().y)
 	  visionMap[x + y * visionMap.getMapSize().x] = 3;
   for (int i = 0; i < visionMap.getMapSize().x * visionMap.getMapSize().y; i += 1)

@@ -1,0 +1,26 @@
+[Object
+  name = "MainBuild"
+  img = "error.png"
+  [objSize
+    x = 1
+    y = 1
+  ]
+  maxHp = 100
+  armor = 2
+  rangeOfVision = 3
+  nbrDmg = 0
+  dmg = 0
+]
+[Building
+  cost = 350
+  timeToProduce = 0.2
+  type = 1
+  canBeTarget = true
+  energyCost = 10
+  energyProduction = 0
+  moneyProduction = 0
+  [weaponConf
+    size = 0
+    data = "miniGun"
+  ]
+]

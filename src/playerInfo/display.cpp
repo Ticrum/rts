@@ -15,7 +15,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 
   for(unsigned int i = 0; i < buildings.size(); i++)
     {
-      std::cout<<"BUILD (" << buildings.size()<< ")\n";
+      //std::cout<<"BUILD (" << buildings.size()<< ")\n";
       casePos = buildings[i]->getPos();
       pixPos.x = casePos.x * mapSize.x;
       pixPos.y = casePos.y * mapSize.y;
@@ -24,7 +24,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
     }
   for(unsigned int i = 0; i < otherBuildings.size(); i++)
     {
-      std::cout<<"otherBUILD (" << otherBuildings.size()<< ")\n";
+      //std::cout<<"otherBUILD (" << otherBuildings.size()<< ")\n";
       casePos = otherBuildings[i]->getPos();
       pixPos.x = casePos.x * mapSize.x;
       pixPos.y = casePos.y * mapSize.y;
@@ -33,7 +33,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
     }
   for(unsigned int i = 0; i < units.size(); i++)
     {
-      std::cout<<"UNIT (" << units.size()<< ")\n";
+      //std::cout<<"UNIT (" << units.size()<< ")\n";
       casePos = units[i]->getPos();
       pixPos.x = casePos.x * mapSize.x;
       pixPos.y = casePos.y * mapSize.y;
@@ -42,7 +42,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
     }
   for(unsigned int i = 0; i < otherUnits.size(); i++)
     {
-      std::cout<<"otherUNIT (" << otherUnits.size()<< ")\n";
+      //std::cout<<"otherUNIT (" << otherUnits.size()<< ")\n";
       casePos = otherUnits[i]->getPos();
       pixPos.x = casePos.x * mapSize.x;
       pixPos.y = casePos.y * mapSize.y;
@@ -52,7 +52,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
                                                            
   for(unsigned int i = 0; i < buildings.size(); i++)
     {
-      std::cout<<"BUILD health(" << buildings.size()<< ")\n";
+      //std::cout<<"BUILD health(" << buildings.size()<< ")\n";
       casePos = buildings[i]->getPos();
       pixPos.x = casePos.x * mapSize.x;
       pixPos.y = casePos.y * mapSize.y;
@@ -61,7 +61,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
     }
   for(unsigned int i = 0; i < otherBuildings.size(); i++)
     {
-      std::cout<<"otherBUILD health(" << otherBuildings.size()<< ")\n";
+      //std::cout<<"otherBUILD health(" << otherBuildings.size()<< ")\n";
       casePos = otherBuildings[i]->getPos();
       pixPos.x = casePos.x * mapSize.x;
       pixPos.y = casePos.y * mapSize.y;
@@ -70,7 +70,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
     }
   for(unsigned int i = 0; i < units.size(); i++)
     {
-      std::cout<<"UNIT health(" << units.size()<< ")\n";
+      //std::cout<<"UNIT health(" << units.size()<< ")\n";
       casePos = units[i]->getPos();
       pixPos.x = casePos.x * mapSize.x;
       pixPos.y = casePos.y * mapSize.y;
@@ -79,7 +79,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
     }
   for(unsigned int i = 0; i < otherUnits.size(); i++)
     {
-      std::cout<<"otherUNIT health(" << otherUnits.size()<< ")\n";
+      //std::cout<<"otherUNIT health(" << otherUnits.size()<< ")\n";
       casePos = otherUnits[i]->getPos();
       pixPos.x = casePos.x * mapSize.x;
       pixPos.y = casePos.y * mapSize.y;
@@ -95,11 +95,6 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
   int rdm;
   t_bunny_color color;
   Pos tmp;
-  std::cout << "////DisplayFog////" << std::endl;
-  std::cout << "pxSizex : " << pxSize.x << std::endl;
-  std::cout << "pxSizey : " << pxSize.y << std::endl;
-  std::cout << "mapSizex : " << mapSize.x << std::endl;
-  std::cout << "mapSizey : " << mapSize.y << std::endl;
   /*  Pos compt(0);
       while (compt.x < pxSize.x && compt.y)*/
 
@@ -128,7 +123,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 	  break;
         case 1:
 	  color.argb[RED_CMP] = 0;
-	  color.argb[GREEN_CMP] = 0;
+	  color.argb[GREEN_CMP] = 40;
 	  color.argb[BLUE_CMP] = 0;
 	  color.argb[ALPHA_CMP] = 50 - (rand()%32);
 	  tmp.x = i % pxSize.x;
