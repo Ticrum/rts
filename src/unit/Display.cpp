@@ -17,7 +17,7 @@ void ef::Unit::UnitDisplay(ef::Bpixelarray &px,
     else
       {
 	tmp.x = ((double)path[actualIndex - 1].x) * caseSize.x;
-	tmp.y = ((double)path[actualIndex - 1].y)* caseSize.y;
+	tmp.y = ((double)path[actualIndex - 1].y) * caseSize.y;
       }
     if(actualIndex + 1 < (int) path.size())
       {
