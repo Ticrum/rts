@@ -76,7 +76,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
       //if(cam.IsIn(pixPos, units[i]->getImg()))
-	units[i]->DisplayHealth(px, rationMapPix, camPos, units[i]->getPathLeft(), units[i]->getProgress());
+	units[i]->DisplayHealth(px, rationMapPix, camPos, units[i]->getPartPath(), units[i]->getProgress());
     }
   for(unsigned int i = 0; i < otherUnits.size(); i++)
     {
@@ -85,7 +85,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
       //if(cam.IsIn(pixPos, otherUnits[i]->getImg()))
-	otherUnits[i]->DisplayHealth(px, rationMapPix, camPos, otherUnits[i]->getPathLeft(), otherUnits[i]->getProgress());
+	otherUnits[i]->DisplayHealth(px, rationMapPix, camPos, otherUnits[i]->getPartPath(), otherUnits[i]->getProgress());
     }
   
   

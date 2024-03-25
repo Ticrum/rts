@@ -9,10 +9,16 @@ void ef::Object::DisplayHealth(ef::Bpixelarray &px,
 {
   Pos tmp;
 
-  tmp.x = ((double)pos.x) * caseSize.x;
-  tmp.y = ((double)pos.y) * caseSize.y;
-  if(progress != -1 && (int) path.size() > 1)
+  if(progress == -1)
     {
+      tmp.x = ((double)pos.x) * caseSize.x;
+      tmp.y = ((double)pos.y) * caseSize.y;
+    }
+  else
+    {
+      tmp.x = path[0].x * caseSize.x;
+      tmp.y = path[0].y * caseSize.y;
+
       tmp.x += (progress * (path[1].x - pos.x)) * caseSize.x;
       tmp.y += (progress * (path[1].y - pos.y)) * caseSize.y;
     }

@@ -61,6 +61,7 @@ namespace ef
     double getProgress();
     MoveType getMoveType();
     std::vector<ConformPos> getPathLeft();
+    std::vector<ConformPos> getPartPath();
     std::vector<double> getWeaponsCd();
 
   private:
