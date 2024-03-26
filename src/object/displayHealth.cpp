@@ -19,8 +19,8 @@ void ef::Object::DisplayHealth(ef::Bpixelarray &px,
       tmp.x = path[0].x * caseSize.x;
       tmp.y = path[0].y * caseSize.y;
 
-      tmp.x += (progress * (path[1].x - pos.x)) * caseSize.x;
-      tmp.y += (progress * (path[1].y - pos.y)) * caseSize.y;
+      tmp.x += (progress * (path[1].x - path[0].x)) * caseSize.x;
+      tmp.y += (progress * (path[1].y - path[0].y)) * caseSize.y;
     }
   tmp.y -= camStart.y;
   tmp.x -= camStart.x;
