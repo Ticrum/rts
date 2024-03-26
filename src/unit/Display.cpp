@@ -22,8 +22,8 @@ void ef::Unit::UnitDisplay(ef::Bpixelarray &px,
     if(actualIndex + 1 < (int) path.size())
       {
 	std::cout << "JE PASSE DANS UNITDISPLAY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
-	tmp.x += (progress * ((double)path[actualIndex].x - (double)pos.x)) * caseSize.x;
-	tmp.y += (progress * ((double)path[actualIndex].y - (double)pos.y)) * caseSize.y;
+	tmp.x += (progress * ((double)path[actualIndex].x - (double)path[actualIndex - 1].x)) * caseSize.x;
+	tmp.y += (progress * ((double)path[actualIndex].y - (double)path[actualIndex - 1].y)) * caseSize.y;
       }
     tmp.y -= camStart.y;
     tmp.x -= camStart.x;
