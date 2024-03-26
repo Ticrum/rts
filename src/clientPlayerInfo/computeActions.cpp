@@ -143,10 +143,14 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 		      std::shared_ptr<Unit> tempOUnit = std::static_pointer_cast<Unit>(playerInfo.getOtherObject(pack.pathUnit.unitId, false));
 		      if (tempOUnit.get() != nullptr)
 			{
+			  std::cout << "!!!!!!!! compAction GET OBJ GOOD !!!!!!!!" << std::endl;
 			  std::vector<Pos> tempPath;
 			  for (int i = 0; i < pack.pathUnit.nbrPos; i += 1)
 			    tempPath.push_back(pack.pathUnit.pos[i].get());
 			  tempOUnit->changePath(tempPath, pack.pathUnit.moveType);
+			  std::vector<ConformPos> newPos = tempOUnit->getPathLeft();
+			  std::cout << "computeActionClient start Pos x : " << newPos[(int)newPos.size() - 1].x << " y : " << newPos[(int)newPos.size() - 1].y << " end x : " << newPos[0].x << " y : " << newPos[0].y << std::endl;
+			  std::cout << "computeActionClient pack start Pos x : " << pack.pathUnit.pos[0].x << " y : " << pack.pathUnit.pos[0].y << " end x : " << pack.pathUnit.pos[(int)newPos.size() - 1].x << " y : " << pack.pathUnit.pos[(int)newPos.size() - 1].y << std::endl;
 			}
 		    }
 		}

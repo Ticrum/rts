@@ -17,9 +17,9 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 
       while (serverTcp->loop() && !gameStarted)
 	{
-	  std::cout << "client Connected" << std::endl;
+	  //std::cout << "client Connected" << std::endl;
 	  clientConnected.push_back(serverTcp->getLastConnected());
-	  std::cout << "server" << (int)ntohs(clientConnected.back().sin_port) << std::endl;
+	  //std::cout << "server" << (int)ntohs(clientConnected.back().sin_port) << std::endl;
 	  clientReady.push_back(false);
 	  std::shared_ptr<PlayerInfo> tempPlayer;
 	  tempPlayer.reset(new PlayerInfo(res, playersInfo.size(), false));
@@ -37,7 +37,7 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 	{
 	  if (!gameStarted && serverTcp->getData((char *)&pack, sizeof(pack), clientConnected[i]) != -1 && pack.type == CLIENTINFO)
 	    {
-	      std::cout << "port receve serv : " << pack.clientInfo.port << std::endl;
+	      //std::cout << "port receve serv : " << pack.clientInfo.port << std::endl;
 	      clientConnected[i].sin_port = htons(pack.clientInfo.port);
 	      serverUdp->loop();
 	      serverUdp->sendData("test", 4, clientConnected[i]);
@@ -48,7 +48,7 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
       serverUdp->loop();
       while (serverUdp->getData((char *)&pack, sizeof(pack)) != -1)
 	{
-	  std::cout << "packet receve serv : " << pack.type << std::endl;
+	  //std::cout << "packet receve serv : " << pack.type << std::endl;
 	  int playerId = -1;
 	  for (int i = 0; i < (int)clientConnected.size(); i += 1)
 	    {
@@ -60,10 +60,10 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 	    {
 	      if (!gameStarted)
 		{
-		  std::cout << "serv pass check" << std::endl;
+		  //std::cout << "serv pass check" << std::endl;
 		  if (pack.type == ISREADY)
 		    {
-		      std::cout << "packet is ready" << std::endl;
+		      //std::cout << "packet is ready" << std::endl;
 		      clientReady[playerId] = pack.ready.isReady;
 		    }
 		  int compt = 0;
@@ -72,7 +72,7 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 		      compt += 1;
 		  if (compt == (int)clientReady.size())
 		    {
-		      std::cout << "GAME HAS STARTED" << std::endl;
+		      //std::cout << "GAME HAS STARTED" << std::endl;
 		      gameStarted = true;
 		      Packet pack;
 		      pack.type = GAMESTART;
@@ -89,7 +89,7 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 			  pack2.addOtherBuilding.len = newBuilding->getConf().size();
 			  memcpy(pack2.addOtherBuilding.conf, &newBuilding->getConf()[0], newBuilding->getConf().size());
 			  pack2.addOtherBuilding.actualHp = newBuilding->getHp();
-			  std::cout << "build hp is : " << newBuilding->getHp() << std::endl;
+			  //std::cout << "build hp is : " << newBuilding->getHp() << std::endl;
 			  pack2.addOtherBuilding.isActive = true;
 			  pack2.addOtherBuilding.nbrCdr = 0;
 			  pack2.addOtherBuilding.isOther = false;
@@ -109,7 +109,7 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 		  else if (pack.type == PRODUCE)
 		    {
 		      std::string str(pack.produce.conf, pack.produce.len);
-		      std::cout << "server producing : " << str << std::endl;
+		      //std::cout << "server producing : " << str << std::endl;
 		      produce(pack.produce.producerId, str, playerId, pack.produce.buildType);
 		    }
 		}

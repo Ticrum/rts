@@ -16,12 +16,12 @@ ef::TargetReturn ef::Unit::makeTargeting(std::vector<std::shared_ptr<Object>> ot
     tar.isBuilding = false;
     for (int i = 0; i < (int)weapons.size(); i += 1)
     {
-        if (!weapons[i].hasTarget())
+        if (!weapons[i].hasTarget() || (weapons[i].hasTarget() && getPos().isInRange(weapons[i].getTarPos(), weapons[i].getRange(), weapons[i].getRange()) == -1))
         {
             minDist = 999999;
             for (int j = 0; j < (int)others.size(); j += 1)
                 if ((actualDist = getPos().isInRange(others[j]->getPos(), weapons[i].getRange(), weapons[i].getRange())) != -1 && getAlegence() != others[j]->getAlegence())
-                    if (actualDist < minDist)
+                    if (actualDist < minDist && actualDist != -1)
                     {
                         minDist = actualDist;
                         bestTarget = others[j];

@@ -13,7 +13,7 @@
 ]
 [Unit
     cost = 100
-    speed = 100
+    speed = 0.5
     runningSpeed = 0.25
     moveType = 0
     isFlying = false

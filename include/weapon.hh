@@ -52,6 +52,7 @@ namespace ef
     double getCdr();
     bool isManual();
     bool hasTarget();
+    Pos getTarPos();
 
   private:
     int dmg;

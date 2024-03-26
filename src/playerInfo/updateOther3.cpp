@@ -6,7 +6,7 @@
 
 #include "playerInfo.hh"
 
-#include <iostream>
+//#include <iostream>
 
 void ef::PlayerInfo::updateOther(std::vector<std::shared_ptr<Building>> newBuilding,
                                  std::shared_ptr<UdpConnect> udp,
