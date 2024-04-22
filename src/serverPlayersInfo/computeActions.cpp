@@ -164,17 +164,25 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 		      std::cout << "serverPlayerInfo send death of unit" << std::endl;
 		      tempPack.destroy.isOther = true;
 		      std::shared_ptr<Unit> temp;
+		      std::shared_ptr<Building> temp2;
 		      for (int k = i + 1; k < i + (int)clientConnected.size(); k += 1)
-			if ((temp = playersInfo[k % playersInfo.size()]->getUnit(kill[j].obj->getId(), true)) != nullptr)//playersInfo[k % playersInfo.size()]->isInVision(kill[j].obj))
-			  {
-			    std::cout << "serverPlayerInfo send to : " << k % clientConnected.size() << std::endl;
-			    playersInfo[k % playersInfo.size()]->destroyUnit(temp, true);
-			    serverUdp->sendData((char *)&tempPack, sizeof(Packet), clientConnected[k % clientConnected.size()]);
-			    if (tempPack.destroy.isBuilding)
-			      playersInfo[i]->destroyBuilding(static_pointer_cast<Building>(kill[j].obj), true);
-			    else
+			{
+			  if ((temp = playersInfo[k % playersInfo.size()]->getUnit(kill[j].obj->getId(), true)) != nullptr)//playersInfo[k % playersInfo.size()]->isInVision(kill[j].obj))
+			    {
+			      std::cout << "serverPlayerInfo send to : " << k % clientConnected.size() << std::endl;
+			      playersInfo[k % playersInfo.size()]->destroyUnit(temp, true);
+			      serverUdp->sendData((char *)&tempPack, sizeof(Packet), clientConnected[k % clientConnected.size()]);
 			      playersInfo[i]->destroyUnit(static_pointer_cast<Unit>(kill[j].obj), true);
-			  }
+			    }
+			  else if ((temp2 = playersInfo[k % playersInfo.size()]->getBuild(kill[j].obj->getId(), true)) != nullptr)//playersInfo[k % playersInfo.size()]->isInVision(kill[j].obj))
+			    {
+			      std::cout << "serverPlayerInfo (build) send to : " << k % clientConnected.size() << std::endl;
+			      tempPack.destroy.isBuilding = true;
+			      playersInfo[k % playersInfo.size()]->destroyBuilding(temp2, true);
+			      serverUdp->sendData((char *)&tempPack, sizeof(Packet), clientConnected[k % clientConnected.size()]);
+			      playersInfo[i]->destroyBuilding(static_pointer_cast<Building>(kill[j].obj), true);
+			    }
+			}
 		    }
 		}
 	      kill.clear();

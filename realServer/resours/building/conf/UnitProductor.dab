@@ -6,7 +6,7 @@
     y = 1
   ]
   maxHp = 100
-  armor = 2
+  armor = 0
   rangeOfVision = 2
   nbrDmg = 0
   dmg = 0

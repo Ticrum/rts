@@ -11,7 +11,7 @@
 std::vector<ef::ConformPos> ef::Unit::getPathLeft()
 {
     std::vector<ConformPos> tempPath;
-    int start = actualIndex;
+    int start = actualIndex + 1;
 
     if (start > 0)
       {

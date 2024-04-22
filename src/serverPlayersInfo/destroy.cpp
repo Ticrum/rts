@@ -16,7 +16,7 @@ bool ef::ServerPlayersInfo::destroy(int unitId,
     if (isBuilding)
     {
       build = playersInfo[playerId]->getBuild(unitId, isOther);
-        return playersInfo[playerId]->destroyBuilding(build, isOther);
+      return playersInfo[playerId]->destroyBuilding(build, isOther);
     }
     unit = playersInfo[playerId]->getUnit(unitId, isOther);
     return playersInfo[playerId]->destroyUnit(unit, isOther);

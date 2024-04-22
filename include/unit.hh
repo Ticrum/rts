@@ -51,6 +51,7 @@ namespace ef
     bool getIsFlying();
     int getActualIndex();
     Pos getActualPos();
+    Pos getActualPos(int decal);
     void changePath(std::vector<Pos> newPath, MoveType type);
     void changeTarget(std::vector<std::shared_ptr<Object>> targets);
     TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others,

@@ -27,6 +27,7 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
   for (int i = 0; i < (int)buildings.size(); i += 1)
     {
       tar.push_back(buildings[i]->makeTargeting(tempUnits, false));
+      tar.push_back(buildings[i]->makeTargeting(tempBuilds, true));
       tar.back().unit = buildings[i];
       for (int compt = 0; compt < (int)tar.back().target.size(); compt += 1)
         {
@@ -82,6 +83,7 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
   for (int i = 0; i < (int)units.size(); i += 1)
     {
       tar.push_back(units[i]->makeTargeting(tempUnits, false));
+      tar.push_back(units[i]->makeTargeting(tempBuilds, true));
       tar.back().unit = units[i];
       for (int compt = 0; compt < (int)tar.back().target.size(); compt += 1)
         {

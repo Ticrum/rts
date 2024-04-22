@@ -17,3 +17,10 @@ ef::Pos ef::Unit::getActualPos()
   return path[actualIndex - 1];
 }
 
+ef::Pos ef::Unit::getActualPos(int decal)
+{
+  if ((int)path.size() == 0 || actualIndex == 0 || actualIndex - 1 + decal < 0)
+    return getPos();
+  return path[actualIndex - 1 + decal];
+}
+
