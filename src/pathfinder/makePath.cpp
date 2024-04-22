@@ -47,7 +47,7 @@ std::vector<ef::Pos> ef::Pathfinder::makePath(Pos start,
                 tempptr = tempptr->lastCell;
             }
             //printf("end loop\n");
-            out.push_back(start);
+            //out.push_back(start);
             return out;
         }
         if (checking[checkIndex]->pos.y > 0 && (map[checking[checkIndex]->pos.x + (checking[checkIndex]->pos.y - 1) * map.getMapSize().x] == 0 || map[checking[checkIndex]->pos.x + (checking[checkIndex]->pos.y - 1) * map.getMapSize().x] == 3))

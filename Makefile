@@ -120,3 +120,10 @@ re: fclean all
 relib: fclean lib
 
 retest: testclean test
+
+resUpdate:
+	@rm -f -r realClient/resours
+	@rm -f -r realServer/resours
+	cp -r ./resours realClient/resours
+	cp -r ./resours realServer/resours
+

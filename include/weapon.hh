@@ -45,7 +45,7 @@ namespace ef
     Weapon(ConfWeapon conf, int _alegence);
     Weapon(ConfWeapon conf, int _alegence, double _cdr);
     std::shared_ptr<Object> fireAction(double timePassed);
-    void setNewTarget(std::shared_ptr<Object> newTarget);
+    void setNewTarget(std::shared_ptr<Object> newTarget, bool _isTargetBuild);
     int getDmg();
     int getNbrAtt();
     int getRange();
@@ -64,6 +64,7 @@ namespace ef
     int alegence;
     ConfObj shot;
     std::shared_ptr<Object> target;
+    bool isTargetBuild;
   };
 }
 

@@ -9,6 +9,6 @@
 void ef::Building::changeTarget(std::vector<std::shared_ptr<Object>> targets)
 {
     for (int i = 0; i < (int)weapons.size(); i += 1)
-        weapons[i].setNewTarget(targets[i]);
+      weapons[i].setNewTarget(targets[i], false);
 }
 

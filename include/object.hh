@@ -83,7 +83,7 @@ namespace ef
     int getRangeOfVision();
     int getAlegence();
     std::string getConf();
-    void kaboom(std::vector<std::shared_ptr<Object>> objects);
+    void kaboom(std::vector<std::shared_ptr<Object>> objects, bool isBuild);
     void Display(Bpixelarray &px,
                  Pos caseSize,
 		 AcuPos camStart);
@@ -92,6 +92,8 @@ namespace ef
 		       AcuPos camStart,
 		       std::vector<ef::ConformPos> path = std::vector<ef::ConformPos>(),
 		       double progress = -1);
+    int getDmg();
+    int getNbrDmg();
 
   protected:
     std::string conf;

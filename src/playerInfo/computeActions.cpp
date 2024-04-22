@@ -14,18 +14,19 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
                                                              std::shared_ptr<UdpConnect> & serverUdp,
                                                              struct sockaddr_in & client)
 {
-  std::vector<std::shared_ptr<Object>> temp;
+  std::vector<std::shared_ptr<Object>> tempUnits;
+  std::vector<std::shared_ptr<Object>> tempBuilds;
   std::vector<TargetReturn> tar;
 
   for (int i = 0; i < (int)killList.size(); i += 1)
     killList[i].time += timePassed;
   for (int i = 0; i < (int)otherUnits.size(); i += 1)
-    temp.push_back(otherUnits[i]);
+    tempUnits.push_back(otherUnits[i]);
   for (int i = 0; i < (int)otherBuildings.size(); i += 1)
-    temp.push_back(otherBuildings[i]);
+    tempBuilds.push_back(otherBuildings[i]);
   for (int i = 0; i < (int)buildings.size(); i += 1)
     {
-      tar.push_back(buildings[i]->makeTargeting(temp));
+      tar.push_back(buildings[i]->makeTargeting(tempUnits, false));
       tar.back().unit = buildings[i];
       for (int compt = 0; compt < (int)tar.back().target.size(); compt += 1)
         {
@@ -80,7 +81,7 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
     }
   for (int i = 0; i < (int)units.size(); i += 1)
     {
-      tar.push_back(units[i]->makeTargeting(temp));
+      tar.push_back(units[i]->makeTargeting(tempUnits, false));
       tar.back().unit = units[i];
       for (int compt = 0; compt < (int)tar.back().target.size(); compt += 1)
         {

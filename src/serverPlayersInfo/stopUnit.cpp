@@ -11,7 +11,7 @@ void ef::ServerPlayersInfo::stopUnit(int unitId,
 {
     std::shared_ptr<Unit> unit;
 
-    unit = playersInfo[playerId]->getUnit(unitId);
+    unit = playersInfo[playerId]->getUnit(unitId, false);
     if (unit.get() == nullptr)
         return;
     playersInfo[playerId]->stopUnit(unit);

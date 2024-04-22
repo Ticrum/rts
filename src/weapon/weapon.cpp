@@ -16,7 +16,7 @@ ef::Weapon::Weapon(ConfWeapon conf,
     range(conf.range),
     manualTarget(conf.manualTarget),
     alegence(_alegence),
-    shot("test"),
+    shot("resours/shot/conf/test.dabsic"),
     target(nullptr)
 {
 }

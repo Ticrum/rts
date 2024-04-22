@@ -6,10 +6,11 @@
 
 #include "unit.hh"
 
-void ef::Unit::manualTargeting(std::shared_ptr<Object> target)
+void ef::Unit::manualTargeting(std::shared_ptr<Object> target,
+			       bool isTargetBuild)
 {
     for (int i = 0; i < (int)weapons.size(); i += 1)
-        if (weapons[i].isManual())
-            weapons[i].setNewTarget(target);
+      if (weapons[i].isManual())
+	weapons[i].setNewTarget(target, isTargetBuild);
 }
 

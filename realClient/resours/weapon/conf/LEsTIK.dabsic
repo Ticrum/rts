@@ -1,9 +1,9 @@
 [Weapon
     name = "LeStik"
     shot = "test"
-    dmg = 1
-    nbrAtt = 2
+    dmg = 10
+    nbrAtt = 1
     cdrMax = 2
-    range = 1
+    range = 2
     manualTarget = true
 ]

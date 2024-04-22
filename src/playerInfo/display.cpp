@@ -113,9 +113,9 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 	  break;
         case 1:
 	  color.argb[RED_CMP] = 0;
-	  color.argb[GREEN_CMP] = 40;
+	  color.argb[GREEN_CMP] = 0;
 	  color.argb[BLUE_CMP] = 0;
-	  color.argb[ALPHA_CMP] = 50 - (rand()%32);
+	  color.argb[ALPHA_CMP] = 100 - (rand()%32);
 	  tmp.x = i % pxSize.x;
 	  tmp.y = i / pxSize.x;
 	  px.placePixel(tmp, color.full);

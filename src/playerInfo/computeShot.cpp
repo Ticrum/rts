@@ -15,19 +15,25 @@ void ef::PlayerInfo::computeShot(bool isClient)
   //std::cout << "COUCOU in computeShot" << std::endl;
   for (int i = 0; i < (int)units.size(); i += 1)
     tempObj.push_back(units[i]);
+  for (int i = 0; i < (int)otherShots.size(); i += 1)
+    otherShots[i]->kaboom(tempObj, false);
+  tempObj.clear();
   for (int i = 0; i < (int)buildings.size(); i += 1)
     tempObj.push_back(buildings[i]);
   for (int i = 0; i < (int)otherShots.size(); i += 1)
-    otherShots[i]->kaboom(tempObj);
+    otherShots[i]->kaboom(tempObj, true);
   tempObj.clear();
   if (isClient)
     {
       for (int i = 0; i < (int)otherUnits.size(); i += 1)
 	tempObj.push_back(otherUnits[i]);
+      for (int i = 0; i < (int)shots.size(); i += 1)
+	shots[i]->kaboom(tempObj, false);
+      tempObj.clear();
       for (int i = 0; i < (int)otherBuildings.size(); i += 1)
 	tempObj.push_back(otherBuildings[i]);
       for (int i = 0; i < (int)shots.size(); i += 1)
-	shots[i]->kaboom(tempObj);
+	shots[i]->kaboom(tempObj, true);
     }
   shots.clear();
   otherShots.clear();

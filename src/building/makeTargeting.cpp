@@ -5,8 +5,10 @@
 // description: makeTargeting implementation
 
 #include "building.hh"
+#include "unit.hh"
 
-ef::TargetReturn ef::Building::makeTargeting(std::vector<std::shared_ptr<Object>> others)
+ef::TargetReturn ef::Building::makeTargeting(std::vector<std::shared_ptr<Object>> others,
+					     bool isBuilding)
 {
     int minDist;
     int actualDist;
@@ -17,18 +19,34 @@ ef::TargetReturn ef::Building::makeTargeting(std::vector<std::shared_ptr<Object>
     for (int i = 0; i < (int)weapons.size(); i += 1)
     {
       if (!weapons[i].hasTarget() || (weapons[i].hasTarget() && getPos().isInRange(weapons[i].getTarPos(), weapons[i].getRange(), weapons[i].getRange()) == -1))
-        {
-            minDist = 999999;
-            for (int j = 0; j < (int)others.size(); j += 1)
-                if ((actualDist = getPos().isInRange(others[j]->getPos(), weapons[i].getRange(), weapons[i].getRange())) != -1 && getAlegence() != others[j]->getAlegence())
-                    if (actualDist < minDist && actualDist != -1)
-                    {
-                        minDist = actualDist;
-                        bestTarget = others[j];
-                    }
-            weapons[i].setNewTarget(bestTarget);
-            tar.target.push_back(bestTarget);
-        }
+	{
+	  minDist = 999999;
+	  for (int j = 0; j < (int)others.size(); j += 1)
+	    {
+	      if (isBuilding)
+		{
+		  std::shared_ptr<Building> tempBuilding = static_pointer_cast<Building>(others[j]);
+		  if ((actualDist = getPos().isInRange(tempBuilding->getPos(), weapons[i].getRange(), weapons[i].getRange())) != -1 && getAlegence() != others[j]->getAlegence())
+		    if (actualDist < minDist && actualDist != -1)
+		      {
+			minDist = actualDist;
+			bestTarget = others[j];
+		      }
+		}
+	      else
+		{
+		  std::shared_ptr<Unit> tempUnit = static_pointer_cast<Unit>(others[j]);
+		  if ((actualDist = getPos().isInRange(tempUnit->getActualPos(), weapons[i].getRange(), weapons[i].getRange())) != -1 && getAlegence() != others[j]->getAlegence())
+		    if (actualDist < minDist && actualDist != -1)
+		      {
+			minDist = actualDist;
+			bestTarget = others[j];
+		      }
+		}
+	    }
+	  weapons[i].setNewTarget(bestTarget, isBuilding);
+	  tar.target.push_back(bestTarget);
+	}
     }
     return tar;
 }

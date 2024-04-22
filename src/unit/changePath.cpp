@@ -15,7 +15,8 @@ void ef::Unit::changePath(std::vector<Pos> newPath,
   if (path.size() > 0)
     {
       std::cout << "change path reset" << std::endl;
-      pos = path[path.size() - 1];
+      if (actualIndex > 0)
+	pos = path[actualIndex - 1];
       path.clear();
     }
   progress = 0;

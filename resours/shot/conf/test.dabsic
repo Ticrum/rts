@@ -1,13 +1,14 @@
+
 [Object
     name = "test"
     img = "error.png"
     [objSize
-        x = 1
-        y = 1
+        x = 0
+        y = 0
     ]
     maxHp = 50
     armor = 0
     rangeOfVision = 1
-    nbrDmg = 50
+    nbrDmg = 10
     dmg = 1
 ]

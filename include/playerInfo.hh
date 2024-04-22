@@ -30,8 +30,8 @@ namespace ef
     PlayerInfo(ResourceManager & res, int _alegence, bool isClient);
     void makePath(std::shared_ptr<Unit> unit, Pos dest, MoveType moveType);
     void stopUnit(std::shared_ptr<Unit> unit);
-    void setTarget(std::shared_ptr<Unit> unit, std::shared_ptr<Object> other);
-    void setTarget(std::shared_ptr<Building> build, std::shared_ptr<Object> other);
+    void setTarget(std::shared_ptr<Unit> unit, std::shared_ptr<Object> other, bool isTargetBuild);
+    void setTarget(std::shared_ptr<Building> build, std::shared_ptr<Object> other, bool isTargetBuild);
     void refreshTarget(std::shared_ptr<Unit> unit, std::vector<std::shared_ptr<Object>> targets);
     void refreshTarget(std::shared_ptr<Building> build, std::vector<std::shared_ptr<Object>> targets);
     std::vector<TargetReturn> computeActions(double timePassed, std::vector<ConfWeapon> & weaponsConf, bool moveOther, std::shared_ptr<UdpConnect> & serverUdp, struct sockaddr_in & clients);
@@ -47,7 +47,7 @@ namespace ef
     bool destroyBuilding(std::shared_ptr<Building> building, bool isOther);
     void addOther(std::shared_ptr<Unit> unit, bool isOther);
     void addOther(std::shared_ptr<Building> building, bool isOther);
-    void addOtherShot(std::shared_ptr<Object> shot);
+    void addOtherShot(std::shared_ptr<Object> shot, bool isOther);
     bool isInVision(std::shared_ptr<Object> obj);
     bool isInVisionUnit(std::shared_ptr<Unit> unit);
     std::vector<std::shared_ptr<Unit>> selectUnit(Pos start, Pos end);
@@ -57,8 +57,8 @@ namespace ef
                  ef::Camera &cam,
                  bool fog);
     std::vector<ef::Killed> & getKillList();
-    std::shared_ptr<Unit> getUnit(int unitId);
-    std::shared_ptr<Building> getBuild(int buildId);
+    std::shared_ptr<Unit> getUnit(int unitId, bool isOther);
+    std::shared_ptr<Building> getBuild(int buildId, bool isOther);
     std::shared_ptr<Object> getOtherObject(int otherId, bool isBuilding);
     void updateOther();
     void updateOther(std::vector<std::shared_ptr<Unit>> newUnit, std::shared_ptr<UdpConnect> udp, struct sockaddr_in client);

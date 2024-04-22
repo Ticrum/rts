@@ -6,15 +6,19 @@
 
 #include "object.hh"
 
+#include <iostream>
+
 void ef::Object::takeDmg(int _nbrDmg,
                          int _dmg)
 {
-    _dmg -= armor;
-    if (_dmg <= 0)
-        return;
-    for (int i = 0; i < _nbrDmg; i += 1)
-        hp -= _dmg;
-    if (hp < 0)
-        hp = 0;
+  std::cout << "takeDmg hp beafore : " << hp << " dmg : " << _dmg << " nbrdmg : " << _nbrDmg << std::endl;
+  _dmg -= armor;
+  if (_dmg <= 0)
+    return;
+  for (int i = 0; i < _nbrDmg; i += 1)
+    hp -= _dmg;
+  if (hp < 0)
+    hp = 0;
+  std::cout << "takeDmg hp after : " << hp << std::endl;
 }
 

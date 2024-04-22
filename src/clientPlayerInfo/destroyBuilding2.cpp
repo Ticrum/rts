@@ -11,7 +11,7 @@ bool ef::ClientPlayerInfo::destroyBuilding(int buildingId,
 {
     std::shared_ptr<Building> tempBuilding;
     if (!isOther)
-        tempBuilding = playerInfo.getBuild(buildingId);
+      tempBuilding = playerInfo.getBuild(buildingId, isOther);
     else
         tempBuilding = std::static_pointer_cast<Building>(playerInfo.getOtherObject(buildingId, false));
     return playerInfo.destroyBuilding(tempBuilding, isOther);

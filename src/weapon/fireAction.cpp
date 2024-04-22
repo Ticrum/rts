@@ -5,6 +5,9 @@
 // description: fireAction implementation
 
 #include "weapon.hh"
+#include "unit.hh"
+
+#include <iostream>
 
 std::shared_ptr<ef::Object> ef::Weapon::fireAction(double timePassed)
 {
@@ -16,7 +19,19 @@ std::shared_ptr<ef::Object> ef::Weapon::fireAction(double timePassed)
     {
       //target->takeDmg(nbrAtt, dmg);
       cdr = cdrMax;
-      shoot.reset(new Object(shot, std::shared_ptr<Bpixelarray>(), target->getPos(), rand(), alegence));
+      if (isTargetBuild)
+	shoot.reset(new Object(shot, std::shared_ptr<Bpixelarray>(), target->getPos(), rand(), alegence));
+      else
+	{
+	  std::shared_ptr<Unit> tempUnit = static_pointer_cast<Unit>(target);
+	  shoot.reset(new Object(shot, std::shared_ptr<Bpixelarray>(), tempUnit->getActualPos(), rand(), alegence));
+	}
+    }
+  if (shoot != nullptr)
+    {
+      std::cout << "fireAction shoot dmg : " << shoot->getDmg() << " nbrDmg : " << shoot->getNbrDmg() << std::endl;
+      std::cout << "fireAction shot dmg : " << shot.dmg << " nbrDmg : " << shot.nbrDmg << std::endl;
+      std::cout << "fireAction cdr : " << cdr << std::endl;
     }
   return shoot;
 }

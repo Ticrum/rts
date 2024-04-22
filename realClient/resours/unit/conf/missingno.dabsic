@@ -5,8 +5,8 @@
         x = 1
         y = 1
     ]
-    maxHp = 3
-    armor = 1000
+    maxHp = 100
+    armor = 0
     rangeOfVision = 4
     nbrDmg = 0
     dmg = 0

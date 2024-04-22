@@ -23,7 +23,7 @@ std::shared_ptr<ef::Unit> ef::ProdBuilding::produceUnit(double timePassed,
         {
 	  Pos tempPos = getPos();
 	  tempPos.x += 1;
-	  std::cout << "unit at x " << tempPos.x << " y " << tempPos.y << std::endl;
+	  //std::cout << "unit at x " << tempPos.x << " y " << tempPos.y << std::endl;
 	  newUnit.reset(new Unit(unitProd[0],imgs[unitProd[0].img], tempPos, rand(), alegence, weaponsConf));
 	  std::vector<ConfUnit> tempVect = unitProd;
 	  unitProd.clear();

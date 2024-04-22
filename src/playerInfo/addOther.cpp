@@ -12,10 +12,7 @@ void ef::PlayerInfo::addOther(std::shared_ptr<Unit> unit,
                               bool isOther)
 {
   if (isOther)
-    {
-      otherUnits.push_back(unit);
-      std::cout << "addOtherUnit add pass size : " << otherUnits.size() << std::endl;
-    }
+    otherUnits.push_back(unit);
   else
     units.push_back(unit);
 }

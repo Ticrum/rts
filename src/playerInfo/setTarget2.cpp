@@ -7,8 +7,9 @@
 #include "playerInfo.hh"
 
 void ef::PlayerInfo::setTarget(std::shared_ptr<Building> build,
-                               std::shared_ptr<Object> other)
+                               std::shared_ptr<Object> other,
+			       bool isTargetBuild)
 {
-    build->manualTargeting(other);
+  build->manualTargeting(other, isTargetBuild);
 }
 

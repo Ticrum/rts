@@ -12,11 +12,11 @@ void ef::ClientPlayerInfo::produce(int producerId,
                                    std::string unitToProd,
                                    BuildingType type)
 {
-  std::cout << "!!!pass type : " << type << "!!!!" << std::endl;
-  std::shared_ptr<Building> build = playerInfo.getBuild(producerId);
+  //std::cout << "!!!pass type : " << type << "!!!!" << std::endl;
+  std::shared_ptr<Building> build = playerInfo.getBuild(producerId, false);
   if (build.get() == nullptr)
     return;
-  std::cout << "!!!producer find!!!" << std::endl;
+  //std::cout << "!!!producer find!!!" << std::endl;
   Packet pack;
   pack.type = PRODUCE;
   pack.produce.producerId = build->getId();
@@ -44,7 +44,7 @@ void ef::ClientPlayerInfo::produce(int producerId,
       Tech tech = res.getTech(unitToProd);
       hasProduced = playerInfo.produce(tBuild, tech);
     }
-  std::cout << "/////// HAS produced ////////" << std::endl;
+  //std::cout << "/////// HAS produced ////////" << std::endl;
   if (hasProduced)
     clientUdp->sendData((char *)&pack, sizeof(Packet), serverConnected);
 }

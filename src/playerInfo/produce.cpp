@@ -11,7 +11,7 @@
 bool ef::PlayerInfo::produce(std::shared_ptr<ProdBuilding> producer,
                              ConfUnit newUnit)
 {
-  std::cout << "passed in produced unit" << std::endl;
+  //std::cout << "passed in produced unit" << std::endl;
   if (money < newUnit.cost)
     {
       std::cout << "YOU HAVE NO MONEY" << std::endl;

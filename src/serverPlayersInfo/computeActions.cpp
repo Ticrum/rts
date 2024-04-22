@@ -131,11 +131,15 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 		  pack.addShot.pos = tempObj[j]->getPos().get();
 		  pack.addShot.len = tempObj[j]->getConf().size();
 		  memcpy(pack.addShot.conf, &tempObj[j]->getConf()[0], pack.addShot.len);
-		  for (int k = 0; k < (int)playersInfo.size(); k += 1)
-		    if (playersInfo[k]->isInVision(tempObj[j]))
+		  pack.addShot.isOther = false;
+		  playersInfo[i]->addOtherShot(tempObj[j], false);
+		  serverUdp->sendData((char *)&pack, sizeof(Packet), clientConnected[i]);
+		  pack.addShot.isOther = true;
+		  for (int k = i + 1; k < (int)playersInfo.size() + i; k += 1)
+		    if (playersInfo[k % (int)playersInfo.size()]->isInVision(tempObj[j]))
 		      {
-			playersInfo[k]->addOtherShot(tempObj[j]);
-			serverUdp->sendData((char *)&pack, sizeof(Packet), clientConnected[k]);
+			playersInfo[k % (int)playersInfo.size()]->addOtherShot(tempObj[j], true);
+			serverUdp->sendData((char *)&pack, sizeof(Packet), clientConnected[k % (int)playersInfo.size()]);
 		      }
 		}
 	      //std::cout << "compute shot called serv" << std::endl;
@@ -148,23 +152,30 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 		  tempPack.destroy.unitId = kill[j].obj->getId();
 		  tempPack.destroy.isOther = false;
 		  std::shared_ptr<ef::Unit> tempUnit = static_pointer_cast<ef::Unit>(kill[j].obj);
-		  if (tempUnit.get() == nullptr)
-		    tempPack.destroy.isBuilding = true;
-		  else
+		  if (tempUnit.get() != nullptr)
 		    tempPack.destroy.isBuilding = false;
+		  else
+		    tempPack.destroy.isBuilding = true;
 		  serverUdp->loop();
 		  if (!serverUdp->sendData((char *)&tempPack, sizeof(Packet), clientConnected[i]))
-		    i -= 1;
-		  tempPack.destroy.isOther = true;
-		  for (int k = i + 1; k < i + (int)clientConnected.size(); k += 1)
-		    if (playersInfo[k % playersInfo.size()]->isInVision(kill[j].obj))
-		      {
-			serverUdp->sendData((char *)&tempPack, sizeof(Packet), clientConnected[k % clientConnected.size()]);
-			if (tempPack.destroy.isBuilding)
-			  playersInfo[i]->destroyBuilding(static_pointer_cast<Building>(kill[j].obj), true);
-			else
-			  playersInfo[i]->destroyUnit(static_pointer_cast<Unit>(kill[j].obj), true);
-		      }
+		    j -= 1;
+		  else
+		    {
+		      std::cout << "serverPlayerInfo send death of unit" << std::endl;
+		      tempPack.destroy.isOther = true;
+		      std::shared_ptr<Unit> temp;
+		      for (int k = i + 1; k < i + (int)clientConnected.size(); k += 1)
+			if ((temp = playersInfo[k % playersInfo.size()]->getUnit(kill[j].obj->getId(), true)) != nullptr)//playersInfo[k % playersInfo.size()]->isInVision(kill[j].obj))
+			  {
+			    std::cout << "serverPlayerInfo send to : " << k % clientConnected.size() << std::endl;
+			    playersInfo[k % playersInfo.size()]->destroyUnit(temp, true);
+			    serverUdp->sendData((char *)&tempPack, sizeof(Packet), clientConnected[k % clientConnected.size()]);
+			    if (tempPack.destroy.isBuilding)
+			      playersInfo[i]->destroyBuilding(static_pointer_cast<Building>(kill[j].obj), true);
+			    else
+			      playersInfo[i]->destroyUnit(static_pointer_cast<Unit>(kill[j].obj), true);
+			  }
+		    }
 		}
 	      kill.clear();
 	    }

@@ -21,14 +21,16 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 	    {
 	      std::vector<Killed> & tempKill = playerInfo.getKillList();
 	      for (int i = 0; i < (int)tempKill.size(); i += 1)
-		if (tempKill[i].time >= 0.2)
+		if (tempKill[i].time >= 1)
 		  {
-		    std::shared_ptr<Unit> tempUnit;
+		    std::cout << "computeAction rea unit ou build" << std::endl;
+		    /*std::shared_ptr<Unit> tempUnit;
 		    std::shared_ptr<Building> tempBuilding;
 		    if ((tempUnit = std::static_pointer_cast<Unit>(tempKill[i].obj)).get() != nullptr)
 		      playerInfo.addOther(tempUnit, tempKill[i].isOther);
 		    else if ((tempBuilding = std::static_pointer_cast<Building>(tempKill[i].obj)).get() != nullptr)
 		      playerInfo.addOther(tempBuilding, tempKill[i].isOther);
+		    */
 		    deleteFromKillList(tempKill[i].obj);
 		  }
 	      playerInfo.updateOther();
@@ -46,18 +48,20 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 		      std::cout << "receve destroy" << std::endl;
 		      if (pack.destroy.isBuilding)
 			{
-			  std::shared_ptr<Building> tempBuild = playerInfo.getBuild(pack.destroy.unitId);
+			  std::shared_ptr<Building> tempBuild = playerInfo.getBuild(pack.destroy.unitId, pack.destroy.isOther);
 			  if (tempBuild.get() != nullptr)
 			    {
+			      std::cout << "computeAction tempBuild pos x : " << tempBuild->getPos().x << " y : " << tempBuild->getPos().y << std::endl;
 			      playerInfo.destroyBuilding(tempBuild, pack.destroy.isOther);
 			      deleteFromKillList(tempBuild);
 			    }
 			}
 		      else
 			{
-			  std::shared_ptr<Unit> tempUnit = playerInfo.getUnit(pack.destroy.unitId);
+			  std::shared_ptr<Unit> tempUnit = playerInfo.getUnit(pack.destroy.unitId, pack.destroy.isOther);
 			  if (tempUnit.get() != nullptr)
 			    {
+			      std::cout << "computeAction tempUnit pos x : " << tempUnit->getActualPos().x << " y : " << tempUnit->getActualPos().y << std::endl;
 			      playerInfo.destroyUnit(tempUnit, pack.destroy.isOther);
 			      deleteFromKillList(tempUnit);
 			    }
@@ -115,9 +119,9 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 			    {
 			      std::shared_ptr<Object> tempObj = playerInfo.getOtherObject(pack.updateTarget.otherId[i], pack.updateTarget.isEnemyBuilding[i]);
 			      if (tempObj.get() == nullptr && !pack.updateTarget.isEnemyBuilding[i])
-				tempObj = playerInfo.getUnit(pack.updateTarget.otherId[i]);
+				tempObj = playerInfo.getUnit(pack.updateTarget.otherId[i], false);
 			      else if (tempObj.get() == nullptr && pack.updateTarget.isEnemyBuilding[i])
-				tempObj = playerInfo.getBuild(pack.updateTarget.otherId[i]);
+				tempObj = playerInfo.getBuild(pack.updateTarget.otherId[i], false);
 			      if (tempObj.get() == nullptr)
 				tempObj = dummy;
 			      targets.push_back(tempObj);
@@ -130,12 +134,12 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 		    }
 		  else if (pack.type == ADDSHOT)
 		    {
-		      std::cout << "receve addShot" << std::endl;
+		      std::cout << "receve addShot at pos x : " << pack.addShot.pos.get().x << " y : " << pack.addShot.pos.get().y << std::endl;
 		      std::shared_ptr<Object> tempObj;
 		      std::string str(pack.addShot.conf, pack.addShot.len);
 		      ConfObj tempConf = res.getShot(str);
 		      tempObj.reset(new Object(tempConf, res.getSprit()[tempConf.img], pack.addShot.pos.get(), pack.addShot.buildId, pack.addShot.alegence));
-		      playerInfo.addOtherShot(tempObj);
+		      playerInfo.addOtherShot(tempObj, pack.addShot.isOther);
 		    }
 		  else if (pack.type == PATHUNIT)
 		    {

@@ -53,8 +53,9 @@ namespace ef
     Pos getActualPos();
     void changePath(std::vector<Pos> newPath, MoveType type);
     void changeTarget(std::vector<std::shared_ptr<Object>> targets);
-    TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others);
-    void manualTargeting(std::shared_ptr<Object> target);
+    TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others,
+			       bool isBuilding);
+    void manualTargeting(std::shared_ptr<Object> target, bool isTargetBuild);
     void UnitDisplay(Bpixelarray &px,
                      Pos caseSize,
 		     AcuPos camStart);

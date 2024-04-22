@@ -58,8 +58,8 @@ namespace ef
     void setIsActive(bool newState);
     int getEnergyProduction();
     int getMoneyProduction();
-    TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others);
-    void manualTargeting(std::shared_ptr<Object> target);
+    TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others, bool isBuilding);
+    void manualTargeting(std::shared_ptr<Object> target, bool isTargetBuild);
     std::vector<double> getWeaponsCd();
 
   protected:

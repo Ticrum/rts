@@ -140,6 +140,7 @@ namespace ef
     int alegence;
     ConformPos pos;
     int len;
+    bool isOther;
     char conf[128];
   };
 

@@ -11,7 +11,7 @@ bool ef::ClientPlayerInfo::destroyUnit(int unitId,
 {
     std::shared_ptr<Unit> tempUnit;
     if (!isOther)
-        tempUnit = playerInfo.getUnit(unitId);
+      tempUnit = playerInfo.getUnit(unitId, isOther);
     else
         tempUnit = std::static_pointer_cast<Unit>(playerInfo.getOtherObject(unitId, false));
     return playerInfo.destroyUnit(tempUnit, isOther);

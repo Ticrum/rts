@@ -6,8 +6,10 @@
 
 #include "weapon.hh"
 
-void ef::Weapon::setNewTarget(std::shared_ptr<Object> newTarget)
+void ef::Weapon::setNewTarget(std::shared_ptr<Object> newTarget,
+			      bool _isTargetBuild)
 {
     target = newTarget;
+    isTargetBuild = _isTargetBuild;
 }
 

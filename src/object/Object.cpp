@@ -21,7 +21,9 @@ ef::Object::Object(ConfObj _conf,
     maxhp(_conf.maxhp),
     armor(_conf.armor),
     rangeOfVision(_conf.rangeOfVision),
-    alegence(_alegence)
+    alegence(_alegence),
+    nbrDmg(_conf.nbrDmg),
+    dmg(_conf.dmg)
 {
 }
 

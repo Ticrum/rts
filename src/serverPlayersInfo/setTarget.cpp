@@ -14,12 +14,12 @@ void ef::ServerPlayersInfo::setTarget(int unitId,
     std::shared_ptr<Unit> unit;
     std::shared_ptr<Object> other;
 
-    unit = playersInfo[playerId]->getUnit(unitId);
+    unit = playersInfo[playerId]->getUnit(unitId, false);
     other = playersInfo[playerId]->getOtherObject(otherId, isBuilding);
     if (unit.get() == nullptr)
         return;
     if (other.get() == nullptr)
         return;
-    playersInfo[playerId]->setTarget(unit, other);
+    playersInfo[playerId]->setTarget(unit, other, isBuilding);
 }
 

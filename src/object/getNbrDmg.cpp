@@ -3,20 +3,15 @@
 // ***     ***     ***     ******  *******  *****      **********************
 // **  ******  ******  *** *****  *******  *********  ***********************
 // *     ***  ******  *** ***       ****  *****      ************************
-// 04/03/2024 15:44:21 ******************************************************
+// 28/03/2024 17:01:04 ******************************************************
 // thomas.barbe <thomas.barbe@aldrin.efrits.fr>
 // - rts -
 // * *** * * ***  ** * ** ** ** ** * * * *** * **  **************************
 
-#include "playerInfo.hh"
+#include "object.hh"
 
-void ef::PlayerInfo::addOtherShot(std::shared_ptr<Object> shot,
-				  bool isOther)
+int ef::Object::getNbrDmg()
 {
-  if (isOther)
-    otherShots.push_back(shot);
-  else
-    shots.push_back(shot);
+  return nbrDmg;
 }
-
 
