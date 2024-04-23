@@ -53,6 +53,8 @@ namespace ef
     bool isManual();
     bool hasTarget();
     Pos getTarPos();
+    std::shared_ptr<Object> getTarget();
+    bool getIsTargetBuild();
 
   private:
     int dmg;

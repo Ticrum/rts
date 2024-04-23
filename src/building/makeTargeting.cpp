@@ -18,7 +18,16 @@ ef::TargetReturn ef::Building::makeTargeting(std::vector<std::shared_ptr<Object>
     tar.isBuilding = true;
     for (int i = 0; i < (int)weapons.size(); i += 1)
     {
-      if (!weapons[i].hasTarget() || (weapons[i].hasTarget() && getPos().isInRange(weapons[i].getTarPos(), weapons[i].getRange(), weapons[i].getRange()) == -1))
+      std::shared_ptr<Object> tempObj;
+      Pos objPos;
+      if (weapons[i].hasTarget())
+	{
+	  tempObj = weapons[i].getTarget();
+	  objPos = tempObj->getPos();
+	  if (!weapons[i].getIsTargetBuild())
+	    objPos = static_pointer_cast<Unit>(tempObj)->getActualPos();
+	}
+      if (!weapons[i].hasTarget() || (weapons[i].hasTarget() && getPos().isInRange(objPos, weapons[i].getRange(), weapons[i].getRange()) == -1))
 	{
 	  minDist = 999999;
 	  for (int j = 0; j < (int)others.size(); j += 1)

@@ -20,20 +20,34 @@ ef::TargetReturn ef::Unit::makeTargeting(std::vector<std::shared_ptr<Object>> ot
   tar.isBuilding = false;
   for (int i = 0; i < (int)weapons.size(); i += 1)
     {
-      if (!weapons[i].hasTarget() || (weapons[i].hasTarget() && getPos().isInRange(weapons[i].getTarPos(), weapons[i].getRange(), weapons[i].getRange()) == -1))
+      std::shared_ptr<Object> tempObj;
+      Pos objPos;
+      if (weapons[i].hasTarget())
+	{
+	  tempObj = weapons[i].getTarget();
+	  objPos = tempObj->getPos();
+	  if (!weapons[i].getIsTargetBuild())
+	    {
+	      objPos = static_pointer_cast<Unit>(tempObj)->getActualPos();
+	      std::cout << "makeTargeting is unit" << std::endl;
+	    }
+	  std::cout << "makeTargeting objpos x : " << objPos.x << " y : " << objPos.y << std::endl;
+	}
+      if (!weapons[i].hasTarget() || (weapons[i].hasTarget() && getActualPos().isInRange(objPos, weapons[i].getRange(), weapons[i].getRange()) == -1))
         {
-	  //std::cout << "makeTargeting check for new target size : " << others.size() << std::endl;
+	  std::cout << "makeTargeting check for new target size : " << others.size() << std::endl;
 	  minDist = 999999;
 	  for (int j = 0; j < (int)others.size(); j += 1)
 	    {
 	      if (isBuilding)
 		{
 		  std::shared_ptr<Building> tempBuilding = static_pointer_cast<Building>(others[j]);
-		  //std::cout << "makeTargeting pos x : " << tempBuilding->getPos().x << " y : " << tempBuilding->getPos().y << std::endl;
+		  std::cout << "makeTargeting other pos x : " << tempBuilding->getPos().x << " y : " << tempBuilding->getPos().y << std::endl;
+		  std::cout << "makeTargeting pos x : " << getActualPos().x << " y : " << getActualPos().y << std::endl;
 		  if ((actualDist = getActualPos().isInRange(tempBuilding->getPos(), weapons[i].getRange(), weapons[i].getRange())) != -1 && getAlegence() != others[j]->getAlegence())
 		    if (actualDist < minDist && actualDist != -1)
 		      {
-			//std::cout << "makeTargeting find new min" << std::endl;
+			std::cout << "makeTargeting find new min" << std::endl;
 			minDist = actualDist;
 			bestTarget = others[j];
 		      }
@@ -41,11 +55,12 @@ ef::TargetReturn ef::Unit::makeTargeting(std::vector<std::shared_ptr<Object>> ot
 	      else
 		{
 		  std::shared_ptr<Unit> tempUnit = static_pointer_cast<Unit>(others[j]);
-		  //std::cout << "makeTargeting pos x : " << tempUnit->getActualPos().x << " y : " << tempUnit->getActualPos().y << std::endl;
+		  std::cout << "makeTargeting other pos x : " << tempUnit->getActualPos().x << " y : " << tempUnit->getActualPos().y << std::endl;
+		  std::cout << "makeTargeting pos x : " << getActualPos().x << " y : " << getActualPos().y << std::endl;
 		  if ((actualDist = getActualPos().isInRange(tempUnit->getActualPos(), weapons[i].getRange(), weapons[i].getRange())) != -1 && getAlegence() != others[j]->getAlegence())
 		    if (actualDist < minDist && actualDist != -1)
 		      {
-			//std::cout << "makeTargeting find new min" << std::endl;
+			std::cout << "makeTargeting find new min" << std::endl;
 			minDist = actualDist;
 			bestTarget = others[j];
 		      }
