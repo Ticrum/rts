@@ -14,7 +14,8 @@ void ef::Bpixelarray::Blit(ef::Bpixelarray &other,
   colo.argb[RED_CMP] += colo.argb[ALPHA_CMP] * 1.0/3.0;
   colo.argb[GREEN_CMP] += colo.argb[ALPHA_CMP] * 1.0/3.0;
   colo.argb[BLUE_CMP] += colo.argb[ALPHA_CMP] * 1.0/3.0;
-  Pos end;
+  colo.argb[ALPHA_CMP] = 255;
+	    Pos end;
 
   end.x = start.x + size.x;
   end.y = start.y + size.y;
