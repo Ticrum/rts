@@ -3,16 +3,14 @@
 // ***     ***     ***     ******  *******  *****      **********************
 // **  ******  ******  *** *****  *******  *********  ***********************
 // *     ***  ******  *** ***       ****  *****      ************************
-// 23/04/2024 12:23:51 ******************************************************
-// romain.piccoche <romain.picoche@laika.efrits.fr>
+// 27/03/2024 17:57:45 ******************************************************
+// romain.piccoche <romain.picoche@aldrin.efrits.fr>
 // - rts -
 // * *** * * ***  ** * ** ** ** ** * * * *** * **  **************************
 
-#include "object.hh"
+#include "apiButton.hh"
 
-ef::Pos &ef::Pos::operator=(Pos const& other)
+void ef::Groupe::alowCase()
 {
-    x = other.x;
-    y = other.y;
-    return *this;
+  Case = true;
 }

@@ -3,16 +3,17 @@
 // ***     ***     ***     ******  *******  *****      **********************
 // **  ******  ******  *** *****  *******  *********  ***********************
 // *     ***  ******  *** ***       ****  *****      ************************
-// 23/04/2024 12:23:51 ******************************************************
-// romain.piccoche <romain.picoche@laika.efrits.fr>
+// 27/03/2024 11:59:56 ******************************************************
+// romain.piccoche <romain.picoche@aldrin.efrits.fr>
 // - rts -
 // * *** * * ***  ** * ** ** ** ** * * * *** * **  **************************
 
-#include "object.hh"
+#include"apiButton.hh"
 
-ef::Pos &ef::Pos::operator=(Pos const& other)
-{
-    x = other.x;
-    y = other.y;
-    return *this;
-}
+ef::Groupe::Groupe(Groupe const& other)
+  :Case(other.Case),
+   Id(other.Id),
+   min(other.min),
+   max(other.max),
+   buton(other.buton)
+{}

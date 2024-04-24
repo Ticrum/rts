@@ -3,16 +3,22 @@
 // ***     ***     ***     ******  *******  *****      **********************
 // **  ******  ******  *** *****  *******  *********  ***********************
 // *     ***  ******  *** ***       ****  *****      ************************
-// 23/04/2024 12:23:51 ******************************************************
-// romain.piccoche <romain.picoche@laika.efrits.fr>
+// 27/03/2024 12:59:11 ******************************************************
+// romain.piccoche <romain.picoche@aldrin.efrits.fr>
 // - rts -
 // * *** * * ***  ** * ** ** ** ** * * * *** * **  **************************
 
-#include "object.hh"
-
-ef::Pos &ef::Pos::operator=(Pos const& other)
+#include "apiButton.hh"
+#include <iostream>
+ef::Buton::Buton()
+  :group(0),
+   id(0),
+   outside(0),
+   background(0)
 {
-    x = other.x;
-    y = other.y;
-    return *this;
+  action = [&](std::string com) {std::cout << "Not INIT : "<< com << "\n";};
+  square.x = 0;
+  square.y = 0;
+  square.h = 0;
+  square.w = 0;
 }

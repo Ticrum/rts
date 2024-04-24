@@ -42,6 +42,10 @@ namespace ef
 
   struct AcuPos
   {
+    AcuPos(){}
+    AcuPos(double both);
+    AcuPos(AcuPos const &other);
+    AcuPos &operator=(AcuPos const& other);
     double x;
     double y;
   };
