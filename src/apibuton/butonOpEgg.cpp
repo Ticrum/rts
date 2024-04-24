@@ -14,6 +14,7 @@ ef::Buton &ef::Buton::operator=(Buton const& other)
 {
   group = other.group;
   id = other.id;
+  print = other.print;
   square.x = other.square.x;
   square.y = other.square.y;
   square.h = other.square.h;

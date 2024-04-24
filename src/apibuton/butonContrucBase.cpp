@@ -13,6 +13,7 @@
 ef::Buton::Buton()
   :group(0),
    id(0),
+   print(true),
    outside(0),
    background(0)
 {
