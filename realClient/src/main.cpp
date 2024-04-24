@@ -113,5 +113,6 @@ int main(int nbrin,
   bunny_set_key_response(key);
   bunny_set_click_response(click);
   bunny_set_display_function(display);
+  game.singleCommand("azerty qwerty");
   bunny_loop(game.cam.getWin(), 60, &game);
 }

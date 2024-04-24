@@ -8,6 +8,7 @@ namespace ef
   struct Game
   {
     Game(int port, int sizex, int sizey);
+    void singleCommand(std::string str);
 
     ef::ClientPlayerInfo cli;
     ef::Camera cam;

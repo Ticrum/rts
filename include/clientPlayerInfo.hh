@@ -24,6 +24,7 @@ namespace ef
     void setTarget(Pos clickPos);
     void placeBuilding(Pos pos);
     void produce(int producerId, std::string unitToProd, BuildingType type);
+    void produce(std::string unitToProd);
     void destroyUnit();
     void destroyBuilding();
     bool destroyUnit(int unitId, bool isOther);
