@@ -12,6 +12,7 @@
 
 ef::Buton::Buton(unsigned int _group,
 		 unsigned int _id,
+		 bool _print,
 		 t_bunny_accurate_area _square,
 		 unsigned int _outside,
 		 unsigned int _background,
@@ -20,6 +21,7 @@ ef::Buton::Buton(unsigned int _group,
 		 std::function<void(std::string)> func)
   :group(_group),
    id(_id),
+   print(_print),
    outside(_outside),
    background(_background),
    sprit(_px),

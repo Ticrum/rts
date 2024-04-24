@@ -43,7 +43,8 @@ unsigned int ef::ButonManager::checkClick(Pos click,
 		  max.x = min.x + grp.buton[chariot].square.w;
 		  max.y = min.y + grp.buton[chariot].square.h;
 		}
-	      if(min.x <= click.x && min.y <= click.y &&
+	      if(grp.buton[chariot].print &&
+		 min.x <= click.x && min.y <= click.y &&
 		 max.x >= click.x && max.y >= click.y)
 		{
 		  grp.buton[chariot].action(grp.buton[chariot].command);

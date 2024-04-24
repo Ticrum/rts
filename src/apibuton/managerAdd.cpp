@@ -11,6 +11,7 @@
 #include "apiButton.hh"
 
 ef::Pos ef::ButonManager::add(unsigned int groupp,
+			      bool print,
 			      t_bunny_accurate_area square,
 			      unsigned int outside,
 			      unsigned int background,
@@ -25,7 +26,7 @@ ef::Pos ef::ButonManager::add(unsigned int groupp,
       if(Case == group[groupp].Case)
 	{
 	  end.y = group[groupp].update(square);
-	  group[groupp].buton.push_back(ef::Buton(groupp, end.y, square, outside, background, px, action, func));
+	  group[groupp].buton.push_back(ef::Buton(groupp, end.y, print, square, outside, background, px, action, func));
 	  end.x = groupp;
 	}
     }
@@ -36,7 +37,7 @@ ef::Pos ef::ButonManager::add(unsigned int groupp,
       if(Case)
 	group[groupp].alowCase();
       end.y = group[groupp].update(square);
-      group[groupp].buton.push_back(ef::Buton(groupp, end.y, square, outside, background, px, action, func));
+      group[groupp].buton.push_back(ef::Buton(groupp, end.y, print, square, outside, background, px, action, func));
       groupIds.push_back(groupp);
       end.x = groupp;
     }
