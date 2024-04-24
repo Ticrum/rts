@@ -3,16 +3,24 @@
 // ***     ***     ***     ******  *******  *****      **********************
 // **  ******  ******  *** *****  *******  *********  ***********************
 // *     ***  ******  *** ***       ****  *****      ************************
-// 23/04/2024 12:23:51 ******************************************************
-// romain.piccoche <romain.picoche@laika.efrits.fr>
+// 27/03/2024 13:11:11 ******************************************************
+// romain.piccoche <romain.picoche@aldrin.efrits.fr>
 // - rts -
 // * *** * * ***  ** * ** ** ** ** * * * *** * **  **************************
 
-#include "object.hh"
+#include "apiButton.hh"
 
-ef::Pos &ef::Pos::operator=(Pos const& other)
+ef::Buton::Buton(Buton const& other)
+  :group(other.group),
+   id(other.id),
+   outside(other.outside),
+   background(other.background),
+   sprit(other.sprit),
+   command(other.command),
+   action(other.action)
 {
-    x = other.x;
-    y = other.y;
-    return *this;
+  square.x = other.square.x;
+  square.y = other.square.y;
+  square.h = other.square.h;
+  square.w = other.square.w;
 }

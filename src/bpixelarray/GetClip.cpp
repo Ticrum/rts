@@ -2,7 +2,7 @@
 
 t_bunny_clipable *ef::Bpixelarray::GetClip()const
 {
-    if(px == NULL)
-        throw(-1);
-    return &px->clipable;
+  if(px == NULL)
+    return NULL;
+  return &px->clipable;
 }

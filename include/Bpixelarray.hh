@@ -1,3 +1,13 @@
+// *****     ***     ***     ***       **       ***      ********************
+// ****  ******  ******  **  *****  *******  *****  *************************
+// ***     ***     ***     ******  *******  *****      **********************
+// **  ******  ******  *** *****  *******  *********  ***********************
+// *     ***  ******  *** ***       ****  *****      ************************
+// 22/04/2024 15:50:27 ******************************************************
+// romain.piccoche <romain.picoche@laika.efrits.fr>
+// - rts -
+// * *** * * ***  ** * ** ** ** ** * * * *** * **  **************************
+
 #ifndef __BPIXELARRAY_HH__
 #define __BPIXELARRAY_HH__
 
@@ -31,6 +41,10 @@ namespace ef
 	      int alegence);
     t_bunny_clipable *GetClip()const;
     Pos GetSize();
+    void rectangle(Pos &start,
+		   AcuPos &size,
+		   unsigned int &background,
+		   unsigned int &outline);
   private:
     t_bunny_pixelarray *px;
     std::unique_ptr<unsigned int[]> pixels;
