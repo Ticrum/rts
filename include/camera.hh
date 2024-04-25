@@ -36,6 +36,7 @@ namespace ef
     AcuPos pos;
     bool god;
     Pos size;
+    Pos mapSize;
   };//!Camera
 };//!ef
 

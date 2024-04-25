@@ -93,7 +93,7 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
 	  else
 	    tar.back().isTargetBuilding.push_back(true);
         }
-      units[i]->moveUnit(timePassed);
+      units[i]->moveUnit(timePassed, buildingMap);
     }
   if (moveOther)
     {
@@ -106,7 +106,7 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
       for (int i = 0; i < (int)otherUnits.size(); i += 1)
         {
 	  //otherUnits[i]->makeTargeting(temp);
-	  otherUnits[i]->moveUnit(timePassed);
+	  otherUnits[i]->moveUnit(timePassed, buildingMap);
         }
       //for (int i = 0; i < (int)otherBuildings.size(); i += 1)
       //	otherBuildings[i]->makeTargeting(temp);

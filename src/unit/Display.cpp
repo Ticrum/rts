@@ -4,7 +4,7 @@
 #include <iostream>
 
 void ef::Unit::UnitDisplay(ef::Bpixelarray &px,
-                           ef::Pos caseSize,
+                           ef::AcuPos caseSize,
 			   ef::AcuPos camStart)
 {
     Pos tmp;

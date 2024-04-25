@@ -9,9 +9,9 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
   Pos casePos;
   Pos pixPos;
   Pos pxSize = px.GetSize();
-  Pos rationMapPix = map.getMapSize();
-  rationMapPix.x = (pxSize.x * cam.getZoom()) / rationMapPix.x;
-  rationMapPix.y = (pxSize.y * cam.getZoom()) / rationMapPix.y;
+  AcuPos rationMapPix;
+  rationMapPix.x = (pxSize.x * cam.getZoom()) / (double)map.getMapSize().x;
+  rationMapPix.y = (pxSize.y * cam.getZoom()) / (double)map.getMapSize().y;
   AcuPos camPos = cam.getPos();
   
    for(unsigned int i = 0; i < buildings.size(); i++)
@@ -35,7 +35,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
   for(unsigned int i = 0; i < units.size(); i++)
     {
       //std::cout<<"UNIT (" << units.size()<< ")\n";
-      casePos = units[i]->getPos();
+      casePos = units[i]->getActualPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
       //if(cam.IsIn(pixPos, units[i]->getImg()))
@@ -44,7 +44,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
   for(unsigned int i = 0; i < otherUnits.size(); i++)
     {
       //std::cout<<"otherUNIT (" << otherUnits.size()<< ")\n";
-      casePos = otherUnits[i]->getPos();
+      casePos = otherUnits[i]->getActualPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
       //if(cam.IsIn(pixPos, otherUnits[i]->getImg()))
@@ -91,7 +91,8 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
   
   if(!fog)
     return;
-  rationMapPix = visionMap.getMapSize();
+  rationMapPix.x = visionMap.getMapSize().x;
+  rationMapPix.y = visionMap.getMapSize().y;
   int totalpx = pxSize.x * pxSize.y;
   int rdm;
   t_bunny_color color;

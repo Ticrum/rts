@@ -8,9 +8,9 @@ void ef::ServerPlayersInfo::Display(Bpixelarray &px,
     Pos casePos;
     Pos pixPos;
     Pos pxSize = px.GetSize();
-    Pos mapSize = trueMap.getMapSize();
-    mapSize.x = (pxSize.x * cam.getZoom()) / mapSize.x;
-    mapSize.y = (pxSize.y * cam.getZoom()) / mapSize.y;
+    AcuPos mapSize;
+    mapSize.x = (pxSize.x * cam.getZoom()) / trueMap.getMapSize().x;
+    mapSize.y = (pxSize.y * cam.getZoom()) / trueMap.getMapSize().y;
     for(int i=0; i < (int) neutralBuildings.size(); i++)
       if(cam.IsIn(neutralBuildings[i]->getPos(), neutralBuildings[i]->getImg()))
 	neutralBuildings[i]->Display(px, mapSize, cam.getPos());

@@ -2,7 +2,7 @@
 #include "Bpixelarray.hh"
 
 void ef::Object::DisplayHealth(ef::Bpixelarray &px,
-			       ef::Pos caseSize,
+			       ef::AcuPos caseSize,
 			       ef::AcuPos camStart,
 			       std::vector<ef::ConformPos> path,
 			       double progress)
@@ -25,7 +25,7 @@ void ef::Object::DisplayHealth(ef::Bpixelarray &px,
   tmp.y -= camStart.y;
   tmp.x -= camStart.x;
 
-  Pos size = caseSize;
+  AcuPos size = caseSize;
 
   size.x *= objSize.x;
 

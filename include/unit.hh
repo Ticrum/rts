@@ -12,6 +12,8 @@
 
 namespace ef
 {
+  class Map;
+
   enum MoveType
     {
       RUN,
@@ -46,7 +48,7 @@ namespace ef
     Unit(ConfUnit conf, std::shared_ptr<ef::Bpixelarray> _img, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, double _progress, int _actualIndex, MoveType type, std::vector<Pos> newPath, std::vector<double> cdr);
     double getSpeed();
     double getRunningSpeed();
-    void moveUnit(double timePassed);
+    void moveUnit(double timePassed, Map & buildMap);
     std::vector<std::shared_ptr<Object>> fireAllWeapon(double timePassed);
     bool getIsFlying();
     int getActualIndex();
@@ -58,7 +60,7 @@ namespace ef
 			       bool isBuilding);
     void manualTargeting(std::shared_ptr<Object> target, bool isTargetBuild);
     void UnitDisplay(Bpixelarray &px,
-                     Pos caseSize,
+                     AcuPos caseSize,
 		     AcuPos camStart);
     double getProgress();
     MoveType getMoveType();

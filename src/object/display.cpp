@@ -2,7 +2,7 @@
 #include "Bpixelarray.hh"
 
 void ef::Object::Display(ef::Bpixelarray &px,
-                         ef::Pos caseSize,
+                         ef::AcuPos caseSize,
 			 ef::AcuPos camStart)
 {
   Pos tmp;

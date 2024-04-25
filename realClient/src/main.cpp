@@ -83,6 +83,38 @@ static t_bunny_response key(t_bunny_event_state state,
       pos.y = posi.y;
       game->cli.makePath(pos, ef::WALK);
     }
+  if (sym == BKS_I)
+    game->cam.ZoomIn(game->cam.getZoom());
+  if (sym == BKS_O)
+    game->cam.ZoomOut(game->cam.getZoom() / 2);
+  if (sym == BKS_UP)
+    {
+      ef::AcuPos tempPos;
+      tempPos.x = 0;
+      tempPos.y = -10;
+      game->cam.Move(tempPos);
+    }
+  if (sym == BKS_DOWN)
+    {
+      ef::AcuPos tempPos;
+      tempPos.x = 0;
+      tempPos.y = 10;
+      game->cam.Move(tempPos);
+    }
+  if (sym == BKS_LEFT)
+    {
+      ef::AcuPos tempPos;
+      tempPos.x = -10;
+      tempPos.y = 0;
+      game->cam.Move(tempPos);
+    }
+  if (sym == BKS_RIGHT)
+    {
+      ef::AcuPos tempPos;
+      tempPos.x = 10;
+      tempPos.y = 0;
+      game->cam.Move(tempPos);
+    }
   return GO_ON;
 }
 
