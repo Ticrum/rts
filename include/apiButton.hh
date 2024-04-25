@@ -23,6 +23,7 @@ namespace ef
     Buton(Buton const& other);
     Buton(unsigned int _group,
 	  unsigned int _id,
+	  bool _print,
 	  t_bunny_accurate_area _square,
 	  unsigned int _outside,
 	  unsigned int _background,
@@ -33,6 +34,7 @@ namespace ef
     Buton &operator=(Buton const& other);
     unsigned int group;
     unsigned int id;
+    bool print;
     t_bunny_accurate_area square;
     t_bunny_color outside;
     t_bunny_color background;
@@ -49,6 +51,8 @@ namespace ef
     Groupe &operator=(Groupe const& other);
     unsigned int update(t_bunny_accurate_area square);
     void alowCase();
+    void showAll();
+    void hideAll();
     bool Case;
     unsigned int Id;
     AcuPos min;
@@ -63,6 +67,7 @@ namespace ef
     ~ButonManager();
     bool init(std::string file);
     Pos add(unsigned int groupp,
+	    bool print,
 	    t_bunny_accurate_area square,
 	    unsigned int outside,
 	    unsigned int background,
@@ -78,6 +83,14 @@ namespace ef
     unsigned int checkClick(Pos click,
 			    Pos start = ef::Pos(0),
 			    double ratioCasePix = 1);
+    int show(unsigned int groupp);
+    int show(unsigned int groupp,
+	     unsigned int id);
+    int hide(unsigned int groupp);
+    int hide(unsigned int groupp,
+	     unsigned int id);
+    void showAll();
+    void hideAll();
     void printTerminal();
     void print(std::shared_ptr<ef::Bpixelarray> px,
 	       Pos start = ef::Pos(0),
