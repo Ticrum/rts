@@ -28,6 +28,7 @@ namespace ef
     void display(ServerPlayersInfo &srv);
     t_bunny_window *getWin();
     t_bunny_position getMousePos();
+    void drawSquareSelect(Pos start, Pos end);
   private:
     t_bunny_window *win;
     Bpixelarray game;

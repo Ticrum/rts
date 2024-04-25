@@ -12,6 +12,14 @@ static t_bunny_response loop(void *data)
 static t_bunny_response display(void *data)
 {
   ef::Game *game = (ef::Game *)data;
+  if (game->isClick)
+    {
+      t_bunny_position pos = game->cam.getMousePos();
+      ef::Pos posi;
+      posi.x = pos.x;
+      posi.y = pos.y;
+      game->cam.drawSquareSelect(game->lastPos, posi);
+    }
   game->cam.display(game->cli.playerInfo);
   return GO_ON;
 }
@@ -124,9 +132,21 @@ static t_bunny_response click(t_bunny_event_state state,
 {
   ef::Game *game = (ef::Game *)data;
   if (state == GO_UP)
-    game->isClick = false;
+    {
+      game->isClick = false;
+      t_bunny_position pos = game->cam.getMousePos();
+      ef::Pos posi;
+      posi.x = pos.x;
+      posi.y = pos.y;
+      game->cli.select(game->lastPos, posi);
+    }
   else if (state == GO_DOWN)
-    game->isClick = true;
+    {
+      t_bunny_position pos = game->cam.getMousePos();
+      game->lastPos.x = pos.x;
+      game->lastPos.y = pos.y;
+      game->isClick = true;
+    }
   return GO_ON;
 }
 
