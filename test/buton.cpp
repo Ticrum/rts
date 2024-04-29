@@ -13,7 +13,7 @@
 
 static void text(std::string cmd)
 {
-  std::cout<< cmd<< "\n";
+  std::cout << "$> " << cmd << "\n";
 }
 
 int main ()

@@ -24,7 +24,7 @@ int ef::ConfBuilding::load(std::string &file)
   if(!bunny_configuration_getf_int(conf.Get(),(int *) &type, "Building.type"))
     return 14;
   if (type < 0 || type > 5)
-    return 20;
+    return 21;
   if(!bunny_configuration_getf_int(conf.Get(), (int *)&canBeTarget, "Building.canBeTarget"))
     return 15;
   if(!bunny_configuration_getf_int(conf.Get(), &energyCost, "Building.energyCost"))
@@ -34,9 +34,14 @@ int ef::ConfBuilding::load(std::string &file)
   if(!bunny_configuration_getf_int(conf.Get(), &moneyProduction, "Building.moneyProduction"))
     return 18;
   char *zut;
+  if(!bunny_configuration_getf_string(conf.Get(), (const char **)&zut, "Building.butons"))
+    return 19;
+  if(!butons.empty())
+    butons.clear();
+  butons.append(zut);
   int size;
   if(!bunny_configuration_getf_int(conf.Get(), &size, "Building.weaponConf.size"))
-    return 19;
+    return 20;
   if(!weaponConf.empty())
     weaponConf.clear();
   for(int i = 0; i < size; i++)

@@ -9,9 +9,11 @@
 
 #include "unit.hh"
 #include <map>
+#include <functional>
 
 namespace ef
 {
+  class ButonManager;
   enum BuildingType
     {
       PRODUCTION,
@@ -41,8 +43,13 @@ namespace ef
     int energyCost;
     int energyProduction;
     int moneyProduction;
+    std::string butons;
     std::vector<std::string> weaponConf;
   };
+
+  std::string extract(unsigned int &start,
+		      std::string &source,
+		      char stop);
 
   class Building : public Object
   {
@@ -58,6 +65,10 @@ namespace ef
     void setIsActive(bool newState);
     int getEnergyProduction();
     int getMoneyProduction();
+    void displayButon(ButonManager &manager,
+		      std::function<void(std::string)> func,
+		      std::map<std::string, std::shared_ptr<Bpixelarray>> &sprits);
+    void removeButon(ButonManager &manager);
     TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others, bool isBuilding);
     void manualTargeting(std::shared_ptr<Object> target, bool isTargetBuild);
     std::vector<double> getWeaponsCd();
@@ -69,6 +80,8 @@ namespace ef
     int energyProduction;
     int moneyProduction;
     bool isActive;
+    std::string butons;
+    unsigned int groupButon;
     std::vector<Weapon> weapons;
   };
 

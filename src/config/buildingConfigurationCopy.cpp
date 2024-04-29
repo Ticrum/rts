@@ -15,5 +15,6 @@ ef::ConfBuilding::ConfBuilding(ef::ConfBuilding const &other)
      energyCost(other.energyCost),
      energyProduction(other.energyProduction),
      moneyProduction(other.moneyProduction),
+     butons(other.butons),
      weaponConf(other.weaponConf)
 {}
