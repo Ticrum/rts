@@ -9,6 +9,7 @@
 
 #include "unit.hh"
 #include <map>
+#include <functional>
 
 namespace ef
 {
@@ -46,7 +47,7 @@ namespace ef
     std::vector<std::string> weaponConf;
   };
 
-  std::string extract(unsigned int start,
+  std::string extract(unsigned int &start,
 		      std::string &source,
 		      char stop);
 
@@ -64,7 +65,9 @@ namespace ef
     void setIsActive(bool newState);
     int getEnergyProduction();
     int getMoneyProduction();
-    void displayButon(ButonManager &manager, std::map<std::string, std::shared_ptr<Bpixelarray>> &sprits);
+    void displayButon(ButonManager &manager,
+		      std::function<void(std::string)> func,
+		      std::map<std::string, std::shared_ptr<Bpixelarray>> &sprits);
     void removeButon(ButonManager &manager);
     TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others, bool isBuilding);
     void manualTargeting(std::shared_ptr<Object> target, bool isTargetBuild);

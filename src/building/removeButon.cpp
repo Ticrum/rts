@@ -11,7 +11,7 @@
 #include "building.hh"
 #include "apiButton.hh"
 
-void ef::building::removeButon(ButonManager &manager)
+void ef::Building::removeButon(ef::ButonManager &manager)
 {
   manager.pop(groupButon);
 }
