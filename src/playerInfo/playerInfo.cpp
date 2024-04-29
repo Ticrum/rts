@@ -24,6 +24,8 @@ ef::PlayerInfo::PlayerInfo(ResourceManager & res,
   res(res)
 {
   map.clear(0);
+  for (int i = 0; i < 30; i += 1)
+    map[rand() % (map.getMapSize().x * map.getMapSize().y)] = 1;
   buildingMap.clear(0);
   visionMap.clear(0);
   if (!isClient)

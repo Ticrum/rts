@@ -159,7 +159,7 @@ int main(int nbrin,
       return 0;
     }
   int port = atoi(inputs[1]);
-  ef::Game game(port, 1000, 1000);
+  ef::Game game(port, 600, 600);
 
   bunny_set_loop_main_function(loop);
   bunny_set_key_response(key);

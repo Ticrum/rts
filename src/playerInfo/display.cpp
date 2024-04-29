@@ -2,6 +2,8 @@
 #include "Bpixelarray.hh"
 #include <stdlib.h>
 
+#include <iostream>
+
 void ef::PlayerInfo::Display(ef::Bpixelarray &px,
                              ef::Camera &cam,
                              bool fog)
@@ -13,7 +15,26 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
   rationMapPix.x = (pxSize.x * cam.getZoom()) / (double)map.getMapSize().x;
   rationMapPix.y = (pxSize.y * cam.getZoom()) / (double)map.getMapSize().y;
   AcuPos camPos = cam.getPos();
-  
+  //clear map
+  for (int i = 0; i < pxSize.x * pxSize.y; i += 1)
+    {
+      int index = (int)((i % pxSize.x + cam.getPos().x * cam.getZoom()) * ((double)map.getMapSize().x / ((double)pxSize.x * cam.getZoom()))) + (int)((i / pxSize.x + cam.getPos().y * cam.getZoom()) * ((double)map.getMapSize().y / ((double)pxSize.y * cam.getZoom()))) * map.getMapSize().x;
+      if (index < map.getMapSize().x * map.getMapSize().y && index >= 0 && i % pxSize.x > -cam.getPos().x && i % pxSize.x < (-cam.getPos().x + pxSize.x * cam.getZoom()))
+	{
+	  pixPos.x = i % pxSize.x;
+	  pixPos.y = i / pxSize.x;
+	  if (map[index] == 0)
+	    {
+	      t_bunny_color tempColor;
+	      tempColor.full = GREEN;
+	      tempColor.argb[GREEN_CMP] = tempColor.argb[GREEN_CMP] - 50;
+	      px.placePixel(pixPos, tempColor.full);
+	    }
+	  else if (map[index] == 1)
+	    px.placePixel(pixPos, BLUE);
+	}
+    }
+  //display unit & building
   for(unsigned int i = 0; i < buildings.size(); i++)
     {
       //std::cout<<"BUILD (" << buildings.size()<< ")\n";
@@ -50,7 +71,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       //if(cam.IsIn(pixPos, otherUnits[i]->getImg()))
       otherUnits[i]->UnitDisplay(px, rationMapPix, camPos, cam.getZoom());
     }
-                                                           
+
   for(unsigned int i = 0; i < buildings.size(); i++)
     {
       //std::cout<<"BUILD health(" << buildings.size()<< ")\n";
@@ -88,7 +109,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       otherUnits[i]->DisplayHealth(px, rationMapPix, camPos, cam.getZoom(), otherUnits[i]->getPartPath(), otherUnits[i]->getProgress());
     }
   
-  
+  // display fog
   if(!fog)
     return;
   rationMapPix.x = visionMap.getMapSize().x;
@@ -137,33 +158,41 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 	  px.placePixel(tmp, color.full);
 	}
     }
-
+  // display minimap
   pxSize.x = pxSize.x * 0.3;
   pxSize.y = pxSize.y * 0.3;
   rationMapPix.x = (pxSize.x) / (double)map.getMapSize().x;
   rationMapPix.y = (pxSize.y) / (double)map.getMapSize().y;
   for(int i = 0; i < pxSize.x * pxSize.y; i++)
     {
-      int index = (int)((i % pxSize.x) * ((double)rationMapPix.x / ((double)pxSize.x))) + (int)((i / pxSize.x) * ((double)rationMapPix.y / ((double)pxSize.y))) * rationMapPix.x;
+      int index = (int)((i % pxSize.x) / (double)rationMapPix.x) + (int)((i / pxSize.x) / (double)rationMapPix.y) * map.getMapSize().x;
       if (index < visionMap.getMapSize().x * visionMap.getMapSize().y && index >= 0 && i % pxSize.x > 0 && i % pxSize.x < pxSize.x)
 	{
 	  switch(visionMap[index])
 	    {
 	    case 0:
-	      rdm = rand() % 31;
 	      color.argb[RED_CMP] = 0;
 	      color.argb[GREEN_CMP] = 0;
 	      color.argb[BLUE_CMP] = 0;
-	      color.argb[ALPHA_CMP] = 255 - (rdm%15);
+	      color.argb[ALPHA_CMP] = 255;
 	      tmp.x = i % (int)pxSize.x;
 	      tmp.y = i / pxSize.x + (pxSize.y * 2);
 	      px.placePixel(tmp, color.full);
 	      break;
 	    case 1:
 	      color.argb[RED_CMP] = 0;
-	      color.argb[GREEN_CMP] = 0;
+	      color.argb[GREEN_CMP] = 100;
 	      color.argb[BLUE_CMP] = 0;
-	      color.argb[ALPHA_CMP] = 100 - (rand()%32);
+	      color.argb[ALPHA_CMP] = 255;
+	      tmp.x = i % (int)pxSize.x;
+	      tmp.y = i / pxSize.x + (pxSize.y * 2);
+	      px.placePixel(tmp, color.full);
+	      break;
+	    case 2:
+	      color.argb[RED_CMP] = 0;
+	      color.argb[GREEN_CMP] = 180;
+	      color.argb[BLUE_CMP] = 0;
+	      color.argb[ALPHA_CMP] = 255;
 	      tmp.x = i % (int)pxSize.x;
 	      tmp.y = i / pxSize.x + (pxSize.y * 2);
 	      px.placePixel(tmp, color.full);

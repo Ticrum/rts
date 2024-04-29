@@ -15,8 +15,8 @@ t_bunny_position ef::Camera::getMousePos()
   t_bunny_position posa;
   const t_bunny_position *posi = bunny_get_mouse_position();
 
-  posa.x = (posi->x + pos.x) * ((double)mapSize.x / ((double)size.x * zoom));
-  posa.y = (posi->y + pos.y) * ((double)mapSize.y / ((double)size.y * zoom));
+  posa.x = (posi->x + pos.x * zoom) * ((double)mapSize.x / ((double)size.x * zoom));
+  posa.y = (posi->y + pos.y * zoom) * ((double)mapSize.y / ((double)size.y * zoom));
   return posa;
 }
 
