@@ -5,7 +5,8 @@
 
 void ef::Unit::UnitDisplay(ef::Bpixelarray &px,
                            ef::AcuPos caseSize,
-			   ef::AcuPos camStart)
+			   ef::AcuPos camStart,
+			   double zoom)
 {
     Pos tmp;
 
@@ -32,8 +33,8 @@ void ef::Unit::UnitDisplay(ef::Bpixelarray &px,
 	    tmp.y += (progress * ((double)path[actualIndex].y - (double)path[actualIndex - 1].y)) * caseSize.y;
 	  }
       }
-    tmp.y -= camStart.y;
-    tmp.x -= camStart.x;
+    tmp.y -= camStart.y * zoom;
+    tmp.x -= camStart.x * zoom;
     AcuPos tmpObjSize;
 
     tmpObjSize.x = objSize.x * caseSize.x;

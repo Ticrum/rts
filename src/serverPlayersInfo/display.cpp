@@ -13,5 +13,5 @@ void ef::ServerPlayersInfo::Display(Bpixelarray &px,
     mapSize.y = (pxSize.y * cam.getZoom()) / trueMap.getMapSize().y;
     for(int i=0; i < (int) neutralBuildings.size(); i++)
       if(cam.IsIn(neutralBuildings[i]->getPos(), neutralBuildings[i]->getImg()))
-	neutralBuildings[i]->Display(px, mapSize, cam.getPos());
+	neutralBuildings[i]->Display(px, mapSize, cam.getPos(), cam.getZoom());
 }

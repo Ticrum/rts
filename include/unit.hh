@@ -61,7 +61,8 @@ namespace ef
     void manualTargeting(std::shared_ptr<Object> target, bool isTargetBuild);
     void UnitDisplay(Bpixelarray &px,
                      AcuPos caseSize,
-		     AcuPos camStart);
+		     AcuPos camStart,
+		     double zoom);
     double getProgress();
     MoveType getMoveType();
     std::vector<ConformPos> getPathLeft();

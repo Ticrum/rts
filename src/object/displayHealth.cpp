@@ -4,6 +4,7 @@
 void ef::Object::DisplayHealth(ef::Bpixelarray &px,
 			       ef::AcuPos caseSize,
 			       ef::AcuPos camStart,
+			       double zoom,
 			       std::vector<ef::ConformPos> path,
 			       double progress)
 {
@@ -22,8 +23,8 @@ void ef::Object::DisplayHealth(ef::Bpixelarray &px,
       tmp.x += (progress * (path[1].x - path[0].x)) * caseSize.x;
       tmp.y += (progress * (path[1].y - path[0].y)) * caseSize.y;
     }
-  tmp.y -= camStart.y;
-  tmp.x -= camStart.x;
+  tmp.y -= camStart.y * zoom;
+  tmp.x -= camStart.x * zoom;
 
   AcuPos size = caseSize;
 
