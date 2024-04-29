@@ -2,13 +2,14 @@
 #include "Bpixelarray.hh"
 
 void ef::Object::Display(ef::Bpixelarray &px,
-                         ef::Pos caseSize,
-			 ef::AcuPos camStart)
+                         ef::AcuPos caseSize,
+			 ef::AcuPos camStart,
+			 double zoom)
 {
   Pos tmp;
 
-  tmp.x = ((double)pos.x) * caseSize.x - camStart.x;
-  tmp.y = ((double)pos.y) * caseSize.y - camStart.y;
+  tmp.x = ((double)pos.x) * caseSize.x - camStart.x * zoom;
+  tmp.y = ((double)pos.y) * caseSize.y - camStart.y * zoom;
 
   AcuPos tmpObjSize;
 

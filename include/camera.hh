@@ -38,6 +38,7 @@ namespace ef
     void display(ServerPlayersInfo &srv);
     t_bunny_window *getWin();
     t_bunny_position getMousePos();
+    void drawSquareSelect(Pos start, Pos end);
   private:
     t_bunny_window *win;
     Bpixelarray game;
@@ -46,6 +47,7 @@ namespace ef
     AcuPos pos;
     bool god;
     Pos size;
+    Pos mapSize;
   };//!Camera
 };//!ef
 

@@ -16,14 +16,16 @@ ef::PlayerInfo::PlayerInfo(ResourceManager & res,
   moneyCooldown(0.25),
   totalEnergy(0),
   actualEnergy(0),
-  map(32, 32),
-  buildingMap(32, 32),
-  visionMap(32, 32),
+  map(64, 64),
+  buildingMap(64, 64),
+  visionMap(64, 64),
   path(buildingMap),
   rallyPoint(nullptr),
   res(res)
 {
   map.clear(0);
+  for (int i = 0; i < 30; i += 1)
+    map[rand() % (map.getMapSize().x * map.getMapSize().y)] = 1;
   buildingMap.clear(0);
   visionMap.clear(0);
   if (!isClient)

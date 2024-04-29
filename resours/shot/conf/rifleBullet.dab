@@ -1,0 +1,14 @@
+
+[Object
+    name = "rifleBullet"
+    img = "error.png"
+    [objSize
+        x = 0
+        y = 0
+    ]
+    maxHp = 10
+    armor = 5
+    rangeOfVision = 1
+    nbrDmg = 3
+    dmg = 15
+]

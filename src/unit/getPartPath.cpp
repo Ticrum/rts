@@ -21,7 +21,7 @@ std::vector<ef::ConformPos> ef::Unit::getPartPath()
       tempPath.push_back(path[actualIndex - 1].get());
     if(0 == path.size())
       {
-	std::cout << "getPartPath pass in path size 0" << std::endl;
+	//std::cout << "getPartPath pass in path size 0" << std::endl;
 	tempPath.push_back(pos.get());
       }
     else

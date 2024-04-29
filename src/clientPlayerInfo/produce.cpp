@@ -49,3 +49,9 @@ void ef::ClientPlayerInfo::produce(int producerId,
     clientUdp->sendData((char *)&pack, sizeof(Packet), serverConnected);
 }
 
+void ef::ClientPlayerInfo::produce(std::string unitToProd)
+{
+  for(int i = 0; i < (int)selectedBuilding.size(); i += 1)
+    produce(selectedBuilding[i]->getId(), unitToProd, selectedBuilding[i]->getType());
+}
+

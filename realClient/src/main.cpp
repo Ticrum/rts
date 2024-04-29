@@ -12,6 +12,14 @@ static t_bunny_response loop(void *data)
 static t_bunny_response display(void *data)
 {
   ef::Game *game = (ef::Game *)data;
+  if (game->isClick)
+    {
+      t_bunny_position pos = game->cam.getMousePos();
+      ef::Pos posi;
+      posi.x = pos.x;
+      posi.y = pos.y;
+      game->cam.drawSquareSelect(game->lastPos, posi);
+    }
   game->cam.display(game->cli.playerInfo);
   return GO_ON;
 }
@@ -83,6 +91,38 @@ static t_bunny_response key(t_bunny_event_state state,
       pos.y = posi.y;
       game->cli.makePath(pos, ef::WALK);
     }
+  if (sym == BKS_I)
+    game->cam.ZoomIn(game->cam.getZoom());
+  if (sym == BKS_O)
+    game->cam.ZoomOut(game->cam.getZoom() / 2);
+  if (sym == BKS_UP)
+    {
+      ef::AcuPos tempPos;
+      tempPos.x = 0;
+      tempPos.y = -10;
+      game->cam.Move(tempPos);
+    }
+  if (sym == BKS_DOWN)
+    {
+      ef::AcuPos tempPos;
+      tempPos.x = 0;
+      tempPos.y = 10;
+      game->cam.Move(tempPos);
+    }
+  if (sym == BKS_LEFT)
+    {
+      ef::AcuPos tempPos;
+      tempPos.x = -10;
+      tempPos.y = 0;
+      game->cam.Move(tempPos);
+    }
+  if (sym == BKS_RIGHT)
+    {
+      ef::AcuPos tempPos;
+      tempPos.x = 10;
+      tempPos.y = 0;
+      game->cam.Move(tempPos);
+    }
   return GO_ON;
 }
 
@@ -92,9 +132,21 @@ static t_bunny_response click(t_bunny_event_state state,
 {
   ef::Game *game = (ef::Game *)data;
   if (state == GO_UP)
-    game->isClick = false;
+    {
+      game->isClick = false;
+      t_bunny_position pos = game->cam.getMousePos();
+      ef::Pos posi;
+      posi.x = pos.x;
+      posi.y = pos.y;
+      game->cli.select(game->lastPos, posi);
+    }
   else if (state == GO_DOWN)
-    game->isClick = true;
+    {
+      t_bunny_position pos = game->cam.getMousePos();
+      game->lastPos.x = pos.x;
+      game->lastPos.y = pos.y;
+      game->isClick = true;
+    }
   return GO_ON;
 }
 
@@ -107,11 +159,12 @@ int main(int nbrin,
       return 0;
     }
   int port = atoi(inputs[1]);
-  ef::Game game(port, 1000, 1000);
+  ef::Game game(port, 600, 600);
 
   bunny_set_loop_main_function(loop);
   bunny_set_key_response(key);
   bunny_set_click_response(click);
   bunny_set_display_function(display);
+  game.singleCommand("azerty qwerty");
   bunny_loop(game.cam.getWin(), 60, &game);
 }

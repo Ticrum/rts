@@ -10,4 +10,6 @@ ef::Camera::Camera(int width,
   pos.y = 0;
   size.x = width;
   size.y = height;
+  mapSize.x = 64;
+  mapSize.y = 64;
 }

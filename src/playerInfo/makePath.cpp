@@ -10,7 +10,14 @@ void ef::PlayerInfo::makePath(std::shared_ptr<Unit> unit,
                               Pos dest,
                               MoveType moveType)
 {
-    path.resetMap(buildingMap);
-    unit->changePath(path.makePath(unit->getActualPos(), dest), moveType);
+  Map tempMap(map.getMapSize().x, map.getMapSize().y);
+  for (int i = 0; i < map.getMapSize().x * map.getMapSize().y; i += 1)
+    {
+      tempMap[i] = 0;
+      if (map[i] != 0 || buildingMap[i] == 1)
+	tempMap[i] = 1;
+    }
+  path.resetMap(tempMap);
+  unit->changePath(path.makePath(unit->getActualPos(), dest), moveType);
 }
 
