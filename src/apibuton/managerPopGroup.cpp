@@ -3,24 +3,15 @@
 // ***     ***     ***     ******  *******  *****      **********************
 // **  ******  ******  *** *****  *******  *********  ***********************
 // *     ***  ******  *** ***       ****  *****      ************************
-// 26/04/2024 11:53:48 ******************************************************
+// 26/04/2024 10:59:29 ******************************************************
 // romain.piccoche <romain.picoche@laika.efrits.fr>
 // - rts -
 // * *** * * ***  ** * ** ** ** ** * * * *** * **  **************************
 
-#include "building.hh"
+#include "apiButton.hh"
 
-ef::ConfBuilding &ef::ConfBuilding::operator=(ConfBuilding const&other)
+void ef::ButonManager::pop(unsigned int groupp)
 {
-  cost = other.cost;
-  timeToProduce = other.timeToProduce;
-  type = other.type;
-  canBeTarget = other.canBeTarget;
-  energyCost = other.energyCost;
-  energyProduction = other.energyProduction;
-  moneyProduction = other.moneyProduction;
-  butons = other.butons;
-  weaponConf = other.weaponConf;
-  ConfObj::operator =(other);
-  return *this;
+  if(group.count(groupp) != 0)
+    group.erase(groupp);
 }

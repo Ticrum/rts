@@ -64,7 +64,6 @@ namespace ef
   {
   public:
     ButonManager();
-    ~ButonManager();
     bool init(std::string file);
     Pos add(unsigned int groupp,
 	    bool print,
@@ -75,8 +74,10 @@ namespace ef
 	    std::string action,
 	    std::function<void(std::string)> func,
 	    bool Case);
+    void pop(unsigned int groupp);
     void pop(unsigned int groupp,
 	     unsigned int id);
+    unsigned int nextGroupId();
     void changePx(unsigned int groupp,
 		  unsigned int id,
 		  std::shared_ptr<ef::Bpixelarray> &px);

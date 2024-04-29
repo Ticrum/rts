@@ -75,9 +75,12 @@ int ef::ResourceManager::LoadBuild(bool reset)
 	      std::cout << "fail buildMoneProd\n";
 	      break;
 	    case 19:
-	      std::cout << "fail buildweapConfSize\n";
+	      std::cout << "fail buildButons\n";
 	      break;
 	    case 20:
+	      std::cout << "fail buildweapConfSize\n";
+	      break;
+	    case 21:
 	      std::cout << "fail build wrong typ(too high or negativ)e\n";
 	      break;
 	    default:

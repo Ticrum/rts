@@ -1,3 +1,13 @@
+// *****     ***     ***     ***       **       ***      ********************
+// ****  ******  ******  **  *****  *******  *****  *************************
+// ***     ***     ***     ******  *******  *****      **********************
+// **  ******  ******  *** *****  *******  *********  ***********************
+// *     ***  ******  *** ***       ****  *****      ************************
+// 24/04/2024 17:05:31 ******************************************************
+// romain.piccoche <romain.picoche@laika.efrits.fr>
+// - rts -
+// * *** * * ***  ** * ** ** ** ** * * * *** * **  **************************
+
 #include "playerInfo.hh"
 #include "Bpixelarray.hh"
 #include <stdlib.h>
@@ -14,7 +24,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
   rationMapPix.y = (pxSize.y * cam.getZoom()) / rationMapPix.y;
   AcuPos camPos = cam.getPos();
   
-   for(unsigned int i = 0; i < buildings.size(); i++)
+  for(unsigned int i = 0; i < buildings.size(); i++)
     {
       //std::cout<<"BUILD (" << buildings.size()<< ")\n";
       casePos = buildings[i]->getPos();

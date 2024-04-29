@@ -19,7 +19,9 @@ ef::Building::Building(ConfBuilding conf,
   energyCost(conf.energyCost),
   energyProduction(conf.energyProduction),
   moneyProduction(conf.moneyProduction),
-  isActive(true)
+  isActive(true),
+  butons(conf.butons),
+  groupButon(0)
 {
   for (int i = 0; i < (int)conf.weaponConf.size(); i += 1)
     for (int j = 0; j < (int)weaponsConf.size(); j += 1)
