@@ -65,7 +65,8 @@ namespace ef
     void setIsActive(bool newState);
     int getEnergyProduction();
     int getMoneyProduction();
-    void displayButon(ButonManager &manager,
+    void displayButon(Pos size,
+		      ButonManager &manager,
 		      std::function<void(std::string)> func,
 		      std::map<std::string, std::shared_ptr<Bpixelarray>> &sprits);
     void removeButon(ButonManager &manager);
