@@ -16,6 +16,7 @@ void ef::Building::displayButon(ef::ButonManager &manager,
 				std::function<void(std::string)> func,
 				std::map<std::string, std::shared_ptr<ef::Bpixelarray>> &sprits)
 {
+  std::cout << "displayButon pass" << std::endl;
   unsigned int tmp = 0;
   std::string tempon;
   unsigned int max = std::stoul(extract(tmp, butons, ','));

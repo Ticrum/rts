@@ -19,6 +19,7 @@
   energyCost = 10
   energyProduction = 0
   moneyProduction = 0
+  butons = "1,F,T,100,100,20,20,4294902015,4278190080,FUCK.png,produce missingno,"
   [weaponConf
     size = 0
     data = "miniGun"

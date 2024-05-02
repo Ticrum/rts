@@ -10,7 +10,7 @@
 
 #include "game.hh"
 #include <iostream>
-
+/*
 void ef::Game::singleCommand(std::string str)
 {
   std::vector<std::string> args;
@@ -56,4 +56,4 @@ void ef::Game::singleCommand(std::string str)
   else if (args[0] == "sendIsReady")
     cli.sendIsReady();
 }
-
+*/

@@ -26,22 +26,25 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
   rationMapPix.y = (pxSize.y * cam.getZoom()) / (double)map.getMapSize().y;
   AcuPos camPos = cam.getPos();
   //clear map
-  for (int i = 0; i < pxSize.x * pxSize.y; i += 1)
+  if (fog)
     {
-      int index = (int)((i % pxSize.x + cam.getPos().x * cam.getZoom()) * ((double)map.getMapSize().x / ((double)pxSize.x * cam.getZoom()))) + (int)((i / pxSize.x + cam.getPos().y * cam.getZoom()) * ((double)map.getMapSize().y / ((double)pxSize.y * cam.getZoom()))) * map.getMapSize().x;
-      if (index < map.getMapSize().x * map.getMapSize().y && index >= 0 && i % pxSize.x > -cam.getPos().x && i % pxSize.x < (-cam.getPos().x + pxSize.x * cam.getZoom()))
+      for (int i = 0; i < pxSize.x * pxSize.y; i += 1)
 	{
-	  pixPos.x = i % pxSize.x;
-	  pixPos.y = i / pxSize.x;
-	  if (map[index] == 0)
+	  int index = (int)((i % pxSize.x + cam.getPos().x * cam.getZoom()) * ((double)map.getMapSize().x / ((double)pxSize.x * cam.getZoom()))) + (int)((i / pxSize.x + cam.getPos().y * cam.getZoom()) * ((double)map.getMapSize().y / ((double)pxSize.y * cam.getZoom()))) * map.getMapSize().x;
+	  if (index < map.getMapSize().x * map.getMapSize().y && index >= 0 && i % pxSize.x > -cam.getPos().x && i % pxSize.x < (-cam.getPos().x + pxSize.x * cam.getZoom()))
 	    {
-	      t_bunny_color tempColor;
-	      tempColor.full = GREEN;
-	      tempColor.argb[GREEN_CMP] = tempColor.argb[GREEN_CMP] - 50;
-	      px.placePixel(pixPos, tempColor.full);
+	      pixPos.x = i % pxSize.x;
+	      pixPos.y = i / pxSize.x;
+	      if (map[index] == 0)
+		{
+		  t_bunny_color tempColor;
+		  tempColor.full = GREEN;
+		  tempColor.argb[GREEN_CMP] = tempColor.argb[GREEN_CMP] - 50;
+		  px.placePixel(pixPos, tempColor.full);
+		}
+	      else if (map[index] == 1)
+		px.placePixel(pixPos, BLUE);
 	    }
-	  else if (map[index] == 1)
-	    px.placePixel(pixPos, BLUE);
 	}
     }
   //display unit & building

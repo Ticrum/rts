@@ -9,9 +9,9 @@
 // * *** * * ***  ** * ** ** ** ** * * * *** * **  **************************
 
 #include "camera.hh"
-#include "playerInfo.hh"
+#include "clientPlayerInfo.hh"
 
-void ef::Camera::display(PlayerInfo &plr)
+void ef::Camera::display(ClientPlayerInfo &cli)
 {
     if(win == NULL)
         return;
@@ -19,7 +19,12 @@ void ef::Camera::display(PlayerInfo &plr)
     col.full = GREEN;
     col.argb[GREEN_CMP] -= 50;
     game.Clear(col.full);
-    plr.Display(game, *this, true);
+    cli.playerInfo.Display(game, *this, true);
+    std::vector<std::shared_ptr<Building>> tempBuilds = cli.getSelectedBuildings();
+    //for (int i = 0; i < tempBuilds.size(); i += 1)
+    //  tempBuilds[i]->displayButon(cli.man, func, cli.res.getSprit());
+    cli.man.print(Hud);
+    //cli.man.printTerminal();
     Pos pos;
     AcuPos apos;
     pos.x = 0;

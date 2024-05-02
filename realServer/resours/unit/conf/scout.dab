@@ -1,0 +1,25 @@
+[Object
+    name = "scout"
+    img = "errorunit.png"
+    [objSize
+        x = 1
+        y = 1
+    ]
+    maxHp = 100
+    armor = 3
+    rangeOfVision = 5
+    nbrDmg = 0
+    dmg = 0
+]
+[Unit
+    cost = 75
+    speed = 0.75
+    runningSpeed = 1
+    moveType = 0
+    isFlying = false
+    timeToProduce = 100
+    [weaponConf
+        size = 1
+        data = "pistol"
+    ]
+]
