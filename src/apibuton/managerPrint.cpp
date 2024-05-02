@@ -16,7 +16,6 @@ void ef::ButonManager::print(ef::Bpixelarray &px,
 			     Pos start,
 			     double ratioCasePix)
 {
-  std::cout << "print pass" << std::endl;
   Pos min;
   AcuPos max;
   for(unsigned int i = 0; i < groupIds.size(); ++i)

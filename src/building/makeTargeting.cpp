@@ -23,6 +23,15 @@ ef::TargetReturn ef::Building::makeTargeting(std::vector<std::shared_ptr<Object>
       if (weapons[i].hasTarget())
 	{
 	  tempObj = weapons[i].getTarget();
+	  if (isBuilding == weapons[i].getIsTargetBuild())
+	    {
+	      int occur = 0;
+	      for (int j = 0; j < (int)others.size(); j += 1)
+		if (tempObj->getId() != others[j]->getId())
+		  occur += 1;
+	      if (occur == (int)others.size() && (int)others.size() != 0)
+		weapons[i].removeTarget();
+	    }
 	  objPos = tempObj->getPos();
 	  if (!weapons[i].getIsTargetBuild())
 	    objPos = static_pointer_cast<Unit>(tempObj)->getActualPos();

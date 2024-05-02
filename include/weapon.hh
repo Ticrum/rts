@@ -46,6 +46,7 @@ namespace ef
     Weapon(ConfWeapon conf, int _alegence, double _cdr);
     std::shared_ptr<Object> fireAction(double timePassed);
     void setNewTarget(std::shared_ptr<Object> newTarget, bool _isTargetBuild);
+    void removeTarget();
     int getDmg();
     int getNbrAtt();
     int getRange();

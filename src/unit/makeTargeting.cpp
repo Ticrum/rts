@@ -14,7 +14,7 @@ ef::TargetReturn ef::Unit::makeTargeting(std::vector<std::shared_ptr<Object>> ot
 {
   int minDist;
   int actualDist;
-  std::shared_ptr<Object> bestTarget;
+  std::shared_ptr<Object> bestTarget = nullptr;
   TargetReturn tar;
 
   tar.isBuilding = false;
@@ -25,6 +25,21 @@ ef::TargetReturn ef::Unit::makeTargeting(std::vector<std::shared_ptr<Object>> ot
       if (weapons[i].hasTarget())
 	{
 	  tempObj = weapons[i].getTarget();
+	  if (isBuilding == weapons[i].getIsTargetBuild())
+	    {
+	      int occur = 0;
+	      for (int j = 0; j < (int)others.size(); j += 1)
+		{
+		  //std::cout << "makeTargeting other ID : " << others[j]->getId() << "target ID : " << tempObj->getId() << std::endl;
+		  if (tempObj->getId() != others[j]->getId())
+		    occur += 1;
+		}
+	      if (occur == (int)others.size() && (int)others.size() != 0)
+		{
+		  //std::cout << "makeTargeting supptarget" << std::endl;
+		  weapons[i].removeTarget();
+		}
+	    }
 	  objPos = tempObj->getPos();
 	  if (!weapons[i].getIsTargetBuild())
 	    {
@@ -66,6 +81,8 @@ ef::TargetReturn ef::Unit::makeTargeting(std::vector<std::shared_ptr<Object>> ot
 		      }
 		}
 	    }
+	  //if (bestTarget.get() != nullptr)
+	  //  std::cout << "makeTargeting besttarget ID : " << bestTarget->getId() << std::endl;
 	  weapons[i].setNewTarget(bestTarget, isBuilding);
 	  tar.target.push_back(bestTarget);
         }
