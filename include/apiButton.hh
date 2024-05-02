@@ -93,7 +93,7 @@ namespace ef
     void showAll();
     void hideAll();
     void printTerminal();
-    void print(std::shared_ptr<ef::Bpixelarray> px,
+    void print(ef::Bpixelarray &px,
 	       Pos start = ef::Pos(0),
 	       double ratioCasePix = 1);
   private:

@@ -9,6 +9,7 @@
 
 #include "playerInfo.hh"
 #include "time.h"
+#include "apiButton.hh"
 
 namespace ef
 {
@@ -19,7 +20,7 @@ namespace ef
     void computeActions(double realTimePassed);
     void connectToServ(int ip, int port);
     void makePath(Pos dest, MoveType moveType);
-    void select(Pos start, Pos end);
+    void select(Pos start, Pos end, std::function<void(std::string)> func);
     void stopUnit();
     void setTarget(Pos clickPos);
     void placeBuilding(Pos pos);
@@ -31,8 +32,10 @@ namespace ef
     bool destroyBuilding(int buildingId, bool isOther);
     void deleteFromKillList(std::shared_ptr<Object> obj);
     void sendIsReady();
+    std::vector<std::shared_ptr<Building>> getSelectedBuildings();
 
     ResourceManager res;
+    ButonManager man;
     PlayerInfo playerInfo;
 
   private:

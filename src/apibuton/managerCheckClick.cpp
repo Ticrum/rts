@@ -1,9 +1,12 @@
 #include "apiButton.hh"
 
+#include <iostream>
+
 unsigned int ef::ButonManager::checkClick(Pos click,
 					  Pos start,
 					  double ratioCasePix)
 {
+  std::cout << "managerCheckClick pos x : " << click.x << " y : " << click.y << std::endl;
   Pos min;
   Pos max;
   for(unsigned int i = 0; i < groupIds.size(); ++i)

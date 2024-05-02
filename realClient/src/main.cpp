@@ -20,7 +20,7 @@ static t_bunny_response display(void *data)
       posi.y = pos.y;
       game->cam.drawSquareSelect(game->lastPos, posi);
     }
-  game->cam.display(game->cli.playerInfo);
+  game->cam.display(game->cli);
   return GO_ON;
 }
 
@@ -81,7 +81,7 @@ static t_bunny_response key(t_bunny_event_state state,
       posi[0].y = 0;
       posi[1].x = 31;
       posi[1].y = 31;
-      game->cli.select(posi[0], posi[1]);
+      game->cli.select(posi[0], posi[1], game->singleCommand);
     }
   if (sym == BKS_M)
     {
@@ -131,21 +131,28 @@ static t_bunny_response click(t_bunny_event_state state,
 			      void *data)
 {
   ef::Game *game = (ef::Game *)data;
-  if (state == GO_UP)
+  t_bunny_position pos = game->cam.getMousePos();
+  ef::Pos posi;
+  posi.x = pos.x;
+  posi.y = pos.y;
+  ef::Pos posi2;
+  const t_bunny_position *pos2 = bunny_get_mouse_position();
+  posi2.x = pos2->x;
+  posi2.y = pos2->y;
+  std::cout << "main cc : " << game->cli.man.checkClick(posi2) << std::endl;
+  if (bunny_get_keyboard()[BKS_LSHIFT])
     {
-      game->isClick = false;
-      t_bunny_position pos = game->cam.getMousePos();
-      ef::Pos posi;
-      posi.x = pos.x;
-      posi.y = pos.y;
-      game->cli.select(game->lastPos, posi);
-    }
-  else if (state == GO_DOWN)
-    {
-      t_bunny_position pos = game->cam.getMousePos();
-      game->lastPos.x = pos.x;
-      game->lastPos.y = pos.y;
-      game->isClick = true;
+      if (state == GO_UP)
+	{
+	  game->isClick = false;
+	  game->cli.select(game->lastPos, posi, game->singleCommand);
+	}
+      else if (state == GO_DOWN)
+	{
+	  game->lastPos.x = pos.x;
+	  game->lastPos.y = pos.y;
+	  game->isClick = true;
+	}
     }
   return GO_ON;
 }

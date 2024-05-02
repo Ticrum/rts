@@ -13,11 +13,12 @@
 
 #include "Bpixelarray.hh"
 #include <string>
+#include <functional>
 
 namespace ef
 {
-  class PlayerInfo;
   class ServerPlayersInfo;
+  class ClientPlayerInfo;
   class Camera
   {
   public:
@@ -34,7 +35,7 @@ namespace ef
     void ZoomOut(double sub);
     void Move(AcuPos move);
     AcuPos getPos();
-    void display(PlayerInfo &plr);
+    void display(ClientPlayerInfo &cli);
     void display(ServerPlayersInfo &srv);
     t_bunny_window *getWin();
     t_bunny_position getMousePos();

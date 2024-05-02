@@ -1,0 +1,9 @@
+[Weapon
+    name = "pistol"
+    shot = "pistolBullet"
+    dmg = 10
+    nbrAtt = 2
+    cdrMax = 0.5
+    range = 2
+    manualTarget = false
+]
