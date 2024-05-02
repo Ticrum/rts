@@ -6,7 +6,8 @@
 
 #include "clientPlayerInfo.hh"
 
-void ef::ClientPlayerInfo::select(Pos start,
+void ef::ClientPlayerInfo::select(Pos size,
+				  Pos start,
                                   Pos end,
 				  std::function<void(std::string)> func)
 {
@@ -15,6 +16,6 @@ void ef::ClientPlayerInfo::select(Pos start,
   selectedUnit = playerInfo.selectUnit(start, end);
   selectedBuilding = playerInfo.selectBuilding(start, end);
   if (selectedBuilding.size() > 0)
-    selectedBuilding[0]->displayButon(man, func, res.getSprit());
+    selectedBuilding[0]->displayButon(size, man, func, res.getSprit());
 }
 

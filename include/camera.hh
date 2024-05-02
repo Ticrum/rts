@@ -40,6 +40,7 @@ namespace ef
     t_bunny_window *getWin();
     t_bunny_position getMousePos();
     void drawSquareSelect(Pos start, Pos end);
+    Pos getSize();
   private:
     t_bunny_window *win;
     Bpixelarray game;

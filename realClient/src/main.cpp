@@ -81,7 +81,7 @@ static t_bunny_response key(t_bunny_event_state state,
       posi[0].y = 0;
       posi[1].x = 31;
       posi[1].y = 31;
-      game->cli.select(posi[0], posi[1], game->singleCommand);
+      game->cli.select(game->cam.getSize(), posi[0], posi[1], game->singleCommand);
     }
   if (sym == BKS_M)
     {
@@ -145,7 +145,7 @@ static t_bunny_response click(t_bunny_event_state state,
       if (state == GO_UP)
 	{
 	  game->isClick = false;
-	  game->cli.select(game->lastPos, posi, game->singleCommand);
+	  game->cli.select(game->cam.getSize(), game->lastPos, posi, game->singleCommand);
 	}
       else if (state == GO_DOWN)
 	{
