@@ -139,7 +139,8 @@ static t_bunny_response click(t_bunny_event_state state,
   const t_bunny_position *pos2 = bunny_get_mouse_position();
   posi2.x = pos2->x;
   posi2.y = pos2->y;
-  std::cout << "main cc : " << game->cli.man.checkClick(posi2) << std::endl;
+  if (state == GO_DOWN)
+    std::cout << "main cc : " << game->cli.man.checkClick(posi2) << std::endl;
   if (bunny_get_keyboard()[BKS_LSHIFT])
     {
       if (state == GO_UP)

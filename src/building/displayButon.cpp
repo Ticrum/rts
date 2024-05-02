@@ -11,6 +11,8 @@
 #include "building.hh"
 #include "apiButton.hh"
 
+#include <iostream>
+
 void ef::Building::displayButon(ef::Pos size,
 				ef::ButonManager &manager,
 				std::function<void(std::string)> func,
