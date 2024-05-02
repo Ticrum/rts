@@ -9,8 +9,8 @@ static void text(std::string cmd)
 
 int main()
 {
-  std::shared_ptr<ef::Bpixelarray> screen (new ef::Bpixelarray());
-  while(screen->Init(1000, 1000));
+  ef::Bpixelarray screen;
+  while(screen.Init(1000, 1000));
   ef::ButonManager manage;
   ef::ResourceManager resource;
   t_bunny_window *win;
@@ -22,14 +22,16 @@ int main()
   std::cout << tmp << std::endl;
   unsigned int start = 0;
   std::cout << ef::extract(start, tmp, ',')<< " _ " << start << std::endl;
-  screen->Clear(PINK);
-  ef::Pos pos(0);
+  screen.Clear(PINK);
+  ef::Pos pos(2);
   ef::Building buil(resource.getBuild("LATHOURES"), resource.getSprit()[resource.getBuild("LATHOURES").img], pos,1,1,resource.getWeaponConf());
+  buil.Display(screen, ef::AcuPos(100));
+  buil.DisplayHealth(screen, ef::AcuPos(100));
   ef::Pos size(1000);
   buil.displayButon(size, manage, text, resource.getSprit());
   manage.print(screen);
   manage.printTerminal();
-  bunny_blit(&win->buffer, screen->GetClip(), NULL);
+  bunny_blit(&win->buffer, screen.GetClip(), NULL);
   bunny_display(win);
   ef::Pos click(110);
   std::cout << click.x<<", "<< click.y<< "\n";
@@ -39,11 +41,11 @@ int main()
   std::cout << click.x<<", "<< click.y<< "\n";
   manage.checkClick(click);
   sleep(5);
-  screen->Clear(PINK);
+  screen.Clear(PINK);
   buil.removeButon(manage);
   manage.print(screen);
   manage.printTerminal();
-  bunny_blit(&win->buffer, screen->GetClip(), NULL);
+  bunny_blit(&win->buffer, screen.GetClip(), NULL);
   bunny_display(win);
   std::cout << click.x<<", "<< click.y<< "\n";
   manage.checkClick(click);

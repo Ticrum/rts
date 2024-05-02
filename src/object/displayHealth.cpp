@@ -42,15 +42,15 @@ void ef::Object::DisplayHealth(ef::Bpixelarray &px,
 
   int tempon = (hp * size.x) / maxhp;
 
-  size.y *= 4 * objSize.y;
+  size.y = 4 * objSize.y;
 
   Pos square;
 
   square.x = tmp.x;
-  square.y = tmp.y - 10;
+  square.y = tmp.y - ((objSize.y * caseSize.y) / 10);
 
   Pos max = px.GetSize();
-  while(square.x-tmp.x < size.x && square.y-tmp.y +10 < size.y)
+  while(square.x-tmp.x < size.x && square.y-tmp.y +((objSize.y * caseSize.y) / 10) < size.y)
     {
       if(square.x >= 0 && square.x < max.x && square.y >= 0 && square.y < max.y)
 	px.GetSetPixel(square.x, square.y) = (square.x - tmp.x < tempon)? GREEN: RED;

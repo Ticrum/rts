@@ -90,12 +90,12 @@ namespace ef
     void kaboom(std::vector<std::shared_ptr<Object>> objects, bool isBuild);
     void Display(Bpixelarray &px,
                  AcuPos caseSize,
-		 AcuPos camStart,
-		 double zoom);
+		 AcuPos camStart = AcuPos(0),
+		 double zoom = 1);
     void DisplayHealth(Bpixelarray &px,
 		       AcuPos caseSize,
-		       AcuPos camStart,
-		       double zoom,
+		       AcuPos camStart = AcuPos(0),
+		       double zoom = 1,
 		       std::vector<ef::ConformPos> path = std::vector<ef::ConformPos>(),
 		       double progress = -1);
     int getDmg();
