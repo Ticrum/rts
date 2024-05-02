@@ -43,7 +43,7 @@ int main()
   cam.x = 0;
   cam.y = 0;
   while(px.Init(500, 500));
-  uni.UnitDisplay(px, pos, cam);
+  //uni.UnitDisplay(px, , cam);
   pos.x = 1;
   pos.y = 1;
   confuni.objSize.y = 1;
@@ -51,7 +51,7 @@ int main()
   std::cout <<"x "<< nit.getPos().x<< " y " << nit.getPos().y << "\n";
   pos.x = 100;
   pos.y = 100;
-  nit.Display(px, pos, cam);
+  //  nit.Display(px, pos, cam);
   bunny_blit(&win->buffer, px.GetClip(), NULL);
   bunny_display(win);
   sleep(10);

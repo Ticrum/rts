@@ -10,11 +10,11 @@ static void text(std::string cmd)
 int main()
 {
   std::shared_ptr<ef::Bpixelarray> screen (new ef::Bpixelarray());
-  while(screen->Init(500, 500));
+  while(screen->Init(1000, 1000));
   ef::ButonManager manage;
   ef::ResourceManager resource;
   t_bunny_window *win;
-  win = bunny_start(500,500, false, "test_blit");
+  win = bunny_start(1000,1000, false, "test_blit");
   std::cout << "build: " << resource.LoadBuild() << std::endl;
   std::cout << " wep : " << resource.LoadWeapon() << std::endl;
   resource.LoadSprit();
@@ -25,8 +25,10 @@ int main()
   screen->Clear(PINK);
   ef::Pos pos(0);
   ef::Building buil(resource.getBuild("LATHOURES"), resource.getSprit()[resource.getBuild("LATHOURES").img], pos,1,1,resource.getWeaponConf());
-  buil.displayButon(manage, text, resource.getSprit());
+  ef::Pos size(1000);
+  buil.displayButon(size, manage, text, resource.getSprit());
   manage.print(screen);
+  manage.printTerminal();
   bunny_blit(&win->buffer, screen->GetClip(), NULL);
   bunny_display(win);
   ef::Pos click(110);
@@ -40,6 +42,7 @@ int main()
   screen->Clear(PINK);
   buil.removeButon(manage);
   manage.print(screen);
+  manage.printTerminal();
   bunny_blit(&win->buffer, screen->GetClip(), NULL);
   bunny_display(win);
   std::cout << click.x<<", "<< click.y<< "\n";
