@@ -20,7 +20,7 @@ namespace ef
     void computeActions(double realTimePassed);
     void connectToServ(int ip, int port);
     void makePath(Pos dest, MoveType moveType);
-    void select(Pos start, Pos end, std::function<void(std::string)> func);
+    void select(Pos size, Pos start, Pos end, std::function<void(std::string)> func);
     void stopUnit();
     void setTarget(Pos clickPos);
     void placeBuilding(Pos pos);
