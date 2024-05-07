@@ -1,0 +1,14 @@
+
+[Object
+    name = "miniGunBullet"
+    img = "error.png"
+    [objSize
+        x = 1
+        y = 1
+    ]
+    maxHp = 12
+    armor = 6
+    rangeOfVision = 1
+    nbrDmg = 20
+    dmg = 18
+]

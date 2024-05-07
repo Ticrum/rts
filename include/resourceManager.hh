@@ -8,6 +8,7 @@
 #define __RESOURCEMANAGER_HH__
 
 #include "building.hh"
+#include "Bpixelarray.hh"
 #include <map>
 
 namespace ef
@@ -26,10 +27,13 @@ namespace ef
     std::vector<ConfWeapon> & getWeaponConf();
     int LoadShot(bool reset = false);
     ConfObj getShot(std::string name);
+    std::vector<ConfObj> & getShotConf();
     int LoadSprit(bool reset = false);
     std::map<std::string, std::shared_ptr<Bpixelarray>> &getSprit();
+    Bpixelarray &getFont();
 
   private:
+    Bpixelarray font;
     std::vector<ConfUnit> unitConf;
     std::vector<ConfWeapon> weaponConf;
     std::vector<ConfBuilding> buildingConf;

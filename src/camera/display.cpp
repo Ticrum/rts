@@ -11,6 +11,8 @@
 #include "camera.hh"
 #include "clientPlayerInfo.hh"
 
+#include <iostream>
+
 void ef::Camera::display(ClientPlayerInfo &cli)
 {
     if(win == NULL)
@@ -20,10 +22,13 @@ void ef::Camera::display(ClientPlayerInfo &cli)
     col.argb[GREEN_CMP] -= 50;
     game.Clear(col.full);
     cli.playerInfo.Display(game, *this, true);
-    std::vector<std::shared_ptr<Building>> tempBuilds = cli.getSelectedBuildings();
     //for (int i = 0; i < tempBuilds.size(); i += 1)
     //  tempBuilds[i]->displayButon(cli.man, func, cli.res.getSprit());
     cli.man.print(Hud);
+    t_bunny_position posi;
+    posi.x = 20;
+    posi.y = 0;
+    drawText(Hud, cli.res.getFont(), cli.playerInfo.getMoney(), posi);
     //cli.man.printTerminal();
     Pos pos;
     AcuPos apos;

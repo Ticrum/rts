@@ -44,8 +44,8 @@ namespace ef
   class Unit : public Object
   {
   public:
-    Unit(ConfUnit conf, std::shared_ptr<ef::Bpixelarray> _img, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf);
-    Unit(ConfUnit conf, std::shared_ptr<ef::Bpixelarray> _img, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, int actualHp, double _progress, int _actualIndex, MoveType type, std::vector<Pos> newPath, std::vector<double> cdr);
+    Unit(ConfUnit conf, std::shared_ptr<ef::Bpixelarray> _img, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, std::vector<ConfObj> & shotConf);
+    Unit(ConfUnit conf, std::shared_ptr<ef::Bpixelarray> _img, Pos _pos, int _objId, int _alegence, std::vector<ConfWeapon> & weaponsConf, std::vector<ConfObj> & shotConf, int actualHp, double _progress, int _actualIndex, MoveType type, std::vector<Pos> newPath, std::vector<double> cdr);
     double getSpeed();
     double getRunningSpeed();
     void moveUnit(double timePassed, Map & buildMap);

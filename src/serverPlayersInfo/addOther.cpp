@@ -17,13 +17,13 @@ void ef::ServerPlayersInfo::addOther(int buildId,
     std::map<std::string, std::shared_ptr<Bpixelarray>> &tmp = res.getSprit();
     
     if (type == PRODUCTION)
-      tempBuild.reset(new ProdBuilding(conf, tmp[conf.img], pos, buildId, playerId, res.getWeaponConf())); //get weapon conf
+      tempBuild.reset(new ProdBuilding(conf, tmp[conf.img], pos, buildId, playerId, res.getWeaponConf(), res.getShotConf())); //get weapon conf
     if (type == CONSTRUCT)
-      tempBuild.reset(new ConstructBuilding(conf, tmp[conf.img], pos, buildId, playerId, res.getWeaponConf())); //get weapon conf
+      tempBuild.reset(new ConstructBuilding(conf, tmp[conf.img], pos, buildId, playerId, res.getWeaponConf(), res.getShotConf())); //get weapon conf
     if (type == TECH)
-      tempBuild.reset(new TechBuilding(conf, tmp[conf.img], pos, buildId, playerId, res.getWeaponConf())); //get weapon conf
+      tempBuild.reset(new TechBuilding(conf, tmp[conf.img], pos, buildId, playerId, res.getWeaponConf(), res.getShotConf())); //get weapon conf
     else
-      tempBuild.reset(new Building(conf, tmp[conf.img], pos, buildId, playerId, res.getWeaponConf()));
+      tempBuild.reset(new Building(conf, tmp[conf.img], pos, buildId, playerId, res.getWeaponConf(), res.getShotConf()));
     playersInfo[playerId]->addOther(tempBuild, false);
 }
 

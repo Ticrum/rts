@@ -1,6 +1,6 @@
 [Object
     name = "baseSoldier"
-    img = "errorunit.png"
+    img = "soldier.jpg"
     [objSize
         x = 1
         y = 1
@@ -17,7 +17,7 @@
     runningSpeed = 0.75
     moveType = 0
     isFlying = false
-    timeToProduce = 100
+    timeToProduce = 1
     [weaponConf
         size = 1
         data = "rifle"

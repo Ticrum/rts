@@ -79,7 +79,7 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 		      std::vector<double> cdr;
 		      for (int i = 0; i < pack.addOtherUnit.nbrCdr; i += 1)
 			cdr.push_back(pack.addOtherUnit.cdr[i]);
-		      tempUnit.reset(new Unit(conf, res.getSprit()[conf.img], pack.addOtherUnit.posi.get(), pack.addOtherUnit.unitId, pack.addOtherUnit.alegence, res.getWeaponConf(), pack.addOtherUnit.actualHp, pack.addOtherUnit.progress, pack.addOtherUnit.actualIndex, pack.addOtherUnit.moveType, path, cdr));
+		      tempUnit.reset(new Unit(conf, res.getSprit()[conf.img], pack.addOtherUnit.posi.get(), pack.addOtherUnit.unitId, pack.addOtherUnit.alegence, res.getWeaponConf(), res.getShotConf(), pack.addOtherUnit.actualHp, pack.addOtherUnit.progress, pack.addOtherUnit.actualIndex, pack.addOtherUnit.moveType, path, cdr));
 		      playerInfo.addOther(tempUnit, pack.addOtherUnit.isOther);
 		    }
 		  else if (pack.type == ADDOTHERBUILDING)
@@ -92,13 +92,13 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 		      for (int i = 0; i < pack.addOtherBuilding.nbrCdr; i += 1)
 			cdr.push_back(pack.addOtherBuilding.cdr[i]);
 		      if (conf.type == PRODUCTION)
-			tempBuilding.reset(new ProdBuilding(conf, res.getSprit()[conf.img], pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), pack.addOtherBuilding.actualHp, cdr));
+			tempBuilding.reset(new ProdBuilding(conf, res.getSprit()[conf.img], pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), res.getShotConf(), pack.addOtherBuilding.actualHp, cdr));
 		      else if (conf.type == CONSTRUCT)
-			tempBuilding.reset(new ConstructBuilding(conf, res.getSprit()[conf.img], pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), pack.addOtherBuilding.actualHp, cdr));
+			tempBuilding.reset(new ConstructBuilding(conf, res.getSprit()[conf.img], pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), res.getShotConf(), pack.addOtherBuilding.actualHp, cdr));
 		      else if (conf.type == TECH)
-			tempBuilding.reset(new TechBuilding(conf, res.getSprit()[conf.img], pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), pack.addOtherBuilding.actualHp, cdr));
+			tempBuilding.reset(new TechBuilding(conf, res.getSprit()[conf.img], pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), res.getShotConf(), pack.addOtherBuilding.actualHp, cdr));
 		      else
-			tempBuilding.reset(new Building(conf, res.getSprit()[conf.img], pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), pack.addOtherBuilding.actualHp, cdr));
+			tempBuilding.reset(new Building(conf, res.getSprit()[conf.img], pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), res.getShotConf(), pack.addOtherBuilding.actualHp, cdr));
 
 		      std::cout << "Placed building is other : " << pack.addOtherBuilding.isOther << std::endl;
 		      playerInfo.addOther(tempBuilding, pack.addOtherBuilding.isOther);
@@ -163,7 +163,7 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 	    }
 	  if (gameStarted)
 	    {
-	      playerInfo.computeActions(timePassed, res.getWeaponConf(), true, clientUdp, serverConnected);
+	      playerInfo.computeActions(timePassed, res.getWeaponConf(), res.getShotConf(), true, clientUdp, serverConnected);
 	      playerInfo.updateVisionMap();
 	      playerInfo.computeShot(true);
 	    }

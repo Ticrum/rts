@@ -41,6 +41,12 @@ namespace ef
     t_bunny_position getMousePos();
     void drawSquareSelect(Pos start, Pos end);
     Pos getSize();
+    void drawText(Bpixelarray &pix,
+		  Bpixelarray &font,
+		  std::string str,
+		  t_bunny_position pos);
+    void drawBuildPos(bool canPlaceBuild);
+
   private:
     t_bunny_window *win;
     Bpixelarray game;

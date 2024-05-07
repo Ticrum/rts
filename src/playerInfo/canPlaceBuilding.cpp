@@ -16,7 +16,10 @@ bool ef::PlayerInfo::canPlaceBuilding(Pos pos)
     for (int i = 0; i < (int)otherBuildings.size(); i += 1)
         if (pos.isInRange(otherBuildings[i]->getPos(), 0, 0) != -1)
             return false;
+    for (int i = 0; i < (int)buildings.size(); i += 1)
+        if (pos.isInRange(buildings[i]->getPos(), 4, 4) > -1)
+            return true;
     std::cout << "PlacedBuild approuved" << std::endl;
-    return true;
+    return false;
 }
 

@@ -3,7 +3,7 @@
     shot = "sniperRifleBullet"
     dmg = 80
     nbrAtt = 1
-    cdrMax = 2
+    cdrMax = 1
     range = 5
     manualTarget = false
 ]

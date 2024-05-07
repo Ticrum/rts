@@ -12,6 +12,8 @@ void ef::ConstructBuilding::addBuildingToProd(ConfBuilding newBuilding)
 {
   std::cout << "before : " << newBuilding.conf << " size : " << this << std::endl;
   buildingProd.push_back(newBuilding);
+  if (buildingProd.size() == 1)
+    timeLeft = buildingProd[0].timeToProduce;
   std::cout << "after" << std::endl;
 }
 

@@ -44,7 +44,7 @@ ef::PlayerInfo::PlayerInfo(ResourceManager & res,
 	  tempPos.x = map.getMapSize().x - 6;
 	  tempPos.y = map.getMapSize().y - 6;
 	}
-      tempBuild.reset(new ConstructBuilding(confBuild, res.getSprit()[confBuild.img], tempPos, rand(), alegence, res.getWeaponConf()));
+      tempBuild.reset(new ConstructBuilding(confBuild, res.getSprit()[confBuild.img], tempPos, rand(), alegence, res.getWeaponConf(), res.getShotConf()));
       addOther(tempBuild, false);
     }
 }

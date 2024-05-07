@@ -10,6 +10,7 @@
 
 std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
                                                              std::vector<ConfWeapon> & weaponsConf,
+                                                             std::vector<ConfObj> & shotConf,
                                                              bool moveOther,
                                                              std::shared_ptr<UdpConnect> & serverUdp,
                                                              struct sockaddr_in & client)
@@ -40,7 +41,7 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
       if (buildings[i]->getType() == PRODUCTION)
 	{
 	  std::shared_ptr<ProdBuilding> prod = std::static_pointer_cast<ProdBuilding>(buildings[i]);
-	  std::shared_ptr<Unit> newUnit = prod->produceUnit(timePassed, weaponsConf, res.getSprit());
+	  std::shared_ptr<Unit> newUnit = prod->produceUnit(timePassed, weaponsConf, res.getShotConf(), res.getSprit());
 	  if (newUnit.get() != nullptr && !moveOther)
 	    {
 	      units.push_back(newUnit);
@@ -68,7 +69,7 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
       else if (buildings[i]->getType() == CONSTRUCT)
 	{
 	  std::shared_ptr<ConstructBuilding> construct = std::static_pointer_cast<ConstructBuilding>(buildings[i]);
-	  std::shared_ptr<Building> newBuilding = construct->produceBuilding(timePassed, weaponsConf,res.getSprit());
+	  std::shared_ptr<Building> newBuilding = construct->produceBuilding(timePassed, weaponsConf, shotConf, res.getSprit());
 	  if (newBuilding.get() != nullptr && !moveOther)
 	    producedBuilding.push_back(newBuilding);
 	}

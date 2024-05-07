@@ -8,6 +8,8 @@
 
 void ef::ProdBuilding::addUnitToProd(ConfUnit newUnit)
 {
-    unitProd.push_back(newUnit);
+  unitProd.push_back(newUnit);
+  if (unitProd.size() == 1)
+    timeLeft = unitProd[0].timeToProduce;
 }
 

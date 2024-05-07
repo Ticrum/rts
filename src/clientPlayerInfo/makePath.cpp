@@ -14,8 +14,8 @@ static ef::Pos groupDest(ef::Pos dest,
   int lenght = (int)sqrt(max);
   if (realLenght != (int)sqrt(max))
     lenght += 1;
-  dest.x = dest.x - lenght / 2 + i % lenght;
-  dest.y = dest.y - lenght / 2 + i / lenght;
+  dest.x = dest.x - (lenght / 2 + i % lenght) + (lenght / 2);
+  dest.y = dest.y - (lenght / 2 + i / lenght) + (lenght / 2);
   return dest;
 }
 

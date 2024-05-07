@@ -7,7 +7,8 @@
 #include "weapon.hh"
 
 ef::Weapon::Weapon(ConfWeapon conf,
-		   int _alegence)
+		   int _alegence,
+		   ConfObj _shot)
     :
     dmg(conf.dmg),
     nbrAtt(conf.nbrAtt),
@@ -16,7 +17,7 @@ ef::Weapon::Weapon(ConfWeapon conf,
     range(conf.range),
     manualTarget(conf.manualTarget),
     alegence(_alegence),
-    shot("resours/shot/conf/test.dabsic"),
+    shot(_shot),
     target(nullptr)
 {
 }

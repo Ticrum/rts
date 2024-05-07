@@ -14,6 +14,7 @@ namespace ef
     ef::ClientPlayerInfo cli;
     ef::Camera cam;
     bool isClick;
+    bool buildMode;
     Pos lastPos;
   };
 }; // !ef

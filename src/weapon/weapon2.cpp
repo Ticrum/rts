@@ -8,6 +8,7 @@
 
 ef::Weapon::Weapon(ConfWeapon conf,
 		   int _alegence,
+		   ConfObj _shot,
                    double _cdr)
     :
     dmg(conf.dmg),
@@ -17,7 +18,7 @@ ef::Weapon::Weapon(ConfWeapon conf,
     range(conf.range),
     manualTarget(conf.manualTarget),
     alegence(_alegence),
-    shot("resours/shot/conf/test.dabsic"),
+    shot(_shot),
     target(nullptr)
 {
 }

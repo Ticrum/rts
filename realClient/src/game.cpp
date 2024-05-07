@@ -8,7 +8,8 @@ ef::Game::Game(int port,
   :
   cli(port, 0),
   cam(sizex, sizey),
-  isClick(false)
+  isClick(false),
+  buildMode(false)
 {
   singleCommand = [&](std::string str)
   {

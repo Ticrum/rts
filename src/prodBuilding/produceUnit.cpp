@@ -10,21 +10,22 @@
 
 std::shared_ptr<ef::Unit> ef::ProdBuilding::produceUnit(double timePassed,
                                                         std::vector<ConfWeapon> & weaponsConf,
+                                                        std::vector<ConfObj> & shotConf,
 							std::map<std::string, std::shared_ptr<Bpixelarray>> & imgs)
 {
   std::shared_ptr<Unit> newUnit;
 
-  if (!onHold)
+  if (!onHold && timeLeft > 0)
     timeLeft -= timePassed;
+  //std::cout << "produce unit timeleft : " << timeLeft << std::endl;
   if (timeLeft <= 0)
     {
-      //std::cout << "unitProdSize : " << unitProd.size() << std::endl;
       if (unitProd.size() > 0)
         {
 	  Pos tempPos = getPos();
 	  tempPos.x += 1;
 	  //std::cout << "unit at x " << tempPos.x << " y " << tempPos.y << std::endl;
-	  newUnit.reset(new Unit(unitProd[0],imgs[unitProd[0].img], tempPos, rand(), alegence, weaponsConf));
+	  newUnit.reset(new Unit(unitProd[0],imgs[unitProd[0].img], tempPos, rand(), alegence, weaponsConf, shotConf));
 	  std::vector<ConfUnit> tempVect = unitProd;
 	  unitProd.clear();
 	  for (int i = 0; i < (int)tempVect.size() - 1; i += 1)

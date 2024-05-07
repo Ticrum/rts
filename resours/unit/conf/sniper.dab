@@ -1,6 +1,6 @@
 [Object
     name = "sniper"
-    img = "errorunit.png"
+    img = "sniper.jpg"
     [objSize
         x = 1
         y = 1
@@ -17,7 +17,7 @@
     runningSpeed = 0.6
     moveType = 0
     isFlying = false
-    timeToProduce = 100
+    timeToProduce = 1
     [weaponConf
         size = 1
         data = "sniperRifle"

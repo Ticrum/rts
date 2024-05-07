@@ -5,6 +5,34 @@
 static t_bunny_response loop(void *data)
 {
   ef::Game *game = (ef::Game *)data;
+  if (bunny_get_keyboard()[BKS_UP])
+    {
+      ef::AcuPos tempPos;
+      tempPos.x = 0;
+      tempPos.y = -5;
+      game->cam.Move(tempPos);
+    }
+  if (bunny_get_keyboard()[BKS_DOWN])
+    {
+      ef::AcuPos tempPos;
+      tempPos.x = 0;
+      tempPos.y = 5;
+      game->cam.Move(tempPos);
+    }
+  if (bunny_get_keyboard()[BKS_LEFT])
+    {
+      ef::AcuPos tempPos;
+      tempPos.x = -5;
+      tempPos.y = 0;
+      game->cam.Move(tempPos);
+    }
+  if (bunny_get_keyboard()[BKS_RIGHT])
+    {
+      ef::AcuPos tempPos;
+      tempPos.x = 5;
+      tempPos.y = 0;
+      game->cam.Move(tempPos);
+    }
   game->cli.computeActions(0.016);
   return GO_ON;
 }
@@ -12,14 +40,14 @@ static t_bunny_response loop(void *data)
 static t_bunny_response display(void *data)
 {
   ef::Game *game = (ef::Game *)data;
+  t_bunny_position pos = game->cam.getMousePos();
+  ef::Pos posi;
+  posi.x = pos.x;
+  posi.y = pos.y;
   if (game->isClick)
-    {
-      t_bunny_position pos = game->cam.getMousePos();
-      ef::Pos posi;
-      posi.x = pos.x;
-      posi.y = pos.y;
-      game->cam.drawSquareSelect(game->lastPos, posi);
-    }
+    game->cam.drawSquareSelect(game->lastPos, posi);
+  if (game->buildMode)
+    game->cam.drawBuildPos(game->cli.playerInfo.canPlaceBuilding(posi));
   game->cam.display(game->cli);
   return GO_ON;
 }
@@ -36,10 +64,10 @@ static t_bunny_response key(t_bunny_event_state state,
   if (sym == BKS_C)
     {
       char i[4];
-      i[0] = 127;
-      i[1] = 0;
-      i[2] = 0;
-      i[3] = 1;
+      i[0] = 192;
+      i[1] = 168;
+      i[2] = 200;
+      i[3] = 62;
       game->cli.connectToServ(*(int *)&i, 25300);
     }
   if (sym == BKS_S)
@@ -56,14 +84,7 @@ static t_bunny_response key(t_bunny_event_state state,
 	game->cli.produce(tempBuild->getId(), "UnitProductor", tempBuild->getType());
     }
   if (sym == BKS_B)
-    {
-      ef::Pos pos;
-      t_bunny_position posi = game->cam.getMousePos();
-      pos.x = posi.x;
-      pos.y = posi.y;
-      std::cout << "clickPos x : " << pos.x << " y : " << pos.y << std::endl;
-      game->cli.placeBuilding(pos);
-    }
+    game->buildMode = !game->buildMode;
   if (sym == BKS_U)
     {
       ef::Pos pos;
@@ -95,34 +116,6 @@ static t_bunny_response key(t_bunny_event_state state,
     game->cam.ZoomIn(game->cam.getZoom());
   if (sym == BKS_O)
     game->cam.ZoomOut(game->cam.getZoom() / 2);
-  if (sym == BKS_UP)
-    {
-      ef::AcuPos tempPos;
-      tempPos.x = 0;
-      tempPos.y = -10;
-      game->cam.Move(tempPos);
-    }
-  if (sym == BKS_DOWN)
-    {
-      ef::AcuPos tempPos;
-      tempPos.x = 0;
-      tempPos.y = 10;
-      game->cam.Move(tempPos);
-    }
-  if (sym == BKS_LEFT)
-    {
-      ef::AcuPos tempPos;
-      tempPos.x = -10;
-      tempPos.y = 0;
-      game->cam.Move(tempPos);
-    }
-  if (sym == BKS_RIGHT)
-    {
-      ef::AcuPos tempPos;
-      tempPos.x = 10;
-      tempPos.y = 0;
-      game->cam.Move(tempPos);
-    }
   return GO_ON;
 }
 
@@ -139,11 +132,19 @@ static t_bunny_response click(t_bunny_event_state state,
   const t_bunny_position *pos2 = bunny_get_mouse_position();
   posi2.x = pos2->x;
   posi2.y = pos2->y;
-  if (state == GO_DOWN)
-    std::cout << "main cc : " << game->cli.man.checkClick(posi2) << std::endl;
-  if (bunny_get_keyboard()[BKS_LSHIFT])
+  int result = 1;
+  if (game->buildMode == true && state == GO_DOWN)
     {
-      if (state == GO_UP)
+      std::cout << "clickPos x : " << posi.x << " y : " << posi.y << std::endl;
+      game->cli.placeBuilding(posi);
+      return GO_ON;
+    }
+  if (state == GO_DOWN)
+    result = game->cli.man.checkClick(posi2);
+  std::cout << "result : " << result << std::endl;
+  if (result == 1 && but == BMB_LEFT)
+    {
+      if (state == GO_UP && game->isClick == true)
 	{
 	  game->isClick = false;
 	  game->cli.select(game->cam.getSize(), game->lastPos, posi, game->singleCommand);
@@ -155,6 +156,8 @@ static t_bunny_response click(t_bunny_event_state state,
 	  game->isClick = true;
 	}
     }
+  if (but == BMB_RIGHT && state == GO_DOWN)
+    game->cli.makePath(posi, ef::WALK);
   return GO_ON;
 }
 

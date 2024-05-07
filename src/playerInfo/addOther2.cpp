@@ -9,10 +9,15 @@
 void ef::PlayerInfo::addOther(std::shared_ptr<Building> building,
                               bool isOther)
 {
-    if (isOther)
-        otherBuildings.push_back(building);
-    else
-        buildings.push_back(building);
-    buildingMap[building->getPos().x + building->getPos().y * buildingMap.getMapSize().x] = 1;
+  if (isOther)
+    otherBuildings.push_back(building);
+  else
+    {
+      buildings.push_back(building);
+      totalEnergy += building->getEnergyProduction();
+      actualEnergy += building->getEnergyProduction() - building->getEnergyCost();
+      moneyGain += building->getMoneyProduction();
+    }
+  buildingMap[building->getPos().x + building->getPos().y * buildingMap.getMapSize().x] = 1;
 }
 

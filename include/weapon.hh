@@ -42,8 +42,8 @@ namespace ef
   class Weapon
   {
   public:
-    Weapon(ConfWeapon conf, int _alegence);
-    Weapon(ConfWeapon conf, int _alegence, double _cdr);
+    Weapon(ConfWeapon conf, int _alegence, ConfObj _shot);
+    Weapon(ConfWeapon conf, int _alegence, ConfObj _shot, double _cdr);
     std::shared_ptr<Object> fireAction(double timePassed);
     void setNewTarget(std::shared_ptr<Object> newTarget, bool _isTargetBuild);
     void removeTarget();

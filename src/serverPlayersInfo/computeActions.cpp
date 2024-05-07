@@ -29,7 +29,7 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 	for (int i = 0; i < (int)playersInfo.size(); i += 1)
 	  {
 	    updateOther();
-	    playersInfo[i]->computeActions(timePassed, res.getWeaponConf(), false, serverUdp, clientConnected[i]);
+	    playersInfo[i]->computeActions(timePassed, res.getWeaponConf(), res.getShotConf(), false, serverUdp, clientConnected[i]);
 	  }
       // tcp read
       serverTcp->loop();

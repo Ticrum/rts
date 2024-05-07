@@ -12,10 +12,11 @@ ef::TechBuilding::TechBuilding(ConfBuilding conf,
                                int _objId,
                                int _alegence,
                                std::vector<ConfWeapon> & weaponsConf,
+			       std::vector<ConfObj> & shotConf,
                                int actualHp,
                                std::vector<double> cdr)
   :
-  Building(conf, _img, _pos, _objId, _alegence, weaponsConf, actualHp, cdr)
+  Building(conf, _img, _pos, _objId, _alegence, weaponsConf, shotConf, actualHp, cdr)
 {
 }
 

@@ -5,7 +5,7 @@ int ef::ResourceManager::LoadUnit(bool reset)
 {
   if(reset)
     unitConf.clear();
-  std::vector<std::string> conf = {"missingno.dabsic"};
+  std::vector<std::string> conf = {"missingno.dabsic", "scout.dab", "baseSoldier.dab", "sniper.dab"};
   std::string stati = "resours/unit/conf/";
   if(unitConf.size() == conf.size())
     return -2;

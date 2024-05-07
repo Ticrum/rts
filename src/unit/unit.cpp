@@ -11,7 +11,8 @@ ef::Unit::Unit(ConfUnit conf,
 	       Pos _pos,
                int _objId,
                int _alegence,
-               std::vector<ConfWeapon> & weaponsConf)
+               std::vector<ConfWeapon> & weaponsConf,
+	       std::vector<ConfObj> & shotConf)
   :
   Object(conf, _img, _pos, _objId, _alegence),
   actualIndex(0),
@@ -25,7 +26,12 @@ ef::Unit::Unit(ConfUnit conf,
     for (int j = 0; j < (int)weaponsConf.size(); j += 1)
       if (conf.weaponConf[i] == weaponsConf[j].conf)
 	{
-	  weapons.emplace_back(weaponsConf[j], alegence);
+	  for (int k = 0; k < (int)shotConf.size(); k += 1)
+	    if (weaponsConf[j].ShotConf == shotConf[k].conf)
+	    {
+	      weapons.emplace_back(weaponsConf[j], alegence, shotConf[k]);
+	      k = shotConf.size() + 1;
+	    }
 	  j = weaponsConf.size() + 1;
 	}
 }

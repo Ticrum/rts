@@ -34,7 +34,7 @@ namespace ef
     void setTarget(std::shared_ptr<Building> build, std::shared_ptr<Object> other, bool isTargetBuild);
     void refreshTarget(std::shared_ptr<Unit> unit, std::vector<std::shared_ptr<Object>> targets);
     void refreshTarget(std::shared_ptr<Building> build, std::vector<std::shared_ptr<Object>> targets);
-    std::vector<TargetReturn> computeActions(double timePassed, std::vector<ConfWeapon> & weaponsConf, bool moveOther, std::shared_ptr<UdpConnect> & serverUdp, struct sockaddr_in & clients);
+    std::vector<TargetReturn> computeActions(double timePassed, std::vector<ConfWeapon> & weaponsConf, std::vector<ConfObj> & shotConf, bool moveOther, std::shared_ptr<UdpConnect> & serverUdp, struct sockaddr_in & clients);
     std::vector<std::shared_ptr<Object>> finishAction(double timePassed);
     void computeShot(bool isClient);
     void placeBuilding(std::shared_ptr<Building> building);
@@ -70,6 +70,7 @@ namespace ef
     std::shared_ptr<Building> getBuildingAtPos(Pos pos);
     std::shared_ptr<Building> getFirstBuild();
     void updateVisionMap();
+    std::string getMoney();
 
   private:
     int alegence;

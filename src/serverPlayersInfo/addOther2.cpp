@@ -14,7 +14,7 @@ void ef::ServerPlayersInfo::addOther(int unitId,
     std::shared_ptr<Unit> tempUnit;
     ConfUnit conf = res.getUnit(unit);
     std::map<std::string, std::shared_ptr<Bpixelarray>> &tmp = res.getSprit();
-    tempUnit.reset(new Unit(conf, tmp[conf.img], pos, unitId, playerId, res.getWeaponConf()));
+    tempUnit.reset(new Unit(conf, tmp[conf.img], pos, unitId, playerId, res.getWeaponConf(), res.getShotConf()));
     playersInfo[playerId]->addOther(tempUnit, true);
 }
 
