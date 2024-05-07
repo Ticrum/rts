@@ -34,13 +34,14 @@ void ef::Building::displayButon(ef::Pos size,
   unsigned int background;
   std::string pxName;
   std::string action;
-  while(tmp < butons.size()&& max > 0)
+  std::shared_ptr<ef::Bpixelarray> tmpSprits(new Bpixelarray());
+while(tmp < butons.size()&& max > 0)
     {
       outside = std::stoul(extract(tmp, butons, ','));
       background = std::stoul(extract(tmp, butons, ','));
       pxName = extract(tmp, butons, ',');
       action = extract(tmp, butons, ',');
-      manager.add(groupButon, print, square, outside, background, sprits[pxName], action, func, Case);
+      manager.add(groupButon, print, square, outside, background, ((sprits.count(pxName) == 0)?tmpSprits : sprits[pxName]), action, func, Case);
       if(square.x >= size.x - square.w - ((square.w * 2) / 3.0))
 	{
 	  square.x = (square.w / 3.0)  + (((double)size.x * 8.0)/ 10.0);

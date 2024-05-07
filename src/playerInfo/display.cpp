@@ -30,8 +30,8 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
     {
       for (int i = 0; i < pxSize.x * pxSize.y; i += 1)
 	{
-	  int index = (int)((i % pxSize.x + cam.getPos().x * cam.getZoom()) * ((double)map.getMapSize().x / ((double)pxSize.x * cam.getZoom()))) + (int)((i / pxSize.x + cam.getPos().y * cam.getZoom()) * ((double)map.getMapSize().y / ((double)pxSize.y * cam.getZoom()))) * map.getMapSize().x;
-	  if (index < map.getMapSize().x * map.getMapSize().y && index >= 0 && i % pxSize.x > -cam.getPos().x && i % pxSize.x < (-cam.getPos().x + pxSize.x * cam.getZoom()))
+	  int index = (int)((i % pxSize.x + camPos.x * cam.getZoom()) * ((double)map.getMapSize().x / ((double)pxSize.x * cam.getZoom()))) + (int)((i / pxSize.x + camPos.y * cam.getZoom()) * ((double)map.getMapSize().y / ((double)pxSize.y * cam.getZoom()))) * map.getMapSize().x;
+	  if (index < map.getMapSize().x * map.getMapSize().y && index >= 0 && i % pxSize.x > -camPos.x && i % pxSize.x < (-camPos.x + pxSize.x * cam.getZoom()))
 	    {
 	      pixPos.x = i % pxSize.x;
 	      pixPos.y = i / pxSize.x;
@@ -123,8 +123,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
     }
   
   // display fog
-  if(!fog)
-    return;
+  
   rationMapPix.x = visionMap.getMapSize().x;
   rationMapPix.y = visionMap.getMapSize().y;
   int totalpx = pxSize.x * pxSize.y;
@@ -132,14 +131,103 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
   t_bunny_color color;
   Pos tmp;
 
-  for(int i = 0; i < totalpx; i++)
+  if(fog)
     {
-      int index = (int)((i % pxSize.x + cam.getPos().x * cam.getZoom()) * ((double)rationMapPix.x / ((double)pxSize.x * cam.getZoom()))) + (int)((i / pxSize.x + cam.getPos().y * cam.getZoom()) * ((double)rationMapPix.y / ((double)pxSize.y * cam.getZoom()))) * rationMapPix.x;
-      if (index < visionMap.getMapSize().x * visionMap.getMapSize().y && index >= 0 && i % pxSize.x > -cam.getPos().x && i % pxSize.x < (-cam.getPos().x + pxSize.x * cam.getZoom()))
+      unsigned int div = 4;
+      Pos mapSize = visionMap.getMapSize();
+      AcuPos limit;
+      limit.x = camPos.x / rationMapPix.x + pxSize.x / rationMapPix.x;
+      limit.y = camPos.y / rationMapPix.y + pxSize.y / rationMapPix.y;
+      AcuPos rectSize;
+      rectSize.x = rationMapPix.x / div;
+      rectSize.y = rationMapPix.y / div;
+      Pos cursor;
+      cursor.x = camPos.x;
+      cursor.y = mapSize.x * (camPos.y);
+      Pos carre;
+      while(cursor.x < mapSize.x && cursor.y < mapSize.y &&  (double)cursor.x < limit.x && (double)cursor.y < limit.y)
 	{
-	  switch(visionMap[index])
+	  if(cursor.x >= 0 && cursor.x < mapSize.x &&
+	     cursor.y >= 0 && cursor.y < mapSize.y)
 	    {
-	    case 0:
+	      switch(visionMap[cursor.x + cursor.y * mapSize.x])
+		{
+		case 0:
+		  rdm = rand() % 31;
+		  color.argb[RED_CMP] = rdm;
+		  color.argb[GREEN_CMP] = rdm;
+		  color.argb[BLUE_CMP] = rdm;
+		  color.argb[ALPHA_CMP] = 255 - (rdm%15);
+		  break;
+		case 1:
+		  color.argb[RED_CMP] = 0;
+		  color.argb[GREEN_CMP] = 0;
+		  color.argb[BLUE_CMP] = 0;
+		  color.argb[ALPHA_CMP] = 120 - (rand()%30);
+		  break;
+		case 2:
+		  color.argb[ALPHA_CMP] = 0;
+		}
+	    }
+	  else
+	    {
+	      color.argb[RED_CMP] = 0;
+	      color.argb[GREEN_CMP] = 0;
+	      color.argb[BLUE_CMP] = 0;
+	      color.argb[ALPHA_CMP] = 255;
+	    }
+	  if(color.argb[ALPHA_CMP] != 0)
+	    px.rectangle(carre, rectSize, color.full, color.full);
+	  if(carre.y / rationMapPix.y >= cursor.y)
+	    {
+	      if(cursor.x == limit.x)
+		{
+		  cursor.x = camPos.x / rationMapPix.x;
+		  cursor.y ++;
+		}
+	      else
+		cursor.x ++;
+	      carre.x = cursor.x;
+	      carre.y = cursor.y;
+	    }
+	  else
+	    if(carre.x - (double)cursor.x >= (rationMapPix.x * ((double)div - 1.0)) / (double)div)
+	      {
+		carre.x = cursor.x;
+		carre.x += rectSize.x;
+	      }
+	    else
+	      carre.x += rectSize.x;
+	}
+      /*for(int i = 0; i < totalpx; i++)
+	{
+	  int index = (int)((i % pxSize.x + cam.getPos().x * cam.getZoom()) * ((double)rationMapPix.x / ((double)pxSize.x * cam.getZoom()))) + (int)((i / pxSize.x + cam.getPos().y * cam.getZoom()) * ((double)rationMapPix.y / ((double)pxSize.y * cam.getZoom()))) * rationMapPix.x;
+	  if (index < visionMap.getMapSize().x * visionMap.getMapSize().y && index >= 0 && i % pxSize.x > -cam.getPos().x && i % pxSize.x < (-cam.getPos().x + pxSize.x * cam.getZoom()))
+	    {
+	      switch(visionMap[index])
+		{
+		case 0:
+		  rdm = rand() % 31;
+		  color.argb[RED_CMP] = rdm;
+		  color.argb[GREEN_CMP] = rdm;
+		  color.argb[BLUE_CMP] = rdm;
+		  color.argb[ALPHA_CMP] = 255 - (rdm%15);
+		  tmp.x = i % pxSize.x;
+		  tmp.y = i / pxSize.x;
+		  px.placePixel(tmp, color.full);
+		  break;
+		case 1:
+		  color.argb[RED_CMP] = 0;
+		  color.argb[GREEN_CMP] = 0;
+		  color.argb[BLUE_CMP] = 0;
+		  color.argb[ALPHA_CMP] = 100 - (rand()%32);
+		  tmp.x = i % pxSize.x;
+		  tmp.y = i / pxSize.x;
+		  px.placePixel(tmp, color.full);
+		}
+	    }
+	  else
+	    {
 	      rdm = rand() % 31;
 	      color.argb[RED_CMP] = rdm;
 	      color.argb[GREEN_CMP] = rdm;
@@ -148,28 +236,8 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 	      tmp.x = i % pxSize.x;
 	      tmp.y = i / pxSize.x;
 	      px.placePixel(tmp, color.full);
-	      break;
-	    case 1:
-	      color.argb[RED_CMP] = 0;
-	      color.argb[GREEN_CMP] = 0;
-	      color.argb[BLUE_CMP] = 0;
-	      color.argb[ALPHA_CMP] = 100 - (rand()%32);
-	      tmp.x = i % pxSize.x;
-	      tmp.y = i / pxSize.x;
-	      px.placePixel(tmp, color.full);
 	    }
-	}
-      else
-	{
-	  rdm = rand() % 31;
-	  color.argb[RED_CMP] = rdm;
-	  color.argb[GREEN_CMP] = rdm;
-	  color.argb[BLUE_CMP] = rdm;
-	  color.argb[ALPHA_CMP] = 255 - (rdm%15);
-	  tmp.x = i % pxSize.x;
-	  tmp.y = i / pxSize.x;
-	  px.placePixel(tmp, color.full);
-	}
+	    }*/
     }
   // display minimap
   pxSize.x = pxSize.x * 0.3;

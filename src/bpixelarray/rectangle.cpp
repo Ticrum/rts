@@ -11,9 +11,9 @@
 #include "Bpixelarray.hh"
 
 void ef::Bpixelarray::rectangle(ef::Pos &start,
-				 ef::AcuPos &size,
-				 unsigned int &background,
-				 unsigned int &outline)
+				ef::AcuPos &size,
+				unsigned int &background,
+				unsigned int &outline)
 {
   AcuPos pos;
   pos.x = start.x;
