@@ -17,7 +17,7 @@ int ef::ResourceManager::LoadSprit(bool reset)
       std::shared_ptr<Bpixelarray> tmp = std::make_shared<Bpixelarray>();
       temp = stati + allConf[i];
       for(int tri = 0;tri < 10 && (exit = tmp->Init(temp)) != 0; tri ++)
-	  std::cout<<"try n°"<< tri<<" : " << " file ("<< temp <<") ";
+	std::cout<<"try n°"<< tri<<" : " << " file ("<< temp <<") "<< std::endl;
       if(exit)
 	return i;
       else
