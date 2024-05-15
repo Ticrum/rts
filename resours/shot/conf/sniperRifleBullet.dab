@@ -10,5 +10,5 @@
     armor = 8
     rangeOfVision = 1
     nbrDmg = 1
-    dmg = 80
+    dmg = 40
 ]

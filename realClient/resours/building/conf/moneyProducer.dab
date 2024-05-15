@@ -6,19 +6,19 @@
     y = 1
   ]
   maxHp = 900
-  armor = 10
+  armor = 12
   rangeOfVision = 3
   nbrDmg = 0
   dmg = 0
 ]
 [Building
-  cost = 850
-  timeToProduce = 6
+  cost = 700
+  timeToProduce = 7
   type = 5
   canBeTarget = true
   energyCost = 10
   energyProduction = 0
-  moneyProduction = 100
+  moneyProduction = 3
   butons = "0,"
   [weaponConf
     size = 0

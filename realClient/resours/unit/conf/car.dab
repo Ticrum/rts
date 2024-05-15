@@ -1,0 +1,25 @@
+[Object
+    name = "car"
+    img = "car.jpg"
+    [objSize
+        x = 1
+        y = 1
+    ]
+    maxHp = 400
+    armor = 12
+    rangeOfVision = 6
+    nbrDmg = 0
+    dmg = 0
+]
+[Unit
+    cost = 350
+    speed = 1.5
+    runningSpeed = 2
+    moveType = 0
+    isFlying = false
+    timeToProduce = 3.5
+    [weaponConf
+        size = 2
+        data = "rifle", "rifle"
+    ]
+]

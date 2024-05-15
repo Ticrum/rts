@@ -9,6 +9,6 @@
     maxHp = 50
     armor = 0
     rangeOfVision = 1
-    nbrDmg = 3
-    dmg = 20
+    nbrDmg = 8
+    dmg = 10
 ]

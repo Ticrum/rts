@@ -17,7 +17,7 @@
     runningSpeed = 1
     moveType = 0
     isFlying = false
-    timeToProduce = 1
+    timeToProduce = 0.75
     [weaponConf
         size = 1
         data = "pistol"

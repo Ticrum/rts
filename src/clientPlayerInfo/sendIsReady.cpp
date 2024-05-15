@@ -12,9 +12,12 @@
 
 void ef::ClientPlayerInfo::sendIsReady()
 {
-  Packet pack;
-  pack.type = ISREADY;
-  pack.ready.isReady = true;
-  clientUdp->sendData((char *)&pack, sizeof(Packet), serverConnected);
+  if (isConnected)
+    {
+      Packet pack;
+      pack.type = ISREADY;
+      pack.ready.isReady = true;
+      clientUdp->sendData((char *)&pack, sizeof(Packet), serverConnected);
+    }
 }
 

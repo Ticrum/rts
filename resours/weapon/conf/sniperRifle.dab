@@ -1,7 +1,7 @@
 [Weapon
     name = "sniperRifle"
     shot = "sniperRifleBullet"
-    dmg = 80
+    dmg = 40
     nbrAtt = 1
     cdrMax = 1
     range = 5

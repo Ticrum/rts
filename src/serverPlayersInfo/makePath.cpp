@@ -15,13 +15,13 @@ void ef::ServerPlayersInfo::makePath(int unitId,
 {
     std::shared_ptr<Unit> unit;
 
-    std::cout << "!!!!!!!!!!!!!!!!MAKE PATH!!!!!!!!!!!!!!!!!!!" << std::endl;
+    //std::cout << "!!!!!!!!!!!!!!!!MAKE PATH!!!!!!!!!!!!!!!!!!!" << std::endl;
     unit = playersInfo[playerId]->getUnit(unitId, false);
     if (unit.get() == nullptr)
       return;
     if (moveType == STATIC)
       {
-	std::cout << "make Path stop" << std::endl;
+	//std::cout << "make Path stop" << std::endl;
         stopUnit(unitId, playerId);
       }
     else
@@ -32,7 +32,7 @@ void ef::ServerPlayersInfo::makePath(int unitId,
         pack.pathUnit.unitId = unit->getId();
         pack.pathUnit.moveType = unit->getMoveType();
         std::vector<ConformPos> newPos = unit->getPathLeft();
-	std::cout << "send New path (make path) size : " << newPos.size() << std::endl;
+	//std::cout << "send New path (make path) size : " << newPos.size() << std::endl;
 	//for (int i = (int)newPos.size() - 1; i >= 0; i -= 1)
 	for (int i = 0; i < (int)newPos.size(); i += 1)
 	  pack.pathUnit.pos[newPos.size() - 1 - i] = newPos[i];

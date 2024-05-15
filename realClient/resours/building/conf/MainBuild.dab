@@ -12,14 +12,14 @@
   dmg = 0
 ]
 [Building
-  cost = 2200
-  timeToProduce = 0.2
+  cost = 1200
+  timeToProduce = 12
   type = 1
   canBeTarget = true
   energyCost = 10
   energyProduction = 0
   moneyProduction = 1
-  butons = "3,T,4294902015,4278190080,barracks.jpg,produce UnitProductor,4294902015,4278190080,tower.jpg,produce LATHOURES,4294902015,4278190080,moneyprinter.jpg,produce moneyProducer,"
+  butons = "4,T,4294902015,4278190080,barracks.jpg,produce UnitProductor,4294902015,4278190080,tower.jpg,produce LATHOURES,4294902015,4278190080,moneyprinter.jpg,produce moneyProducer,4294902015,4278190080,factory.jpg,produce VehiculeProductor,"
   [weaponConf
     size = 0
     data = "miniGun"

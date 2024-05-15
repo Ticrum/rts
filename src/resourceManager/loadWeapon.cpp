@@ -5,7 +5,7 @@ int ef::ResourceManager::LoadWeapon(bool reset)
 {
   if(reset)
     weaponConf.clear();
-  std::vector<std::string> conf = {"LEsTIK.dabsic", "miniGun.dabsic", "rifle.dab", "pistol.dab", "sniperRifle.dab"};
+  std::vector<std::string> conf = {"LEsTIK.dabsic", "miniGun.dabsic", "rifle.dab", "pistol.dab", "sniperRifle.dab", "artilleryGun.dab", "cannon.dab", "rocketLauncher.dab"};
   std::string stati = "resours/weapon/conf/";
   if(weaponConf.size() == conf.size())
     return -2;

@@ -16,7 +16,7 @@ std::vector<ef::ConformPos> ef::Unit::getPathLeft()
     if (start > 0)
       {
 	start -= 1;
-	std::cout << "getPathLeft comence not from start" << std::endl;
+	//std::cout << "getPathLeft comence not from start" << std::endl;
       }
     for(int i = start; i < (int)path.size(); i += 1)
         tempPath.push_back(path[i].get());

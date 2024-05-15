@@ -1,0 +1,25 @@
+[Object
+    name = "rocketSoldier"
+    img = "rocket.jpg"
+    [objSize
+        x = 1
+        y = 1
+    ]
+    maxHp = 100
+    armor = 4
+    rangeOfVision = 4
+    nbrDmg = 0
+    dmg = 0
+]
+[Unit
+    cost = 100
+    speed = 0.3
+    runningSpeed = 0.5
+    moveType = 0
+    isFlying = false
+    timeToProduce = 1
+    [weaponConf
+        size = 1
+        data = "rocketLauncher"
+    ]
+]

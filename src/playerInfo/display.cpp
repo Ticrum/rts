@@ -54,8 +54,8 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       casePos = buildings[i]->getPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
-      //if(cam.IsIn(pixPos, buildings[i]->getImg()))
-      buildings[i]->Display(px, rationMapPix, camPos, cam.getZoom());
+      if(cam.IsIn(pixPos, rationMapPix, buildings[i]->getImg()))
+	buildings[i]->Display(px, rationMapPix, camPos, cam.getZoom());
     }
   for(unsigned int i = 0; i < otherBuildings.size(); i++)
     {
@@ -63,8 +63,8 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       casePos = otherBuildings[i]->getPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
-      //if(cam.IsIn(pixPos, otherBuildings[i]->getImg()))
-      otherBuildings[i]->Display(px, rationMapPix, camPos, cam.getZoom());
+      if(cam.IsIn(pixPos, rationMapPix, otherBuildings[i]->getImg()))
+	otherBuildings[i]->Display(px, rationMapPix, camPos, cam.getZoom());
     }
   for(unsigned int i = 0; i < units.size(); i++)
     {
@@ -72,8 +72,8 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       casePos = units[i]->getActualPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
-      //if(cam.IsIn(pixPos, units[i]->getImg()))
-      units[i]->UnitDisplay(px, rationMapPix, camPos, cam.getZoom());
+      if(cam.IsIn(pixPos, rationMapPix, units[i]->getImg()))
+	units[i]->UnitDisplay(px, rationMapPix, camPos, cam.getZoom());
     }
   for(unsigned int i = 0; i < otherUnits.size(); i++)
     {
@@ -81,8 +81,8 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       casePos = otherUnits[i]->getActualPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
-      //if(cam.IsIn(pixPos, otherUnits[i]->getImg()))
-      otherUnits[i]->UnitDisplay(px, rationMapPix, camPos, cam.getZoom());
+      if(cam.IsIn(pixPos, rationMapPix, otherUnits[i]->getImg()))
+	otherUnits[i]->UnitDisplay(px, rationMapPix, camPos, cam.getZoom());
     }
 
   for(unsigned int i = 0; i < buildings.size(); i++)
@@ -91,8 +91,11 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       casePos = buildings[i]->getPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
-      //if(cam.IsIn(pixPos, buildings[i]->getImg()))
-      buildings[i]->DisplayHealth(px, rationMapPix, camPos, cam.getZoom());
+      if(cam.IsIn(pixPos, rationMapPix, buildings[i]->getImg()))
+	{
+	  buildings[i]->DisplayHealth(px, rationMapPix, camPos, cam.getZoom());
+	  buildings[i]->displayProgress(px, rationMapPix, camPos, cam.getZoom(), buildings[i]);
+	}
     }
   for(unsigned int i = 0; i < otherBuildings.size(); i++)
     {
@@ -100,8 +103,8 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       casePos = otherBuildings[i]->getPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
-      //if(cam.IsIn(pixPos, otherBuildings[i]->getImg()))
-      otherBuildings[i]->DisplayHealth(px, rationMapPix, camPos, cam.getZoom());
+      if(cam.IsIn(pixPos, rationMapPix, otherBuildings[i]->getImg()))
+	otherBuildings[i]->DisplayHealth(px, rationMapPix, camPos, cam.getZoom());
     }
   for(unsigned int i = 0; i < units.size(); i++)
     {
@@ -109,8 +112,8 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       casePos = units[i]->getPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
-      //if(cam.IsIn(pixPos, units[i]->getImg()))
-      units[i]->DisplayHealth(px, rationMapPix, camPos, cam.getZoom(), units[i]->getPartPath(), units[i]->getProgress());
+      if(cam.IsIn(pixPos, rationMapPix, units[i]->getImg()))
+	units[i]->DisplayHealth(px, rationMapPix, camPos, cam.getZoom(), units[i]->getPartPath(), units[i]->getProgress());
     }
   for(unsigned int i = 0; i < otherUnits.size(); i++)
     {
@@ -118,8 +121,8 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       casePos = otherUnits[i]->getPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
-      //if(cam.IsIn(pixPos, otherUnits[i]->getImg()))
-      otherUnits[i]->DisplayHealth(px, rationMapPix, camPos, cam.getZoom(), otherUnits[i]->getPartPath(), otherUnits[i]->getProgress());
+      if(cam.IsIn(pixPos, rationMapPix, otherUnits[i]->getImg()))
+	otherUnits[i]->DisplayHealth(px, rationMapPix, camPos, cam.getZoom(), otherUnits[i]->getPartPath(), otherUnits[i]->getProgress());
     }
   
   // display fog
@@ -176,6 +179,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
   pxSize.y = pxSize.y * 0.3;
   rationMapPix.x = (pxSize.x) / (double)map.getMapSize().x;
   rationMapPix.y = (pxSize.y) / (double)map.getMapSize().y;
+  int decal = pxSize.y * 2.35;
   for(int i = 0; i < pxSize.x * pxSize.y; i++)
     {
       int index = (int)((i % pxSize.x) / (double)rationMapPix.x) + (int)((i / pxSize.x) / (double)rationMapPix.y) * map.getMapSize().x;
@@ -189,7 +193,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 	      color.argb[BLUE_CMP] = 0;
 	      color.argb[ALPHA_CMP] = 255;
 	      tmp.x = i % (int)pxSize.x;
-	      tmp.y = i / pxSize.x + (pxSize.y * 2);
+	      tmp.y = i / pxSize.x + (decal);
 	      px.placePixel(tmp, color.full);
 	      break;
 	    case 1:
@@ -198,7 +202,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 	      color.argb[BLUE_CMP] = 0;
 	      color.argb[ALPHA_CMP] = 255;
 	      tmp.x = i % (int)pxSize.x;
-	      tmp.y = i / pxSize.x + (pxSize.y * 2);
+	      tmp.y = i / pxSize.x + (decal);
 	      px.placePixel(tmp, color.full);
 	      break;
 	    case 2:
@@ -207,7 +211,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 	      color.argb[BLUE_CMP] = 0;
 	      color.argb[ALPHA_CMP] = 255;
 	      tmp.x = i % (int)pxSize.x;
-	      tmp.y = i / pxSize.x + (pxSize.y * 2);
+	      tmp.y = i / pxSize.x + (decal);
 	      px.placePixel(tmp, color.full);
 	    }
 	}
@@ -219,11 +223,10 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 	  color.argb[BLUE_CMP] = rdm;
 	  color.argb[ALPHA_CMP] = 255 - (rdm%15);
 	  tmp.x = i % (int)pxSize.x;
-	  tmp.y = i / pxSize.x + (pxSize.y * 2);
+	  tmp.y = i / pxSize.x + (decal);
 	  px.placePixel(tmp, color.full);
 	}
     }
-  int decal = pxSize.y * 2;
   for(unsigned int i = 0; i < buildings.size(); i++)
     {
       casePos = buildings[i]->getPos();

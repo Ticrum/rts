@@ -11,10 +11,10 @@
 void ef::Unit::changePath(std::vector<Pos> newPath,
                           MoveType type)
 {
-  std::cout << "change path size : " << newPath.size() << std::endl;
+  //std::cout << "change path size : " << newPath.size() << std::endl;
   if (path.size() > 0)
     {
-      std::cout << "change path reset" << std::endl;
+      //std::cout << "change path reset" << std::endl;
       if (actualIndex > 0)
 	pos = path[actualIndex - 1];
       path.clear();

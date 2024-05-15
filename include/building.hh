@@ -73,6 +73,11 @@ namespace ef
     TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others, bool isBuilding);
     void manualTargeting(std::shared_ptr<Object> target, bool isTargetBuild);
     std::vector<double> getWeaponsCd();
+    void displayProgress(ef::Bpixelarray &px,
+			 ef::AcuPos caseSize,
+			 ef::AcuPos camStart,
+			 double zoom,
+			 std::shared_ptr<Building> self);
 
   protected:
     BuildingType type;
@@ -98,6 +103,10 @@ namespace ef
     void addUnitToProd(ConfUnit newUnit);
     bool getOnHold();
     void setOnHold(bool newState);
+    void displayProgress(ef::Bpixelarray &px,
+			 ef::AcuPos caseSize,
+			 ef::AcuPos camStart,
+			 double zoom);
 
   private:
     double timeLeft;
@@ -117,6 +126,10 @@ namespace ef
     void addBuildingToProd(ConfBuilding newBuilding);
     bool getOnHold();
     void setOnHold(bool newState);
+    void displayProgress(ef::Bpixelarray &px,
+			 ef::AcuPos caseSize,
+			 ef::AcuPos camStart,
+			 double zoom);
 
   private:
     double timeLeft;

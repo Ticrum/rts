@@ -1,0 +1,25 @@
+[Object
+    name = "barbar"
+    img = "barbar.jpg"
+    [objSize
+        x = 1
+        y = 1
+    ]
+    maxHp = 130
+    armor = 8
+    rangeOfVision = 2
+    nbrDmg = 0
+    dmg = 0
+]
+[Unit
+    cost = 50
+    speed = 0.85
+    runningSpeed = 1.2
+    moveType = 0
+    isFlying = false
+    timeToProduce = 0.5
+    [weaponConf
+        size = 1
+        data = "LeStik"
+    ]
+]

@@ -1,0 +1,25 @@
+[Object
+    name = "tank"
+    img = "tank.png"
+    [objSize
+        x = 1
+        y = 1
+    ]
+    maxHp = 550
+    armor = 35
+    rangeOfVision = 5
+    nbrDmg = 0
+    dmg = 0
+]
+[Unit
+    cost = 600
+    speed = 0.85
+    runningSpeed = 1.3
+    moveType = 0
+    isFlying = false
+    timeToProduce = 6
+    [weaponConf
+        size = 2
+        data = "rifle", "cannon"
+    ]
+]

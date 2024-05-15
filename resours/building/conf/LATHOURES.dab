@@ -12,8 +12,8 @@
   dmg = 0
 ]
 [Building
-  cost = 1000
-  timeToProduce = 4
+  cost = 600
+  timeToProduce = 6
   type = 3
   canBeTarget = true
   energyCost = 10

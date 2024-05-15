@@ -29,6 +29,7 @@ namespace ef
 	   int height);
     int Init(std::string screen);
     bool IsIn(Pos start,
+	      AcuPos caseSize,
 	      std::shared_ptr<ef::Bpixelarray> &pic);
     void ZoomIn(double add);
     double getZoom();

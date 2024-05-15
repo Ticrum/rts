@@ -1,0 +1,9 @@
+[Weapon
+    name = "cannon"
+    shot = "cannonBullet"
+    dmg = 140
+    nbrAtt = 1
+    cdrMax = 3
+    range = 4
+    manualTarget = false
+]

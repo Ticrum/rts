@@ -16,7 +16,10 @@ std::shared_ptr<ef::Building> ef::ConstructBuilding::produceBuilding(double time
   std::shared_ptr<Building> newBuilding;
 
   if (!onHold && timeLeft > 0)
-    timeLeft -= timePassed;
+    {
+      timeLeft -= timePassed;
+      //std::cout << "produceBuilding pass time : " << std::endl;
+    }
   if (timeLeft <= 0)
     {
       //std::cout << "buildProdSize : " << buildingProd.size() << std::endl;

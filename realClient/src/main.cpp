@@ -5,31 +5,35 @@
 static t_bunny_response loop(void *data)
 {
   ef::Game *game = (ef::Game *)data;
-  if (bunny_get_keyboard()[BKS_UP])
+  const t_bunny_position *pos = bunny_get_mouse_position();
+  double speed = 7.0 / game->cam.getZoom();
+  if (speed < 1)
+    speed = 1;
+  if (bunny_get_keyboard()[BKS_UP] || pos->y < 20)
     {
       ef::AcuPos tempPos;
       tempPos.x = 0;
-      tempPos.y = -5;
+      tempPos.y = -speed;
       game->cam.Move(tempPos);
     }
-  if (bunny_get_keyboard()[BKS_DOWN])
+  if (bunny_get_keyboard()[BKS_DOWN] || pos->y > game->cam.getSize().y - 20)
     {
       ef::AcuPos tempPos;
       tempPos.x = 0;
-      tempPos.y = 5;
+      tempPos.y = speed;
       game->cam.Move(tempPos);
     }
-  if (bunny_get_keyboard()[BKS_LEFT])
+  if (bunny_get_keyboard()[BKS_LEFT] || pos->x < 20)
     {
       ef::AcuPos tempPos;
-      tempPos.x = -5;
+      tempPos.x = -speed;
       tempPos.y = 0;
       game->cam.Move(tempPos);
     }
-  if (bunny_get_keyboard()[BKS_RIGHT])
+  if (bunny_get_keyboard()[BKS_RIGHT] || pos->x > game->cam.getSize().x - 20)
     {
       ef::AcuPos tempPos;
-      tempPos.x = 5;
+      tempPos.x = speed;
       tempPos.y = 0;
       game->cam.Move(tempPos);
     }
@@ -68,49 +72,20 @@ static t_bunny_response key(t_bunny_event_state state,
       i[1] = 168;
       i[2] = 200;
       i[3] = 62;
-      game->cli.connectToServ(*(int *)&i, 25300);
+      game->cli.connectToServ(*(int *)&i, 64841);
     }
   if (sym == BKS_S)
     game->cli.sendIsReady();
-  if (sym == BKS_P)
-    {
-      ef::Pos pos;
-      t_bunny_position posi = game->cam.getMousePos();
-      pos.x = posi.x;
-      pos.y = posi.y;
-      std::cout << "clickPos x : " << pos.x << " y : " << pos.y << std::endl;
-      std::shared_ptr<ef::Building> tempBuild = game->cli.playerInfo.getBuildingAtPos(pos);
-      if (tempBuild.get() != nullptr)
-	game->cli.produce(tempBuild->getId(), "UnitProductor", tempBuild->getType());
-    }
   if (sym == BKS_B)
     game->buildMode = !game->buildMode;
-  if (sym == BKS_U)
-    {
-      ef::Pos pos;
-      t_bunny_position posi = game->cam.getMousePos();
-      pos.x = posi.x;
-      pos.y = posi.y;
-      std::shared_ptr<ef::Building> tempBuild = game->cli.playerInfo.getBuildingAtPos(pos);
-      if (tempBuild.get() != nullptr)
-	game->cli.produce(tempBuild->getId(), "missingno", tempBuild->getType());
-    }
   if (sym == BKS_A)
     {
       ef::Pos posi[2];
       posi[0].x = 0;
       posi[0].y = 0;
-      posi[1].x = 31;
-      posi[1].y = 31;
+      posi[1].x = 63;
+      posi[1].y = 63;
       game->cli.select(game->cam.getSize(), posi[0], posi[1], game->singleCommand);
-    }
-  if (sym == BKS_M)
-    {
-      ef::Pos pos;
-      t_bunny_position posi = game->cam.getMousePos();
-      pos.x = posi.x;
-      pos.y = posi.y;
-      game->cli.makePath(pos, ef::WALK);
     }
   if (sym == BKS_I)
     game->cam.ZoomIn(game->cam.getZoom());
@@ -133,15 +108,17 @@ static t_bunny_response click(t_bunny_event_state state,
   posi2.x = pos2->x;
   posi2.y = pos2->y;
   int result = 1;
-  if (game->buildMode == true && state == GO_DOWN)
+  if (but == BMB_MIDDLE && state == GO_DOWN)
+    game->buildMode = !game->buildMode;
+  if (game->buildMode == true && state == GO_DOWN && but == BMB_LEFT)
     {
-      std::cout << "clickPos x : " << posi.x << " y : " << posi.y << std::endl;
+      //std::cout << "clickPos x : " << posi.x << " y : " << posi.y << std::endl;
       game->cli.placeBuilding(posi);
       return GO_ON;
     }
   if (state == GO_DOWN)
     result = game->cli.man.checkClick(posi2);
-  std::cout << "result : " << result << std::endl;
+  //std::cout << "result : " << result << std::endl;
   if (result == 1 && but == BMB_LEFT)
     {
       if (state == GO_UP && game->isClick == true)
@@ -161,6 +138,20 @@ static t_bunny_response click(t_bunny_event_state state,
   return GO_ON;
 }
 
+static t_bunny_response wheel(int wheelid,
+			      int delta,
+			      void *data)
+{
+  ef::Game *game = (ef::Game *)data;
+
+  //std::cout << "delta : " << delta << std::endl;
+  if (delta == 1)
+    game->cam.ZoomIn(game->cam.getZoom());
+  if (delta == -1)
+    game->cam.ZoomOut(game->cam.getZoom() / 2);
+  return GO_ON;
+}
+
 int main(int nbrin,
 	 char **inputs)
 {
@@ -176,6 +167,7 @@ int main(int nbrin,
   bunny_set_key_response(key);
   bunny_set_click_response(click);
   bunny_set_display_function(display);
+  bunny_set_wheel_response(wheel);
   game.singleCommand("azerty qwerty");
   bunny_loop(game.cam.getWin(), 60, &game);
 }

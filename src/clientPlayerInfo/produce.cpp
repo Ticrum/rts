@@ -6,7 +6,7 @@
 
 #include "clientPlayerInfo.hh"
 
-#include "iostream"
+#include <iostream>
 
 void ef::ClientPlayerInfo::produce(int producerId,
                                    std::string unitToProd,
@@ -30,6 +30,8 @@ void ef::ClientPlayerInfo::produce(int producerId,
       ConfUnit conf = res.getUnit(unitToProd);
       if (conf.maxhp >= 0)
 	hasProduced = playerInfo.produce(pBuild, conf);
+      else
+	std::cout << "produce in clientplayerinfo BAD CONF" << std::endl;
     }
   else if (type == CONSTRUCT)
     {
@@ -37,6 +39,8 @@ void ef::ClientPlayerInfo::produce(int producerId,
       ConfBuilding conf = res.getBuild(unitToProd);
       if (conf.maxhp >= 0)
 	hasProduced = playerInfo.produce(cBuild, conf);
+      else
+	std::cout << "produce in clientplayerinfo BAD CONF" << std::endl;
     }
   else if (type == TECH)
     {
