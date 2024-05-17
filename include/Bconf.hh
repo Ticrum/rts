@@ -12,8 +12,7 @@
 
 namespace ef
 {
-    
-    class Bconf
+  class Bconf
     {
     public:
         Bconf(std::string file);

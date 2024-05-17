@@ -5,7 +5,7 @@
 
 int main()
 {
-  ef::ResourceManager rsa;
+/*ef::ResourceManager rsa;
   int error = rsa.LoadUnit();
   std::cout<< "LoadUnit "<<error<<"\n";
   error = rsa.LoadBuild();
@@ -56,4 +56,5 @@ int main()
   bunny_display(win);
   sleep(10);
   return 0;
-}
+*/}
+
