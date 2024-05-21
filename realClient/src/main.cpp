@@ -48,11 +48,12 @@ static t_bunny_response display(void *data)
   ef::Pos posi;
   posi.x = pos.x;
   posi.y = pos.y;
+  game->cam.display(game->cli);
   if (game->isClick)
     game->cam.drawSquareSelect(game->lastPos, posi);
   if (game->buildMode)
     game->cam.drawBuildPos(game->cli.playerInfo.canPlaceBuilding(posi));
-  game->cam.display(game->cli);
+  game->cam.finalDisplay(game->cli);
   return GO_ON;
 }
 
@@ -146,9 +147,9 @@ static t_bunny_response wheel(int wheelid,
 
   //std::cout << "delta : " << delta << std::endl;
   if (delta == 1)
-    game->cam.ZoomIn(game->cam.getZoom());
+    game->cam.ZoomIn(game->cam.getZoom() / 4.0);
   if (delta == -1)
-    game->cam.ZoomOut(game->cam.getZoom() / 2);
+    game->cam.ZoomOut((game->cam.getZoom() / 5.0));
   return GO_ON;
 }
 
@@ -161,13 +162,12 @@ int main(int nbrin,
       return 0;
     }
   int port = atoi(inputs[1]);
-  ef::Game game(port, 600, 600);
+  static ef::Game game(port, 1000, 1000);
 
   bunny_set_loop_main_function(loop);
   bunny_set_key_response(key);
   bunny_set_click_response(click);
   bunny_set_display_function(display);
   bunny_set_wheel_response(wheel);
-  game.singleCommand("azerty qwerty");
   bunny_loop(game.cam.getWin(), 60, &game);
 }

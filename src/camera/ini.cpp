@@ -13,5 +13,6 @@ int ef::Camera::Init(std::string screen)
       return 2;
     if((win = bunny_start(size.x, size.y, false, (god)? &(screen + "_serveur_rts")[0]: &(screen + "_client_rts")[0])) == NULL)
         return 3;
+    main = bunny_new_picture(size.x, size.y);
     return 0;
 }

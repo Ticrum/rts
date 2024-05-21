@@ -55,7 +55,8 @@ void ef::Object::DisplayHealth(ef::Bpixelarray &px,
   while(square.y - (tmp.y - ((objSize.y * caseSize.y) / 4)) < size.y)
     {
       if(square.x >= 0 && square.x < max.x && square.y >= 0 && square.y < max.y)
-	px.GetSetPixel(square.x, square.y) = (square.x - tmp.x < tempon)? GREEN: RED;
+	px.placePixel(square, (square.x - tmp.x < tempon)? GREEN: RED);
+	//px.GetSetPixel(square.x, square.y) = (square.x - tmp.x < tempon)? GREEN: RED;
       square.x++;
       if(size.x <= square.x - tmp.x)
 	{

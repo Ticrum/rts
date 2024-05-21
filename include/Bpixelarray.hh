@@ -18,18 +18,34 @@
 
 namespace ef
 {
+  struct Vertex
+  {
+    t_bunny_accurate_position pos;
+    t_bunny_position tex;
+    unsigned int color;
+  };
+
+  template <int Len>
+  struct VertexArray
+  {
+    size_t length;
+    Vertex vertex[Len];
+  };
+
+
   class Bpixelarray
   {
   public:
+    Bpixelarray(const Bpixelarray &) = delete;
     Bpixelarray();
     ~Bpixelarray();
     void Clear(unsigned int color);
     bool Init(unsigned int width,
 	      unsigned int height);
     bool Init(std::string file);
-    unsigned int &GetSetPixel(unsigned int pos);
-    unsigned int &GetSetPixel(unsigned int x,
-			      unsigned int y);
+    //unsigned int &GetSetPixel(unsigned int pos);
+    //unsigned int &GetSetPixel(unsigned int x,
+    //			      unsigned int y);
     void placePixel(Pos &pos,
 		    unsigned int colo);
     void Blit(Bpixelarray &other,
@@ -45,8 +61,14 @@ namespace ef
 		   AcuPos &size,
 		   unsigned int &background,
 		   unsigned int &outline);
+
+    VertexArray<45000> recVec;
+    VertexArray<5000> lineVec;
+    VertexArray<20000> pixVec;
+
   private:
-    t_bunny_pixelarray *px;
+    //t_bunny_pixelarray *px;
+    t_bunny_picture *px; // for GPU compute
     std::unique_ptr<unsigned int[]> pixels;
   };
 };//!ef

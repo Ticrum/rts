@@ -37,6 +37,7 @@ namespace ef
     void Move(AcuPos move);
     AcuPos getPos();
     void display(ClientPlayerInfo &cli);
+    void finalDisplay(ClientPlayerInfo &cli);
     void display(ServerPlayersInfo &srv);
     t_bunny_window *getWin();
     t_bunny_position getMousePos();
@@ -50,6 +51,7 @@ namespace ef
 
   private:
     t_bunny_window *win;
+    t_bunny_picture *main;
     Bpixelarray game;
     Bpixelarray Hud;
     double zoom;
