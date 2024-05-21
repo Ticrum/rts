@@ -26,9 +26,9 @@ void ef::Camera::drawBuildPos(bool canPlaceBuild)
 	tempPos.x = x;
 	tempPos.y = y;
 	if (canPlaceBuild)
-	  Hud.placePixel(tempPos, GREEN);
+	  game.placePixel(tempPos, GREEN);
 	else
-	  Hud.placePixel(tempPos, RED);
+	  game.placePixel(tempPos, RED);
       }
 }
 

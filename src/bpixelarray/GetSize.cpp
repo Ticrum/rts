@@ -6,8 +6,8 @@ ef::Pos ef::Bpixelarray::GetSize()
 
     if(px != NULL)
     {
-        pos.x = px->clipable.buffer.width;
-        pos.y = px->clipable.buffer.height;
+        pos.x = px->buffer.width;
+        pos.y = px->buffer.height;
     }
     else
     {

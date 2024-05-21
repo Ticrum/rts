@@ -14,6 +14,7 @@ ef::ResourceManager::ResourceManager()
 {
   int compt = 0;
 
+  bunny_enable_full_blit(true);
   font.Init("resours/font.png");
   while (LoadUnit(false) >= 0 && compt < 5)
     compt += 1;

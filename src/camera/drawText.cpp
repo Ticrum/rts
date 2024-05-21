@@ -20,12 +20,34 @@ static void print_char(ef::Bpixelarray &pix,
   ef::Pos temp;
   unsigned int color;
 
+  ef::VertexArray<5> tempV;
+  tempV.length = 4;
+  tempV.vertex[0].pos.x = pos.x;
+  tempV.vertex[0].pos.y = pos.y;
+  tempV.vertex[0].tex.x = c * 10;
+  tempV.vertex[0].tex.y = 0;
+  tempV.vertex[1].pos.x = pos.x + 10;
+  tempV.vertex[1].pos.y = pos.y;
+  tempV.vertex[1].tex.x = c * 10 + 10;
+  tempV.vertex[1].tex.y = 0;
+  tempV.vertex[2].pos.x = pos.x + 10;
+  tempV.vertex[2].pos.y = pos.y + 14;
+  tempV.vertex[2].tex.x = c * 10 + 10;
+  tempV.vertex[2].tex.y = 14;
+  tempV.vertex[3].pos.x = pos.x;
+  tempV.vertex[3].pos.y = pos.y + 14;
+  tempV.vertex[3].tex.x = c * 10;
+  tempV.vertex[3].tex.y = 14;
+  bunny_set_geometry(&pix.GetClip()->buffer, BGY_QUADS, (t_bunny_vertex_array *)&tempV, font.GetClip());
+
+  /*
   y = 0;
   while (y < 14)
     {
       x = 0;
       while (x < 10)
         {
+	  
 	  color = font.GetSetPixel(x + c * 10, y);//px[x + (c * 10) + (y * font->clipable.buffer.width)];
 	  //printf("col %u %u\n", color, WHITE);
 	  if (color == 4290013695)
@@ -38,6 +60,7 @@ static void print_char(ef::Bpixelarray &pix,
         }
       y += 1;
     }
+  */
 }
 
 void ef::Camera::drawText(Bpixelarray &pix,
