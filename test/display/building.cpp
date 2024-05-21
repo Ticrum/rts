@@ -9,7 +9,7 @@ static void text(std::string cmd)
 
 int main()
 {
-  ef::Bpixelarray screen;
+/*ef::Bpixelarray screen;
   while(screen.Init(1000, 1000));
   ef::ButonManager manage;
   ef::ResourceManager resource;
@@ -54,4 +54,5 @@ int main()
   std::cout << click.x<<", "<< click.y<< "\n";
   manage.checkClick(click);
   sleep(5);
-}
+*/}
+

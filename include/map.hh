@@ -9,6 +9,7 @@ namespace ef
   {
   public:
     Map(int sizex, int sizey);
+    Map(std::string &file);
     Pos getMapSize();
     char & operator[](int index);
     void clear(char data);
