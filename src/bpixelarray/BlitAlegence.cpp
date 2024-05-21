@@ -50,6 +50,17 @@ void ef::Bpixelarray::Blit(ef::Bpixelarray &other,
   bunny_set_geometry(&px->buffer, BGY_QUADS, (t_bunny_vertex_array *)&tempV, other.GetClip());
   tempV.length = 5;
   bunny_set_geometry(&px->buffer, BGY_LINE_STRIP, (t_bunny_vertex_array *)&tempV, NULL);
+  tempV.vertex[0].pos.x = start.x + 1;
+  tempV.vertex[0].pos.y = start.y + 1;
+  tempV.vertex[1].pos.x = end.x - 1;
+  tempV.vertex[1].pos.y = start.y + 1;
+  tempV.vertex[2].pos.x = end.x - 1;
+  tempV.vertex[2].pos.y = end.y - 1;
+  tempV.vertex[3].pos.x = start.x + 1;
+  tempV.vertex[3].pos.y = end.y - 1;
+  tempV.vertex[4].pos.x = start.x + 1;
+  tempV.vertex[4].pos.y = start.y + 1;
+  bunny_set_geometry(&px->buffer, BGY_LINE_STRIP, (t_bunny_vertex_array *)&tempV, NULL);
   //free(tempV.vertex);
   /*
   std::map<int, bool> gate;

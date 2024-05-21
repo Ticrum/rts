@@ -17,6 +17,7 @@ void ef::ButonManager::print(ef::Bpixelarray &px,
 			     double ratioCasePix)
 {
   Pos min;
+  AcuPos mina;
   AcuPos max;
   for(unsigned int i = 0; i < groupIds.size(); ++i)
     {
@@ -32,7 +33,11 @@ void ef::ButonManager::print(ef::Bpixelarray &px,
 	      if(group[groupIds[i]].buton[chariot].sprit->GetClip() != NULL)
 		px.Blit(*group[groupIds[i]].buton[chariot].sprit, min, max);
 	      else
-		px.rectangle(min, max, group[groupIds[i]].buton[chariot].background.full, group[groupIds[i]].buton[chariot].outside.full);
+		{
+		  mina.x = min.x;
+		  mina.y = min.y;
+		  px.rectangle(mina, max, group[groupIds[i]].buton[chariot].background.full, group[groupIds[i]].buton[chariot].outside.full);
+		}
 	    }
 	  chariot ++;
 	}

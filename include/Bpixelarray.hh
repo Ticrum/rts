@@ -57,7 +57,7 @@ namespace ef
 	      int alegence);
     t_bunny_clipable *GetClip()const;
     Pos GetSize();
-    void rectangle(Pos &start,
+    void rectangle(AcuPos &start,
 		   AcuPos &size,
 		   unsigned int &background,
 		   unsigned int &outline);

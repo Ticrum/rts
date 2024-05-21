@@ -10,7 +10,7 @@
 
 #include "Bpixelarray.hh"
 
-void ef::Bpixelarray::rectangle(ef::Pos &start,
+void ef::Bpixelarray::rectangle(ef::AcuPos &start,
 				ef::AcuPos &size,
 				unsigned int &background,
 				unsigned int &outline)

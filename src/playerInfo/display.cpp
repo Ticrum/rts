@@ -42,7 +42,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       /*Acu*/Pos cursor;
       cursor.x = (camPos.x * cam.getZoom()) / rationMapPix.x -1;
       cursor.y = (camPos.y * cam.getZoom()) / rationMapPix.y -1;
-      Pos casePx;
+      AcuPos casePx;
       /*std::cout << "__-PL INFO-__\npxSize : " << pxSize.x << " : " << pxSize.y <<
 	"\nzoom : " << cam.getZoom()<<
 	"\nmapSize : "<< mapSize.x << " | "<< mapSize.y <<
@@ -64,8 +64,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 		case 0:
 		  color.full = GREEN;
 		  color.argb[GREEN_CMP] = 170;
-		  color.argb[RED_CMP] = 30;
-		  
+		  color.argb[RED_CMP] = 40;
 		  break;
 		case 1:
 		  color.full = BLUE;
@@ -255,7 +254,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
       /*Acu*/Pos cursor;
       cursor.x = (camPos.x * cam.getZoom()) / rationMapPix.x -1;
       cursor.y = (camPos.y * cam.getZoom()) / rationMapPix.y -1;
-      Pos casePx;
+      AcuPos casePx;
       /*std::cout << "__-PL INFO-__\npxSize : " << pxSize.x << " : " << pxSize.y <<
 	"\nzoom : " << cam.getZoom()<<
 	"\nmapSize : "<< mapSize.x << " | "<< mapSize.y <<
