@@ -63,7 +63,7 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 		  //std::cout << "serv pass check" << std::endl;
 		  if (pack.type == ISREADY)
 		    {
-		      //std::cout << "packet is ready" << std::endl;
+		      std::cout << "packet is ready" << std::endl;
 		      clientReady[playerId] = pack.ready.isReady;
 		    }
 		  int compt = 0;
@@ -72,7 +72,7 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 		      compt += 1;
 		  if (compt == (int)clientReady.size())
 		    {
-		      //std::cout << "GAME HAS STARTED" << std::endl;
+		      std::cout << "GAME HAS STARTED" << std::endl;
 		      gameStarted = true;
 		      Packet pack;
 		      pack.type = GAMESTART;

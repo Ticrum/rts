@@ -59,8 +59,8 @@ namespace ef
     Pos GetSize();
     void rectangle(AcuPos &start,
 		   AcuPos &size,
-		   unsigned int &background,
-		   unsigned int &outline);
+		   unsigned int background,
+		   unsigned int outline);
 
     VertexArray<45000> recVec;
     VertexArray<5000> lineVec;

@@ -267,7 +267,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 	casePx.y = cursor.y * rationMapPix.y - (camPos.y * cam.getZoom());*/
       casePx.x = cursor.x * rationMapPix.x - (camPos.x * cam.getZoom());
       casePx.y = cursor.y * rationMapPix.y - (camPos.y * cam.getZoom());
-      Pos caseStart(casePx);
+      AcuPos caseStart(casePx);
       while(cursor.x + mapSize.x * cursor.y < limit.x + mapSize.x *  limit.y)
 	{
 	  /*while(casePx.y >= caseStart.y + rationMapPix.y)
@@ -282,7 +282,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 		      color.argb[RED_CMP] = 10 + rdm;
 		      color.argb[GREEN_CMP] = 10 + rdm;
 		      color.argb[BLUE_CMP] = 10 + rdm;
-		      color.argb[ALPHA_CMP] = 255 - (10 + rdm%15);
+		      color.argb[ALPHA_CMP] = 255 - (rdm%15);
 		      break;
 		    case 1:
 		      color.argb[RED_CMP] = 10;
@@ -509,5 +509,5 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
     bunny_set_geometry(&px.GetClip()->buffer, BGY_LINES, (t_bunny_vertex_array *)&px.lineVec, NULL);
   px.lineVec.length = 0;
   int stop = clock();
-  std::cout << "display in playerinfo time passed : " << (double)(stop - startTime) / CLOCKS_PER_SEC << std::endl;
+  //std::cout << "display in playerinfo time passed : " << (double)(stop - startTime) / CLOCKS_PER_SEC << std::endl;
 }

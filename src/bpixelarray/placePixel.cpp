@@ -5,6 +5,8 @@
 void ef::Bpixelarray::placePixel(Pos &pos,
                                  unsigned int colo)
 {
+  if (pixVec.length > 40000)
+    std::cout << "placePixel AHHHHHHH" << std::endl;
   if (px == NULL)
     return;
   if(pos.x >= 0 && pos.x < px->buffer.width && pos.y >= 0 && pos.y < px->buffer.height)

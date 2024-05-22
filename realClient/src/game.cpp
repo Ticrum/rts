@@ -57,7 +57,8 @@ ef::Game::Game(int port,
     else if (args[0] == "sendIsReady")
       cli.sendIsReady();
   };
-  for(char i, j =0;i <10 && (j = cam.Init("client")) != 0; i++)
+  char j;
+  for(int i = 0; i < 10 && (j = cam.Init("client")) != 0; i++)
     std::cout<< "game construct " << std::to_string(j) << std::endl;
   cam.ZoomIn(1);
   lastPos.x = -1;

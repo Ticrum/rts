@@ -27,6 +27,6 @@ void ef::Camera::finalDisplay(ClientPlayerInfo &cli)
   bunny_blit(&win->buffer, game.GetClip(), NULL);
   bunny_display(win);
   int stop = clock();
-  std::cout << "finalDisplay time passed : " << (double)(stop - start) / CLOCKS_PER_SEC << std::endl;
+  //std::cout << "finalDisplay time passed : " << (double)(stop - start) / CLOCKS_PER_SEC << std::endl;
 }
 

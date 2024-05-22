@@ -13,22 +13,19 @@
 void ef::Camera::drawBuildPos(bool canPlaceBuild)
 {
   t_bunny_position posi = getMousePos();
-  Pos start;
+  AcuPos start;
   start.x = posi.x;
   start.y = posi.y;
   double caseSize = (size.x / (double)mapSize.x) * zoom;
   start.x = (start.x) * caseSize - pos.x * zoom;
   start.y = (start.y) * caseSize - pos.y * zoom;
   Pos tempPos;
-  for (int x = start.x; x < start.x + caseSize; x += 1)
-    for (int y = start.y; y < start.y + caseSize; y += 1)
-      {
-	tempPos.x = x;
-	tempPos.y = y;
-	if (canPlaceBuild)
-	  game.placePixel(tempPos, GREEN);
-	else
-	  game.placePixel(tempPos, RED);
-      }
+  AcuPos Size;
+  Size.x = caseSize;
+  Size.y = caseSize;
+  if (canPlaceBuild)
+    game.rectangle(start, Size, GREEN, GREEN);
+  else
+    game.rectangle(start, Size, RED, RED);
 }
 

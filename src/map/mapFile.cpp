@@ -12,7 +12,7 @@
 #include "Bconf.hh"
 #include <iostream>
 
-ef::Map::Map(std::string &file)
+ef::Map::Map(std::string file)
 {
   Bconf conf(std::string("resours/maps/") + file);
   bool gate = true;

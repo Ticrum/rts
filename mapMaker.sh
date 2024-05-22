@@ -7,7 +7,7 @@ SIZEY=64
 #    exit 0
 #fi
 #BASENAME=$1
-echo -e -n "[Map\n[Size\nx = $SIZEX\ny = $SIZEY\n]\nmap = [\n" > $BASENAME
+echo -e -n "[Map\n[Size\nx = $SIZEX\ny = $SIZEY\n]\n{map\n" > $BASENAME
 for ((J=0;$J<$SIZEY;$((J+=1))))
 do
     for ((I=0;$I<$SIZEX;$((I+=1))))
@@ -25,4 +25,4 @@ do
     done
     echo -e -n "\n" >> $BASENAME
 done
-echo -e "]\n]" >> $BASENAME
+echo -e "}\n]" >> $BASENAME
