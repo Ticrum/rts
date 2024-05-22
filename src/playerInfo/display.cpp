@@ -56,6 +56,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 	Pos caseStart(casePx);*/
       while(cursor.x + mapSize.x * cursor.y < limit.x + mapSize.x *  limit.y)
 	{
+	  //while(casePx.y >= caseStart.y + rationMapPix.y){
 	  if(cursor.x >= 0 && cursor.x < mapSize.x &&
 	     cursor.y >= 0 && cursor.y < mapSize.y)
 	    {
@@ -83,8 +84,15 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 	      casePx.y = cursor.y * rationMapPix.y - (camPos.y * cam.getZoom());
 	      px.rectangle(casePx, rectSize, color.full, color.full);
 	    }
-	  /*if(casePx.y >= caseStart.y + (rationMapPix.y *(div-1)) /div)
-	    {*/
+	  /*if(casePx.y >= caseStart.y + rationMapPix.y)
+	    {
+	    casePx.x = cursor.x * rationMapPix.x - (camPos.x * cam.getZoom());
+	    casePx.y += rectSize.y;
+	    }
+	    else
+	    casePx.x += rectSize.x;
+	    }
+	    */
 	  if(cursor.x >= limit.x)
 	    {
 	      cursor.x = (camPos.x* cam.getZoom()) / rationMapPix.x;
