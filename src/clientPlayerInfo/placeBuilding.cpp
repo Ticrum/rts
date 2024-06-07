@@ -6,9 +6,20 @@
 
 #include "clientPlayerInfo.hh"
 
+#include <iostream>
+
 void ef::ClientPlayerInfo::placeBuilding(Pos pos)
 {
-  playerInfo.placeBuilding(pos);
+  //playerInfo.placeBuilding(pos);
+  std::cout << "placeBuilding clientplayerinfo pass " << std::endl;
+  std::vector<std::shared_ptr<Building>> temp = playerInfo.getProducedBuilding();
+  if (temp.size() > 0)
+    {
+      playerInfo.getProducedBuilding().clear();
+      for (int i = 0; i < (int)temp.size() - 1; i += 1)
+	playerInfo.getProducedBuilding().push_back(temp[i + 1]);
+    }
+
   Packet pack;
   pack.type = PLACEBUILD;
   pack.placeBuild.pos = pos.get();

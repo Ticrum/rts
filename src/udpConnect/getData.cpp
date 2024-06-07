@@ -9,6 +9,14 @@
 int ef::UdpConnect::getData(char *data,
                             int len)
 {
+  if (buffer.size() > 0)
+    {
+      memcpy(data, buffer[0].get(), len);
+      sockGet = sockBuffer[0];
+      int result = resultBuffer[0];
+      popBuffer(false);
+      return result;
+    }
   if (fd[0].revents & POLLIN)
     {
       int result = recvfrom(fd[0].fd, data, len, 0, (struct sockaddr *)&sockGet, (socklen_t *)&s);

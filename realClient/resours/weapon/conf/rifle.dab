@@ -1,9 +1,10 @@
 [Weapon
-    name = "rifle"
-    shot = "rifleBullet"
-    dmg = 15
-    nbrAtt = 3
-    cdrMax = 1
-    range = 3
-    manualTarget = false
+  name = "rifle"
+  shot = "rifleBullet"
+  dmg = 15
+  nbrAtt = 3
+  cdrMax = 1
+  range = 3
+  manualTarget = true
+  canTargetFly = false
 ]

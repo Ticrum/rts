@@ -11,6 +11,8 @@ namespace ef
 
     ef::ServerPlayersInfo srv;
     ef::Camera cam;
+    int startTime;
+    int stop;
   };
 }; // !ef
 

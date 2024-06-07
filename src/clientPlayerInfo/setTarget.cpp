@@ -15,15 +15,13 @@ void ef::ClientPlayerInfo::setTarget(Pos clickPos)
       for (int i = 0; i < (int)selectedUnit.size(); i += 1)
         {
 	  playerInfo.setTarget(selectedUnit[i], tempUnit, false);
-	  /*
-            Packet pack;
-            pack.type = SETTARGET;
-            pack.setTarget.unitId = selectedUnit[i]->getId();
-            pack.setTarget.otherId = tempUnit->getId();
-            pack.setTarget.isBuilding = false;
-            clientUdp->sendData((char *)&pack, sizeof(Packet), serverConnected);
-	  */
-        }
+	  Packet pack;
+	  pack.type = SETTARGET;
+	  pack.setTarget.unitId = selectedUnit[i]->getId();
+	  pack.setTarget.otherId = tempUnit->getId();
+	  pack.setTarget.isBuilding = false;
+	  clientUdp->sendData((char *)&pack, sizeof(Packet), serverConnected);
+	}
     }
   else if (tempBuilding.get() != nullptr)
     {

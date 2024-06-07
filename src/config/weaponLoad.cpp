@@ -29,6 +29,8 @@ int ef::ConfWeapon::load(std::string &file)
     return 6;
   if(!bunny_configuration_getf_bool(conff.Get(), &manualTarget , "Weapon.manualTarget"))
     return 7;
+  if(!bunny_configuration_getf_bool(conff.Get(), &canTargetFly , "Weapon.canTargetFly"))
+    return 9;
   if(!bunny_configuration_getf_string(conff.Get(), &buf, "Weapon.shot"))
     return 8;
   ShotConf.clear();

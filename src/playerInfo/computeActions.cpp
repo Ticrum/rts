@@ -38,7 +38,7 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
 	  else
 	    tar.back().isTargetBuilding.push_back(true);
         }
-      if (buildings[i]->getType() == PRODUCTION)
+      if (buildings[i]->getType() == PRODUCTION && actualEnergy >= 0)
 	{
 	  std::shared_ptr<ProdBuilding> prod = std::static_pointer_cast<ProdBuilding>(buildings[i]);
 	  std::shared_ptr<Unit> newUnit = prod->produceUnit(timePassed, weaponsConf, res.getShotConf(), res.getSprit());
@@ -70,10 +70,10 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
 	{
 	  std::shared_ptr<ConstructBuilding> construct = std::static_pointer_cast<ConstructBuilding>(buildings[i]);
 	  std::shared_ptr<Building> newBuilding = construct->produceBuilding(timePassed, weaponsConf, shotConf, res.getSprit());
-	  if (newBuilding.get() != nullptr && !moveOther)
+	  if (newBuilding.get() != nullptr)
 	    producedBuilding.push_back(newBuilding);
 	}
-      else if (buildings[i]->getType() == TECH)
+      else if (buildings[i]->getType() == TECH && actualEnergy >= 0)
         {
 	  std::shared_ptr<TechBuilding> tech = std::static_pointer_cast<TechBuilding>(buildings[i]);
 	  std::shared_ptr<Tech> newTech = tech->searchTech(timePassed);
@@ -112,11 +112,14 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
       //for (int i = 0; i < (int)otherBuildings.size(); i += 1)
       //	otherBuildings[i]->makeTargeting(temp);
     }
-  moneyCooldown -= timePassed;
-  if (moneyCooldown <= 0)
+  if (actualEnergy > 0)
     {
-      money += moneyGain;
-      moneyCooldown = 0.25;
+      moneyCooldown -= timePassed;
+      if (moneyCooldown < 0)
+	{
+	  money += moneyGain;
+	  moneyCooldown = 0.25;
+	}
     }
   //std::cout << "[[[ MAP ]]]" << std::endl;
   //map.print();

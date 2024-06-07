@@ -49,7 +49,7 @@ namespace ef
     void placePixel(Pos &pos,
 		    unsigned int colo);
     void Blit(Bpixelarray &other,
-	      Pos const &start,
+	      AcuPos const &start,
 	      AcuPos const &size);
     void Blit(Bpixelarray &other,
 	      Pos const &start,

@@ -103,6 +103,7 @@ namespace ef
     void addUnitToProd(ConfUnit newUnit);
     bool getOnHold();
     void setOnHold(bool newState);
+    void cancelUnit(int & money);
     void displayProgress(ef::Bpixelarray &px,
 			 ef::AcuPos caseSize,
 			 ef::AcuPos camStart,
@@ -126,6 +127,7 @@ namespace ef
     void addBuildingToProd(ConfBuilding newBuilding);
     bool getOnHold();
     void setOnHold(bool newState);
+    void cancelBuilding(int & money);
     void displayProgress(ef::Bpixelarray &px,
 			 ef::AcuPos caseSize,
 			 ef::AcuPos camStart,
@@ -161,6 +163,7 @@ namespace ef
     void addSearchToList(Tech newSearch);
     bool getOnHold();
     void setOnHold(bool newState);
+    void cancelTech(int & money);
 
   private:
     double timeLeft;

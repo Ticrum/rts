@@ -5,6 +5,7 @@
 static t_bunny_response loop(void *data)
 {
   ef::Game *game = (ef::Game *)data;
+  game->startTime = clock();
   game->srv.computeActions(0.016);
   return GO_ON;
 }
@@ -13,6 +14,8 @@ static t_bunny_response display(void *data)
 {
   ef::Game *game = (ef::Game *)data;
   game->cam.display(game->srv);
+  game->stop = clock();
+  game->srv.stockPacket(0.014 - ((double)(game->stop - game->startTime) / CLOCKS_PER_SEC));
   return GO_ON;
 }
 

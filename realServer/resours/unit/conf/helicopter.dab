@@ -1,0 +1,25 @@
+[Object
+    name = "helicopter"
+    img = "helicopter.jpg"
+    [objSize
+        x = 1
+        y = 1
+    ]
+    maxHp = 350
+    armor = 10
+    rangeOfVision = 8
+    nbrDmg = 0
+    dmg = 0
+]
+[Unit
+    cost = 450
+    speed = 2
+    runningSpeed = 3
+    moveType = 0
+    isFlying = true
+    timeToProduce = 4.5
+    [weaponConf
+        size = 1
+        data = "miniGun"
+    ]
+]

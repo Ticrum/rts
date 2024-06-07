@@ -1,0 +1,27 @@
+[Object
+  name = "Reactor"
+  img = "reactor.gif"
+  [objSize
+    x = 1
+    y = 1
+  ]
+  maxHp = 800
+  armor = 11
+  rangeOfVision = 2
+  nbrDmg = 0
+  dmg = 0
+]
+[Building
+  cost = 450
+  timeToProduce = 4.5
+  type = 4
+  canBeTarget = true
+  energyCost = 0
+  energyProduction = 100
+  moneyProduction = 0
+  butons = "0,F,"
+  [weaponConf
+    size = 0
+    data = ""
+  ]
+]

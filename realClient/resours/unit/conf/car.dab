@@ -14,7 +14,7 @@
 [Unit
     cost = 350
     speed = 1.5
-    runningSpeed = 2
+    runningSpeed = 2.2
     moveType = 0
     isFlying = false
     timeToProduce = 3.5

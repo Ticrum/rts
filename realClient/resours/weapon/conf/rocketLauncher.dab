@@ -1,9 +1,10 @@
 [Weapon
-    name = "rocketLauncher"
-    shot = "rocketLauncherBullet"
-    dmg = 90
-    nbrAtt = 1
-    cdrMax = 2
-    range = 4
-    manualTarget = false
+  name = "rocketLauncher"
+  shot = "rocketLauncherBullet"
+  dmg = 90
+  nbrAtt = 1
+  cdrMax = 2
+  range = 4
+  manualTarget = true
+  canTargetFly = true
 ]

@@ -16,13 +16,14 @@ void ef::Camera::drawBuildPos(bool canPlaceBuild)
   AcuPos start;
   start.x = posi.x;
   start.y = posi.y;
-  double caseSize = (size.x / (double)mapSize.x) * zoom;
-  start.x = (start.x) * caseSize - pos.x * zoom;
-  start.y = (start.y) * caseSize - pos.y * zoom;
+  double caseSizex = (size.x / (double)mapSize.x) * zoom;
+  double caseSizey = (size.y / (double)mapSize.y) * zoom;
+  start.x = (start.x) * caseSizex - pos.x * zoom;
+  start.y = (start.y) * caseSizey - pos.y * zoom;
   Pos tempPos;
   AcuPos Size;
-  Size.x = caseSize;
-  Size.y = caseSize;
+  Size.x = caseSizex;
+  Size.y = caseSizey;
   if (canPlaceBuild)
     game.rectangle(start, Size, GREEN, GREEN);
   else

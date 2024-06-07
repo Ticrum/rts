@@ -20,7 +20,7 @@ void ef::Unit::moveUnit(double timePassed,
   else
     progress += speed * timePassed;
   actualIndex += 1;
-  if (buildMap[getActualPos().x + getActualPos().y * buildMap.getMapSize().x] != 0)
+  if (buildMap[getActualPos().x + getActualPos().y * buildMap.getMapSize().x] != 0 && !isFlying)
     progress = progressBefore;
   actualIndex -= 1;
 if (progress >= 1)

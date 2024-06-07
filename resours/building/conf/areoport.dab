@@ -1,0 +1,27 @@
+[Object
+  name = "Areoport"
+  img = "areoport.jpg"
+  [objSize
+    x = 1
+    y = 1
+  ]
+  maxHp = 700
+  armor = 12
+  rangeOfVision = 3
+  nbrDmg = 0
+  dmg = 0
+]
+[Building
+  cost = 350
+  timeToProduce = 3.5
+  type = 0
+  canBeTarget = true
+  energyCost = 30
+  energyProduction = 0
+  moneyProduction = 0
+  butons = "3,F,4294902015,4278190080,helicopter.jpg,produce helicopter,4294902015,4278190080,SC.jpg,produce SC,4294902015,4278190080,rocketCopter.jpg,produce RocketCopter,"
+  [weaponConf
+    size = 0
+    data = "miniGun"
+  ]
+]

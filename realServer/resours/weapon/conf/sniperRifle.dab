@@ -1,9 +1,10 @@
 [Weapon
-    name = "sniperRifle"
-    shot = "sniperRifleBullet"
-    dmg = 40
-    nbrAtt = 1
-    cdrMax = 1
-    range = 5
-    manualTarget = false
+  name = "sniperRifle"
+  shot = "sniperRifleBullet"
+  dmg = 40
+  nbrAtt = 1
+  cdrMax = 1
+  range = 5
+  manualTarget = true
+  canTargetFly = true
 ]

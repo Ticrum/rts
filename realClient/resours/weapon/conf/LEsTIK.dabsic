@@ -6,4 +6,5 @@
     cdrMax = 1
     range = 1
     manualTarget = true
+    canTargetFly = false
 ]

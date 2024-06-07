@@ -4,12 +4,17 @@
 
 ef::Game::Game(int port,
 	       int sizex,
-	       int sizey)
+	       int sizey,
+	       bool isIa)
   :
   cli(port, 0),
   cam(sizex, sizey),
   isClick(false),
-  buildMode(false)
+  buildMode(false),
+  lastClick(0),
+  firstBuildLoad(false),
+  startTime(0),
+  stop(0)
 {
   singleCommand = [&](std::string str)
   {
@@ -56,6 +61,8 @@ ef::Game::Game(int port,
       }
     else if (args[0] == "sendIsReady")
       cli.sendIsReady();
+    else if (args[0] == "cancel")
+      cli.cancel();
   };
   char j;
   for(int i = 0; i < 10 && (j = cam.Init("client")) != 0; i++)
@@ -63,4 +70,8 @@ ef::Game::Game(int port,
   cam.ZoomIn(1);
   lastPos.x = -1;
   lastPos.y = -1;
+  if (isIa)
+    ia.reset(new Ia(1, 1, 1, 1, cli, singleCommand, cam.getSize()));
+  else
+    ia = nullptr;
 }

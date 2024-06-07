@@ -6,6 +6,8 @@
 
 #include "weapon.hh"
 
+#include <iostream>
+
 ef::Weapon::Weapon(ConfWeapon conf,
 		   int _alegence,
 		   ConfObj _shot)
@@ -16,6 +18,7 @@ ef::Weapon::Weapon(ConfWeapon conf,
     cdr(cdrMax),
     range(conf.range),
     manualTarget(conf.manualTarget),
+    canTargetFly(conf.canTargetFly),
     alegence(_alegence),
     shot(_shot),
     target(nullptr)

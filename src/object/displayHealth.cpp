@@ -64,4 +64,7 @@ void ef::Object::DisplayHealth(ef::Bpixelarray &px,
 	  square.x = tmp.x;
 	}
     }
+  if (px.pixVec.length > 0)
+    bunny_set_geometry(&px.GetClip()->buffer, BGY_PIXELS, (t_bunny_vertex_array *)&px.pixVec, NULL);
+  px.pixVec.length = 0;
 }

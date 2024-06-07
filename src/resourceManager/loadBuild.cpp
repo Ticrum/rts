@@ -5,7 +5,7 @@ int ef::ResourceManager::LoadBuild(bool reset)
 {
   if(reset)
     buildingConf.clear();
-  std::vector<std::string> conf = {"LATHOURES.dab", "MainBuild.dab", "UnitProductor.dab", "moneyProducer.dab", "vehiculeProductor.dab"};
+  std::vector<std::string> conf = {"LATHOURES.dab", "MainBuild.dab", "UnitProductor.dab", "moneyProducer.dab", "vehiculeProductor.dab", "areoport.dab", "reactor.dab", "fusion.dab", "canonTower.dab", "antiAirSys.dab"};
   std::string stati = "resours/building/conf/";
   if(buildingConf.size() == conf.size())
     return -2;

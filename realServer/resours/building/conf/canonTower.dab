@@ -1,0 +1,27 @@
+[Object
+  name = "canonTower"
+  img = "canonTower.jpg"
+  [objSize
+    x = 1
+    y = 1
+  ]
+  maxHp = 1200
+  armor = 50
+  rangeOfVision = 5
+  nbrDmg = 0
+  dmg = 0
+]
+[Building
+  cost = 900
+  timeToProduce = 9
+  type = 3
+  canBeTarget = true
+  energyCost = 30
+  energyProduction = 0
+  moneyProduction = 0
+  butons = "0,"
+  [weaponConf
+    size = 1
+    data = "cannon"
+  ]
+]

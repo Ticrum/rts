@@ -16,7 +16,7 @@ void ef::ButonManager::print(ef::Bpixelarray &px,
 			     Pos start,
 			     double ratioCasePix)
 {
-  Pos min;
+  AcuPos min;
   AcuPos mina;
   AcuPos max;
   for(unsigned int i = 0; i < groupIds.size(); ++i)
