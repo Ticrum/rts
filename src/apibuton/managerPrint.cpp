@@ -16,7 +16,7 @@ void ef::ButonManager::print(ef::Bpixelarray &px,
 			     Pos start,
 			     double ratioCasePix)
 {
-  Pos min;
+  AcuPos min;
   AcuPos mina;
   AcuPos max;
   unsigned int chariot;

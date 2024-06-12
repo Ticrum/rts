@@ -41,8 +41,11 @@ namespace ef
     std::shared_ptr<ef::Building> placeBuilding(Pos pos);
     bool canPlaceBuilding(Pos pos);
     bool produce(std::shared_ptr<ProdBuilding> producer, ConfUnit newUnit);
+    void cancel(std::shared_ptr<ProdBuilding> producer);
     bool produce(std::shared_ptr<TechBuilding> producer, Tech newSearch);
+    void cancel(std::shared_ptr<TechBuilding> producer);
     bool produce(std::shared_ptr<ConstructBuilding> producer, ConfBuilding newBuilding);
+    void cancel(std::shared_ptr<ConstructBuilding> producer);
     bool destroyUnit(std::shared_ptr<Unit> unit, bool isOther);
     bool destroyBuilding(std::shared_ptr<Building> building, bool isOther);
     void addOther(std::shared_ptr<Unit> unit, bool isOther);
@@ -51,7 +54,9 @@ namespace ef
     bool isInVision(std::shared_ptr<Object> obj);
     bool isInVisionUnit(std::shared_ptr<Unit> unit);
     std::vector<std::shared_ptr<Unit>> selectUnit(Pos start, Pos end);
+    std::vector<std::shared_ptr<Unit>> selectSameUnit(Pos start, Pos end);
     std::vector<std::shared_ptr<Building>> selectBuilding(Pos start, Pos end);
+    std::vector<std::shared_ptr<Building>> selectSameBuilding(Pos start, Pos end);
     void modifyMoneyGain(int money);
     void Display(Bpixelarray &px,
                  ef::Camera &cam,
@@ -71,6 +76,14 @@ namespace ef
     std::shared_ptr<Building> getFirstBuild();
     void updateVisionMap();
     std::string getMoney();
+    int getIntMoney();
+    std::string getEnergy();
+    int getIntEnergy();
+    std::vector<std::shared_ptr<Unit>> & getUnits();
+    std::vector<std::shared_ptr<Unit>> & getOtherUnits();
+    std::vector<std::shared_ptr<Building>> & getBuild();
+    std::vector<std::shared_ptr<Building>> & getOtherBuild();
+    std::vector<std::shared_ptr<Building>> & getProducedBuilding();
 
   private:
     int alegence;

@@ -14,7 +14,7 @@ void ef::PlayerInfo::makePath(std::shared_ptr<Unit> unit,
   for (int i = 0; i < map.getMapSize().x * map.getMapSize().y; i += 1)
     {
       tempMap[i] = 0;
-      if (map[i] != 0 || buildingMap[i] == 1)
+      if ((map[i] != 0 || buildingMap[i] == 1) && !unit->getIsFlying())
 	tempMap[i] = 1;
     }
   path.resetMap(tempMap);

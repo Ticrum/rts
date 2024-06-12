@@ -20,12 +20,14 @@ namespace ef
     void computeActions(double realTimePassed);
     void connectToServ(int ip, int port);
     void makePath(Pos dest, MoveType moveType);
-    void select(Pos size, Pos start, Pos end, std::function<void(std::string)> func);
+    void select(Pos size, Pos start, Pos end, std::function<void(std::string)> func, bool isSame);
     void stopUnit();
     void setTarget(Pos clickPos);
     void placeBuilding(Pos pos);
     void produce(int producerId, std::string unitToProd, BuildingType type);
     void produce(std::string unitToProd);
+    void cancel(int producerId, BuildingType type);
+    void cancel();
     void destroyUnit();
     void destroyBuilding();
     bool destroyUnit(int unitId, bool isOther);
@@ -34,6 +36,8 @@ namespace ef
     void updateSelectedInfo();
     void sendIsReady();
     std::vector<std::shared_ptr<Building>> getSelectedBuildings();
+    bool isGameStarted();
+    void stockPacket(double timeToPass);
 
     ResourceManager res;
     ButonManager man;

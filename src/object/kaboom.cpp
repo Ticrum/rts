@@ -24,7 +24,7 @@ void ef::Object::kaboom(std::vector<std::shared_ptr<Object>> objects,
 	  {
 	    //std::cout << "\nkaboom tageted obj pos x : " << objects[i]->getPos().x << " y : " << objects[i]->getPos().y << std::endl;
 	    //std::cout << "kaboom pojectile pos x : " << pos.x << " y : " << pos.y << std::endl;
-	    std::cout << "kaboom range x : " << objSize.x << " y : " << objSize.y << std::endl;
+	    //std::cout << "kaboom range x : " << objSize.x << " y : " << objSize.y << std::endl;
 	    //std::cout << "kaboom conf : " << conf << std::endl;
 	    objects[i]->takeDmg(nbrDmg, dmg);
 	  }
@@ -36,7 +36,7 @@ void ef::Object::kaboom(std::vector<std::shared_ptr<Object>> objects,
 	  {
 	    //std::cout << "kaboom tageted obj pos x : " << tempUnit->getActualPos().x << " y : " << tempUnit->getActualPos().y << std::endl;
 	    //std::cout << "kaboom pojectile pos x : " << pos.x << " y : " << pos.y << std::endl;
-	    std::cout << "kaboom range x : " << objSize.x << " y : " << objSize.y << std::endl;
+	    //std::cout << "kaboom range x : " << objSize.x << " y : " << objSize.y << std::endl;
 	    objects[i]->takeDmg(nbrDmg, dmg);
 	  }
       }

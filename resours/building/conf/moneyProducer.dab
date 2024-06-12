@@ -16,12 +16,12 @@
   timeToProduce = 7
   type = 5
   canBeTarget = true
-  energyCost = 10
+  energyCost = 40
   energyProduction = 0
-  moneyProduction = 3
+  moneyProduction = 3*2
   butons = "0,"
   [weaponConf
     size = 0
-    data = "miniGun"
+    data = ""
   ]
 ]

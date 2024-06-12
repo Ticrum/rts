@@ -11,9 +11,10 @@ std::vector<std::shared_ptr<ef::Object>> ef::Unit::fireAllWeapon(double timePass
   std::vector<std::shared_ptr<Object>> shots;
   std::shared_ptr<Object> tempObj = nullptr;
 
-  for (int i = 0; i < (int)weapons.size(); i += 1)
-    if ((tempObj = weapons[i].fireAction(timePassed)) != nullptr)
-      shots.push_back(tempObj);
+  if (moveType != RUN)
+    for (int i = 0; i < (int)weapons.size(); i += 1)
+      if ((tempObj = weapons[i].fireAction(timePassed)) != nullptr)
+	shots.push_back(tempObj);
   return shots;
 }
 

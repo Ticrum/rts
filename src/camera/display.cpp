@@ -30,6 +30,9 @@ void ef::Camera::display(ClientPlayerInfo &cli)
   posi.x = 20;
   posi.y = 0;
   drawText(game, cli.res.getSprit()["font.png"], cli.playerInfo.getMoney(), posi);
+  posi.x = 20;
+  posi.y = 20;
+  drawText(game, cli.res.getSprit()["font.png"], cli.playerInfo.getEnergy(), posi);
   //cli.man.printTerminal();
   Pos pos;
   AcuPos apos;

@@ -22,12 +22,14 @@ namespace ef
     void computeActions(double realTimePassed);
     void placeBuilding(Pos pos, int playerId);
     void produce(int producerId, std::string unitToProd, int playerId, BuildingType type);
+    void cancel(int producerId, int playerId, BuildingType type);
     bool destroy(int unitId, bool isOther, int playerId, bool isBuilding);
     void addOther(int buildId, std::string build, Pos pos, int playerId, BuildingType type);
     void addOther(int unitId, std::string unit, Pos pos, int playerId);
     void Display(Bpixelarray &px,
                  ef::Camera &cam);
     void broadcastTarget(std::vector<TargetReturn> target);
+    void stockPacket(double timeToPass);
 
   private:
     void updateOther();

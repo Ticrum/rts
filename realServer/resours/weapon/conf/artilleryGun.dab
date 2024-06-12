@@ -1,9 +1,10 @@
 [Weapon
-    name = "artilleryGun"
-    shot = "artilleryGunBullet"
-    dmg = 45
-    nbrAtt = 2
-    cdrMax = 3
-    range = 7
-    manualTarget = false
+  name = "artilleryGun"
+  shot = "artilleryGunBullet"
+  dmg = 45
+  nbrAtt = 2
+  cdrMax = 3
+  range = 7
+  manualTarget = true
+  canTargetFly = false
 ]

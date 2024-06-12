@@ -29,6 +29,7 @@ namespace ef
     double cdrMax;
     int range;
     bool manualTarget;
+    bool canTargetFly;
   };
   struct TargetReturn
   {
@@ -56,6 +57,7 @@ namespace ef
     Pos getTarPos();
     std::shared_ptr<Object> getTarget();
     bool getIsTargetBuild();
+    bool getCanTargetFly();
 
   private:
     int dmg;
@@ -64,6 +66,7 @@ namespace ef
     double cdr;
     int range;
     bool manualTarget;
+    bool canTargetFly;
     int alegence;
     ConfObj shot;
     std::shared_ptr<Object> target;

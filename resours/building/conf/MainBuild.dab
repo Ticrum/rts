@@ -1,6 +1,6 @@
 [Object
   name = "MainBuild"
-  img = "error.png"
+  img = "base.jpg"
   [objSize
     x = 1
     y = 1
@@ -12,16 +12,17 @@
   dmg = 0
 ]
 [Building
-  cost = 1200
-  timeToProduce = 12
+  cost = 2000
+  timeToProduce = 20
   type = 1
   canBeTarget = true
-  energyCost = 10
-  energyProduction = 0
+  energyCost = 0
+  energyProduction = 200
   moneyProduction = 1
-  butons = "4,F,4294902015,4278190080,barracks.jpg,produce UnitProductor,4294902015,4278190080,tower.jpg,produce LATHOURES,4294902015,4278190080,moneyprinter.jpg,produce moneyProducer,4294902015,4278190080,factory.jpg,produce VehiculeProductor,"
+ butons = "4,F,4294902015,4278190080,barracks.jpg,produce UnitProductor,4294902015,4278190080,tower.jpg,produce LATHOURES,4294902015,4278190080,moneyprinter.jpg,produce moneyProducer,4294902015,4278190080,factory.jpg,produce VehiculeProductor,"
+
   [weaponConf
     size = 0
-    data = "miniGun"
+    data = ""
   ]
 ]

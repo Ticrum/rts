@@ -5,7 +5,7 @@ int ef::ResourceManager::LoadShot(bool reset)
 {
   if(reset)
     shot.clear();
-  std::vector<std::string> conf = {"test.dabsic", "miniGunBullet.dab", "rifleBullet.dab", "sniperRifleBullet.dab", "pistolBullet.dab", "artilleryGunBullet.dab", "cannonBullet.dab", "rocketLauncherBullet.dab"};
+  std::vector<std::string> conf = {"test.dabsic", "miniGunBullet.dab", "rifleBullet.dab", "sniperRifleBullet.dab", "pistolBullet.dab", "artilleryGunBullet.dab", "cannonBullet.dab", "rocketLauncherBullet.dab", "rocketBarageBullet.dab"};
   std::string stati = "resours/shot/conf/";
   if(shot.size() == conf.size())
     return -2;

@@ -40,7 +40,6 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 	      //std::cout << "port receve serv : " << pack.clientInfo.port << std::endl;
 	      clientConnected[i].sin_port = htons(pack.clientInfo.port);
 	      serverUdp->loop();
-	      serverUdp->sendData("test", 4, clientConnected[i]);
 	    }
 	}
 
@@ -106,6 +105,10 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 		    setTarget(pack.setTarget.unitId, pack.setTarget.otherId, playerId, pack.setTarget.isBuilding);
 		  else if (pack.type == PLACEBUILD)
 		    placeBuilding(pack.placeBuild.pos.get(), playerId);
+		  else if (pack.type == CANCEL)
+		    cancel(pack.cancel.producerId, playerId, pack.cancel.buildType);
+		  else if (pack.type == SETTARGET)
+		    setTarget(pack.setTarget.unitId, pack.setTarget.otherId, playerId, pack.setTarget.isBuilding);
 		  else if (pack.type == PRODUCE)
 		    {
 		      std::string str(pack.produce.conf, pack.produce.len);

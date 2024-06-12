@@ -1,0 +1,25 @@
+[Object
+    name = "RocketCopter"
+    img = "rocketCopter.jpg"
+    [objSize
+        x = 1
+        y = 1
+    ]
+    maxHp = 350
+    armor = 11
+    rangeOfVision = 8
+    nbrDmg = 0
+    dmg = 0
+]
+[Unit
+    cost = 650
+    speed = 1.8
+    runningSpeed = 2.5
+    moveType = 0
+    isFlying = true
+    timeToProduce = 6.5
+    [weaponConf
+        size = 2
+        data = "rocketLauncher", "rocketLauncher"
+    ]
+]

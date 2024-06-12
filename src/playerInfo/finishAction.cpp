@@ -10,11 +10,14 @@ std::vector<std::shared_ptr<ef::Object>> ef::PlayerInfo::finishAction(double tim
 {
   std::vector<std::shared_ptr<Object>> tempShot;
 
-  for (int i = 0; i < (int)buildings.size(); i += 1)
+  if (actualEnergy > 0)
     {
-      tempShot = buildings[i]->fireAllWeapon(timePassed);
-      for (int j = 0; j < (int)tempShot.size(); j += 1)
-	shots.push_back(tempShot[j]);
+      for (int i = 0; i < (int)buildings.size(); i += 1)
+	{
+	  tempShot = buildings[i]->fireAllWeapon(timePassed);
+	  for (int j = 0; j < (int)tempShot.size(); j += 1)
+	    shots.push_back(tempShot[j]);
+	}
     }
   for (int i = 0; i < (int)units.size(); i += 1)
     {

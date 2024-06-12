@@ -1,9 +1,10 @@
 [Weapon
-    name = "miniGun"
-    shot = "miniGunBullet"
-    dmg = 18
-    nbrAtt = 20
-    cdrMax = 2
-    range = 4
-    manualTarget = false
+   name = "miniGun"
+   shot = "miniGunBullet"
+   dmg = 18
+   nbrAtt = 20
+   cdrMax = 2
+   range = 4
+   manualTarget = true
+   canTargetFly = true
 ]

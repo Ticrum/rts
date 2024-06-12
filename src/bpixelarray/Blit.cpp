@@ -1,13 +1,13 @@
 #include "Bpixelarray.hh"
 
 void ef::Bpixelarray::Blit(ef::Bpixelarray &other,
-                           Pos const &start,
+                           AcuPos const &start,
                            AcuPos const &size/*,
                            float const rotate*/)
 {
   if(px == NULL || other.px == NULL)
     return;
-  Pos end;
+  AcuPos end;
   end.x = start.x + size.x;
   end.y = start.y + size.y;
   VertexArray<5> tempV;

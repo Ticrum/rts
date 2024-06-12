@@ -1,0 +1,27 @@
+[Object
+  name = "Fusion"
+  img = "fusion.jpg"
+  [objSize
+    x = 1
+    y = 1
+  ]
+  maxHp = 1200
+  armor = 15
+  rangeOfVision = 3
+  nbrDmg = 0
+  dmg = 0
+]
+[Building
+  cost = 900
+  timeToProduce = 9
+  type = 4
+  canBeTarget = true
+  energyCost = 0
+  energyProduction = 300
+  moneyProduction = 0
+  butons = "0,F,"
+  [weaponConf
+    size = 0
+    data = ""
+  ]
+]

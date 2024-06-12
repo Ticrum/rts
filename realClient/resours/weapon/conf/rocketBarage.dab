@@ -1,0 +1,10 @@
+[Weapon
+  name = "rocketBarage"
+  shot = "rocketBarageBullet"
+  dmg = 45
+  nbrAtt = 6
+  cdrMax = 3
+  range = 5
+  manualTarget = false
+  canTargetFly = true
+]

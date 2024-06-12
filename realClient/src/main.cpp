@@ -5,6 +5,16 @@
 static t_bunny_response loop(void *data)
 {
   ef::Game *game = (ef::Game *)data;
+  game->startTime = clock();
+  if (game->ia != nullptr && game->cli.isGameStarted())
+    {
+      if (!game->firstBuildLoad)
+	{
+	  game->ia->getMainBuild();
+	  game->firstBuildLoad = true;
+	}
+      game->ia->compute(0.016);
+    }
   const t_bunny_position *pos = bunny_get_mouse_position();
   double speed = 7.0 / game->cam.getZoom();
   if (speed < 1)
@@ -54,6 +64,8 @@ static t_bunny_response display(void *data)
   if (game->buildMode)
     game->cam.drawBuildPos(game->cli.playerInfo.canPlaceBuilding(posi));
   game->cam.finalDisplay(game->cli);
+  game->stop = clock();
+  game->cli.stockPacket(0.014 - ((double)(game->stop - game->startTime) / CLOCKS_PER_SEC));
   return GO_ON;
 }
 
@@ -86,7 +98,7 @@ static t_bunny_response key(t_bunny_event_state state,
       posi[0].y = 0;
       posi[1].x = 63;
       posi[1].y = 63;
-      game->cli.select(game->cam.getSize(), posi[0], posi[1], game->singleCommand);
+      game->cli.select(game->cam.getSize(), posi[0], posi[1], game->singleCommand, false);
     }
   if (sym == BKS_I)
     game->cam.ZoomIn(game->cam.getZoom());
@@ -117,25 +129,58 @@ static t_bunny_response click(t_bunny_event_state state,
       game->cli.placeBuilding(posi);
       return GO_ON;
     }
-  if (state == GO_DOWN)
+  if (state == GO_DOWN && !game->buildMode)
     result = game->cli.man.checkClick(posi2);
   //std::cout << "result : " << result << std::endl;
-  if (result == 1 && but == BMB_LEFT)
+  if (pos2->y > (game->cam.getSize().y * 0.3) * 2.35 &&
+      pos2->y < game->cam.getSize().y &&
+      pos2->x < game->cam.getSize().x * 0.3 &&
+      pos2->x > 0)
     {
-      if (state == GO_UP && game->isClick == true)
+      if (but == BMB_LEFT && state == GO_DOWN)
 	{
-	  game->isClick = false;
-	  game->cli.select(game->cam.getSize(), game->lastPos, posi, game->singleCommand);
-	}
-      else if (state == GO_DOWN)
-	{
-	  game->lastPos.x = pos.x;
-	  game->lastPos.y = pos.y;
-	  game->isClick = true;
+	  ef::AcuPos minimapPos;
+	  minimapPos.x = pos2->x / 0.3;
+	  minimapPos.y = (pos2->y - ((game->cam.getSize().y * 0.3) * 2.35)) / 0.3;
+	  minimapPos.x = minimapPos.x - game->cam.getPos().x - ((game->cam.getSize().x / game->cam.getZoom()) / 2);
+	  minimapPos.y = minimapPos.y - game->cam.getPos().y - ((game->cam.getSize().y / game->cam.getZoom()) / 2);
+	  game->cam.Move(minimapPos);
 	}
     }
-  if (but == BMB_RIGHT && state == GO_DOWN)
-    game->cli.makePath(posi, ef::WALK);
+  else
+    {
+      if (result == 1 && but == BMB_LEFT)
+	{
+	  if (state == GO_UP && game->isClick == true)
+	    {
+	      game->isClick = false;
+	      if ((double)(clock() - game->lastClick) / CLOCKS_PER_SEC < 0.18)
+		game->cli.select(game->cam.getSize(), game->lastPos, posi, game->singleCommand, true);
+	      else
+		{
+		  game->cli.select(game->cam.getSize(), game->lastPos, posi, game->singleCommand, false);
+		  game->lastClick = clock();
+		}
+	    }
+	  else if (state == GO_DOWN)
+	    {
+	      game->lastPos.x = pos.x;
+	      game->lastPos.y = pos.y;
+	      game->isClick = true;
+	    }
+	}
+      if (but == BMB_RIGHT && state == GO_DOWN)
+	{
+	  if ((double)(clock() - game->lastClick) / CLOCKS_PER_SEC < 0.18)
+	    game->cli.makePath(posi, ef::RUN);
+	  else
+	    {
+	      game->cli.makePath(posi, ef::WALK);
+	      game->cli.setTarget(posi);
+	      game->lastClick = clock();
+	    }
+	}
+    }
   return GO_ON;
 }
 
@@ -156,13 +201,16 @@ static t_bunny_response wheel(int wheelid,
 int main(int nbrin,
 	 char **inputs)
 {
-  if (nbrin != 2)
+  if (nbrin != 3)
     {
-      std::cout << "How to use :\n\n./rts_client CLIENTPORT\nCLIENTPORT = the port for the client" << std::endl;
+      std::cout << "How to use :\n\n./rts_client CLIENTPORT ISIA\nCLIENTPORT = the port for the client\nISIA = '1' for true '0' for false" << std::endl;
       return 0;
     }
   int port = atoi(inputs[1]);
-  static ef::Game game(port, 1000, 1000);
+  bool isIa = false;
+  if (inputs[2][0] == '1')
+    isIa = true;
+  static ef::Game game(port, 1920, 1080, isIa);
 
   bunny_set_loop_main_function(loop);
   bunny_set_key_response(key);

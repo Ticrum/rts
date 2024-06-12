@@ -17,6 +17,7 @@ ef::Weapon::Weapon(ConfWeapon conf,
     cdr(_cdr),
     range(conf.range),
     manualTarget(conf.manualTarget),
+    canTargetFly(conf.canTargetFly),
     alegence(_alegence),
     shot(_shot),
     target(nullptr)

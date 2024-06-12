@@ -25,7 +25,8 @@ namespace ef
       UPDATETARGET,
       GAMESTART,
       ADDSHOT,
-      CLIENTINFO
+      CLIENTINFO,
+      CANCEL
     };
 
   struct PacketReady
@@ -150,6 +151,13 @@ namespace ef
     int port;
   };
 
+  struct PacketCancel
+  {
+    PackType type;
+    int producerId;
+    BuildingType buildType;
+  };
+
   union Packet
   {
     PackType type;
@@ -166,6 +174,7 @@ namespace ef
     PacketUpdateTarget updateTarget;
     PacketAddShot addShot;
     PacketClientInfo clientInfo;
+    PacketCancel cancel;
   };
 }; // !ef
 

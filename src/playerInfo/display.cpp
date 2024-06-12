@@ -82,7 +82,23 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
 	    {
 	      casePx.x = cursor.x * rationMapPix.x - (camPos.x * cam.getZoom());
 	      casePx.y = cursor.y * rationMapPix.y - (camPos.y * cam.getZoom());
-	      px.rectangle(casePx, rectSize, color.full, color.full);
+	      if (map[cursor.x + cursor.y * mapSize.x] == 0)
+		{
+		  std::shared_ptr<Bpixelarray> tempImg = res.getSprit()["grass.jpg"];
+		  px.Blit(*tempImg, casePx, rectSize);
+		}
+	      else if (map[cursor.x + cursor.y * mapSize.x] == 1)
+		{
+		  std::shared_ptr<Bpixelarray> tempImg = res.getSprit()["water.jpg"];
+		  px.Blit(*tempImg, casePx, rectSize);
+		}
+	      else if (map[cursor.x + cursor.y * mapSize.x] == 2)
+		{
+		  std::shared_ptr<Bpixelarray> tempImg = res.getSprit()["rock.jpg"];
+		  px.Blit(*tempImg, casePx, rectSize);
+		}
+	      else
+		px.rectangle(casePx, rectSize, color.full, color.full);
 	    }
 	  /*if(casePx.y >= caseStart.y + rationMapPix.y)
 	    {
@@ -207,7 +223,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
   for(unsigned int i = 0; i < units.size(); i++)
     {
       //std::cout<<"UNIT health(" << units.size()<< ")\n";
-      casePos = units[i]->getPos();
+      casePos = units[i]->getActualPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
       if(cam.IsIn(pixPos, rationMapPix, units[i]->getImg()))
@@ -216,7 +232,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
   for(unsigned int i = 0; i < otherUnits.size(); i++)
     {
       //std::cout<<"otherUNIT health(" << otherUnits.size()<< ")\n";
-      casePos = otherUnits[i]->getPos();
+      casePos = otherUnits[i]->getActualPos();
       pixPos.x = casePos.x * rationMapPix.x;
       pixPos.y = casePos.y * rationMapPix.y;
       if(cam.IsIn(pixPos, rationMapPix, otherUnits[i]->getImg()))
@@ -374,6 +390,7 @@ void ef::PlayerInfo::Display(ef::Bpixelarray &px,
   if (px.recVec.length > 0)
     bunny_set_geometry(&px.GetClip()->buffer, BGY_QUADS, (t_bunny_vertex_array *)&px.recVec, NULL);
   px.recVec.length = 0;
+
   // display minimap
   pxSize.x = pxSize.x * 0.3;
   pxSize.y = pxSize.y * 0.3;

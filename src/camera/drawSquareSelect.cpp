@@ -15,11 +15,25 @@
 void ef::Camera::drawSquareSelect(Pos start,
 				  Pos end)
 {
-  double caseSize = (size.x / (double)mapSize.x) * zoom;
-  end.x = (end.x + 1) * caseSize - pos.x * zoom;
-  end.y = (end.y + 1) * caseSize - pos.y * zoom;
-  start.x = (start.x) * caseSize - pos.x * zoom;
-  start.y = (start.y) * caseSize - pos.y * zoom;
+  if (start.x > end.x)
+    {
+      int temp = start.x;
+      start.x = end.x;
+      end.x = temp;
+    }
+  if (start.y > end.y)
+    {
+      int temp = start.y;
+      start.y = end.y;
+      end.y = temp;
+    }
+
+  double caseSizex = (size.x / (double)mapSize.x) * zoom;
+  double caseSizey = (size.y / (double)mapSize.y) * zoom;
+  end.x = (end.x + 1) * caseSizex - pos.x * zoom;
+  end.y = (end.y + 1) * caseSizey - pos.y * zoom;
+  start.x = (start.x) * caseSizex - pos.x * zoom;
+  start.y = (start.y) * caseSizey - pos.y * zoom;
   Pos tempPos = start;
   while (tempPos.x < end.x)
     {

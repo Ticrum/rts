@@ -26,6 +26,13 @@ std::shared_ptr<ef::Object> ef::Weapon::fireAction(double timePassed)
 	  std::shared_ptr<Unit> tempUnit = static_pointer_cast<Unit>(target);
 	  shoot.reset(new Object(shot, std::shared_ptr<Bpixelarray>(), tempUnit->getActualPos(), rand(), alegence));
 	}
+      int temphp = target->getHp();
+      int damage = shot.dmg - target->getArmor();
+      if (damage < 0)
+	damage = 0;
+      temphp -= damage * shot.nbrDmg;
+      if (temphp <= 0)
+	target = nullptr;
     }
   if (shoot != nullptr)
     {

@@ -5,7 +5,9 @@ ef::Game::Game(int port,
 	       int sizey)
   :
   srv(port),
-  cam(sizex, sizey, true)
+  cam(sizex, sizey, true),
+  startTime(0),
+  stop(0)
 {
   cam.Init("server");
   cam.ZoomIn(1);
