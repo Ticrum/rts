@@ -19,7 +19,8 @@
   energyCost = 0
   energyProduction = 200
   moneyProduction = 1
-  butons = "10,T,4294902015,4278190080,barracks.jpg,produce UnitProductor,4294902015,4278190080,tower.jpg,produce LATHOURES,4294902015,4278190080,moneyprinter.jpg,produce moneyProducer,4294902015,4278190080,factory.jpg,produce VehiculeProductor,4294902015,4278190080,areoport.jpg,produce Areoport,4294902015,4278190080,reactor.gif,produce Reactor,4294902015,4278190080,fusion.jpg,produce Fusion,4294902015,4278190080,canonTower.jpg,produce canonTower,4294902015,4278190080,base.jpg,produce MainBuild,4294902015,4278190080,antiAirSys.jpg,produce AntiAirSys,"
+ butons = "4,F,4294902015,4278190080,barracks.jpg,produce UnitProductor,4294902015,4278190080,tower.jpg,produce LATHOURES,4294902015,4278190080,moneyprinter.jpg,produce moneyProducer,4294902015,4278190080,factory.jpg,produce VehiculeProductor,"
+
   [weaponConf
     size = 0
     data = ""

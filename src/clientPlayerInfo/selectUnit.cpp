@@ -5,6 +5,7 @@
 // description: selectUnit implementation
 
 #include "clientPlayerInfo.hh"
+#include <iostream>
 
 void ef::ClientPlayerInfo::select(Pos size,
 				  Pos start,
@@ -13,6 +14,7 @@ void ef::ClientPlayerInfo::select(Pos size,
 				  bool isSame)
 {
   if (selectedBuilding.size() > 0)
+
     selectedBuilding[0]->removeButon(man);
   if (isSame)
     selectedUnit = playerInfo.selectSameUnit(start, end);
@@ -23,6 +25,23 @@ void ef::ClientPlayerInfo::select(Pos size,
   else
     selectedBuilding = playerInfo.selectBuilding(start, end);
   if (selectedBuilding.size() > 0)
-    selectedBuilding[0]->displayButon(size, man, func, res.getSprit());
+    {
+      selectedBuilding[0]->displayButon(size, man, func, res.getSprit());
+      switch(selectedBuilding[0]->getType())
+	{
+	case CONSTRUCT:
+	  std::cout<< "select unit prod"<< std::endl;
+	  std::static_pointer_cast<ef::ConstructBuilding>(selectedBuilding[0])->displayInfo(size, man, func, res.getSprit());
+	  break;
+	case PRODUCTION:
+	  std::cout<< "select unit prod"<< std::endl;
+	  std::static_pointer_cast<ef::ProdBuilding>(selectedBuilding[0])->displayInfo(size, man, func, res.getSprit());
+	  break;
+	default:
+	  std::cout<< "select unit default"<< std::endl;
+	  selectedBuilding[0]->displayInfo(size, man, res.getSprit());
+	}
+    }
 }
+
 

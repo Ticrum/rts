@@ -3,20 +3,23 @@
 // ***     ***     ***     ******  *******  *****      **********************
 // **  ******  ******  *** *****  *******  *********  ***********************
 // *     ***  ******  *** ***       ****  *****      ************************
-// 24/05/2024 12:17:16 ******************************************************
+// 23/05/2024 18:23:15 ******************************************************
 // romain.piccoche <romain.picoche@laika.efrits.fr>
 // - rts -
 // * *** * * ***  ** * ** ** ** ** * * * *** * **  **************************
 
 #include "apiButton.hh"
-#include <iostream>
-void ef::ButonManager::printTerminal()
+
+unsigned int ef::ButonManager::add (ef::Pos pos,
+				    ef::AcuPos size,
+				    std::string msg,
+				    std::shared_ptr<ef::Bpixelarray> &styleFont)
 {
-  std::cout<<"\n\nSTART OF THE APIBUTON LOG\nstart of the buttons log"<< std::endl;
-  for(unsigned int i = 0; i < groupIds.size(); ++i)
-    std::cout << groupIds[i] << ": \n" << (group[groupIds[i]] << "");
-  std::cout<<"end of the buttons log\n----------\nstart of the labbel log"<< std::endl;
+  int max = 0;
   for(unsigned int i = 0; i < groupLabIds.size(); ++i)
-    std::cout << groupLabIds[i] << ": " << (groupLab[groupLabIds[i]] << "");
-  std::cout<<"end of the labbel log\n\nEND OF THE APIBUTON LOG\n"<< std::endl;
+    if(max <= groupLabIds[i])
+      max = groupLabIds[i]+1;
+  groupLab[max] = ef::Labbel(pos, size, msg, styleFont);
+  groupLabIds.push_back(max);
+  return max;
 }

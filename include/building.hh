@@ -13,7 +13,6 @@
 
 namespace ef
 {
-  class ButonManager;
   enum BuildingType
     {
       PRODUCTION,
@@ -23,7 +22,7 @@ namespace ef
       ENERGY,
       MONEY
     };/*if you add a BuildingType don't forget to update;
-	the if line 26 in "src/config/buildingLoad.cpp",
+	add N, equal to the number of type you add, to the if line 26 in "src/config/buildingLoad.cpp",
 	Building.type in "resours/building/conf/tamplate"
       */
 
@@ -69,7 +68,12 @@ namespace ef
 		      ButonManager &manager,
 		      std::function<void(std::string)> func,
 		      std::map<std::string, std::shared_ptr<Bpixelarray>> &sprits);
-    void removeButon(ButonManager &manager);
+    void updateApiButonInfo(ef::ButonManager &manager,
+			    std::map<std::string, std::shared_ptr<Bpixelarray>> &sprits);
+    void removeInfo(ButonManager &manager);
+    void displayInfo(ef::Pos size,
+		     ButonManager &manager,
+		     std::map<std::string, std::shared_ptr<Bpixelarray>> &sprits);
     TargetReturn makeTargeting(std::vector<std::shared_ptr<Object>> others, bool isBuilding);
     void manualTargeting(std::shared_ptr<Object> target, bool isTargetBuild);
     std::vector<double> getWeaponsCd();
@@ -87,7 +91,6 @@ namespace ef
     int moneyProduction;
     bool isActive;
     std::string butons;
-    unsigned int groupButon;
     std::vector<Weapon> weapons;
   };
 
@@ -108,11 +111,19 @@ namespace ef
 			 ef::AcuPos caseSize,
 			 ef::AcuPos camStart,
 			 double zoom);
+    void displayInfo(ef::Pos size,
+		     ButonManager &manager,
+		     std::function<void(std::string)> func,
+		     std::map<std::string, std::shared_ptr<Bpixelarray>> &sprits);
+    void updateApiButonInfo(ef::ButonManager &manager,
+			    std::map<std::string, std::shared_ptr<Bpixelarray>> &sprits);
 
   private:
     double timeLeft;
     bool onHold;
     std::vector<ConfUnit> unitProd;
+    bool needToUpdate;
+    unsigned int idQu [5];
   };
 
   class ConstructBuilding : public Building
@@ -132,11 +143,18 @@ namespace ef
 			 ef::AcuPos caseSize,
 			 ef::AcuPos camStart,
 			 double zoom);
-
+    void displayInfo(ef::Pos size,
+		     ButonManager &manager,
+		     std::function<void(std::string)> func,
+		     std::map<std::string, std::shared_ptr<Bpixelarray>> &sprits);
+    void updateApiButonInfo(ef::ButonManager &manager,
+			    std::map<std::string, std::shared_ptr<ef::Bpixelarray>> &sprits);
   private:
     double timeLeft;
     bool onHold;
     std::vector<ConfBuilding> buildingProd;
+    bool needToUpdate;
+    unsigned int idQu [5];
   };
 
   struct Tech

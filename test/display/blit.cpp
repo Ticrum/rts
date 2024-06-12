@@ -3,7 +3,7 @@
 
 int main()
 {
-    t_bunny_window *win;
+  /*t_bunny_window *win;
 
     win = bunny_start(500,500, false, "test_blit");
     ef::Bpixelarray px;
@@ -40,6 +40,6 @@ int main()
     px.Blit(blu, size, siz);
     bunny_blit(&win->buffer, px.GetClip(), NULL);
     bunny_display(win);
-    sleep(1);
+    sleep(1);*/
 }
 

@@ -18,7 +18,7 @@ static void text(std::string cmd)
 
 int main ()
 {
-  ef::ButonManager manage;
+  /*ef::ButonManager manage;
   t_bunny_accurate_area square;
   std::shared_ptr<ef::Bpixelarray> ero (new ef::Bpixelarray());
   while(ero->Init("resours/sprit/error.png"));
@@ -117,5 +117,5 @@ int main ()
   sleep(1);
 
   //  manage.pop(1, 1);
-  //manage.printTerminal();
+  //manage.printTerminal();*/
 }

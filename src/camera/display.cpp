@@ -24,14 +24,15 @@ void ef::Camera::display(ClientPlayerInfo &cli)
   cli.playerInfo.Display(game, *this, true);
   //for (int i = 0; i < tempBuilds.size(); i += 1)
   //  tempBuilds[i]->displayButon(cli.man, func, cli.res.getSprit());
+  cli.updateSelectedInfo();
   cli.man.print(game);
   t_bunny_position posi;
   posi.x = 20;
   posi.y = 0;
-  drawText(game, cli.res.getFont(), cli.playerInfo.getMoney(), posi);
+  drawText(game, cli.res.getSprit()["font.png"], cli.playerInfo.getMoney(), posi);
   posi.x = 20;
   posi.y = 20;
-  drawText(game, cli.res.getFont(), cli.playerInfo.getEnergy(), posi);
+  drawText(game, cli.res.getSprit()["font.png"], cli.playerInfo.getEnergy(), posi);
   //cli.man.printTerminal();
   Pos pos;
   AcuPos apos;

@@ -23,8 +23,7 @@ ef::Building::Building(ConfBuilding conf,
   energyProduction(conf.energyProduction),
   moneyProduction(conf.moneyProduction),
   isActive(true),
-  butons(conf.butons),
-  groupButon(0)
+  butons(conf.butons)
 {
   std::cout << "building construct" << std::endl;
   for (int i = 0; i < (int)conf.weaponConf.size(); i += 1)

@@ -19,7 +19,8 @@ ef::ConstructBuilding::ConstructBuilding(ConfBuilding conf,
   Building(conf, _img, _pos, _objId, _alegence, weaponsConf, shotConf, actualHp, cdr),
   timeLeft(0),
   onHold(false),
-  buildingProd()
+  buildingProd(),
+  needToUpdate(false)
 {
 }
 

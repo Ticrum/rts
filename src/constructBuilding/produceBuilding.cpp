@@ -41,7 +41,8 @@ std::shared_ptr<ef::Building> ef::ConstructBuilding::produceBuilding(double time
 	    buildingProd.push_back(tempVect[i + 1]);
 	  if (buildingProd.size() > 0)
 	    timeLeft = buildingProd[0].timeToProduce;
-        }
+	  needToUpdate = true;
+	}
     }
   else
     newBuilding = nullptr;

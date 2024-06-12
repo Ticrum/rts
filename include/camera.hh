@@ -44,7 +44,7 @@ namespace ef
     void drawSquareSelect(Pos start, Pos end);
     Pos getSize();
     void drawText(Bpixelarray &pix,
-		  Bpixelarray &font,
+		  std::shared_ptr<Bpixelarray> &font,
 		  std::string str,
 		  t_bunny_position pos);
     void drawBuildPos(bool canPlaceBuild);
