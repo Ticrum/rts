@@ -16,7 +16,7 @@ void ef::ButonManager::changePx(unsigned int groupp,
 	      ind.buton[i].sprit = px;
 	      Pos tmp (ind.buton[i].sprit->GetSize());
 	      Pos tp (px->GetSize());
-	      std::cout << "_-BM CP-_" << groupp<< ", "<< id<<"\n"<< tmp.x<<  ", " <<tmp.y<<  " | " << tp.x<< ", " <<tp.y<< ". "<< ((ind.buton[i].sprit->GetClip() != NULL)? "px": "nul")<< "\n-_______-" << std::endl;
+	      //std::cout << "_-BM CP-_" << groupp<< ", "<< id<<"\n"<< tmp.x<<  ", " <<tmp.y<<  " | " << tp.x<< ", " <<tp.y<< ". "<< ((ind.buton[i].sprit->GetClip() != NULL)? "px": "nul")<< "\n-_______-" << std::endl;
 	      return ;
 	    }
 	}

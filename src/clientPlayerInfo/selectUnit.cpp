@@ -29,15 +29,15 @@ void ef::ClientPlayerInfo::select(Pos size,
       switch(selectedBuilding[0]->getType())
 	{
 	case CONSTRUCT:
-	  std::cout<< "select unit prod"<< std::endl;
+	  //std::cout<< "select unit prod"<< std::endl;
 	  std::static_pointer_cast<ef::ConstructBuilding>(selectedBuilding[0])->displayInfo(size, man, func, res.getSprit());
 	  break;
 	case PRODUCTION:
-	  std::cout<< "select unit prod"<< std::endl;
+	  //std::cout<< "select unit prod"<< std::endl;
 	  std::static_pointer_cast<ef::ProdBuilding>(selectedBuilding[0])->displayInfo(size, man, func, res.getSprit());
 	  break;
 	default:
-	  std::cout<< "select unit default"<< std::endl;
+	  //std::cout<< "select unit default"<< std::endl;
 	  selectedBuilding[0]->displayInfo(size, man, res.getSprit());
 	}
     }

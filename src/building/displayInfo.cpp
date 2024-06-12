@@ -36,6 +36,6 @@ void ef::Building::displayInfo(ef::Pos size,
     labbelId.push_back(manager.add(,,"energy production: " + std::to_string(energyProduction),));
     labbelId.push_back(manager.add(,,"money production: " + std::to_string(moneyProduction),));
       */
-  for(unsigned int i = 0; i < labbelId.size(); i++)
-    std::cout << labbelId[i]<< std::endl;
+  /*for(unsigned int i = 0; i < labbelId.size(); i++)
+    std::cout << labbelId[i]<< std::endl;*/
 }

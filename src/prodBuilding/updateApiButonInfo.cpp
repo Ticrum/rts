@@ -17,15 +17,15 @@ void ef::ProdBuilding::updateApiButonInfo(ef::ButonManager &manager,
 {
   if(needToUpdate)
     {
-      std::cout << "PRODBUILDING IN" << std::endl;
+      //std::cout << "PRODBUILDING IN" << std::endl;
       for(unsigned char i = 0; i < 5; i++)
       {
-	std::cout << "Boucle" << std::endl;
+	//std::cout << "Boucle" << std::endl;
 	manager.changePx(groupButon, idQu[i], ((i >= unitProd.size())? sprits["waitToProd" + std::to_string(i) + ".png"]: sprits[unitProd[i]. img]));
-	std::cout << ((i >= unitProd.size())? "waitToProd": "IIIMMMGGG!") << " = " <<(((i >= unitProd.size())? sprits["waitToProd" + std::to_string(i) + ".png"]: sprits[unitProd[i]. img])->GetClip() == NULL)<< std::endl;
+	//std::cout << ((i >= unitProd.size())? "waitToProd": "IIIMMMGGG!") << " = " <<(((i >= unitProd.size())? sprits["waitToProd" + std::to_string(i) + ".png"]: sprits[unitProd[i]. img])->GetClip() == NULL)<< std::endl;
       }
       ef::Building::updateApiButonInfo(manager, sprits);
     needToUpdate = false;
-    std::cout << "\n" << std::endl;
+    //std::cout << "\n" << std::endl;
     }
 }

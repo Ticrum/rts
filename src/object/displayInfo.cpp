@@ -32,8 +32,8 @@ void ef::Object::displayInfo(ef::Pos &start,
   square.y = start.y;
   square.w = size.x;
   square.h = size.y;
-  std::cout << "là" << std::endl;
-  std::cout<< "__--DI--__\ntx: "<< start.x << "\nty: "<< start.y << "\nsx: "<< size.x << "\nsy: "<< size.y << "\nx " << square.x << "\ny " << square.y<< "\nh " << square.h << "\nw " << square.w << std::endl;
+  //std::cout << "là" << std::endl;
+  //std::cout<< "__--DI--__\ntx: "<< start.x << "\nty: "<< start.y << "\nsx: "<< size.x << "\nsy: "<< size.y << "\nx " << square.x << "\ny " << square.y<< "\nh " << square.h << "\nw " << square.w << std::endl;
   //manager.add(groupButon, true, square, GREEN, GREEN, std::make_shared<ef::Bpixelarray>(), "yes", nothing, false);
   square.x = start.x + 1.0/15.0 * size.y;
   square.w = 1.0/2.0 * size.y;
