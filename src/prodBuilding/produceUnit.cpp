@@ -32,10 +32,10 @@ std::shared_ptr<ef::Unit> ef::ProdBuilding::produceUnit(double timePassed,
 	    unitProd.push_back(tempVect[i + 1]);
 	  if (unitProd.size() > 0)
 	    timeLeft = unitProd[0].timeToProduce;
+	  needToUpdate = true;
         }
     }
   else
     newUnit = nullptr;
   return newUnit;
 }
-

@@ -17,7 +17,8 @@ ef::ConstructBuilding::ConstructBuilding(ConfBuilding conf,
   Building(conf, _img, _pos, _objId, _alegence, weaponsConf, shotConf),
   timeLeft(0),
   onHold(false),
-  buildingProd()
+  buildingProd(),
+  needToUpdate(false)
 {
   buildingProd.reserve(8);
 }

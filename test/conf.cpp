@@ -3,7 +3,7 @@
 
 int main(void)
 {
-  ef::ConfWeapon wep;
+  /*  ef::ConfWeapon wep;
   ef::ConfBuilding build;
   ef::ConfUnit unit;
   bool gate = true;
@@ -221,5 +221,5 @@ int main(void)
   build = rsa.getBuild("LATHOURES");
   tech = rsa.getTech("test");
   shot = rsa.getShot("test");
-  std::cout << (unit << (build << (tech << (shot << ""))));
+  std::cout << (unit << (build << (tech << (shot << ""))));*/
 }

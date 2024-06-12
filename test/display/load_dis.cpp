@@ -5,7 +5,7 @@
 #include <time.h>
 int main()
 {
-    ef::Bpixelarray unit;
+  /*    ef::Bpixelarray unit;
     ef::Bpixelarray build;
     bool gate = true;
     for(char i = 0; i < 10 && (gate = unit.Init(std::string("resours/sprit/errorunit.png"))); i++);
@@ -81,5 +81,5 @@ int main()
 	bunny_display(win);
 	sleep(0.5);
       }
-    sleep(1);
+      sleep(1);*/
 }

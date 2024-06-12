@@ -7,6 +7,7 @@
 #ifndef __OBJECT_HH__
 #define __OBJECT_HH__
 
+#include <map>
 #include <vector>
 #include <cstdint>
 #include <string>
@@ -16,6 +17,7 @@ namespace ef
 {
   class ResourceManager;
   class Bconf;
+  class ButonManager;
   class Bpixelarray;
   struct Pos;
 
@@ -102,6 +104,14 @@ namespace ef
     int getNbrDmg();
 
   protected:
+    void displayInfo(ef::Pos &start,
+		     ef::Pos &size,
+		     ef::ButonManager &manager,
+		     std::map<std::string, std::shared_ptr<Bpixelarray>> &sprits);
+    void updateApiButonInfo(ef::ButonManager &manager,
+			    std::map<std::string, std::shared_ptr<Bpixelarray>> &sprits);
+    std::vector<unsigned int> labbelId;
+    unsigned int groupButon;
     std::string conf;
     int objId;
     Pos pos;

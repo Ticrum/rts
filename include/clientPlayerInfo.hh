@@ -31,6 +31,7 @@ namespace ef
     bool destroyUnit(int unitId, bool isOther);
     bool destroyBuilding(int buildingId, bool isOther);
     void deleteFromKillList(std::shared_ptr<Object> obj);
+    void updateSelectedInfo();
     void sendIsReady();
     std::vector<std::shared_ptr<Building>> getSelectedBuildings();
 

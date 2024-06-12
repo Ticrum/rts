@@ -11,7 +11,7 @@
 #include "camera.hh"
 
 static void print_char(ef::Bpixelarray &pix,
-                       ef::Bpixelarray &font,
+		       std::shared_ptr<ef::Bpixelarray> &font,
                        char c,
                        t_bunny_position pos)
 {
@@ -38,7 +38,7 @@ static void print_char(ef::Bpixelarray &pix,
   tempV.vertex[3].pos.y = pos.y + 14;
   tempV.vertex[3].tex.x = c * 10;
   tempV.vertex[3].tex.y = 14;
-  bunny_set_geometry(&pix.GetClip()->buffer, BGY_QUADS, (t_bunny_vertex_array *)&tempV, font.GetClip());
+  bunny_set_geometry(&pix.GetClip()->buffer, BGY_QUADS, (t_bunny_vertex_array *)&tempV, font->GetClip());
 
   /*
   y = 0;
@@ -64,7 +64,7 @@ static void print_char(ef::Bpixelarray &pix,
 }
 
 void ef::Camera::drawText(Bpixelarray &pix,
-			  Bpixelarray &font,
+			  std::shared_ptr<ef::Bpixelarray> &font,
 			  std::string str,
 			  t_bunny_position pos)
 {

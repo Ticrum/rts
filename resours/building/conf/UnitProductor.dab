@@ -19,7 +19,7 @@
   energyCost = 10
   energyProduction = 0
   moneyProduction = 0
-  butons = "5,T,4294902015,4278190080,soldier.jpg,produce baseSoldier,4294902015,4278190080,scout.jpg,produce scout,4294902015,4278190080,sniper.jpg,produce sniper,4294902015,4278190080,rocket.jpg,produce rocketSoldier,4294902015,4278190080,barbar.jpg,produce barbar,"
+  butons = "5,F,4294902015,4278190080,soldier.jpg,produce baseSoldier,4294902015,4278190080,scout.jpg,produce scout,4294902015,4278190080,sniper.jpg,produce sniper,4294902015,4278190080,rocket.jpg,produce rocketSoldier,4294902015,4278190080,barbar.jpg,produce barbar,"
   [weaponConf
     size = 0
     data = "miniGun"

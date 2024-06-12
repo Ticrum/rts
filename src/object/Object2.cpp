@@ -12,17 +12,20 @@ ef::Object::Object(ConfObj _conf,
                    int _objId,
                    int _alegence,
                    int actualHp)
-    :
-    conf(_conf.conf),
-    objId(_objId),
-    pos(_pos),
-    img(_img),
-    objSize(_conf.objSize),
-    hp(actualHp),
-    maxhp(_conf.maxhp),
-    armor(_conf.armor),
-    rangeOfVision(_conf.rangeOfVision),
-    alegence(_alegence)
+  :
+  groupButon(0),
+  conf(_conf.conf),
+  objId(_objId),
+  pos(_pos),
+  img(_img),
+  objSize(_conf.objSize),
+  hp(actualHp),
+  maxhp(_conf.maxhp),
+  armor(_conf.armor),
+  rangeOfVision(_conf.rangeOfVision),
+  alegence(_alegence),
+  nbrDmg(_conf.nbrDmg),
+  dmg(_conf.dmg)
 {
 }
 

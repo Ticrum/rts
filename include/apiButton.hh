@@ -12,7 +12,6 @@
 #define __APIBUTTON_HH__
 
 #include "Bpixelarray.hh"
-#include <map>
 #include <functional>
 
 namespace ef
@@ -60,11 +59,31 @@ namespace ef
     std::vector<Buton> buton;
   };//!groupe
 
+  struct Labbel
+  {
+    Labbel();
+    Labbel(Labbel const& other);
+    Labbel(ef::Pos pos,
+	   ef::AcuPos size,
+	   std::string msg,
+	   std::shared_ptr<ef::Bpixelarray> &styleFont);
+    Labbel &operator=(Labbel const& other);
+    std::string operator<<(std::string src);
+    void usableSize(ef::AcuPos size);
+    void print(ef::Bpixelarray &pix);
+    t_bunny_accurate_area square;
+    std::string text;
+    std::shared_ptr<ef::Bpixelarray> font;
+  };
   class ButonManager
   {
   public:
     ButonManager();
     bool init(std::string file);
+    unsigned int add (ef::Pos pos,
+		      ef::AcuPos size,
+		      std::string msg,
+		      std::shared_ptr<ef::Bpixelarray> &styleFont);
     Pos add(unsigned int groupp,
 	    bool print,
 	    t_bunny_accurate_area square,
@@ -74,6 +93,7 @@ namespace ef
 	    std::string action,
 	    std::function<void(std::string)> func,
 	    bool Case);
+    void popLabbel(unsigned int id);
     void pop(unsigned int groupp);
     void pop(unsigned int groupp,
 	     unsigned int id);
@@ -81,6 +101,11 @@ namespace ef
     void changePx(unsigned int groupp,
 		  unsigned int id,
 		  std::shared_ptr<ef::Bpixelarray> &px);
+    void updateLabbel(unsigned int id,
+		      std::string msg = "",
+		      ef::Pos pos = ef::Pos(-1),
+		      std::shared_ptr<ef::Bpixelarray> font = std::make_shared<ef::Bpixelarray>(),
+		      ef::AcuPos size = ef::AcuPos());
     unsigned int checkClick(Pos click,
 			    Pos start = ef::Pos(0),
 			    double ratioCasePix = 1);
@@ -97,6 +122,8 @@ namespace ef
 	       Pos start = ef::Pos(0),
 	       double ratioCasePix = 1);
   private:
+    std::vector<unsigned int> groupLabIds;
+    std::map<unsigned int,ef::Labbel> groupLab;
     std::vector<unsigned int> groupIds;
     std::map<unsigned int,ef::Groupe> group;
   };//butonManager

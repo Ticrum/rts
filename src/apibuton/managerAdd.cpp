@@ -9,6 +9,7 @@
 // * *** * * ***  ** * ** ** ** ** * * * *** * **  **************************
 
 #include "apiButton.hh"
+#include <iostream>
 
 ef::Pos ef::ButonManager::add(unsigned int groupp,
 			      bool print,
@@ -20,18 +21,23 @@ ef::Pos ef::ButonManager::add(unsigned int groupp,
 			      std::function<void(std::string)> func,
 			      bool Case)
 {
-  Pos end(-1);
+  //std::cout<< "__--AD--__\nx " << square.x << "\ny " << square.y<< "\nh " << square.h << "\nw " << square.w << std::endl;
+ Pos end(-1);
   if(group.count(groupp) != 0)
     {
       if(Case == group[groupp].Case)
 	{
+	  //std::cout<< "AD Yes " << Case << std::endl;
 	  end.y = group[groupp].update(square);
 	  group[groupp].buton.push_back(ef::Buton(groupp, end.y, print, square, outside, background, px, action, func));
 	  end.x = groupp;
 	}
+      /*else
+	std::cout<< "AD FUCK ( " << Case << "=="<< group[groupp].Case << std::endl;*/
     }
   else
     {
+      //std::cout << "add new one, buton" <<std::endl;
       Groupe tmp;
       group[groupp] = tmp;
       if(Case)

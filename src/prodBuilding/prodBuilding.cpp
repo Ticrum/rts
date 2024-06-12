@@ -16,7 +16,10 @@ ef::ProdBuilding::ProdBuilding(ConfBuilding conf,
   :
   Building(conf, _img, _pos, _objId, _alegence, weaponsConf, shotConf),
   timeLeft(0),
-  onHold(false)
+  onHold(false),
+  needToUpdate(false)
 {
+  for(unsigned int i = 0; i < 5; i++)
+    idQu[i] = 0;
 }
 
