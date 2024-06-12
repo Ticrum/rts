@@ -10,6 +10,8 @@
 
 #include "ia.hh"
 
+#include <iostream>
+
 void ef::Brain::targetOutVision(std::string target,
 				bool isEnemy)
 {
@@ -18,6 +20,7 @@ void ef::Brain::targetOutVision(std::string target,
       for (int i = 0; i < (int)tasks.size(); i += 1)
 	if (tasks[i].target == target)
 	  {
+	    std::cout << "targetOutVision brain removeTarget from vision" << std::endl;
 	    tasks[i].visType = INDIRECT;
 	    return;
 	  }

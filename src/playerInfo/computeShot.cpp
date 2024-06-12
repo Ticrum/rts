@@ -40,7 +40,7 @@ void ef::PlayerInfo::computeShot(bool isClient)
   for (int i = 0; i < (int)buildings.size(); i += 1)
     if (buildings[i]->getHp() <= 0)
       {
-	std::cout << "build is dead" << std::endl;
+	//std::cout << "build is dead" << std::endl;
 	Killed tempKill;
 	tempKill.obj = buildings[i];
 	tempKill.time = 0;
@@ -51,7 +51,7 @@ void ef::PlayerInfo::computeShot(bool isClient)
   for (int i = 0; i < (int)units.size(); i += 1)
     if (units[i]->getHp() <= 0)
       {
-	std::cout << "unit is dead" << std::endl;
+	//std::cout << "unit is dead" << std::endl;
 	Killed tempKill;
 	tempKill.obj = units[i];
 	tempKill.time = 0;

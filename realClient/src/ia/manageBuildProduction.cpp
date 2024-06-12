@@ -20,7 +20,8 @@ void ef::Ia::manageBuildProduction()
   if (unitToProd == -1)
     {
       //std::cout << "manageBuildProduction ia energy : " << cli.playerInfo.getIntEnergy() << std::endl;
-      cli.select(size, MainBuild[0]->getPos(), MainBuild[0]->getPos(), singleCommand, false);
+      if (tempBuildProd.size() == 0)
+	cli.select(size, MainBuild[0]->getPos(), MainBuild[0]->getPos(), singleCommand, false);
       if (tempBuildProd.size() == 0 && cli.playerInfo.getIntMoney() > 450 && internalEnergy < 70 && !resourceFilled)
 	{
 	  singleCommand("produce Reactor");

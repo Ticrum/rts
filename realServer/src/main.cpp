@@ -32,7 +32,7 @@ static t_bunny_response key(t_bunny_event_state state,
 
 int main(void)
 {
-  ef::Game game(64841, 600, 600);
+  static ef::Game game(64841, 600, 600);
 
   bunny_set_loop_main_function(loop);
   bunny_set_key_response(key);

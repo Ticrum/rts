@@ -14,7 +14,7 @@ void ef::Ia::compute(double timePassed)
 {
   manageBuildProduction();
   manageUnitProduction();
-  moveUnit();
+  moveUnit(timePassed);
 }
 
 

@@ -93,7 +93,7 @@ namespace ef
   private:
     void manageBuildProduction();
     void manageUnitProduction();
-    void moveUnit();
+    void moveUnit(double timePassed);
     bool placeBuild();
 
     Brain brain;
@@ -108,8 +108,9 @@ namespace ef
     Pos size;
     std::function<void(std::string)> singleCommand;
     std::vector<std::shared_ptr<Building>> MainBuild;
+    std::vector<int> alegences;
+    std::vector<double> pressure;
   };
-
 };
 
 #endif // __IA_HH__

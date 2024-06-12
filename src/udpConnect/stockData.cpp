@@ -10,8 +10,6 @@
 
 #include "udpConnect.hh"
 
-#include <iostream>
-
 void ef::UdpConnect::stockData(double timeToPass,
 			       int len)
 {
@@ -32,10 +30,7 @@ void ef::UdpConnect::stockData(double timeToPass,
       if (result == 0)
 	popBuffer(true);
       else
-	{
-	  std::cout << "stockData udpconnect receve message" << std::endl;
-	  resultBuffer[resultBuffer.size() - 1] = result;
-	}
+	resultBuffer[resultBuffer.size() - 1] = result;
       int stop = clock();
       timeToPass -= (double)(stop - startTime) / CLOCKS_PER_SEC;
     }

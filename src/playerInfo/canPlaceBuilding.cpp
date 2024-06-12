@@ -10,6 +10,8 @@
 
 bool ef::PlayerInfo::canPlaceBuilding(Pos pos)
 {
+  if (visionMap[pos.x + pos.y * visionMap.getMapSize().x] != 2)
+    return false;
   for (int i = 0; i < (int)buildings.size(); i += 1)
     if (pos.isInRange(buildings[i]->getPos(), 0, 0) != -1)
       return false;

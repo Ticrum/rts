@@ -10,6 +10,8 @@
 
 #include "ia.hh"
 
+#include <iostream>
+
 void ef::Ia::manageUnitProduction()
 {
   if (unitToProd > 0)

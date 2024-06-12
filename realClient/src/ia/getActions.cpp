@@ -10,6 +10,8 @@
 
 #include "ia.hh"
 
+#include <iostream>
+
 std::vector<ef::Action> ef::Brain::getActions(double timePassed)
 {
   std::vector<Action> actions;
@@ -18,6 +20,7 @@ std::vector<ef::Action> ef::Brain::getActions(double timePassed)
   double bestPrio = 0;
   int bestIndex = -1;
 
+  //std::cout << "getActions brain tasks size : " << tasks.size() << std::endl;
   updatePressureTime(timePassed);
   for (int i = 0; i < (int)tasks.size(); i += 1)
     if (!tasks[i].isPlayer && tasks[i].priority * protecting > bestPrio)
@@ -44,15 +47,18 @@ std::vector<ef::Action> ef::Brain::getActions(double timePassed)
 
   avoidImediateDanger(actions);
 
+  bestIndex = -1;
   for (int i = 0; i < (int)tasks.size(); i += 1)
     if (tasks[i].isPlayer && tasks[i].priority > bestPrio)
       {
+	std::cout << "getActions brain new prio" << std::endl;
 	bestPrio = tasks[i].priority;
 	bestActPlayer.target = tasks[i].target;
 	bestIndex = i;
       }
   if (bestIndex != -1)
     {
+      std::cout << "getActions brain set action" << std::endl;
       double pressureResult = tasks[bestIndex].pressure[0] / agressive;
       if (pressureResult < 3)
 	bestActPlayer.actType = ATTACK;
@@ -67,6 +73,7 @@ std::vector<ef::Action> ef::Brain::getActions(double timePassed)
       actions.push_back(bestActPlayer);
     }
 
+  bestIndex = -1;
   for (int i = 0; i < (int)allyTasks.size(); i += 1)
     if (allyTasks[i].isPlayer && allyTasks[i].priority > bestPrio)
       {

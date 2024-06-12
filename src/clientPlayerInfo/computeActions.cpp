@@ -38,20 +38,20 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 	  clientUdp->loop();
 	  while (clientUdp->getData((char *)&pack, sizeof(pack)) != -1)
 	    {
-	      std::cout << "receve PACKET cli : " << pack.type << std::endl;
+	      //std::cout << "receve PACKET cli : " << pack.type << std::endl;
 	      if (pack.type == GAMESTART && pack.gameStart.isStart)
 		gameStarted = true;
 	      if (gameStarted)
 		{
 		  if (pack.type == DESTROY)
 		    {
-		      std::cout << "receve destroy" << std::endl;
+		      //std::cout << "receve destroy" << std::endl;
 		      if (pack.destroy.isBuilding)
 			{
 			  std::shared_ptr<Building> tempBuild = playerInfo.getBuild(pack.destroy.unitId, pack.destroy.isOther);
 			  if (tempBuild.get() != nullptr)
 			    {
-			      std::cout << "computeAction tempBuild pos x : " << tempBuild->getPos().x << " y : " << tempBuild->getPos().y << std::endl;
+			      //std::cout << "computeAction tempBuild pos x : " << tempBuild->getPos().x << " y : " << tempBuild->getPos().y << std::endl;
 			      playerInfo.destroyBuilding(tempBuild, pack.destroy.isOther);
 			      deleteFromKillList(tempBuild);
 			    }
@@ -61,7 +61,7 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 			  std::shared_ptr<Unit> tempUnit = playerInfo.getUnit(pack.destroy.unitId, pack.destroy.isOther);
 			  if (tempUnit.get() != nullptr)
 			    {
-			      std::cout << "computeAction tempUnit pos x : " << tempUnit->getActualPos().x << " y : " << tempUnit->getActualPos().y << std::endl;
+			      //std::cout << "computeAction tempUnit pos x : " << tempUnit->getActualPos().x << " y : " << tempUnit->getActualPos().y << std::endl;
 			      playerInfo.destroyUnit(tempUnit, pack.destroy.isOther);
 			      deleteFromKillList(tempUnit);
 			    }
@@ -69,7 +69,7 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 		    }
 		  else if (pack.type == ADDOTHERUNIT)
 		    {
-		      std::cout << "receve addUnit" << std::endl;
+		      //std::cout << "receve addUnit" << std::endl;
 		      std::shared_ptr<Unit> tempUnit;
 		      std::string confName(pack.addOtherUnit.conf, pack.addOtherUnit.len);
 		      ConfUnit conf = res.getUnit(confName);
@@ -84,7 +84,7 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 		    }
 		  else if (pack.type == ADDOTHERBUILDING)
 		    {
-		      std::cout << "receve addBuilding" << std::endl;
+		      //std::cout << "receve addBuilding" << std::endl;
 		      std::shared_ptr<Building> tempBuilding;
 		      std::string confName(pack.addOtherBuilding.conf, pack.addOtherBuilding.len);
 		      ConfBuilding conf = res.getBuild(confName);
@@ -100,12 +100,12 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 		      else
 			tempBuilding.reset(new Building(conf, res.getSprit()[conf.img], pack.addOtherBuilding.posi.get(), pack.addOtherBuilding.buildId, pack.addOtherBuilding.alegence, res.getWeaponConf(), res.getShotConf(), pack.addOtherBuilding.actualHp, cdr));
 
-		      std::cout << "Placed building is other : " << pack.addOtherBuilding.isOther << std::endl;
+		      //std::cout << "Placed building is other : " << pack.addOtherBuilding.isOther << std::endl;
 		      playerInfo.addOther(tempBuilding, pack.addOtherBuilding.isOther);
 		    }
 		  else if (pack.type == UPDATETARGET)
 		    {
-		      std::cout << "receve updateTarget" << std::endl;
+		      //std::cout << "receve updateTarget" << std::endl;
 		      std::shared_ptr<Unit> tempUnit = nullptr;
 		      std::shared_ptr<Building> tempBuild = nullptr;
 		      std::vector<std::shared_ptr<Object>> targets;
@@ -134,7 +134,7 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 		    }
 		  else if (pack.type == ADDSHOT)
 		    {
-		      std::cout << "receve addShot at pos x : " << pack.addShot.pos.get().x << " y : " << pack.addShot.pos.get().y << std::endl;
+		      //std::cout << "receve addShot at pos x : " << pack.addShot.pos.get().x << " y : " << pack.addShot.pos.get().y << std::endl;
 		      std::shared_ptr<Object> tempObj;
 		      std::string str(pack.addShot.conf, pack.addShot.len);
 		      ConfObj tempConf = res.getShot(str);
@@ -143,11 +143,11 @@ void ef::ClientPlayerInfo::computeActions(double realTimePassed)
 		    }
 		  else if (pack.type == PATHUNIT)
 		    {
-		      std::cout << "receve pathUnit" << std::endl;
+		      //std::cout << "receve pathUnit" << std::endl;
 		      std::shared_ptr<Unit> tempOUnit = std::static_pointer_cast<Unit>(playerInfo.getOtherObject(pack.pathUnit.unitId, false));
 		      if (tempOUnit.get() != nullptr)
 			{
-			  std::cout << "!!!!!!!! compAction GET OBJ GOOD !!!!!!!!" << std::endl;
+			  //std::cout << "!!!!!!!! compAction GET OBJ GOOD !!!!!!!!" << std::endl;
 			  std::vector<Pos> tempPath;
 			  for (int i = 0; i < pack.pathUnit.nbrPos; i += 1)
 			    tempPath.push_back(pack.pathUnit.pos[i].get());
