@@ -14,8 +14,7 @@ void ef::ClientPlayerInfo::select(Pos size,
 				  bool isSame)
 {
   if (selectedBuilding.size() > 0)
-
-    selectedBuilding[0]->removeButon(man);
+    selectedBuilding[0]->removeInfo(man);
   if (isSame)
     selectedUnit = playerInfo.selectSameUnit(start, end);
   else
