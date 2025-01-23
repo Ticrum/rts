@@ -16,10 +16,11 @@ void ef::ClientPlayerInfo::cancel(int producerId,
   if (build.get() == nullptr)
     return;
   //std::cout << "!!!producer find!!!" << std::endl;
-  Packet pack;
+  PacketCancel pack;
   pack.type = CANCEL;
-  pack.cancel.producerId = build->getId();
-  pack.cancel.buildType = type;
+  pack.datalen = sizeof(PacketCancel);
+  pack.producerId = build->getId();
+  pack.buildType = type;
   if (type == PRODUCTION)
     {
       std::shared_ptr<ProdBuilding> pBuild = std::static_pointer_cast<ProdBuilding>(build);
@@ -36,7 +37,7 @@ void ef::ClientPlayerInfo::cancel(int producerId,
       playerInfo.cancel(tBuild);
     }
   //std::cout << "/////// HAS produced ////////" << std::endl;
-  clientUdp->sendData((char *)&pack, sizeof(Packet), serverConnected);
+  clientUdp->sendData((char *)&pack, pack.datalen, serverConnected);
 }
 
 void ef::ClientPlayerInfo::cancel()

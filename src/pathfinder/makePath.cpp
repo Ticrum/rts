@@ -79,25 +79,53 @@ std::vector<ef::Pos> ef::Pathfinder::makePath(Pos start,
 	  //out.push_back(start);
 	  return out;
         }
+      // up
       if (checking[checkIndex]->pos.y > 0 && (map[checking[checkIndex]->pos.x + (checking[checkIndex]->pos.y - 1) * map.getMapSize().x] == 0 || map[checking[checkIndex]->pos.x + (checking[checkIndex]->pos.y - 1) * map.getMapSize().x] == 3))
         {
 	  //printf("go top\n");
 	  expendBorder(checking[checkIndex]->pos.x + (checking[checkIndex]->pos.y - 1) * map.getMapSize().x, 0);
         }
+      // up right
+      if (checking[checkIndex]->pos.y > 0 && checking[checkIndex]->pos.x < map.getMapSize().x - 1 && (map[checking[checkIndex]->pos.x + 1 + (checking[checkIndex]->pos.y - 1) * map.getMapSize().x] == 0 || map[checking[checkIndex]->pos.x + 1 + (checking[checkIndex]->pos.y - 1) * map.getMapSize().x] == 3))
+        {
+	  //printf("go top\n");
+	  expendBorder(checking[checkIndex]->pos.x + 1 + (checking[checkIndex]->pos.y - 1) * map.getMapSize().x, 1);
+        }
+      // right
       if (checking[checkIndex]->pos.x < map.getMapSize().x - 1 && (map[checking[checkIndex]->pos.x + 1 + checking[checkIndex]->pos.y * map.getMapSize().x] == 0 || map[checking[checkIndex]->pos.x + 1 + checking[checkIndex]->pos.y * map.getMapSize().x] == 3))
         {
 	  //printf("go right\n");
-	  expendBorder(checking[checkIndex]->pos.x + 1 + checking[checkIndex]->pos.y * map.getMapSize().x, 1);
+	  expendBorder(checking[checkIndex]->pos.x + 1 + checking[checkIndex]->pos.y * map.getMapSize().x, 2);
         }
+      // down right
+      if (checking[checkIndex]->pos.x < map.getMapSize().x - 1 && checking[checkIndex]->pos.y < map.getMapSize().y - 1 && (map[checking[checkIndex]->pos.x + 1 + (checking[checkIndex]->pos.y + 1) * map.getMapSize().x] == 0 || map[checking[checkIndex]->pos.x + 1 + (checking[checkIndex]->pos.y + 1) * map.getMapSize().x] == 3))
+        {
+	  //printf("go right\n");
+	  expendBorder(checking[checkIndex]->pos.x + 1 + (checking[checkIndex]->pos.y + 1) * map.getMapSize().x, 3);
+        }
+      // down
       if (checking[checkIndex]->pos.y < map.getMapSize().y - 1 && (map[checking[checkIndex]->pos.x + (checking[checkIndex]->pos.y + 1) * map.getMapSize().x] == 0 || map[checking[checkIndex]->pos.x + (checking[checkIndex]->pos.y + 1) * map.getMapSize().x] == 3))
         {
 	  //printf("go down\n");
-	  expendBorder(checking[checkIndex]->pos.x + (checking[checkIndex]->pos.y + 1) * map.getMapSize().x, 2);
+	  expendBorder(checking[checkIndex]->pos.x + (checking[checkIndex]->pos.y + 1) * map.getMapSize().x, 4);
         }
+      // down left
+      if (checking[checkIndex]->pos.y < map.getMapSize().y - 1 && checking[checkIndex]->pos.x > 0 && (map[checking[checkIndex]->pos.x - 1 + (checking[checkIndex]->pos.y + 1) * map.getMapSize().x] == 0 || map[checking[checkIndex]->pos.x - 1 + (checking[checkIndex]->pos.y + 1) * map.getMapSize().x] == 3))
+        {
+	  //printf("go down\n");
+	  expendBorder(checking[checkIndex]->pos.x - 1 + (checking[checkIndex]->pos.y + 1) * map.getMapSize().x, 5);
+        }
+      // left
       if (checking[checkIndex]->pos.x > 0 && (map[checking[checkIndex]->pos.x - 1 + checking[checkIndex]->pos.y * map.getMapSize().x] == 0 || map[checking[checkIndex]->pos.x - 1 + checking[checkIndex]->pos.y * map.getMapSize().x] == 3))
         {
 	  //printf("go left\n");
-	  expendBorder(checking[checkIndex]->pos.x - 1 + checking[checkIndex]->pos.y * map.getMapSize().x, 3);
+	  expendBorder(checking[checkIndex]->pos.x - 1 + checking[checkIndex]->pos.y * map.getMapSize().x, 6);
+        }
+      // up left
+      if (checking[checkIndex]->pos.x > 0 && checking[checkIndex]->pos.y > 0 && (map[checking[checkIndex]->pos.x - 1 + (checking[checkIndex]->pos.y - 1) * map.getMapSize().x] == 0 || map[checking[checkIndex]->pos.x - 1 + (checking[checkIndex]->pos.y - 1) * map.getMapSize().x] == 3))
+        {
+	  //printf("go left\n");
+	  expendBorder(checking[checkIndex]->pos.x - 1 + (checking[checkIndex]->pos.y - 1) * map.getMapSize().x, 7);
         }
       map[checking[checkIndex]->pos.x + checking[checkIndex]->pos.y * map.getMapSize().x] = 2;
       //printf("\n");

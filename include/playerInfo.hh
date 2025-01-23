@@ -84,6 +84,10 @@ namespace ef
     std::vector<std::shared_ptr<Building>> & getBuild();
     std::vector<std::shared_ptr<Building>> & getOtherBuild();
     std::vector<std::shared_ptr<Building>> & getProducedBuilding();
+    std::shared_ptr<Unit> getUnitToUpdate();
+    void increaseUpdateIndex();
+    int getAlegence();
+    void updateUnit(int unitId, std::shared_ptr<UdpConnect> udp, struct sockaddr_in client);
 
   private:
     int alegence;
@@ -92,6 +96,8 @@ namespace ef
     double moneyCooldown;
     int totalEnergy;
     int actualEnergy;
+    int otherUnitUpdaterIndex;
+    int otherBuildingUpdaterIndex;
     Map map;
     Map buildingMap;
     Map visionMap; //0: quepouik | 1: gnn? | 2 : i see

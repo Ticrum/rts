@@ -17,9 +17,9 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 
       while (serverTcp->loop() && !gameStarted)
 	{
-	  //std::cout << "client Connected" << std::endl;
+	  std::cout << "client Connected" << std::endl;
 	  clientConnected.push_back(serverTcp->getLastConnected());
-	  //std::cout << "server" << (int)ntohs(clientConnected.back().sin_port) << std::endl;
+	  std::cout << "server" << (int)ntohs(clientConnected.back().sin_port) << std::endl;
 	  clientReady.push_back(false);
 	  std::shared_ptr<PlayerInfo> tempPlayer;
 	  tempPlayer.reset(new PlayerInfo(res, playersInfo.size(), false));
@@ -38,7 +38,7 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 	  if (!gameStarted && serverTcp->getData((char *)&pack, sizeof(pack), clientConnected[i]) != -1 && pack.type == CLIENTINFO)
 	    {
 	      //std::cout << "port receve serv : " << pack.clientInfo.port << std::endl;
-	      clientConnected[i].sin_port = htons(pack.clientInfo.port);
+	      clientConnected[i].sin_port = htons(((PacketClientInfo *)&pack)->port);
 	      serverUdp->loop();
 	    }
 	}
@@ -63,7 +63,7 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 		  if (pack.type == ISREADY)
 		    {
 		      std::cout << "packet is ready" << std::endl;
-		      clientReady[playerId] = pack.ready.isReady;
+		      clientReady[playerId] = ((PacketReady *)&pack)->isReady;
 		    }
 		  int compt = 0;
 		  for (int i = 0; i < (int)clientReady.size(); i += 1)
@@ -75,46 +75,49 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 		      gameStarted = true;
 		      Packet pack;
 		      pack.type = GAMESTART;
-		      pack.gameStart.isStart = true;
+		      ((PacketGameStart *)&pack)->isStart = true;
 		      for (int i = 0; i < (int)clientConnected.size(); i += 1)
 			{
 			  serverUdp->sendData((char *)&pack, sizeof(Packet), clientConnected[i]);
 			  std::shared_ptr<Building> newBuilding = playersInfo[i]->getFirstBuild();
-			  Packet pack2;
+			  PacketAddOtherBuilding pack2;
 			  pack2.type = ADDOTHERBUILDING;
-			  pack2.addOtherBuilding.buildId = newBuilding->getId();
-			  pack2.addOtherBuilding.alegence = newBuilding->getAlegence();
-			  pack2.addOtherBuilding.posi = newBuilding->getPos().get();
-			  pack2.addOtherBuilding.len = newBuilding->getConf().size();
-			  memcpy(pack2.addOtherBuilding.conf, &newBuilding->getConf()[0], newBuilding->getConf().size());
-			  pack2.addOtherBuilding.actualHp = newBuilding->getHp();
+			  pack2.datalen = sizeof(PacketAddOtherBuilding);
+			  pack2.buildId = newBuilding->getId();
+			  pack2.alegence = newBuilding->getAlegence();
+			  pack2.posi = newBuilding->getPos().get();
+			  pack2.len = newBuilding->getConf().size();
+			  memcpy(pack2.conf, &newBuilding->getConf()[0], newBuilding->getConf().size());
+			  pack2.actualHp = newBuilding->getHp();
 			  //std::cout << "build hp is : " << newBuilding->getHp() << std::endl;
-			  pack2.addOtherBuilding.isActive = true;
-			  pack2.addOtherBuilding.nbrCdr = 0;
-			  pack2.addOtherBuilding.isOther = false;
+			  pack2.isActive = true;
+			  pack2.nbrCdr = 0;
+			  pack2.isOther = false;
 			  serverUdp->loop();
-			  serverUdp->sendData((char *)&pack2, sizeof(Packet), clientConnected[i]);
+			  serverUdp->sendData((char *)&pack2, pack2.datalen, clientConnected[i]);
 			}
 		    }
 		}
 	      else
 		{
 		  if (pack.type == MOVEUNIT)
-		    makePath(pack.moveUnit.unitId, pack.moveUnit.dest.get(), pack.moveUnit.moveType, playerId);
+		    makePath(((PacketMoveUnit *)&pack)->unitId, ((PacketMoveUnit *)&pack)->dest.get(), ((PacketMoveUnit *)&pack)->moveType, playerId);
 		  else if (pack.type == SETTARGET)
-		    setTarget(pack.setTarget.unitId, pack.setTarget.otherId, playerId, pack.setTarget.isBuilding);
+		    setTarget(((PacketSetTarget *)&pack)->unitId, ((PacketSetTarget *)&pack)->otherId, playerId, ((PacketSetTarget *)&pack)->isBuilding);
 		  else if (pack.type == PLACEBUILD)
-		    placeBuilding(pack.placeBuild.pos.get(), playerId);
+		    placeBuilding(((PacketPlaceBuilding *)&pack)->pos.get(), playerId);
 		  else if (pack.type == CANCEL)
-		    cancel(pack.cancel.producerId, playerId, pack.cancel.buildType);
+		    cancel(((PacketCancel *)&pack)->producerId, playerId, ((PacketCancel *)&pack)->buildType);
 		  else if (pack.type == SETTARGET)
-		    setTarget(pack.setTarget.unitId, pack.setTarget.otherId, playerId, pack.setTarget.isBuilding);
+		    setTarget(((PacketSetTarget *)&pack)->unitId, ((PacketSetTarget *)&pack)->otherId, playerId, ((PacketSetTarget *)&pack)->isBuilding);
 		  else if (pack.type == PRODUCE)
 		    {
-		      std::string str(pack.produce.conf, pack.produce.len);
+		      std::string str(((PacketProduce *)&pack)->conf, ((PacketProduce *)&pack)->len);
 		      //std::cout << "server producing : " << str << std::endl;
-		      produce(pack.produce.producerId, str, playerId, pack.produce.buildType);
+		      produce(((PacketProduce *)&pack)->producerId, str, playerId, ((PacketProduce *)&pack)->buildType);
 		    }
+		  else if (pack.type == SYNC)
+		    syncUnit(((PacketSync *)&pack)->unitId, ((PacketSync *)&pack)->alegence);
 		}
 	    }
 	  serverUdp->loop();
@@ -128,44 +131,47 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 	      std::vector<std::shared_ptr<ef::Object>> tempObj = playersInfo[i]->finishAction(timePassed);
 	      for (int j = 0; j < (int)tempObj.size(); j += 1)
 		{
-		  pack.type = ADDSHOT;
-		  pack.addShot.buildId = tempObj[j]->getId();
-		  pack.addShot.alegence = tempObj[j]->getAlegence();
-		  pack.addShot.pos = tempObj[j]->getPos().get();
-		  pack.addShot.len = tempObj[j]->getConf().size();
-		  memcpy(pack.addShot.conf, &tempObj[j]->getConf()[0], pack.addShot.len);
-		  pack.addShot.isOther = false;
+		  PacketAddShot pack2;
+		  pack2.type = ADDSHOT;
+		  pack2.datalen = sizeof(PacketAddShot);
+		  pack2.buildId = tempObj[j]->getId();
+		  pack2.alegence = tempObj[j]->getAlegence();
+		  pack2.pos = tempObj[j]->getPos().get();
+		  pack2.len = tempObj[j]->getConf().size();
+		  memcpy(pack2.conf, &tempObj[j]->getConf()[0], pack2.len);
+		  pack2.isOther = false;
 		  playersInfo[i]->addOtherShot(tempObj[j], false);
-		  serverUdp->sendData((char *)&pack, sizeof(Packet), clientConnected[i]);
-		  pack.addShot.isOther = true;
+		  serverUdp->sendData((char *)&pack2, pack2.datalen, clientConnected[i]);
+		  pack2.isOther = true;
 		  for (int k = i + 1; k < (int)playersInfo.size() + i; k += 1)
 		    if (playersInfo[k % (int)playersInfo.size()]->isInVision(tempObj[j]))
 		      {
 			playersInfo[k % (int)playersInfo.size()]->addOtherShot(tempObj[j], true);
-			serverUdp->sendData((char *)&pack, sizeof(Packet), clientConnected[k % (int)playersInfo.size()]);
+			serverUdp->sendData((char *)&pack2, pack2.datalen, clientConnected[k % (int)playersInfo.size()]);
 		      }
 		}
 	      //std::cout << "compute shot called serv" << std::endl;
 	      playersInfo[i]->computeShot(false);
-	      Packet tempPack;
+	      PacketDestroy tempPack;
 	      std::vector<ef::Killed> & kill = playersInfo[i]->getKillList();
 	      for (int j = 0; j < (int)kill.size(); j += 1)
 		{
 		  tempPack.type = DESTROY;
-		  tempPack.destroy.unitId = kill[j].obj->getId();
-		  tempPack.destroy.isOther = false;
+		  tempPack.datalen = sizeof(PacketDestroy);
+		  tempPack.unitId = kill[j].obj->getId();
+		  tempPack.isOther = false;
 		  std::shared_ptr<ef::Unit> tempUnit = static_pointer_cast<ef::Unit>(kill[j].obj);
 		  if (tempUnit.get() != nullptr)
-		    tempPack.destroy.isBuilding = false;
+		    tempPack.isBuilding = false;
 		  else
-		    tempPack.destroy.isBuilding = true;
+		    tempPack.isBuilding = true;
 		  serverUdp->loop();
-		  if (!serverUdp->sendData((char *)&tempPack, sizeof(Packet), clientConnected[i]))
+		  if (!serverUdp->sendData((char *)&tempPack, tempPack.datalen, clientConnected[i]))
 		    j -= 1;
 		  else
 		    {
 		      std::cout << "serverPlayerInfo send death of unit" << std::endl;
-		      tempPack.destroy.isOther = true;
+		      tempPack.isOther = true;
 		      std::shared_ptr<Unit> temp;
 		      std::shared_ptr<Building> temp2;
 		      for (int k = i + 1; k < i + (int)clientConnected.size(); k += 1)
@@ -180,9 +186,9 @@ void ef::ServerPlayersInfo::computeActions(double realTimePassed)
 			  else if ((temp2 = playersInfo[k % playersInfo.size()]->getBuild(kill[j].obj->getId(), true)) != nullptr)//playersInfo[k % playersInfo.size()]->isInVision(kill[j].obj))
 			    {
 			      std::cout << "serverPlayerInfo (build) send to : " << k % clientConnected.size() << std::endl;
-			      tempPack.destroy.isBuilding = true;
+			      tempPack.isBuilding = true;
 			      playersInfo[k % playersInfo.size()]->destroyBuilding(temp2, true);
-			      serverUdp->sendData((char *)&tempPack, sizeof(Packet), clientConnected[k % clientConnected.size()]);
+			      serverUdp->sendData((char *)&tempPack, tempPack.datalen, clientConnected[k % clientConnected.size()]);
 			      playersInfo[i]->destroyBuilding(static_pointer_cast<Building>(kill[j].obj), true);
 			    }
 			}

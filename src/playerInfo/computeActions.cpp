@@ -38,32 +38,33 @@ std::vector<ef::TargetReturn> ef::PlayerInfo::computeActions(double timePassed,
 	  else
 	    tar.back().isTargetBuilding.push_back(true);
         }
-      if (buildings[i]->getType() == PRODUCTION && actualEnergy >= 0)
+      if (buildings[i]->getType() == PRODUCTION && actualEnergy >= 0 && units.size() < 100)
 	{
 	  std::shared_ptr<ProdBuilding> prod = std::static_pointer_cast<ProdBuilding>(buildings[i]);
 	  std::shared_ptr<Unit> newUnit = prod->produceUnit(timePassed, weaponsConf, res.getShotConf(), res.getSprit());
 	  if (newUnit.get() != nullptr && !moveOther)
 	    {
 	      units.push_back(newUnit);
-	      Packet pack;
+	      PacketAddOtherUnit pack;
 	      pack.type = ADDOTHERUNIT;
-	      pack.addOtherUnit.unitId = newUnit->getId();
-	      pack.addOtherUnit.alegence = newUnit->getAlegence();
-	      pack.addOtherUnit.posi = newUnit->getPos().get();
-	      pack.addOtherUnit.actualHp = newUnit->getHp();
-	      pack.addOtherUnit.progress = 0;
-	      pack.addOtherUnit.actualIndex = 0;
-	      pack.addOtherUnit.moveType = newUnit->getMoveType();
-	      pack.addOtherUnit.nbrPos = 0;
+	      pack.datalen = sizeof(PacketAddOtherUnit);
+	      pack.unitId = newUnit->getId();
+	      pack.alegence = newUnit->getAlegence();
+	      pack.posi = newUnit->getPos().get();
+	      pack.actualHp = newUnit->getHp();
+	      pack.progress = 0;
+	      pack.actualIndex = 0;
+	      pack.moveType = newUnit->getMoveType();
+	      pack.nbrPos = 0;
 	      std::vector<double> tempCdr = newUnit->getWeaponsCd();
-	      pack.addOtherUnit.nbrCdr = tempCdr.size();
+	      pack.nbrCdr = tempCdr.size();
 	      for (int i = 0; i < (int)tempCdr.size(); i += 1)
-		pack.addOtherUnit.cdr[i] = tempCdr[i];
-	      pack.addOtherUnit.isOther = false;
-	      pack.addOtherUnit.len = newUnit->getConf().size();
-	      memcpy(pack.addOtherUnit.conf, &newUnit->getConf()[0], newUnit->getConf().size());
+		pack.cdr[i] = tempCdr[i];
+	      pack.isOther = false;
+	      pack.len = newUnit->getConf().size();
+	      memcpy(pack.conf, &newUnit->getConf()[0], newUnit->getConf().size());
 	      serverUdp->loop();
-	      serverUdp->sendData((char *)&pack, sizeof(Packet), client);
+	      serverUdp->sendData((char *)&pack, pack.datalen, client);
 	    }
 	}
       else if (buildings[i]->getType() == CONSTRUCT)

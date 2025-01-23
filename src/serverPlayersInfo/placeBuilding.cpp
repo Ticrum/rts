@@ -12,22 +12,23 @@ void ef::ServerPlayersInfo::placeBuilding(Pos pos,
   std::shared_ptr<Building> newBuilding;
   if ((newBuilding = playersInfo[playerId]->placeBuilding(pos)) != nullptr)
     {
-      Packet pack;
+      PacketAddOtherBuilding pack;
       pack.type = ADDOTHERBUILDING;
-      pack.addOtherBuilding.buildId = newBuilding->getId();
-      pack.addOtherBuilding.alegence = newBuilding->getAlegence();
-      pack.addOtherBuilding.posi = newBuilding->getPos().get();
-      pack.addOtherBuilding.actualHp = newBuilding->getHp();
-      pack.addOtherBuilding.isActive = true;
+      pack.datalen = sizeof(PacketAddOtherBuilding);
+      pack.buildId = newBuilding->getId();
+      pack.alegence = newBuilding->getAlegence();
+      pack.posi = newBuilding->getPos().get();
+      pack.actualHp = newBuilding->getHp();
+      pack.isActive = true;
       std::vector<double> tempCdr = newBuilding->getWeaponsCd();
-      pack.addOtherBuilding.nbrCdr = tempCdr.size();
+      pack.nbrCdr = tempCdr.size();
       for (int i = 0; i < (int)tempCdr.size(); i += 1)
-	pack.addOtherBuilding.cdr[i] = tempCdr[i];
-      pack.addOtherBuilding.isOther = false;
-      pack.addOtherBuilding.len = newBuilding->getConf().size();
-      memcpy(pack.addOtherBuilding.conf, &newBuilding->getConf()[0], newBuilding->getConf().size());
+	pack.cdr[i] = tempCdr[i];
+      pack.isOther = false;
+      pack.len = newBuilding->getConf().size();
+      memcpy(pack.conf, &newBuilding->getConf()[0], newBuilding->getConf().size());
       serverUdp->loop();
-      serverUdp->sendData((char *)&pack, sizeof(Packet), clientConnected[playerId]);
+      serverUdp->sendData((char *)&pack, pack.datalen, clientConnected[playerId]);
     }
 }
 

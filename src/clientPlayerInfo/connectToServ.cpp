@@ -18,11 +18,12 @@ void ef::ClientPlayerInfo::connectToServ(int ip,
 	{
 	  isConnected = true;
 	  serverConnected = clientTcp->getLastConnected();
-	  Packet pack;
+	  PacketClientInfo pack;
 	  pack.type = CLIENTINFO;
-	  pack.clientInfo.port = clientPort;
+	  pack.datalen = sizeof(PacketClientInfo);
+	  pack.port = clientPort;
 	  clientTcp->loop();
-	  clientTcp->sendData((char *)&pack, sizeof(Packet), serverConnected);
+	  clientTcp->sendData((char *)&pack, pack.datalen, serverConnected);
 	  clientUdp->sendData((char *)&"test"[0], 4, serverConnected);
 	  std::cout << "client" << (int)ntohs(serverConnected.sin_port) << std::endl;
 	}

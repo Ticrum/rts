@@ -10,12 +10,13 @@ void ef::ClientPlayerInfo::destroyUnit()
 {
     for (int i = 0; i < (int)selectedUnit.size(); i += 1)
     {
-        Packet pack;
+        PacketDestroy pack;
         pack.type = DESTROY;
-        pack.destroy.unitId = selectedUnit[i]->getId();
-        pack.destroy.isOther = false;
-        pack.destroy.isBuilding = false;
-        clientUdp->sendData((char *)&pack, sizeof(Packet), serverConnected);
+	pack.datalen = sizeof(PacketDestroy);
+        pack.unitId = selectedUnit[i]->getId();
+        pack.isOther = false;
+        pack.isBuilding = false;
+        clientUdp->sendData((char *)&pack, pack.datalen, serverConnected);
         playerInfo.destroyUnit(selectedUnit[i], false);
     }
     selectedUnit.clear();

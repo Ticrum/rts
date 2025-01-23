@@ -26,18 +26,21 @@ namespace ef
       GAMESTART,
       ADDSHOT,
       CLIENTINFO,
-      CANCEL
+      CANCEL,
+      SYNC
     };
 
   struct PacketReady
   {
     PackType type;
+    int datalen;
     bool isReady;
   };
 
   struct PacketMoveUnit
   {
     PackType type;
+    int datalen;
     int unitId;
     ConformPos dest;
     MoveType moveType;
@@ -46,6 +49,7 @@ namespace ef
   struct PacketPathUnit
   {
     PackType type;
+    int datalen;
     int unitId;
     MoveType moveType;
     int nbrPos;
@@ -55,6 +59,7 @@ namespace ef
   struct PacketSetTarget
   {
     PackType type;
+    int datalen;
     int unitId;
     int otherId;
     bool isBuilding;
@@ -63,6 +68,7 @@ namespace ef
   struct PacketUpdateTarget
   {
     PackType type;
+    int datalen;
     int unitId;
     int otherLen;
     int otherId[20];
@@ -74,12 +80,14 @@ namespace ef
   struct PacketPlaceBuilding
   {
     PackType type;
+    int datalen;
     ConformPos pos;
   };
 
   struct PacketAddOtherUnit
   {
     PackType type;
+    int datalen;
     int unitId;
     int alegence;
     ConformPos posi;
@@ -94,11 +102,13 @@ namespace ef
     int nbrCdr;
     double cdr[10];
     bool isOther;
+    bool isUpdating;
   };
 
   struct PacketAddOtherBuilding
   {
     PackType type;
+    int datalen;
     int buildId;
     int alegence;
     ConformPos posi;
@@ -114,6 +124,7 @@ namespace ef
   struct PacketProduce
   {
     PackType type;
+    int datalen;
     int producerId;
     int len;
     char conf[128];
@@ -123,6 +134,7 @@ namespace ef
   struct PacketDestroy
   {
     PackType type;
+    int datalen;
     int unitId;
     bool isOther;
     bool isBuilding;
@@ -131,12 +143,14 @@ namespace ef
   struct PacketGameStart
   {
     PackType type;
+    int datalen;
     bool isStart;
   };
 
   struct PacketAddShot
   {
     PackType type;
+    int datalen;
     int buildId;
     int alegence;
     ConformPos pos;
@@ -148,33 +162,31 @@ namespace ef
   struct PacketClientInfo
   {
     PackType type;
+    int datalen;
     int port;
   };
 
   struct PacketCancel
   {
     PackType type;
+    int datalen;
     int producerId;
     BuildingType buildType;
   };
 
-  union Packet
+  struct PacketSync
   {
     PackType type;
-    PacketGameStart gameStart;
-    PacketReady ready;
-    PacketMoveUnit moveUnit;
-    PacketPathUnit pathUnit;
-    PacketSetTarget setTarget;
-    PacketPlaceBuilding placeBuild;
-    PacketAddOtherUnit addOtherUnit;
-    PacketAddOtherBuilding addOtherBuilding;
-    PacketProduce produce;
-    PacketDestroy destroy;
-    PacketUpdateTarget updateTarget;
-    PacketAddShot addShot;
-    PacketClientInfo clientInfo;
-    PacketCancel cancel;
+    int datalen;
+    int unitId;
+    int alegence;    
+  };
+
+  struct Packet
+  {
+    PackType type;
+    int datalen;
+    char buffer[600];
   };
 }; // !ef
 

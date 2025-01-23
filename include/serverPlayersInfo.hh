@@ -30,6 +30,7 @@ namespace ef
                  ef::Camera &cam);
     void broadcastTarget(std::vector<TargetReturn> target);
     void stockPacket(double timeToPass);
+    void syncUnit(int unitId, int alegence);
 
   private:
     void updateOther();

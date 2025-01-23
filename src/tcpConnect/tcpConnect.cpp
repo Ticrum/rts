@@ -12,6 +12,8 @@ ef::TcpConnect::TcpConnect(int port)
 {
   pollfd tempfd;
 
+  int temp2 = INADDR_ANY;
+
   tempfd.fd = socket(AF_INET, SOCK_STREAM, 0);
   if (tempfd.fd == -1)
     perror("socket");
@@ -19,7 +21,7 @@ ef::TcpConnect::TcpConnect(int port)
   fds.push_back(tempfd);
   mySock.sin_family = AF_INET;
   mySock.sin_port = (in_port_t)htons(port);
-  mySock.sin_addr = (struct in_addr)INADDR_ANY;
+  mySock.sin_addr = *((in_addr *)&temp2);
   int temp = 1;
   setsockopt(fds[0].fd, SOL_SOCKET, SO_REUSEADDR, &temp, 1);
   if (bind(fds[0].fd, (struct sockaddr *)&mySock, (socklen_t)s) == -1)

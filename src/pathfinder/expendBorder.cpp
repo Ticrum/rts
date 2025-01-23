@@ -16,11 +16,31 @@ void ef::Pathfinder::expendBorder(int mapId,
     if (sens == 0)
         tempPos.y -= 1;
     else if (sens == 1)
+      {
         tempPos.x += 1;
+        tempPos.y -= 1;
+      }
     else if (sens == 2)
+        tempPos.x += 1;
+    else if (sens == 3)
+      {
+        tempPos.x += 1;
         tempPos.y += 1;
-    else
+      }
+    else if (sens == 4)
+        tempPos.y += 1;
+    else if (sens == 5)
+      {
         tempPos.x -= 1;
+        tempPos.y += 1;
+      }
+    else if (sens == 6)
+        tempPos.x -= 1;
+    else if (sens == 7)
+      {
+        tempPos.x -= 1;
+        tempPos.y -= 1;
+      }
     if (map[mapId] == 3)
     {
         tempCell = getConflictCell(tempPos);

@@ -37,6 +37,7 @@ void ef::PlayerInfo::computeShot(bool isClient)
     }
   shots.clear();
   otherShots.clear();
+  //killList.clear();
   for (int i = 0; i < (int)buildings.size(); i += 1)
     if (buildings[i]->getHp() <= 0)
       {
@@ -59,4 +60,28 @@ void ef::PlayerInfo::computeShot(bool isClient)
 	killList.push_back(tempKill);
 	destroyUnit(units[i], false);
       }
+  /*
+  for (int i = 0; i < (int)otherBuildings.size(); i += 1)
+    if (buildings[i]->getHp() <= 0)
+      {
+	//std::cout << "build is dead" << std::endl;
+	Killed tempKill;
+	tempKill.obj = otherBuildings[i];
+	tempKill.time = 0;
+	tempKill.isOther = false;
+	killList.push_back(tempKill);
+	destroyBuilding(buildings[i], false);
+      }
+  for (int i = 0; i < (int)otherUnits.size(); i += 1)
+    if (units[i]->getHp() <= 0)
+      {
+	//std::cout << "unit is dead" << std::endl;
+	Killed tempKill;
+	tempKill.obj = otherUnits[i];
+	tempKill.time = 0;
+	tempKill.isOther = false;
+	killList.push_back(tempKill);
+	destroyUnit(units[i], false);
+      }
+  */
 }

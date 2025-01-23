@@ -25,28 +25,30 @@ void ef::PlayerInfo::updateOther(std::vector<std::shared_ptr<Unit>> newUnit,
 	  }
       if (!hasFind)
         {
-	  Packet pack;
+	  PacketAddOtherUnit pack;
 	  //std::cout << "updateOtherUnit pass GOOD  port : " << ntohs(client.sin_port) << " id : " << newUnit[i]->getId() << std::endl;
 	  pack.type = ADDOTHERUNIT;
-	  pack.addOtherUnit.unitId = newUnit[i]->getId();
-	  pack.addOtherUnit.isOther = true;
-	  pack.addOtherUnit.alegence = newUnit[i]->getAlegence();
-	  pack.addOtherUnit.posi = newUnit[i]->getActualPos(0).get();
-	  memcpy(pack.addOtherUnit.conf, &newUnit[i]->getConf()[0], newUnit[i]->getConf().size());
-	  pack.addOtherUnit.len = newUnit[i]->getConf().size();
-	  pack.addOtherUnit.actualHp = newUnit[i]->getHp();
-	  pack.addOtherUnit.progress = newUnit[i]->getProgress();
-	  pack.addOtherUnit.actualIndex = 0;//newUnit[i]->getActualIndex();
-	  pack.addOtherUnit.moveType = newUnit[i]->getMoveType();
+	  pack.datalen = sizeof(PacketAddOtherUnit);
+	  pack.unitId = newUnit[i]->getId();
+	  pack.isOther = true;
+	  pack.alegence = newUnit[i]->getAlegence();
+	  pack.posi = newUnit[i]->getActualPos(0).get();
+	  memcpy(pack.conf, &newUnit[i]->getConf()[0], newUnit[i]->getConf().size());
+	  pack.len = newUnit[i]->getConf().size();
+	  pack.actualHp = newUnit[i]->getHp();
+	  pack.progress = newUnit[i]->getProgress();
+	  pack.actualIndex = 0;//newUnit[i]->getActualIndex();
+	  pack.moveType = newUnit[i]->getMoveType();
 	  std::vector<ConformPos> newPos = newUnit[i]->getPathLeft();
 	  for (int j = 0; j < (int)newPos.size(); j += 1)
-	    pack.addOtherUnit.pos[j] = newPos[j];
-	  pack.addOtherUnit.nbrPos = newPos.size();
+	    pack.pos[j] = newPos[j];
+	  pack.nbrPos = newPos.size();
 	  std::vector<double> weaponCd = newUnit[i]->getWeaponsCd();
 	  for (int j = 0; j < (int)weaponCd.size(); j += 1)
-	    pack.addOtherUnit.cdr[j] = weaponCd[j];
-	  pack.addOtherUnit.nbrCdr = weaponCd.size();
-	  udp->sendData((char *)&pack, sizeof(Packet), client);
+	    pack.cdr[j] = weaponCd[j];
+	  pack.nbrCdr = weaponCd.size();
+	  pack.isUpdating = false;
+	  udp->sendData((char *)&pack, pack.datalen, client);
 	  addOther(newUnit[i], true);
         }
     }

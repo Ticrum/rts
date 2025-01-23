@@ -17,12 +17,13 @@ void ef::ClientPlayerInfo::produce(int producerId,
   if (build.get() == nullptr)
     return;
   //std::cout << "!!!producer find!!!" << std::endl;
-  Packet pack;
+  PacketProduce pack;
   pack.type = PRODUCE;
-  pack.produce.producerId = build->getId();
-  pack.produce.len = unitToProd.size();
-  memcpy(pack.produce.conf, (char *)&unitToProd[0], unitToProd.size());
-  pack.produce.buildType = type;
+  pack.datalen = sizeof(PacketProduce);
+  pack.producerId = build->getId();
+  pack.len = unitToProd.size();
+  memcpy(pack.conf, (char *)&unitToProd[0], unitToProd.size());
+  pack.buildType = type;
   bool hasProduced = false;
   if (type == PRODUCTION)
     {

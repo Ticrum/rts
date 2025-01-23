@@ -5,6 +5,7 @@
 // description: makePath implementation
 
 #include "clientPlayerInfo.hh"
+#include <iostream>
 
 static ef::Pos groupDest(ef::Pos dest,
 			 int i,
@@ -15,7 +16,12 @@ static ef::Pos groupDest(ef::Pos dest,
   if (realLenght != (int)sqrt(max))
     lenght += 1;
   dest.x = dest.x - (lenght / 2 + i % lenght) + (lenght / 2);
+  if (dest.x < 0)
+    dest.x = 0;
   dest.y = dest.y - (lenght / 2 + i / lenght) + (lenght / 2);
+  if (dest.y < 0)
+    dest.y = 0;
+  //std::cout << "makePath groupDest x=" << dest.x << " y=" << dest.y << " y < 0? " << (dest.y < 0) << std::endl;
   return dest;
 }
 
@@ -27,6 +33,7 @@ void ef::ClientPlayerInfo::makePath(Pos dest,
   for (int i = 0; i < (int)selectedUnit.size(); i += 1)
     {
       Pos tempDest = groupDest(dest, i, (int)selectedUnit.size());
+      //std::cout << "makePath x=" << tempDest.x << " y=" << tempDest.y << std::endl;
       /*
       if (i % 5 == 1)
 	tempDest.x += 1;
@@ -38,12 +45,13 @@ void ef::ClientPlayerInfo::makePath(Pos dest,
 	tempDest.y -= 1;
       */
       playerInfo.makePath(selectedUnit[i], tempDest, moveType);
-      Packet pack;
+      PacketMoveUnit pack;
       pack.type = MOVEUNIT;
-      pack.moveUnit.unitId = selectedUnit[i]->getId();
-      pack.moveUnit.dest = tempDest.get();
-      pack.moveUnit.moveType = moveType;
-      clientUdp->sendData((char *)&pack, sizeof(Packet), serverConnected);
+      pack.datalen = sizeof(PacketMoveUnit);
+      pack.unitId = selectedUnit[i]->getId();
+      pack.dest = tempDest.get();
+      pack.moveType = moveType;
+      clientUdp->sendData((char *)&pack, pack.datalen, serverConnected);
     }
 }
 

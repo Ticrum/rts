@@ -15,7 +15,7 @@ bool ef::TcpConnect::connectClient(int ip, int port)
     fd.events = POLLOUT | POLLIN;
     tempSock.sin_family = AF_INET;
     tempSock.sin_port = (in_port_t)htons(port);
-    tempSock.sin_addr = (struct in_addr)ip;
+    tempSock.sin_addr = *((in_addr *)&ip);
     if (connect(fd.fd, (struct sockaddr *)&tempSock, (socklen_t)s) != -1)
     {
         fds.push_back(fd);

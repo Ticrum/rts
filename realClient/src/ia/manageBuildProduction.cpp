@@ -10,7 +10,7 @@
 
 #include "ia.hh"
 
-//#include <iostream>
+#include <iostream>
 
 void ef::Ia::manageBuildProduction()
 {
@@ -41,7 +41,7 @@ void ef::Ia::manageBuildProduction()
 	}
       else if (tempBuildProd.size() > 0)
 	{
-	  //std::cout << "manageBuildProduction ia " << std::endl;
+	  std::cout << "manageBuildProduction ia " << std::endl;
 	  if (!placeBuild())
 	    {
 	      unitToProd = 20 / nbrProd;

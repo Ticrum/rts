@@ -5,7 +5,7 @@ LIBSTAOUT=lib$(OUT).a
 CC=g++
 
 #flags
-CPPFLAGS= -std=c++20
+CPPFLAGS= -std=c++2a
 CXXFLAGS= -W -Wall
 DFLAGS= -O0 -g -g3
 GCOVFLAGS= -O0 --coverage -ftest-coverage -fprofile-arcs
@@ -25,6 +25,8 @@ endif
 ifeq ($(OPTFLAGS),)
 	OPTFLAGS = $(OPTIFLAGS)
 endif
+
+LIBLAPIN=1
 
 #others
 INCLUDE=-I./include/

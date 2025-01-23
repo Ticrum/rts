@@ -15,13 +15,14 @@ void ef::ServerPlayersInfo::stopUnit(int unitId,
     if (unit.get() == nullptr)
         return;
     playersInfo[playerId]->stopUnit(unit);
-    Packet pack;
+    PacketPathUnit pack;
     pack.type = PATHUNIT;
-    pack.pathUnit.unitId = unit->getId();
-    pack.pathUnit.moveType = STATIC;
-    pack.pathUnit.nbrPos = 0;
+    pack.datalen = sizeof (PacketPathUnit);
+    pack.unitId = unit->getId();
+    pack.moveType = STATIC;
+    pack.nbrPos = 0;
     for (int i = playerId + 1; i < playerId + (int)clientConnected.size(); i += 1)
         if (playersInfo[i % playersInfo.size()]->isInVision(unit))
-            serverUdp->sendData((char *)&pack, sizeof(Packet), clientConnected[i % clientConnected.size()]);
+            serverUdp->sendData((char *)&pack, pack.datalen, clientConnected[i % clientConnected.size()]);
 }
 

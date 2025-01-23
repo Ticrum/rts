@@ -12,12 +12,14 @@ ef::UdpConnect::UdpConnect(int port)
 {
     int tempfd;
 
+    int temp2 = INADDR_ANY;
+
     tempfd = socket(AF_INET, SOCK_DGRAM, 0);
     fd[0].fd = tempfd;
     fd[0].events = POLLOUT | POLLIN;
     mySock.sin_family = AF_INET;
     mySock.sin_port = (in_port_t)htons(port);
-    mySock.sin_addr = (struct in_addr)INADDR_ANY;
+    mySock.sin_addr = *((in_addr *)&temp2);
     bind(fd[0].fd, (struct sockaddr *)&mySock, (socklen_t)s);
     sockGet = mySock;
 }

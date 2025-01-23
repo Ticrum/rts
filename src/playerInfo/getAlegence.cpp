@@ -3,23 +3,15 @@
 // ***     ***     ***     ******  *******  *****      **********************
 // **  ******  ******  *** *****  *******  *********  ***********************
 // *     ***  ******  *** ***       ****  *****      ************************
-// 27/03/2024 12:59:11 ******************************************************
-// romain.piccoche <romain.picoche@aldrin.efrits.fr>
+// 03/05/2024 10:53:18 ******************************************************
+// thomas.barbe <thomas.barbe@aldrin.efrits.fr>
 // - rts -
 // * *** * * ***  ** * ** ** ** ** * * * *** * **  **************************
 
-#include "apiButton.hh"
-#include <iostream>
-ef::Buton::Buton()
-  :group(0),
-   id(0),
-   print(true)
+#include "playerInfo.hh"
+
+int ef::PlayerInfo::getAlegence()
 {
-  outside.full = 0;
-  background.full = 0;
-  action = [&](std::string com) {std::cout << "Not INIT : "<< com << "\n";};
-  square.x = 0;
-  square.y = 0;
-  square.h = 0;
-  square.w = 0;
+  return alegence;
 }
+

@@ -83,8 +83,8 @@ static t_bunny_response key(t_bunny_event_state state,
       char i[4];
       i[0] = 192;
       i[1] = 168;
-      i[2] = 200;
-      i[3] = 62;
+      i[2] = 188;
+      i[3] = 129;
       game->cli.connectToServ(*(int *)&i, 64841);
     }
   if (sym == BKS_S)

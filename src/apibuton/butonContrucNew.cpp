@@ -21,13 +21,13 @@ ef::Buton::Buton(unsigned int _group,
 		 std::function<void(std::string)> func)
   :group(_group),
    id(_id),
-   print(_print),
-   outside(_outside),
-   background(_background),
-   sprit(_px),
-   command(_action),
-   action(func)
+   print(_print)
 {
+  outside.full = _outside;
+  background.full = _background;
+  sprit = _px;
+  command = _action;
+  action = func;
   square.x = _square.x;
   square.y = _square.y;
   square.h = _square.h;

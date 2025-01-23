@@ -11,12 +11,13 @@ void ef::ClientPlayerInfo::stopUnit()
     for (int i = 0; i < (int)selectedUnit.size(); i += 1)
     {
         playerInfo.stopUnit(selectedUnit[i]);
-        Packet pack;
+        PacketMoveUnit pack;
         pack.type = MOVEUNIT;
-        pack.moveUnit.unitId = selectedUnit[i]->getId();
-        pack.moveUnit.dest = selectedUnit[i]->getPos().get();
-        pack.moveUnit.moveType = STATIC;
-        clientUdp->sendData((char *)&pack, sizeof(Packet), serverConnected);
+	pack.datalen = sizeof(PacketMoveUnit);
+        pack.unitId = selectedUnit[i]->getId();
+        pack.dest = selectedUnit[i]->getPos().get();
+        pack.moveType = STATIC;
+        clientUdp->sendData((char *)&pack, pack.datalen, serverConnected);
     }
 }
 

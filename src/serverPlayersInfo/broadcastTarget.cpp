@@ -10,22 +10,23 @@ void ef::ServerPlayersInfo::broadcastTarget(std::vector<TargetReturn> target)
 {
     for (int i = 0; i < (int)target.size(); i += 1)
     {
-        Packet pack;
+        PacketUpdateTarget pack;
         pack.type = UPDATETARGET;
-        pack.updateTarget.unitId = target[i].unit->getId();
-        pack.updateTarget.isBuilding = target[i].isBuilding;
-        pack.updateTarget.isEnemy = true;
-        pack.updateTarget.otherLen = target.size();
+	pack.datalen = sizeof(PacketUpdateTarget);
+        pack.unitId = target[i].unit->getId();
+        pack.isBuilding = target[i].isBuilding;
+        pack.isEnemy = true;
+        pack.otherLen = target.size();
         for (int j = 0; j < (int)target[i].target.size(); j += 1)
         {
-            pack.updateTarget.otherId[j] = target[i].target[j]->getId();
-            pack.updateTarget.isEnemyBuilding[j] = target[i].isTargetBuilding[j];
+            pack.otherId[j] = target[i].target[j]->getId();
+            pack.isEnemyBuilding[j] = target[i].isTargetBuilding[j];
         }
         int playerId = target[i].unit->getAlegence();
         for (int j = playerId + 1; j < (int)clientConnected.size() + playerId; j += 1)
         {
             serverUdp->loop();
-            serverUdp->sendData((char *)&pack, sizeof(Packet), clientConnected[j % clientConnected.size()]);
+            serverUdp->sendData((char *)&pack, pack.datalen, clientConnected[j % clientConnected.size()]);
         }
     }
 }

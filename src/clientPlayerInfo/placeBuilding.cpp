@@ -20,9 +20,10 @@ void ef::ClientPlayerInfo::placeBuilding(Pos pos)
 	playerInfo.getProducedBuilding().push_back(temp[i + 1]);
     }
 
-  Packet pack;
+  PacketPlaceBuilding pack;
   pack.type = PLACEBUILD;
-  pack.placeBuild.pos = pos.get();
-  clientUdp->sendData((char *)&pack, sizeof(Packet), serverConnected);
+  pack.datalen = sizeof(PacketPlaceBuilding);
+  pack.pos = pos.get();
+  clientUdp->sendData((char *)&pack, pack.datalen, serverConnected);
 }
 

@@ -24,21 +24,22 @@ void ef::PlayerInfo::updateOther(std::vector<std::shared_ptr<Building>> newBuild
 	  }
       if (!hasFind)
         {
-	  Packet pack;
+	  PacketAddOtherBuilding pack;
 	  //std::cout << "updateOther pass GOOD  port : " << ntohs(client.sin_port) << std::endl;
 	  pack.type = ADDOTHERBUILDING;
-	  pack.addOtherBuilding.isOther = true;
-	  pack.addOtherBuilding.buildId = newBuilding[i]->getId();
-	  pack.addOtherBuilding.alegence = newBuilding[i]->getAlegence();
-	  pack.addOtherBuilding.posi = newBuilding[i]->getPos().get();
-	  memcpy(pack.addOtherBuilding.conf, &newBuilding[i]->getConf()[0], newBuilding[i]->getConf().size());
-	  pack.addOtherBuilding.len = newBuilding[i]->getConf().size();
-	  pack.addOtherBuilding.actualHp = newBuilding[i]->getHp();
-	  pack.addOtherBuilding.isActive = newBuilding[i]->getIsActive();
+	  pack.datalen = sizeof(PacketAddOtherBuilding);
+	  pack.isOther = true;
+	  pack.buildId = newBuilding[i]->getId();
+	  pack.alegence = newBuilding[i]->getAlegence();
+	  pack.posi = newBuilding[i]->getPos().get();
+	  memcpy(pack.conf, &newBuilding[i]->getConf()[0], newBuilding[i]->getConf().size());
+	  pack.len = newBuilding[i]->getConf().size();
+	  pack.actualHp = newBuilding[i]->getHp();
+	  pack.isActive = newBuilding[i]->getIsActive();
 	  std::vector<double> weaponCd = newBuilding[i]->getWeaponsCd();
 	  for (int j = 0; j < (int)weaponCd.size(); j += 1)
-	    pack.addOtherBuilding.cdr[j] = weaponCd[j];
-	  pack.addOtherBuilding.nbrCdr = weaponCd.size();
+	    pack.cdr[j] = weaponCd[j];
+	  pack.nbrCdr = weaponCd.size();
 	  udp->sendData((char *)&pack, sizeof(Packet), client);
 	  addOther(newBuilding[i], true);
         }
